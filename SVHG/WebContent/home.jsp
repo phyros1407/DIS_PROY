@@ -39,7 +39,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1>Nano Sports RHO</h1>
+									<h1>Nano Sports</h1>
 									<h2>Peru</h2>
 									<p>Estamos especializados en brindar servicios y proyectos de 
 									asesoría y consultoria en la rama del fitness y del entrenamiento
