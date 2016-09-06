@@ -34,7 +34,7 @@ padding-top: 9px;
 					<input type="hidden" name="idU" value="0">					
 					<br>										
 					<div class="form-group">
-						<label class="control-label col-md-3">Contrase�a antigua: <span
+						<label class="control-label col-md-3">Contraseña antigua: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-6">
@@ -43,7 +43,7 @@ padding-top: 9px;
 						</div>							
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Nueva contrase�a: <span
+						<label class="control-label col-md-3">Nueva contraseña: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-6">
@@ -52,7 +52,7 @@ padding-top: 9px;
 						</div>							
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Repetir contrase�a: <span
+						<label class="control-label col-md-3">Repetir contraseña: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-6">
@@ -70,14 +70,13 @@ padding-top: 9px;
 						</div>							
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Tel�fono: <span
+						<label class="control-label col-md-3">Teléfono: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-6">
-							<input type="number" name="txtTel1" id="txtTel1"
-								class="form-control" data-required="1" required />
-								<input type="hidden" name="action" value="3">
-								<input type="hidden" name="txtDNIH" id="txtDNIH">
+							<input maxlength="9" pattern=".{7}|.{9}" required title="Ingrese 7 o 9 dígitos" id="txtTel1"
+								onkeypress="return solonumeros(event)" name="txtTel1"
+								data-required="1" class="form-control">
 								
 						</div>							
 					</div>
@@ -119,7 +118,7 @@ padding-top: 9px;
 				console.log("entro al response "+response);
 				console.log(cargo);
 				console.log(response['object']['correo']);
-				$('#txtConA').val(response['object']['contrase�a']); ; 
+				$('#txtConA').val(response['object']['contraseña']); ; 
 				$('#txtCorreo1').val(response['object']['correo']); ; 
 				$('#txtTel1').val(response['object']['telefono']); ;
 				$('#txtDNIH').val(response['object']['dni']); ; 				
