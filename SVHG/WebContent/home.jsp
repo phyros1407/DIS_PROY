@@ -52,7 +52,7 @@
 							</div>
 							<div class="item">
 								<div class="col-sm-6">
-									<h1>Nano Sports</h1>
+									<h1>Nano Sportsyukytukyuk</h1>
 									<h2>Peru</h2>
 									<p>Hemos investigado y trabajado para brindar un servicio que realmente llegue a los atletas y entrenadores,</p>
 									<button type="button" class="btn btn-default get">Consiguelo Ahora</button>
