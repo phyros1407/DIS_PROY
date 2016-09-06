@@ -20,11 +20,10 @@
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <!-- *******************************PARA MODAL  ******************************* -->		
 <%@ include file="include/head.jsp"%>
-
-<script type="text/javascript" src="./scripts/app.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./js/validaciones.js" charset="UTF-8"></script>
 <!-- END HEAD -->
 
-<!-- inicio del Floro del men˙ -->
+<!-- inicio del Floro del men√∫ -->
 <body
 
 	class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
@@ -65,7 +64,7 @@
 					</div>
 				</div>
 
-<!-- fin del Floro del men˙ -->
+<!-- fin del Floro del men√∫ -->
 
 				<div>
 					<table id="myTable">
@@ -96,7 +95,7 @@
 								<td><%=usuario.get(i).getNombre()%></td>
 								<td><%=usuario.get(i).getApePat()%> <%=usuario.get(i).getApeMat()%></td>
 								<td><%=usuario.get(i).getRol()%></td>
-								<td><a onclick="detalle(<%=usuario.get(i).getId_persona()%>,<%=rol%>);">Ver m·s</a></td>
+								<td><a onclick="detalle(<%=usuario.get(i).getId_persona()%>,<%=rol%>);">Ver m√°s</a></td>
 								<td><a onclick="modificar(<%=usuario.get(i).getId_persona()%>,<%=rol%>);"> Modificar </a></td>
 								<td><form action="Gestionar_Usuario" method="post">
 								<input type="hidden" name="idU" value="<%=usuario.get(i).getId_usuario() %>">
