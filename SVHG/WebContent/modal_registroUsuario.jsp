@@ -45,9 +45,9 @@
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input type="number" maxlength="8" id="txtDNI"
+								<input maxlength="8" pattern=".{8,8}" required title="Ingrese 8 dÃ­gitos" id="txtDNI"
 								onkeypress="return solonumeros(event)" name="txtDNI"
-								data-required="1" class="form-control" required />
+								data-required="1" class="form-control">
 						</div>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="col-md-3">
@@ -57,6 +57,7 @@
 					</div>
 					<hr>
 					<br>
+					<div id=formulario style="visibility: hidden;">
 					<div class="form-group">
 						<label class="control-label col-md-3">Nombres : <span
 							class="required"> * </span>
@@ -93,7 +94,7 @@
 								onkeypress="return sololetras(event)" data-required="1"
 								class="form-control" required readonly/>
 						</div>
-						<label class="control-label col-md-2">Dirección: <span
+						<label class="control-label col-md-2">DirecciÃ³n: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
@@ -106,13 +107,14 @@
 							class="required"> * </span>
 						</label>
 						<div class="col-md-2">
-							<input name="txtRUC" id="txtRUC" type="text" onkeypress="return solonumeros(event)"
-								class="form-control"/>
+							<input maxlength="9" pattern=".{11}" required title="Debe tener 11 dÃ­gitos" id="txtRUC"
+								onkeypress="return solonumeros(event)" name="txtRUC"
+								data-required="1" class="form-control">
 						</div>
 						<div class="col-md-1">
 							<input name="btnRaz" id="btnRaz" type="button" value="Buscar" onclick="buscarRuc();" class="btn btn-default"/>
 						</div>
-						<label class="control-label col-md-2">Razón Social: <span
+						<label class="control-label col-md-2">RazÃ³n Social: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
@@ -121,19 +123,19 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Contraseña: <span
+						<label class="control-label col-md-3">ContraseÃ±a: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input name="txtContraseña1" id="txtContraseña1" type="password"
-								class="form-control" data-required="1" />
+							<input name="txtContraseÃ±a1" id="txtContraseÃ±a1" type="password"
+								class="form-control" data-required="1" required/>
 						</div>
-						<label class="control-label col-md-2">Re-Contraseña: <span
+						<label class="control-label col-md-2">Re-ContraseÃ±a: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input name="txtContraseña2" id="txtContraseña2" type="password"
-								class="form-control" data-required="1"  />
+							<input name="txtContraseÃ±a2" id="txtContraseÃ±a2" type="password"
+								class="form-control" data-required="1"  required />
 						</div>
 					</div>						
 					
@@ -145,34 +147,37 @@
 							<input type="email" name="txtCorreo" id="txtCorreo"
 								class="form-control" data-required="1" required />
 						</div>						
-						<label class="control-label col-md-2">Teléfono : <span
+						<label class="control-label col-md-2">TelÃ©fono : <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input type="number" maxlength="9" id="txtTel"
+							<input maxlength="9" pattern=".{7}|.{9}" required title="Ingrese 7 o 9 dÃ­gitos" id="txtTel"
 								onkeypress="return solonumeros(event)" name="txtTel"
-								data-required="1" class="form-control" required />
+								data-required="1" class="form-control">
 							<input type="hidden" name="action" value="2">
 						</div>
 					</div>
+					</div>			
 					<div id="registro" style="visibility: hidden;">
 						<div class='alert alert-danger' style="margin-top: 15px;"
 							role='alert'>
-							<label id='mensajepequeno' name='ms'>el número de DNI es incorrecto o no está registrado en la RENIEC</label>
+							<label id='mensajepequeno' name='ms'>el nÃºmero de DNI es incorrecto o no estÃ¡ registrado en la RENIEC</label>
 						</div>
 					</div>
 					<div id="ruc" style="visibility: hidden;">
 						<div class='alert alert-danger' style="margin-top: 15px;"
 							role='alert'>
-							<label id='mensajepequeno' name='ms'> El número de RUC es incorrecto o no está registrado</label>
+							<label id='mensajepequeno' name='ms'> El nÃºmero de RUC es incorrecto o no estÃ¡ registrado</label>
 						</div>
 					</div>
+					<div  id="botones" style="visibility: hidden;">
 					<div class="modal-footer">
+			
 						
 						<input type="submit" class="btn btn-primary" value="Registrar Usuario">
 						<button type="button" class="btn btn-default"
 							onclick="limpiarRegistro();" data-dismiss="modal">Salir</button>
-					</div>
+					</div></div>
 
 				</form>
 
@@ -182,10 +187,14 @@
 	<!--------------------------------------------------------------fin registrar usuario modal-------------------------------------->
 	<script type="text/javascript">
 	function proveedor(){
-		if(document.getElementById("selCar").value==4){
+		if(document.getElementById("selCar").value==4  && document.getElementById("formulario").style.visibility =="visible"){
 			document.getElementById("proveedor").style.visibility = "visible";
+			document.getElementById("txtRUC").required = true;
+			document.getElementById("txtRazSoc").required = true;
 		}else{
 			document.getElementById("proveedor").style.visibility = "hidden";
+			document.getElementById("txtRUC").required = false;
+			document.getElementById("txtRazSoc").required = false;
 		}
 	}
 
@@ -206,8 +215,12 @@
 							$('#txtApeMat').val(response['object']['apeMat']); 
 							$('#dateFecNac').val(response['object']['fechaNac']);
 							$('#txtDireccion').val(response['object']['direccion']);
+							document.getElementById("formulario").style.visibility = "visible";
+							document.getElementById("botones").style.visibility = "visible";
 					}else{
 						document.getElementById("registro").style.visibility = "visible";
+						document.getElementById("formulario").style.visibility = "hidden";
+						document.getElementById("botones").style.visibility = "hidden";
 					}		
 		  });
 	}
