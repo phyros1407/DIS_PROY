@@ -1,5 +1,6 @@
 <!-- MODAL PARA LA IMAGEN -->
 <script src="js/ajax_producto.js"></script>
+<script src="js/validaciones.js"></script>
 <div id="myModalI" class="modal1">
   <span class="close" onclick="document.getElementById('myModalI').style.display='none'">&times;X</span>
   <img class="modal-content2" id="img01">
