@@ -255,7 +255,9 @@
 				}else{
 					x=2;
 				}
-			 	
+			 	if(x==1){
+			 		document.getElementById("ruc").style.visibility = "hidden";
+			 	}
 			 	if(x==2){
 			 		
 			 			document.getElementById("ruc").style.visibility = "visible";
