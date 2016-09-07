@@ -10,21 +10,16 @@
 <%
 	ArrayList<ProductoBean> productos = (ArrayList<ProductoBean>) request.getAttribute("productos");
 %>
-
-
-
 <!DOCTYPE html>
 <html>
-
-
-<%@ include file="/include/head.jsp"%>
-
+<jsp:include page="/include/head.jsp"></jsp:include>
 <!-- END HEAD -->
-
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 	<!-- BEGIN HEADER -->
-	<%@ include file="/include/headSideBar.jsp"%>
+	<div id="desap">
+		<jsp:include page="/include/headSideBar.jsp"></jsp:include>
+	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN HEADER & CONTENT DIVIDER -->
 	<div class="clearfix"></div>
@@ -85,9 +80,16 @@
 								<td><%=productos.get(i).getNombre() %></td>
 								<td ><%=productos.get(i).getDescripcion() %></td>
 								<!--  <td align="center"><img src="<%=productos.get(i).getFoto() %>" onmouseover="this.width=500;this.height=400;" onmouseout="this.width=100;this.height=80;" width="100" height="80" alt=""></td>-->
-								<td align="center"> <img  onclick="javascript:this.width=500;this.height=400;" ondblclick="javascript:this.width=80;this.height=80;" src="<%=productos.get(i).getFoto() %>" width="80" height="80"/>  </td>
-								<td align="center"><button class="btn btn-link" onclick="buscarDProducto(<%=productos.get(i).getIdProducto()%>)" data-target="#myModal3" data-toggle="modal" > Ver más</button></td>
-								<td align="center"><button class="btn btn-default" data-target="#myModal2" data-toggle="modal" onclick="buscarProducto(<%=productos.get(i).getIdProducto()%>);">MODIFICA</button></td>
+								<td align="center"> 
+									<!--  <img  onclick="javascript:this.width=500;this.height=400;" ondblclick="javascript:this.width=80;this.height=80;" src="<%=productos.get(i).getFoto() %>" width="80" height="80"/> --> 
+									<img id="myImg" src="<%=productos.get(i).getFoto() %>" alt="<%=productos.get(i).getNombre() %>" width="80" height="80" onclick="modalI(this);"/>
+								</td>
+								<td align="center">
+									<button class="btn btn-link" onclick="buscarDProducto(<%=productos.get(i).getIdProducto()%>)" data-target="#myModal3" data-toggle="modal" > Ver más</button>
+								</td>
+								<td align="center">
+									<button class="btn btn-default" data-target="#myModal2" data-toggle="modal" onclick="buscarProducto(<%=productos.get(i).getIdProducto()%>);">MODIFICA</button>
+								</td>
 								<%if(productos.get(i).getEstado().equalsIgnoreCase("A")) {%>
 									<td align="center">
 										<form action="Gestionar_Producto" method="post">
@@ -118,13 +120,34 @@
 	<!-- END CONTAINER -->
 	<jsp:include page="/modals/modalProducto.jsp"></jsp:include>
 	<%@ include file="/include/footer.jsp"%>	
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#myTable').DataTable();
-});
-</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		    $('#myTable').DataTable();
+		});
+	
+		//ENVIAR IMAGEN AL MODAL
+		//CAPTURANDO MODAL IMAGEN
+		var modalImagen = document.getElementById("myModalI");
+		function modalI(Img){
+			//INSERTA LA IMAGEN EN EL MODAL
+			var modalImg = document.getElementById("img01");
+			var captionText = document.getElementById("caption");
+			
+			modalImagen.style.display = "block";
+			modalImg.src = Img.src;
+			captionText.innerHTML = Img.alt;
+			
+			var desap = document.getElementById("desap").style = "z-index: -1; "
+			
+		}
+	
+		//CERRAR MODAL CON UN CLICK
+		window.onclick = function(event) {
+			  if (event.target == modalImagen) {
+				  modalImagen.style.display = "none";
+			  }
+		}
+		
+	</script>
 </body>
-
-
-
 </html>

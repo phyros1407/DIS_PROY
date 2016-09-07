@@ -26,6 +26,7 @@
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="<%=request.getContextPath() %>/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
         <link href="<%=request.getContextPath() %>/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/images.css" rel="stylesheet" type="text/css" />
         <!-- END THEME GLOBAL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="<%=request.getContextPath() %>/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
