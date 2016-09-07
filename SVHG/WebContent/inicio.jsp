@@ -48,7 +48,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
-                                <span>Cajero</span>
+                                <span>ADMINISTRADOR</span>
                             </li>
                         </ul>
                         <div class="page-toolbar">
