@@ -23,6 +23,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
         <!-- BEGIN HEADER -->
+        <a>teque</a>
         <%@ include file="include/headSideBar.jsp" %>
         <!-- END HEADER -->
         <!-- BEGIN HEADER & CONTENT DIVIDER -->
