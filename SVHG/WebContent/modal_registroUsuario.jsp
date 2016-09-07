@@ -107,7 +107,7 @@
 							class="required"> * </span>
 						</label>
 						<div class="col-md-2">
-							<input maxlength="9" pattern=".{11}" required title="Debe tener 11 dÃ­gitos" id="txtRUC"
+							<input maxlength="9" pattern=".{11}" required title="Debe tener 11 dígitos" id="txtRUC"
 								onkeypress="return solonumeros(event)" name="txtRUC"
 								data-required="1" class="form-control">
 						</div>
@@ -144,10 +144,10 @@
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input type="email" name="txtCorreo" id="txtCorreo"
+							<input type="email" name="txtCorreo" id="txtCorreo" onkeypress="validarCorreo(event)"
 								class="form-control" data-required="1" required />
 						</div>						
-						<label class="control-label col-md-2">TelÃ©fono : <span
+						<label class="control-label col-md-2">Teléfono : <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
@@ -161,13 +161,13 @@
 					<div id="registro" style="visibility: hidden;">
 						<div class='alert alert-danger' style="margin-top: 15px;"
 							role='alert'>
-							<label id='mensajepequeno' name='ms'>el nÃºmero de DNI es incorrecto o no estÃ¡ registrado en la RENIEC</label>
+							<label id='mensajepequeno' name='ms'>el número de DNI es incorrecto o no estÃ¡ registrado en la RENIEC</label>
 						</div>
 					</div>
 					<div id="ruc" style="visibility: hidden;">
 						<div class='alert alert-danger' style="margin-top: 15px;"
 							role='alert'>
-							<label id='mensajepequeno' name='ms'> El nÃºmero de RUC es incorrecto o no estÃ¡ registrado</label>
+							<label id='mensajepequeno' for="lblRucCor" name='ms'> El número de RUC es incorrecto o no está registrado</label>
 						</div>
 					</div>
 					<div  id="botones" style="visibility: hidden;">
@@ -242,8 +242,28 @@
 								
 						}else{
 							document.getElementById("ruc").style.visibility = "visible";
+							jQuery("label[for='lblRUC']").html("El número de RUC es incorrecto o no está registrado");
 						}		
 			  });
 		}
+		
+		function validarCorreo(e){
+			  var x;
+			  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+			 	if(emailRegex.test(txtCorreo)){
+					x=1;
+				}else{
+					x=2;
+				}
+			 	if(x==1){
+			 		document.getElementById("ruc").style.visibility = "hidden";
+			 	}
+			 	if(x==2){
+			 		
+			 			document.getElementById("ruc").style.visibility = "visible";
+			 			jQuery("label[for='lblRucCor']").html("Correo no valido. Utilize el sgt. Formato:\ncorreo@domain");
+				}
+		}
+		
 	</script>
 	</body>
