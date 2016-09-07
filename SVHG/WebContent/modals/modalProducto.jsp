@@ -166,6 +166,20 @@
 	    	
 	    	
 	    }
+	    
+	    function validarTamaño(input){
+	        
+	        var file = input.files[0];
+	        if(file.size>=1,000,000){
+	        	alert("Ha superado el limite de tamaño del archivo (1MB)");
+	        	input.value='';
+	        }else{
+	        	return
+	        }
+	        
+	       
+	        
+	    }
 		
     </script>
 
@@ -189,15 +203,15 @@
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Nombre del Producto : <b style="color:red;">*</b></label>
-        		<input type="text" class="form-control" placeholder="Nombre" name="nompro" required>
+        		<input type="text" class="form-control" placeholder="Nombre" name="nompro" maxlength="35" required>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Foto del Producto : </label>
-        		<input type="file"  name="foto" onchange="control(this)">
+        		<input type="file"  name="foto" onchange="control(this),validarTamaño(this)">
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Descripcion : <b style="color:red;">*</b></label>
-        		<textarea rows="12" cols="5" class="form-control" name="descripcion" style="resize:vertical; max-height:150px; min-height:150px;" required></textarea>
+        		<textarea rows="12" cols="5" class="form-control" name="descripcion" style="resize:vertical; max-height:150px; min-height:150px;" required maxlength="100"></textarea>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Medida del Producto : <b style="color:red;">*</b></label>
@@ -208,12 +222,12 @@
         	</div>
         	<div class="form-group col-xs-6 col-md-6">
         		<label>Precio del Producto : <b style="color:red;">*</b></label>
-        		<input type="text" onpaste="return false"  class="form-control" placeholder="Precio" name="prepro" required onkeypress=" return expRegular(event)">
+        		<input type="text" onpaste="return false"  class="form-control" placeholder="Precio" name="prepro" required onkeypress=" return expRegular(event)" maxlength="8">
         		<b id="errorC" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-6 col-md-6">
         		<label>Peso del Producto : <b style="color:red;">*</b></label>
-        		<input type="text" onpaste="return false"  class="form-control" placeholder="Peso" name="pespro" required onkeypress=" return expRegular(event)">
+        		<input type="text" onpaste="return false"  class="form-control" placeholder="Peso" name="pespro" required onkeypress=" return expRegular(event)" maxlength="8">
         		<b id="errorC" style="color:red;"></b>
         	</div>
         </form>
