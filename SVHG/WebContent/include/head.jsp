@@ -35,19 +35,8 @@
         <link href="<%=request.getContextPath() %>/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="<%=request.getContextPath() %>/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
+        <!--  LOGO DEL NAVEGADOR --> -->
         <link rel="shortcut icon" href="favicon.ico" />
-        
-        <style type="text/css">
-	        .celda{
-				height: auto;
-				width: 200px;
-			}
-			img{
-       			 cursor: zoom-in ;
-    		}
-			
-        </style>
-        
 </head>
 <body>
 
