@@ -11,6 +11,8 @@
 	ArrayList<ProductoBean> productos = (ArrayList<ProductoBean>) request.getAttribute("productos");
 %>
 
+
+
 <!DOCTYPE html>
 <html>
 
