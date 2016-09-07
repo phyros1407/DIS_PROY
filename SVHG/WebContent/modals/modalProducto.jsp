@@ -27,7 +27,7 @@
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Nombre del Producto : <b style="color:red;">*</b></label>
-        		<input type="text" class="form-control" placeholder="Nombre" name="nompro" id="nompro" maxlength="35" required  pattern="^\S+$" title="Nombre Invalido">
+        		<input type="text" class="form-control" placeholder="Nombre" name="nompro" id="nompro" maxlength="35" required  >
         		<b id="errorC" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
@@ -104,7 +104,7 @@
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Descripcion : </label>
-        		<textarea rows="12" cols="5" class="form-control" id="Adescripcion" name="Adescripcion" style="resize:vertical; max-height:150px; min-height:150px;"   pattern="^\S+$" required maxlength="100"></textarea>
+        		<textarea rows="12" cols="5" class="form-control" id="Adescripcion" name="Adescripcion" style="resize:vertical; max-height:150px; min-height:150px;"   required maxlength="100"></textarea>
         		<b id="errorC3" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">

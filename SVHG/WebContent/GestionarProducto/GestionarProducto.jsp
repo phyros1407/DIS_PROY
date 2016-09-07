@@ -137,7 +137,7 @@
 			modalImg.src = Img.src;
 			captionText.innerHTML = Img.alt;
 			
-			var desap = document.getElementById("desap").style = "z-index: -1; "
+			
 			
 		}
 	

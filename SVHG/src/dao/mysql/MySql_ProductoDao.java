@@ -289,7 +289,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 	}
 
 	@Override
-	public boolean buscarCoincidencia(double peso, String nombre) throws Exception {
+	public boolean buscarCoincidencia(int id,double peso, String nombre) throws Exception {
 		// TODO Auto-generated method stub
 		
 		boolean flag = false;
@@ -299,16 +299,33 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 			
 			Statement stmt=con.createStatement();
 			
-			String query = "select * from producto where NOM like '%"+nombre.trim().toUpperCase()+"%' and peso = "+peso;
 			
 			
-			ResultSet rs = stmt.executeQuery(query);
+			String query2 = "select nom from producto where id = "+ id;
 			
-			
-			
-			if(!(rs.first())){
-				flag = true;
+			ResultSet rs2 = stmt.executeQuery(query2);
+			String nombreprueba = "";
+			if(rs2.next()){
+				nombreprueba = rs2.getString("nom");
 			}
+			
+			if(!(nombreprueba.equalsIgnoreCase(nombre))){
+				
+				String query = "select * from producto where NOM like '%"+nombre.trim().toUpperCase()+"%' and peso = "+peso;
+				
+				
+				ResultSet rs = stmt.executeQuery(query);
+				
+				
+				
+				if(!(rs.first())){
+					flag = true;
+				}
+			}else{
+				flag=true;
+			}
+			
+			
 			
 			
 			

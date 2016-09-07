@@ -240,7 +240,7 @@ public class Gestionar_Producto extends HttpServlet {
 				
 				ProductoBean producto = new ProductoBean();	
 				
-				if(productodao.buscarCoincidencia(peso, nompro)){
+				if(productodao.buscarCoincidencia(0,peso, nompro)){
 					
 					
 					System.out.println("hasta aca llegola webada");
@@ -298,7 +298,7 @@ public class Gestionar_Producto extends HttpServlet {
 		
 		if(accion.equalsIgnoreCase("actualizar")){
 			
-			
+			int id = Integer.parseInt(request.getParameter("AidPro"));
 			String nompro = request.getParameter("Anompro");
 			System.out.println(nompro);
 			double peso = Double.parseDouble(request.getParameter("Apespro"));
@@ -306,9 +306,9 @@ public class Gestionar_Producto extends HttpServlet {
 			
 			try {
 				
-				if(productodao.buscarCoincidencia(peso, nompro)){
+				if(productodao.buscarCoincidencia(id,peso, nompro)){
 					
-					int id = Integer.parseInt(request.getParameter("AidPro"));
+					
 					String codpro = request.getParameter("AcodPro");
 					String categoria = request.getParameter("Acate");
 					String descripcion = request.getParameter("Adescripcion");

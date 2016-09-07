@@ -15,5 +15,5 @@ public interface ProductoDao {
 	public String buscarUltimoCod(String categoria)throws Exception;
 	public boolean habilitar(int id) throws Exception;
 	public boolean desabilitar(int id) throws Exception;
-	public boolean buscarCoincidencia(double peso, String nombre) throws Exception;
+	public boolean buscarCoincidencia(int id,double peso, String nombre) throws Exception;
 }
