@@ -173,6 +173,54 @@
 
 			}
 		
+		function validacionCompleta(){
+
+			var pass=document.getElementById("nompro").value;
+			var pass2=document.getElementById("descripcion").value;
+				
+			if(pass.trim()==""){
+				document.getElementById("errorC").innerHTML="El nombre ingresado es invalido";
+				return false;
+			}
+			if(pass2.trim()==""){
+				document.getElementById("errorC1").innerHTML="La descripcion ingresada es invalida";
+				return false;
+			}	
+				
+			return true;
+			
+			
+			
+		}
+		
+		
+		function validacionCompleta2(){
+
+			var pass=document.getElementById("Anompro").value;
+			var pass2=document.getElementById("Adescripcion").value;
+				
+			if(pass.trim()==""){
+				document.getElementById("errorC2").innerHTML="El nombre ingresado es invalido";
+				return false;
+			}
+			if(pass2.trim()==""){
+				document.getElementById("errorC3").innerHTML="La descripcion ingresada es invalida";
+				return false;
+			}	
+				
+			return true;
+			
+			
+			
+		}
+		
+		
+		function limpiar(){
+			document.getElementById("errorC").innerHTML="";
+			document.getElementById("errorC1").innerHTML="";
+			document.getElementById("errorC2").innerHTML="";
+			document.getElementById("errorC3").innerHTML="";
+		}
 	</script>
 
 
@@ -203,28 +251,6 @@
 		    return patron.test(te);
 	    }
 	    
-	    
-	    function validadPunto(){
-	    	
-	    	
-	    	
-	    }
-	   /* 
-	    function validarTamaño(input){
-	        
-	        var file = input.files[0];
-	        if(file.size>=1,000,000){
-	        	
-	        	var t=input.cloneNode(true);
-		        t.value='';
-		        input.parentNode.replaceChild(t,input);
-	        	alert("Ha superado el limite de tamaño del archivo (1MB)");
-	        }
-	        
-	       
-	        
-	    }*/
-		
     </script>
 
 <!-- MODAL AGREGAR PRODUCTO -->
@@ -237,7 +263,7 @@
         <h4 class="modal-title">Registrar Nuevo Producto</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="Gestionar_Producto" id="productoS" enctype="multipart/form-data" >
+        <form method="post" action="Gestionar_Producto" id="productoS" enctype="multipart/form-data" onsubmit="return validacionCompleta();" >
         	<input type="hidden" name="accion" form="productoS" value="grabar">
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Categoria : <b style="color:red;">*</b></label>
@@ -247,7 +273,8 @@
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Nombre del Producto : <b style="color:red;">*</b></label>
-        		<input type="text" class="form-control" placeholder="Nombre" name="nompro" maxlength="35" required>
+        		<input type="text" class="form-control" placeholder="Nombre" name="nompro" id="nompro" maxlength="35" required  pattern="^\S+$" title="Nombre Invalido">
+        		<b id="errorC" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Foto del Producto : </label>
@@ -255,7 +282,8 @@
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Descripcion : <b style="color:red;">*</b></label>
-        		<textarea rows="12" cols="5" class="form-control" name="descripcion" style="resize:vertical; max-height:150px; min-height:150px;" required maxlength="100"></textarea>
+        		<textarea rows="12" cols="5" class="form-control" name="descripcion" id="descripcion" style="resize:vertical; max-height:150px; min-height:150px;" required maxlength="100"  ></textarea>
+        		<b id="errorC1" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Medida del Producto : <b style="color:red;">*</b></label>
@@ -267,19 +295,17 @@
         	<div class="form-group col-xs-6 col-md-6">
         		<label>Precio del Producto : <b style="color:red;">*</b></label>
         		<input type="text" onpaste="return false"  class="form-control" placeholder="Precio" name="prepro" required onkeypress=" return NumCheck(event,this)" maxlength="8">
-        		<b id="errorC" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-6 col-md-6">
         		<label>Peso del Producto : <b style="color:red;">*</b></label>
         		<input type="text" onpaste="return false"  class="form-control" placeholder="Peso" name="pespro" required onkeypress=" return NumCheck(event,this)" maxlength="8">
-        		<b id="errorC" style="color:red;"></b>
         	</div>
         </form>
       </div>
       <div class="modal-footer">
       	
       	<button type="submit" class="btn  btn-success" form="productoS">Agregar Producto</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="limpiar();">Cerrar</button>
       </div>
     </div>
   </div>
@@ -297,7 +323,7 @@
         <h4 class="modal-title">Actualizar Producto</h4>
       </div>
       <div class="modal-body" style="height: 570px;">
-        <form method="post" action="Gestionar_Producto" id="productoS1" enctype="multipart/form-data" >
+        <form method="post" action="Gestionar_Producto" id="productoS1" enctype="multipart/form-data" onsubmit="return validacionCompleta2();">
         	<input type="hidden" name="accion" form="productoS1" value="actualizar">
         	<input type="hidden" name="AidPro" id="AidPro" >
         	<input type="hidden" name="AcodPro" id="AcodPro">
@@ -315,6 +341,7 @@
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Nombre del Producto : </label>
         		<input type="text" class="form-control" placeholder="Nombre" id="Anompro" name="Anompro" required  maxlength="35">
+        		<b id="errorC2" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Foto del Producto : </label>
@@ -323,7 +350,8 @@
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Descripcion : </label>
-        		<textarea rows="12" cols="5" class="form-control" id="Adescripcion" name="Adescripcion" style="resize:vertical; max-height:150px; min-height:150px;" required maxlength="100"></textarea>
+        		<textarea rows="12" cols="5" class="form-control" id="Adescripcion" name="Adescripcion" style="resize:vertical; max-height:150px; min-height:150px;"   pattern="^\S+$" required maxlength="100"></textarea>
+        		<b id="errorC3" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
         		<label>Medida del Producto : </label>
@@ -335,19 +363,19 @@
         	<div class="form-group col-xs-6 col-md-6">
         		<label>Precio del Producto : </label>
         		<input type="text" class="form-control" onpaste="return false" placeholder="Precio" id="Aprepro" name="Aprepro" required onkeypress="return NumCheck(event,this)">
-        		<b id="errorC" style="color:red;"></b>
+        		
         	</div>
         	<div class="form-group  col-xs-6 col-md-6">
         		<label>Peso del Producto : </label>
         		<input type="text" class="form-control" onpaste="return false" placeholder="Peso" id="Apespro" name="Apespro" required onkeypress="return NumCheck(event,this)">
-        		<b id="errorC" style="color:red;"></b>
+        		
         	</div>
         </form>
       </div>
       <div class="modal-footer">
       	
       	<button type="submit" class="btn btn-success" form="productoS1">Actualizar Producto</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="limpiar();">Cerrar</button>
       </div>
     </div>
   </div>

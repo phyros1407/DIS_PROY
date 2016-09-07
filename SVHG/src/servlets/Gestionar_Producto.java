@@ -245,8 +245,8 @@ public class Gestionar_Producto extends HttpServlet {
 					
 					System.out.println("hasta aca llegola webada");
 					producto.setCodPro(categoria.substring(0,3)+"-"+productodao.buscarUltimoCod(categoria.substring(categoria.length()-1)));
-					producto.setNombre(nompro);
-					producto.setDescripcion(descripcion);
+					producto.setNombre(nompro.trim());
+					producto.setDescripcion(descripcion.trim());
 					System.out.println(Integer.parseInt(categoria.substring(categoria.length()-1)));
 					producto.setIdCategoria(Integer.parseInt(categoria.substring(categoria.length()-1)));
 					guardarFoto.guardar( (rutaGuardarFoto + nombreFoto), foto );//GUARDAR FOTO EN CARPETA
@@ -350,8 +350,8 @@ public class Gestionar_Producto extends HttpServlet {
 							producto.setCodPro(categoria.substring(0,3)+"-"+productodao.buscarUltimoCod(categoria.substring(categoria.length()-1)));
 						}
 						producto.setIdProducto(id);
-						producto.setNombre(nompro);
-						producto.setDescripcion(descripcion);
+						producto.setNombre(nompro.trim());
+						producto.setDescripcion(descripcion.trim());
 						System.out.println("CODIGO DE LA CATEGORIA --->"+Integer.parseInt(categoria.substring(categoria.length()-1)));
 						producto.setIdCategoria(Integer.parseInt(categoria.substring(categoria.length()-1)));
 						producto.setFoto(rutaProyecto);
