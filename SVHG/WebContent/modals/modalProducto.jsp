@@ -182,13 +182,13 @@
         <form method="post" action="Gestionar_Producto" id="productoS" enctype="multipart/form-data" >
         	<input type="hidden" name="accion" form="productoS" value="grabar">
         	<div class="form-group col-xs-12 col-md-12">
-        		<label>Categoria : </label>
+        		<label>Categoria : <b style="color:red;">*</b></label>
         		<select class="form-control" id="cat" name="cate" required >
         			
         		</select>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
-        		<label>Nombre del Producto : </label>
+        		<label>Nombre del Producto : <b style="color:red;">*</b></label>
         		<input type="text" class="form-control" placeholder="Nombre" name="nompro" required>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
@@ -196,23 +196,23 @@
         		<input type="file"  name="foto" onchange="control(this)">
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
-        		<label>Descripcion : </label>
+        		<label>Descripcion : <b style="color:red;">*</b></label>
         		<textarea rows="12" cols="5" class="form-control" name="descripcion" style="resize:vertical; max-height:150px; min-height:150px;" required></textarea>
         	</div>
         	<div class="form-group col-xs-12 col-md-12">
-        		<label>Medida del Producto : </label>
+        		<label>Medida del Producto : <b style="color:red;">*</b></label>
         		<select name="medida" class="form-control" required>
         			<option value="UNIDAD">UNIDAD</option>
         			<option value="PAR">PAR</option>
         		</select>
         	</div>
         	<div class="form-group col-xs-6 col-md-6">
-        		<label>Precio del Producto : </label>
+        		<label>Precio del Producto : <b style="color:red;">*</b></label>
         		<input type="text" onpaste="return false"  class="form-control" placeholder="Precio" name="prepro" required onkeypress=" return expRegular(event)">
         		<b id="errorC" style="color:red;"></b>
         	</div>
         	<div class="form-group col-xs-6 col-md-6">
-        		<label>Peso del Producto : </label>
+        		<label>Peso del Producto : <b style="color:red;">*</b></label>
         		<input type="text" onpaste="return false"  class="form-control" placeholder="Peso" name="pespro" required onkeypress=" return expRegular(event)">
         		<b id="errorC" style="color:red;"></b>
         	</div>
