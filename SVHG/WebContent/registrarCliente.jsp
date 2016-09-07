@@ -82,16 +82,50 @@
 			  var txtRuc=$('#txtRuc').val();
 			  var txtRazon=$('#txtRazon').val();
 			  var optradio=$('#optradio').val();
+			  
+			  var longNum=txtCelular.length;
+			  var  num=txtCelular.charAt(0);
+			  var y=0;
+			  if((num!='9' && longNum=='9') || ((num=='1' || num=='8' || num=='9'  ) && longNum=='7' ) || longNum<7) {
+				  y=1;
+			  }
+			 
+			    
+		
+			
+			  
+			  var x;
+			  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+			 	if(emailRegex.test(txtCorreo)){
+					x=1;
+				}else{
+					x=2;
+				}
+			 	
 			if(txt_dni==''){
 				alert("Falta ingresar DNI");
+			  }else if(txtRuc==''){
+				  alert("Falta ingresar RUC");
 			  }else if(txtCorreo==''){
 				  alert("Falta ingresar Correo");
+			  }else if(x==2){
+				  alert("Correo no valido. Utilize el sgt. Formato:\ncorreo@domain");
 			  }else if(txtClave==''){
 				  alert("Falta ingresar Clave");
 			  }else if(txtClave2==''){
 				  alert("Falta ingresar Clave 2");
 			  }else if(txtCelular==''){
 				  alert("Falta ingresar Celular");
+			  }else if(y=='1'){
+				  if(longNum=='9'){
+					    alert("Numero de celular incorrecto. Debe iniciar con 9");
+				  }
+				  if(longNum=='7'){
+					  alert("Numero fijo incorrecto. Formato: 5555555")
+				  }
+					  alert("Ingrese numero de celular o fijo.");
+				  
+				  
 			  }else if(optradio==''){
 				  alert("Falta seleccionar tipo de persona");
 			  }else{
@@ -164,7 +198,7 @@
 								<div class="col-sm-4">
 									<!-- Tipo de cliene -->
 									<div class="radio">
-							     		<label><input   type="radio" onclick="desaparecerCampoRuc()" id="optradio" name="optradio" value="persona">Persona</label>
+							     		<label><input checked="checked"  type="radio" onclick="desaparecerCampoRuc()" id="optradio" name="optradio" value="persona">Persona</label>
 							    	</div>
 							   		<div class="radio">
 							     		<label><input type="radio" onclick="aparecerCampoRuc()"id="optradio" name="optradio" value="empresa">Empresa</label>
@@ -246,9 +280,8 @@
 							<div class="row">
 								<div class="col-sm-4">
 						       		<label >Correo:</label>
-						        	  <div id="divClave"><input required type="email" id="txtCorreo" onchange="buscarCorreo()" name="txtCorreo" class="form-control"></div>	
+						        	  <div id="divClave"><input required  id="txtCorreo" onchange="buscarCorreo()" name="txtCorreo" class="form-control"></div>	
 						        	<br>
-						        	 <center><div id="divCorreoError"></div></center>
 								</div>		
 								<div class="col-sm-4">
 									<label >Clave:</label>
@@ -260,7 +293,7 @@
 						<br>
 							<div class="row">
 								<div class="col-sm-4">
-						       		<label >Celular:</label>
+						       		<label >Telefono(Fijo o Celular):</label>
 						        	<input required type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
 								</div>	
 								<div class="col-sm-4">
@@ -293,6 +326,9 @@
 						  document.getElementById("botonSubmit").disabled = false;
 					}
 					}
+					
+		
+					
 					</script>
 					
 					
