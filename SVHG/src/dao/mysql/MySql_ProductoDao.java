@@ -167,15 +167,15 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 			if(producto.getFoto().trim().equalsIgnoreCase("images/")) {
 				
 				query = " update producto "
-						+  " set cat_id = "+producto.getIdCategoria()+", codpro = '"+producto.getCodPro()+"', nom = '"+producto.getNombre().toUpperCase()+"', "
-						+  " des = '"+producto.getDescripcion().toUpperCase()+"', med = '"+producto.getMedida().toUpperCase()+"', "
+						+  " set cat_id = "+producto.getIdCategoria()+", codpro = '"+producto.getCodPro()+"', nom = '"+producto.getNombre().trim().toUpperCase()+"', "
+						+  " des = '"+producto.getDescripcion().trim().toUpperCase()+"', med = '"+producto.getMedida().toUpperCase()+"', "
 						+  " pre = "+producto.getPrecio()+", peso ="+producto.getPeso()+", ult_usu_mod_regi = 'USU', fec_ult_mod_regi = now()"
 						+  " where id = "+ producto.getIdProducto();
 				
 			}else{
 				query = " update producto "
-						+  " set cat_id = "+producto.getIdCategoria()+", codpro = '"+producto.getCodPro()+"', nom = '"+producto.getNombre().toUpperCase()+"', "
-						+  " des = '"+producto.getDescripcion().toUpperCase()+"', foto = '"+producto.getFoto()+"', med = '"+producto.getMedida().toUpperCase()+"', "
+						+  " set cat_id = "+producto.getIdCategoria()+", codpro = '"+producto.getCodPro()+"', nom = '"+producto.getNombre().trim().toUpperCase()+"', "
+						+  " des = '"+producto.getDescripcion().trim().toUpperCase()+"', foto = '"+producto.getFoto()+"', med = '"+producto.getMedida().toUpperCase()+"', "
 						+  " pre = "+producto.getPrecio()+", peso ="+producto.getPeso()+", ult_usu_mod_regi = 'USU', fec_ult_mod_regi = now()"
 						+  " where id = "+ producto.getIdProducto();
 			}
@@ -299,7 +299,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 			
 			Statement stmt=con.createStatement();
 			
-			String query = "select * from producto where NOM = '"+nombre.toUpperCase()+"' and peso = "+peso;
+			String query = "select * from producto where NOM like '%"+nombre.trim().toUpperCase()+"%' and peso = "+peso;
 			
 			
 			ResultSet rs = stmt.executeQuery(query);
