@@ -41,6 +41,7 @@
 							<%if(session.getAttribute("mostrarLogin")=="no"){ %>
 							<li><a><font color=blue>Bienvenido <%=session.getAttribute("nombreApellidoPersona") %></font></a></li>
 							<li><a href=""><i class="fa fa-user"></i> Cuenta</a></li>
+							<li><a href="ServletPedido?accion=listarPedidosPendientes"><i class="fa fa-shopping-cart"></i>Pedidos</a></li>
 							<%} %>
 							<%if(request.getAttribute("msjError")!=null){ %>
 								<li><a><font color=red><%=request.getAttribute("msjError") %></font></a></li>
@@ -117,18 +118,40 @@
 			</div>
 				
 			<div class="row">
-			<center>
+				<center>
 									<div class="form-group">
+									
 										     	<label class="" >Usuario:</label>
-										    <input id="text"  style="width: 40%"class="form-control" type="text" autocomplete="off" placeholder="Usuario" name="usuario" required/>
+										    <input id="usuario" onchange="validarUsu()" style="width: 40%"class="" type="text" autocomplete="off" placeholder="Usuario" name="usuario" required/>
+											<input disabled id="astUsu" name="astUsu" style="border: none;color: red;background-color: #fff;" value="*" >
+									
 									</div>		
-			
+									
 					
 									<div class="form-group">
 										     	<label class="" >Clave:</label>
-										    <input id="contraseña"  style="width: 40%"class="form-control" type="password" autocomplete="on" placeholder="Contraseña" name="contraseña" required>
+										    <input id="contraseña" onchange="validarClave()" style="width: 40%"class="" type="password" autocomplete="on" placeholder="Contraseña" name="contraseña" required>
+									<input disabled id="astClave" name="astClave" style="border: none; color: red; background-color: #fff;" value="*" >
+									 </div> 
+									
 					</center>
 			</div>
+			 <script >
+									 function validarUsu(){
+										 if(document.getElementById("usuario").value!=''){
+											 document.getElementById("astUsu").value="";
+										 }else{
+											 document.getElementById("astUsu").value="*";
+										 }
+									 }
+									 function validarClave(){
+										 if(document.getElementById("contraseña").value!=''){
+											 document.getElementById("astClave").value="";
+										 }else{
+											 document.getElementById("astClave").value="*";
+										 }
+									 }
+				 </script>
 			<center><button type="submit" class="btn btn-default" style="background-color: #008CBA;color: white;" >Ingresar</button></center>  
 			<div class="form-actions">
 				
@@ -148,16 +171,36 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-envelope"></i>
-						<input required class="form-control" style="width: 40%"type="text" placeholder="Email" autocomplete="off" id="correo" name="correo" />
-						
+						<input onchange="validarCorreo()" required class="form-control" style="width: 40%"type="text" placeholder="Email" autocomplete="off" id="correo" name="correo" />
+						 <font color="red"><span id="emailOK"></span></font>
 					</div>
 					
 				</div>
 				
 			</div>
+			<script >
+		
+			function validarCorreo(){
+				  campo = event.target;
+				    valido = document.getElementById('emailOK');
+				        
+				    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+				    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+				    if (emailRegex.test(campo.value)) {
+				    	 document.getElementById("botonRecuperar").disabled = false;
+				    	 valido.innerText = "";
+				    } else {
+				      document.getElementById("botonRecuperar").disabled = true;
+				      valido.innerText = "Correo Inválido, correo@domai.";
+				    }
+			
+			}	
+			  
+			
+			</script>
 			<div class="form-actions">
 				<br>
-				    <button type="" href="<%=request.getContextPath()%>/recepcionista/generarCita.jsp" class="btn blue ">
+				    <button type="submit" id="botonRecuperar"  class="btn blue ">
 				Recuperar 
 				</button>        
 			</div>
