@@ -21,6 +21,7 @@
     <link rel="apple-touch-icon-precomposed" href="imagesOut/ico/apple-touch-icon-57-precomposed.png">
 
 </head>
+
 <body>
 	<%@include file="../includeOut/header.jsp" %>
 
