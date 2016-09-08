@@ -82,7 +82,7 @@ public class ServletPedido extends HttpServlet {
 						if(productos!=null){
 							request.setAttribute("pedidos", pedidos);
 							request.setAttribute("productos", productos);
-							request.setAttribute("estado", "Pendientes");
+							request.setAttribute("estado", "Entregados");
 							request.getServletContext().getRequestDispatcher("/pedidos.jsp").forward(request, response);
 						}
 					}
