@@ -40,7 +40,7 @@
 							<ul class="nav navbar-nav">
 							<%if(session.getAttribute("mostrarLogin")=="no"){ %>
 							<li><a><font color=blue>Bienvenido <%=session.getAttribute("nombreApellidoPersona") %></font></a></li>
-							<li><a href=""><i class="fa fa-user"></i> Cuenta</a></li>
+							<li><a href="actualizarDatos.jsp"><i class="fa fa-user"></i> Cuenta</a></li>
 							<%} %>
 							<%if(request.getAttribute("msjError")!=null){ %>
 								<li><a><font color=red><%=request.getAttribute("msjError") %></font></a></li>

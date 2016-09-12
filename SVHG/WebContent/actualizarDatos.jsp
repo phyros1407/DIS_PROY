@@ -70,7 +70,7 @@
 <section>
 		<div class="container">
 			<div class="row">
-				<%@include file="../include/sidebar.jsp" %>
+				<%@include file="../includeOut/sidebar.jsp" %>
 				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
@@ -79,27 +79,7 @@
 						<!-- Fila 1 -->
 							<div class="row">
 								<div class="col-sm-4">
-									<!-- Tipo de cliene -->
-									<div class="radio">
-							     		<label><input  checked="checked" type="radio" onclick="desaparecerCampoRuc()" id="optradio" name="optradio">Persona</label>
-							    	</div>
-							   		<div class="radio">
-							     		<label><input type="radio" onclick="aparecerCampoRuc()"id="optradio" name="optradio">Empresa</label>
-							    	</div>
-							    	
-							    <script type="text/javascript">
-							    function aparecerCampoRuc(){
-							    	document.getElementById("divRuc").innerHTML  = "<label>RUC</label><input  type=number class=form-control name=campoRuc id=txtRuc>";		    	
-							    	document.getElementById("divBoton").innerHTML  = "<input type=button class=btn btn-warning onclick='buscarRuc();' value=Buscar>";		    	
-							    	document.getElementById("divRazon").innerHTML  = "<label>Razon Social</label><input readonly type=text class=form-control name=campoRazon id=txtRazon>";
-							    }
-							    function desaparecerCampoRuc(){
-							    	document.getElementById("divRuc").innerHTML  = "";
-							    	document.getElementById("divBoton").innerHTML  = "";
-							    	document.getElementById("divRazon").innerHTML  = "";
-							    }
-							  
-							    </script>
+						
 								</div>
 								<div class="col-sm-3">
 									 <div class="form-group">
