@@ -114,7 +114,7 @@ div.container4 p {
 				</p>
 				<br>
 				<br>
-				<table id="myTable" class="table-bordered" style="height: 200px;width:500px;display:block;">
+				<table class="table-bordered" style="height: 200px;width:500px;display:block;">
 				
 				<thead style="width:100%;">
 				<tr style="width:100%;">
@@ -136,11 +136,11 @@ div.container4 p {
 				</tbody>
 				</table>
 				<br>
-				<p align="right" style="margin-right: 50px;"> Total : 150.00 S/.</p>
+				<p align="right" style="margin-right: 50px;"> Total : S/.150.00 </p>
 				
-				<p align="right" style="margin-right: 50px;"> Asignar Oferta : <input type="text" name="oferta" maxlength="2" size="2"></p>
+				<p align="right" style="margin-right: 50px;"> Asignar Oferta : <input type="text" name="oferta" maxlength="2" size="2"> %</p>
 				
-				<p align="right" style="margin-right: 50px;"> Precio Venta : 120.00 S/.</p>
+				<p align="right" style="margin-right: 50px;"> Precio Venta : S/.120.00</p>
 				
 </div>
 <div class="col-sm-12 col-md-6">
