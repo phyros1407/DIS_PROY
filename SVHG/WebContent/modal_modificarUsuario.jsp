@@ -118,7 +118,7 @@ padding-top: 9px;
 				console.log("entro al response "+response);
 				console.log(cargo);
 				console.log(response['object']['correo']);
-				$('#txtConA').val(response['object']['contraseÃ±a']); ; 
+				$('#txtConA').val(response['object']['contraseña']); ; 
 				$('#txtCorreo1').val(response['object']['correo']); ; 
 				$('#txtTel1').val(response['object']['telefono']); ;
 				$('#txtDNIH').val(response['object']['dni']); ; 				
