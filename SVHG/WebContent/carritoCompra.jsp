@@ -31,6 +31,7 @@
 		}
 		
 		
+		
 		function disminuir(cantidad,desc){
 	
 			var canti = parseInt(cantidad)-1;
