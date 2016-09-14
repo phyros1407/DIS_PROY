@@ -95,7 +95,7 @@
 								<td><%=usuario.get(i).getNombre()%></td>
 								<td><%=usuario.get(i).getApePat()%> <%=usuario.get(i).getApeMat()%></td>
 								<td><%=usuario.get(i).getRol()%></td>
-								<td><a onclick="detalle(<%=usuario.get(i).getId_persona()%>,<%=rol%>);">Ver m√°s</a></td>
+								<td><a onclick="detalle(<%=usuario.get(i).getId_persona()%>,<%=rol%>);">Ver m·s</a></td>
 								<td><a onclick="modificar(<%=usuario.get(i).getId_persona()%>,<%=rol%>);"> Modificar </a></td>
 								<td><form action="Gestionar_Usuario" method="post">
 								<input type="hidden" name="idU" value="<%=usuario.get(i).getId_usuario() %>">

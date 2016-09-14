@@ -123,18 +123,18 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">ContraseÃ±a: <span
+						<label class="control-label col-md-3">Contraseña: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input name="txtContraseÃ±a1" id="txtContraseÃ±a1" type="password"
+							<input name="txtContraseña1" id="txtContraseña1" type="password"
 								class="form-control" data-required="1" required/>
 						</div>
-						<label class="control-label col-md-2">Re-ContraseÃ±a: <span
+						<label class="control-label col-md-2">Re-Contraseña: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input name="txtContraseÃ±a2" id="txtContraseÃ±a2" type="password"
+							<input name="txtContraseña2" id="txtContraseña2" type="password"
 								class="form-control" data-required="1"  required />
 						</div>
 					</div>						
@@ -144,7 +144,7 @@
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input type="email" name="txtCorreo" id="txtCorreo" onkeyup="validarCorreo(event)"
+							<input type="email" name="txtCorreo" id="txtCorreo"
 								class="form-control" data-required="1" required />
 						</div>						
 						<label class="control-label col-md-2">Teléfono : <span
@@ -161,7 +161,7 @@
 					<div id="registro" style="visibility: hidden;">
 						<div class='alert alert-danger' style="margin-top: 15px;"
 							role='alert'>
-							<label id='mensajepequeno' name='ms'>el número de DNI es incorrecto o no estÃ¡ registrado en la RENIEC</label>
+							<label id='mensajepequeno' name='ms'>el número de DNI es incorrecto o no está registrado en la RENIEC</label>
 						</div>
 					</div>
 					<div id="ruc" style="visibility: hidden;">
@@ -201,7 +201,7 @@
 	function buscarReniec(){
 		  var dni = $('#txtDNI').val();
 		 var accion='buscarDni';
-		  $.get('http://env-0307453.jelasticlw.com.br/service/Gestionar_Persona', {
+		  $.get('http://env-6803205.jelasticlw.com.br/service/Gestionar_Persona', {
 			  
 					accion : accion,
 					dni:dni
@@ -229,7 +229,7 @@
 			  var ruc = $('#txtRUC').val();
 			 // console.log("asdasd"+dni);
 			 var accion='buscarRuc';
-			  $.get('http://env-0307453.jelasticlw.com.br/service/Gestionar_Empresa', {
+			  $.get('http://env-6803205.jelasticlw.com.br/service/Gestionar_Empresa', {
 				  
 						accion : accion,
 						ruc:ruc
