@@ -33,6 +33,7 @@
 		<div class="page-content-wrapper">
 			<!-- BEGIN CONTENT BODY -->
 			<div class="page-content">
+			
 				<!-- BEGIN PAGE HEADER-->
 				<!-- BEGIN THEME PANEL -->
 				<!-- END THEME PANEL -->
