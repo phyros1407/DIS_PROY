@@ -150,8 +150,6 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 		return null;
 	}
 
-	
-	
 	@Override
 	public boolean actualizarProducto(ProductoBean producto) throws Exception {
 		// TODO Auto-generated method stub
@@ -196,7 +194,6 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 		return flag;
 	}
 
-	
 	@Override
 	public ProductoBean buscar(int id) throws Exception {
 		// TODO Auto-generated method stub

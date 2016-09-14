@@ -144,7 +144,7 @@
 							class="required"> * </span>
 						</label>
 						<div class="col-md-3">
-							<input type="email" name="txtCorreo" id="txtCorreo" onkeypress="validarCorreo(event)"
+							<input type="email" name="txtCorreo" id="txtCorreo" onkeyup="validarCorreo(event)"
 								class="form-control" data-required="1" required />
 						</div>						
 						<label class="control-label col-md-2">Teléfono : <span
