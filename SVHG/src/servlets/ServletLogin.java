@@ -107,22 +107,16 @@ public class ServletLogin extends HttpServlet {
 					
 				}
 			}else if( usu!=null &&  usu.getIntento().equals("1")){
-				request.setAttribute("msjError", "Le queda 5 Intentos para iniciar sessión con el usuario: "+usu.getNombreUsu());
-				request.getRequestDispatcher("home.jsp").forward(request, response);
-			}else if(usu!=null &&  usu.getIntento().equals("2")){
-				request.setAttribute("msjError", "Le queda 4 Intentos para iniciar sessión con el usuario: "+usu.getNombreUsu());
-				request.getRequestDispatcher("home.jsp").forward(request, response);
-			}else if(usu!=null &&  usu.getIntento().equals("3")){
 				request.setAttribute("msjError", "Le queda 3 Intentos para iniciar sessión con el usuario: "+usu.getNombreUsu());
 				request.getRequestDispatcher("home.jsp").forward(request, response);
-			}else if(usu!=null &&  usu.getIntento().equals("4")){
+			}else if(usu!=null &&  usu.getIntento().equals("2")){
 				request.setAttribute("msjError", "Le queda 2 Intentos para iniciar sessión con el usuario: "+usu.getNombreUsu());
 				request.getRequestDispatcher("home.jsp").forward(request, response);
-			}else if(usu!=null &&  usu.getIntento().equals("5")){
-				request.setAttribute("msjError", "Le queda 1 Intentos para iniciar sessión con el usuario: "+usu.getNombreUsu());
+			}else if(usu!=null &&  usu.getIntento().equals("3")){
+				request.setAttribute("msjError", "Le queda 1 Intento para iniciar sessión con el usuario: "+usu.getNombreUsu());
 				request.getRequestDispatcher("home.jsp").forward(request, response);
 			}else if(usu!=null &&  usu.getIntento().equals("resetearPass")){
-				request.setAttribute("msjError", "Se ha reseteado su contraseña por exceder el maximo de intentos, usuario: "+usu.getNombreUsu());
+				
 				try {
 					
 					HttpSession misesion=request.getSession();
@@ -132,11 +126,11 @@ public class ServletLogin extends HttpServlet {
 					if(usuRes!=null ){
 						
 						EmailUtility.sendEmailWithAttachment(host, port, user, pass,usuRes.getRecipient(), usuRes.getSubject(), usuRes.getContent());
-						request.setAttribute("msjError", "Se envió correctamente la nueva contraseña a su correo");
+						request.setAttribute("msjError", "Se ha reseteado su contraseña por exceder el maximo de intentos, usuario: "+usu.getNombreUsu());
 						request.getRequestDispatcher("home.jsp").forward(request, response);
 					}else{
 						
-						request.setAttribute("msjError", "Correo incorrecto o no registrado");
+						request.setAttribute("msjError", "Hubo un error al resetear contraseña");
 						request.getRequestDispatcher("home.jsp").forward(request, response);
 					}
 					
@@ -175,7 +169,6 @@ public class ServletLogin extends HttpServlet {
 				System.out.println(e.getMessage());
 			}
 		}
-		
 		
 		
 		
