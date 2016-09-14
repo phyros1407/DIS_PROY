@@ -128,7 +128,7 @@
 				  
 			  }else if(optradio==''){
 				  alert("Falta seleccionar tipo de persona");
-			  }else{
+			  }else{ 
 				  var accion='registrarCliente';
 				  $.post('<%=request.getContextPath() %>/ServletCliente', {
 					  	txt_dni : txt_dni,
