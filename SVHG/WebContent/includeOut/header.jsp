@@ -40,12 +40,12 @@
 							<ul class="nav navbar-nav">
 							<%if(session.getAttribute("mostrarLogin")=="no"){ %>
 							<li><a><font color=blue>Bienvenido <%=session.getAttribute("nombreApellidoPersona") %></font></a></li>
-<<<<<<< HEAD
+
 							<li><a href="actualizarDatos.jsp"><i class="fa fa-user"></i> Cuenta</a></li>
-=======
+
 							<li><a href=""><i class="fa fa-user"></i> Cuenta</a></li>
 							<li><a href="ServletPedido?accion=listarPedidosPendientes"><i class="fa fa-shopping-cart"></i>Pedidos</a></li>
->>>>>>> branch 'master' of https://github.com/phyros1407/DIS_PROY
+
 							<%} %>
 							<%if(request.getAttribute("msjError")!=null){ %>
 								<li><a><font color=red><%=request.getAttribute("msjError") %></font></a></li>

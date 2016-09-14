@@ -82,6 +82,8 @@
 			  var txtRuc=$('#txtRuc').val();
 			  var txtRazon=$('#txtRazon').val();
 			  var optradio=$('#optradio').val();
+			  var usuario=(txt_nombre.charAt(0)+txt_apepat+txt_apemat.charAt(0)).toUpperCase();
+			  
 			  
 			  var longNum=txtCelular.length;
 			  var  num=txtCelular.charAt(0);
@@ -103,19 +105,19 @@
 				}
 			 	
 			if(txt_dni==''){
-				alert("Falta ingresar DNI");
+				alert("Debe llenar los campos obligatorios.");
 			  }else if(txtRuc==''){
-				  alert("Falta ingresar RUC");
+				  alert("Debe llenar los campos obligatorios.");
 			  }else if(txtCorreo==''){
-				  alert("Falta ingresar Correo");
+				  alert("Debe llenar los campos obligatorios.");
 			  }else if(x==2){
 				  alert("Correo no valido. Utilize el sgt. Formato:\ncorreo@domain");
 			  }else if(txtClave==''){
-				  alert("Falta ingresar Clave");
+				  alert("Debe llenar los campos obligatorios.");
 			  }else if(txtClave2==''){
-				  alert("Falta ingresar Clave 2");
+				  alert("Debe llenar los campos obligatorios.");
 			  }else if(txtCelular==''){
-				  alert("Falta ingresar Celular");
+				  alert("Debe llenar los campos obligatorios.");
 			  }else if(y=='1'){
 				  if(longNum=='9'){
 					    alert("Numero de celular incorrecto. Debe iniciar con 9");
@@ -127,7 +129,7 @@
 				  
 				  
 			  }else if(optradio==''){
-				  alert("Falta seleccionar tipo de persona");
+				  alert("Debe llenar los campos obligatorios.");
 			  }else{ 
 				  var accion='registrarCliente';
 				  $.post('<%=request.getContextPath() %>/ServletCliente', {
@@ -141,14 +143,14 @@
 					  	txtRuc : txtRuc,
 					  	txtRazon : txtRazon,
 					  	optradio : optradio,
-					  
+					  	
 							accion : accion
 						}, function(response) {
 							
 							if (response.success==true) {
 								location.reload();
 							
-									alert("cliente Registrado, el usuario generado es la primera letra de su nombre, seguido de su apellido paterno y la primera letra de su apellido materno")
+									alert("Cliente Registrado. Su usuario es: "+usuario)
 									document.location.href="home.jsp";
 								}else{
 
@@ -192,7 +194,7 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Registrar Cliente</h2>
-						<form class="form-horizontal" action="<%=getServletContext().getContextPath() %>/ServletCliente"  role="form">
+						<form  class="form-horizontal" action="<%=getServletContext().getContextPath() %>/ServletCliente"  role="form">
 						<!-- Fila 1 -->
 							<div class="row">
 								<div class="col-sm-4">
