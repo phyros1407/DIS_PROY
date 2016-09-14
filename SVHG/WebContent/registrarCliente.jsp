@@ -31,7 +31,7 @@
 		  var dni = $('#txtDni').val();
 		 // console.log("asdasd"+dni);
 		 var accion='buscarDni';
-		  $.get('http://env-0307453.jelasticlw.com.br/service/Gestionar_Persona', {
+		  $.get('http://env-6803205.jelasticlw.com.br/service/Gestionar_Persona', {
 					accion : accion,
 					dni:dni
 				}, function(response) {		
@@ -52,7 +52,7 @@
 			  var ruc = $('#txtRuc').val();
 			 // console.log("asdasd"+dni);
 			 var accion='buscarRuc';
-			  $.get('http://env-0307453.jelasticlw.com.br/service/Gestionar_Empresa', {
+			  $.get('http://env-6803205.jelasticlw.com.br/service/Gestionar_Empresa', {
 				  
 						accion : accion,
 						ruc:ruc
