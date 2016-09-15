@@ -43,7 +43,7 @@
 
 							<li><a href="actualizarDatos.jsp"><i class="fa fa-user"></i> Cuenta</a></li>
 
-							<li><a href=""><i class="fa fa-user"></i> Cuenta</a></li>
+						
 							<li><a href="ServletPedido?accion=listarPedidosPendientes"><i class="fa fa-shopping-cart"></i>Pedidos</a></li>
 
 							<%} %>
