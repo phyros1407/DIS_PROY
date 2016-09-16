@@ -65,6 +65,8 @@ public class ServletLogin extends HttpServlet {
 		if(accion.equals("cerrarSesion")){
 			
 			misesion.removeAttribute("usuId");
+			misesion.removeAttribute("codigoCliente");
+			
 			misesion.setAttribute("mostrarLogin", "");
 			request.getRequestDispatcher("home.jsp").forward(request, response);
 		}
@@ -87,14 +89,17 @@ public class ServletLogin extends HttpServlet {
 			if(usu!=null && usu.getEstado().equals("A") &&  usu.getIntento().equals("validado")){
 				
 				HttpSession misesion=request.getSession();
-				misesion.setAttribute("usuId",usu.getUsuId());
+				misesion.setAttribute("usuId",usu.getPersonaId());
 				misesion.setAttribute("mostrarLogin", "no");
 				misesion.setAttribute("nombreApellidoPersona", usu.getNombre()+" "+usu.getApellidoPaterno());
+				
+				
 				System.out.println("rolllll "+usu.getRolId());
 				if(usu.getRolId()==1 ){//rol administrador
 					System.out.println("entro 1 rol");
 					misesion.setAttribute("nombreApellidoPersonaAdmi", usu.getNombre()+" "+usu.getApellidoPaterno());
 					request.getRequestDispatcher("inicio.jsp").forward(request, response);
+					misesion.setAttribute("codigoCliente", usu.getId_usuario());
 				}else if(usu.getRolId()==2 ){//rol almacenero
 					
 				}else if(usu.getRolId()==3 ){//rol carguero
