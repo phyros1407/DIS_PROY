@@ -132,7 +132,12 @@ public class ServletCliente extends HttpServlet {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-		}	
+		}
+		
+		if(accion.equals("actualizarDatos")){
+			
+			
+		}
 	}
 
 }
