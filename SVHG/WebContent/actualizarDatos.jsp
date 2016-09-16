@@ -1,3 +1,4 @@
+<%@page import="beans.PersonaBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,52 +22,110 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    
+	 <%
+	 PersonaBean persona=(PersonaBean) request.getAttribute("persona");
+		
+	%>
 </head>
-<!-- RegistrarCliente -->
-	<script type="text/javascript">
+S
+<body>
+<%@include file="../includeOut/header.jsp" %>
+<script type="text/javascript">
 
-		function registrarCliente(){
-			  var txt_dni = $('#txtDni').val();
-			  var txt_nombre = $('#txtNombres').val();
-			  var txt_apepat = $('#txtApePat').val();
-			  var txt_apemat = $('#txtApeMat').val();
+		function actualizarCliente(){	  
+		
 			  var txtClave = $('#txtClave').val();
+			  var txtClave2 = $('#txtClave2').val();
 			  var txtCorreo = $('#txtCorreo').val();
 			  var txtCelular = $('#txtCelular').val();
 			  
-			 var accion='registrarCliente';
-			  $.post('<%=request.getContextPath() %>/ServletCliente', {
-				  	txt_dni : txt_dni,
-				  	txt_nombre : txt_nombre,
-				  	txt_apemat : txt_apemat,
-				  	txt_apepat : txt_apepat,
-				  	txtClave : txtClave,
-				  	txtCorreo : txtCorreo,
-				  	txtCelular : txtCelular,
-				  	
-				  	
+
+			  var longNum=txtCelular.length;
+			  var  num=txtCelular.charAt(0);
+			  var y=0;
+			  if((num!='9' && longNum=='9') || ((num=='1' || num=='8' || num=='9'  ) && longNum=='7' ) || longNum<7) {
+				  y=1;
+			  }
+	  
+			  var x;
+			  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+			 	if(emailRegex.test(txtCorreo)){
+					x=1;
+				}else{
+					x=2;
+				}
+			 	
+			if(txtCorreo==''){
+				  alert("Debe llenar los campos obligatorios.");
+			  }else if(x==2){
+				  alert("Correo no valido. Utilize el sgt. Formato:\ncorreo@domain");
+			  }else if(txtClave==''){
+				  alert("Debe llenar los campos obligatorios.");
+			  }else if(txtClave2==''){
+				  alert("Debe llenar los campos obligatorios.");
+			  }else if(txtCelular==''){
+				  alert("Debe llenar los campos obligatorios.");
+			  }else if(y=='1'){
+				  if(longNum=='9'){
+					    alert("Numero de celular incorrecto. Debe iniciar con 9");
+				  }
+				  if(longNum=='7'){
+					  alert("Numero fijo incorrecto. Formato: 5555555")
+				  }
+					  alert("Ingrese numero de celular o fijo.");
 				  
+				  
+			  }else { 
+				
+				  var accion='actualizarCliente';
+				  $.post('<%=request.getContextPath() %>/ServletCliente', {
+					  
+					  	txtClave : txtClave,
+					  	txtCorreo : txtCorreo,
+					  	txtCelular : txtCelular,
+					
+							accion : accion
+						}, function(response) {
+							
+							if (response.success==true) {
+								location.reload();
+							
+									alert("Actualizacion de datos correcta")
+									document.location.href="home.jsp";
+								}else{
+
+									alert("Error al actualizar datos");
+									
+								}	
+				  });
+			  }
+			
+		  }
+		
+		function buscarCorreo(){
+			 var txtCorreo = $('#txtCorreo').val();
+			 var accion='buscarCorreo';
+			  $.post('<%=request.getContextPath()%>/ServletCliente', {
+				  	txtCorreo : txtCorreo,
 						accion : accion
 					}, function(response) {
 						
 						if (response.success==true) {
-							location.reload();
-						
-								alert("cliente Registrado")
-								document.location.href="index.jsp";
-							}else{
-
-								alert("	 existe");
+								document.getElementById("divCorreo").innerHTML="<input type=email class=form-control onchange=buscarCorreo() autofocus name=txtCorreo id=txtCorreo>";
+								alert("El correo esta en uso. Vuelva a intentar con otro correo.")
+								if(document.getElementById("xCorreo").value!=txtCorreo){
+									alert("xxx");
+								}
 								
+							}else{
+				
+//								alert("Correo valido");
 							}	
 			  });
 		  }
+		
 
 	</script>
-<body>
-<%@include file="../includeOut/header.jsp" %>
-
 <section>
 		<div class="container">
 			<div class="row">
@@ -75,37 +134,25 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Actualizar Datos</h2>
-						<form class="form-horizontal" action="<%=getServletContext().getContextPath() %>/ServletCliente" onSubmit="return validarClave()" role="form">
+						<form class="form-horizontal" action="<%=getServletContext().getContextPath() %>/ServletCliente"  role="form">
 						<!-- Fila 1 -->
-							<div class="row">
-								<div class="col-sm-4">
-						
-								</div>
-								<div class="col-sm-3">
-									 <div class="form-group">
-								     	<label class="sr-only" >Ingresa tu DNI:</label>
-								     <input type="text" id="txtDni" name="txtDni" class="form-control" placeholder="Ingresa DNI">
-								    </div>
-								</div>
-								<div class="col-sm-5">
-								<input type="button" class="btn btn-warning" onclick="buscarReniec();"  value="Buscar">
-								</div>
-							</div>
+							
 							<hr><hr>
 						<!-- Fila 2 -->
 						<br>
 							<div class="row">
 								<div class="col-sm-4">
 							       		<label >Nombre:</label>
-							        	<input type="text" id="txtNombres" name="txtNombres" class="form-control" readonly> 
+							        	<input value="<%=persona.getNombre()%>" type="text" id="txtNombres" name="txtNombres" class="form-control" readonly> 
 								</div>	
 							</div>
 						<!-- Fila 3 -->
+						<h1></h1>
 						<br>
 							<div class="row">
 								<div class="col-sm-4">
 							       		<label >Apellido Paterno:</label>
-							        	<input type="text" name="txtApePat"  id="txtApePat" class="form-control" readonly> 
+							        	<input value="<%=persona.getApellidoPaterno()%>" type="text" name="txtApePat"  id="txtApePat" class="form-control" readonly> 
 								</div>	
 							</div>
 							
@@ -115,7 +162,7 @@
 							<div class="row">
 								<div class="col-sm-4">
 							       		<label >Apellido Materno:</label>
-							        	<input type="text" name="txtApeMat"  id="txtApeMat" class="form-control" readonly> 
+							        	<input value="<%=persona.getApellidoMaterno()%>" type="text" name="txtApeMat"  id="txtApeMat" class="form-control" readonly> 
 								</div>	
 							</div>
 							
@@ -143,7 +190,8 @@
 							<div class="row">
 								<div class="col-sm-4">
 						       		<label >Correo:</label>
-						        	<input type="email" id="txtCorreo" name="txtCorreo" class="form-control"> 
+						        	 <div  id="divCorreo"><input value="<%=persona.getCorreo()%>"  required  id="txtCorreo" onchange="buscarCorreo()" name="txtCorreo" class="form-control"></div>
+						        	 <input value="<%=persona.getCorreo()%>" hidden  id="xCorreo" > 
 								</div>	
 								<div class="col-sm-4">
 									<label >Clave:</label>
@@ -156,36 +204,40 @@
 							<div class="row">
 								<div class="col-sm-4">
 						       		<label >Celular:</label>
-						        	<input type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
+						        	<input  value="<%=persona.getTelefono()%>"  type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
 								</div>	
 								<div class="col-sm-4">
 									<label >Repetir Clave:</label>
-						        	<input type="password"  id="txtClave2" class="form-control" required> 
+						        	<input type="password"  onchange="validarClave()" id="txtClave2" class="form-control" required> 
 								</div>
 							</div>
 							<br><br>
 						<!-- Fila 8 -->
 							<div class="row">
-							<input type="hidden" name="accion" id="accion" value="registrarCliente">
-							<center><button type="button" class="btn btn-warning" onclick="registrarCliente()">Registrar</button></center>
+							
+							<center><button type="button" class="btn btn-warning" onclick="actualizarCliente()">Registrar</button></center>
 								<center><div id="divError"></div></center>
 							</div>
 							
 						</form>
 					</div><!--features_items-->
-				
+<!---------------------- Script validacion de clave---------------- -->
 					<script>
 					function validarClave(){
-					var p1 = document.getElementById("txtClave").value;
-					var p2 = document.getElementById("txtClave2").value;
-					
-					if (p1 != p2) {
-						  document.getElementById("divError").innerHTML  ="<div class=alert alert-danger><strong>ERROR!</strong> Las claves no coinciden.</div>";
-						  return false;
+						var p1 = document.getElementById("txtClave").value;
+						var p2 = document.getElementById("txtClave2").value;
+						
+						if (p1 != p2) {
+							  document.getElementById("divError").innerHTML  ="<div class=alert alert-danger><strong>ERROR!</strong> Las claves no coinciden.</div>";
+							  document.getElementById("botonSubmit").disabled = true;
+							  return false;
+						}else{
+							 document.getElementById("divError").innerHTML  ="";
+							 document.getElementById("botonSubmit").disabled = false;
 						}
-					}
+						}
 					</script>
-					
+<!----------------------Final Script validacion de clave---------------- -->				
 					
 				</div>
 			</div>
