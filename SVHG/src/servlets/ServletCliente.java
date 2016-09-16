@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import dao.interfaces.EmpresaDao;
 import dao.interfaces.PersonaDao;
@@ -119,6 +120,7 @@ public class ServletCliente extends HttpServlet {
 					EmpresaBean empresa = new EmpresaBean();
 					DAOFactory daoEmpresa= DAOFactory.getDaoFactory(DAOFactory.MYSQL);
 					EmpresaDao iempresadao = daoEmpresa.getEmpresaDAO();
+					
 					
 					empresa.setEmp_ide(String.valueOf(id.getId()));
 					empresa.setIde("C");
