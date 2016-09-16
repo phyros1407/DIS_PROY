@@ -17,6 +17,7 @@ div.container4 p {
 </head>
 <body>
 <div class="col-sm-12 col-md-6">
+
 <br>					
 				Categoria:	<select name="selCat" id="selCat">
 				<option value="1">SUSPENSIÓN</option>
