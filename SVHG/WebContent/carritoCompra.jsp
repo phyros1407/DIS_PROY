@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
 <title>Carrito</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -29,12 +28,16 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script>
+<script type="text/javascript">
+
 	function agregar(cantidad, desc) {
 
+		alert (cantidad+" -   asdasda    - "+desc);
 		var canti = parseInt(cantidad) + 1;
 
-		document.getElementById(desc.toString()).value = canti;
+		var direccion = "#"+desc
+		
+		$(direccion).val(canti)
 	}
 
 	function disminuir(cantidad, desc) {
@@ -42,9 +45,9 @@
 		var canti = parseInt(cantidad) - 1;
 
 		if (canti <= 0) {
-			document.getElementById(desc.toString()).value = 1;
+			document.getElementById(desc.toString).value = 1;
 		} else {
-			document.getElementById(desc.toString()).value = canti;
+			document.getElementById(desc.toString).value = canti;
 		}
 	}
 
@@ -53,13 +56,13 @@
 				$('input[name="entrega"]').click(function() {
 					if ($(this).attr("value") == "casa") {
 
-						$("#boton1").hide();
+						$(".step1").hide();
 						$("#formuCasa").show();
 						$("#boton3").show();
-					}
+					}else
 					if ($(this).attr("value") == "local") {
 
-						$("#boton1").show();
+						$(".step1").show();
 						$("#titInDir").hide();
 						$("#infoDirEnv").hide();
 						$("#botonCambDir").hide();
@@ -72,19 +75,21 @@
 
 				$('#boton1').click(function() {
 					$(this).hide();
-					//$(".step1").hide();
+					$(".step1").hide();
 					$(".step2").show();
 					$(".pagenv").hide();
 					$("#valEnv").text("$/.0.00");
 				});
 
-				$('#boton3').click(
-						function() {
+				$('#boton3').click(function() {
+					
+							$(".step3").show();
+							$("#boton1").show();
 							$(this).hide();
 							$("#formuCasa").hide();
 							$(".step1").hide();
 							$(".step2").show();
-							$(".step3").show();
+							
 							$(".pagenv").show();
 							$("#valEnv").text("$/.20.00");
 
@@ -113,8 +118,8 @@
 
 </head>
 <body>
-	<%@include file="../includeOut/header.jsp"%>
-
+	
+	<jsp:include page="includeOut/header.jsp"></jsp:include>
 	<section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -153,13 +158,13 @@
 								style="vertical-align: middle; text-align: center;">
 								<div class="cart_quantity_button">
 									<a class="cart_quantity_up" href="#"
-										onclick="agregar(cantidad.value,desc.value);"> + </a> <input
+										onclick="agregar(cantidad.value,desc.value)"> + </a> <input
 										type="hidden" value="cantidad" id="desc"> <input
-										onkeypress="return solonumerosCarr(event);" name="quantity"
+										onkeypress="return solonumerosCarr(event)" name="quantity"
 										maxlength="2" class="cart_quantity_input" type="text"
 										value="1" size="2" id="cantidad"> <a
 										class="cart_quantity_down" href="#"
-										onclick="disminuir(cantidad.value,desc.value);"> - </a>
+										onclick="disminuir(cantidad.value,desc.value)"> - </a>
 								</div>
 							</td>
 							<td class="cart_total"
@@ -208,7 +213,6 @@
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
@@ -399,8 +403,8 @@
 		</div>
 	</section>
 	<!--/#do_action-->
-
-	<%@include file="../includeOut/footer.jsp"%>
+	<jsp:include page="includeOut/footer.jsp"></jsp:include>
+	
 </body>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
