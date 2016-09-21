@@ -57,6 +57,8 @@
 					if ($(this).attr("value") == "casa") {
 
 						$(".step1").hide();
+						$(".step2").hide();
+						$(".step3").hide();
 						$("#formuCasa").show();
 						$("#boton3").show();
 					}else
@@ -89,7 +91,7 @@
 							$("#formuCasa").hide();
 							$(".step1").hide();
 							$(".step2").show();
-							
+							$("#infoDirEnv").show();
 							$(".pagenv").show();
 							$("#valEnv").text("$/.20.00");
 
