@@ -406,6 +406,7 @@
 	<jsp:include page="includeOut/footer.jsp"></jsp:include>
 	
 </body>
+
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>
