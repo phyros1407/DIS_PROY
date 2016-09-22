@@ -65,6 +65,9 @@
 	
 		
 		
+		
+		
+		var depas = [];
 		$(document).ready(
 				function() {
 					$('input[name="entrega"]').click(function() {
@@ -75,9 +78,37 @@
 							$(".step3").hide();
 							$("#formuCasa").show();
 							$("#boton3").show();
+							
+							
+							var action = "deps";
+							
+							$.GET('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+								action : action
+							},function(response){
+								
+								depas = new Array(response['object'].length);
+								
+								var cadena = "";
+								for(var i=0;i<response['object'].length;i++){
+									depas[i] = response['object'][i]['departamento'];
+									cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['departamento']+"</option>");
+								}
+								
+								console.log(depas[i]);
+								
+								$("#departamento").html(cadena);
+								
+							});
+							
+							
 						}else
 						if ($(this).attr("value") == "local") {
 	
+							
+							
+							
+							
+							
 							$(".step1").show();
 							$("#titInDir").hide();
 							$("#infoDirEnv").hide();
@@ -284,8 +315,7 @@
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" name="departamento"
 									id="departamento">
-									<option>Lima</option>
-									<option>Arequipa</option>
+									
 								</select>
 							</div>
 						</div>
