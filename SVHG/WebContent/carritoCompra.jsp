@@ -1,126 +1,139 @@
-
 <!DOCTYPE html >
 <html>
 <head>
-<meta charset="utf-8">
-<title>Carrito</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/font-awesome.min.css" rel="stylesheet">
-<link href="css/prettyPhoto.css" rel="stylesheet">
-<link href="css/price-range.css" rel="stylesheet">
-<link href="css/animate.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet">
-<link href="css/responsive.css" rel="stylesheet">
-<link rel="shortcut icon" href="imagesOut/ico/favicon.ico">
-<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="imagesOut/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="imagesOut/ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="imagesOut/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed"
-	href="imagesOut/ico/apple-touch-icon-57-precomposed.png">
-<script src="js/validaciones.js"></script>
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Carrito</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/prettyPhoto.css" rel="stylesheet">
+	<link href="css/price-range.css" rel="stylesheet">
+	<link href="css/animate.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+	<link rel="shortcut icon" href="imagesOut/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="imagesOut/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="imagesOut/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="imagesOut/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="imagesOut/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/validaciones.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script	
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	</script>
+	<script type="text/javascript">
 
-<script type="text/javascript">
-
-	function agregar(cantidad, desc) {
-
-		alert (cantidad+" -   asdasda    - "+desc);
-		var canti = parseInt(cantidad) + 1;
-
-		var direccion = "#"+desc
-		
-		$(direccion).val(canti)
-	}
-
-	function disminuir(cantidad, desc) {
-
-		var canti = parseInt(cantidad) - 1;
-
-		if (canti <= 0) {
-			document.getElementById(desc.toString).value = 1;
-		} else {
-			document.getElementById(desc.toString).value = canti;
+		function cambiar(cantidad,desc){
+			
+			alert("Entro a cambiar");
+			var direccion = "#"+desc;
+			
+			if(isNaN(cantidad)||cantidad == null||cantidad.trim()==""){
+				$(direccion).val(1);
+			}
+			
 		}
-	}
-
-	$(document).ready(
-			function() {
-				$('input[name="entrega"]').click(function() {
-					if ($(this).attr("value") == "casa") {
-
-						$(".step1").hide();
-						$(".step2").hide();
-						$(".step3").hide();
-						$("#formuCasa").show();
-						$("#boton3").show();
-					}else
-					if ($(this).attr("value") == "local") {
-
-						$(".step1").show();
-						$("#titInDir").hide();
-						$("#infoDirEnv").hide();
-						$("#botonCambDir").hide();
-						$("#formuCasa").hide();
-						$(".step2").hide();
-						$(".step3").show();
-						
-					}
-				});
-
-				$('#boton1').click(function() {
-					$(this).hide();
-					$(".step1").hide();
-					$(".step2").show();
-					$(".pagenv").hide();
-					$("#valEnv").text("$/.0.00");
-				});
-
-				$('#boton3').click(function() {
-					
-							$(".step3").show();
-							$("#boton1").show();
-							$(this).hide();
-							$("#formuCasa").hide();
+	
+		function agregar(cantidad, desc) {
+	
+			event.preventDefault();
+			
+			var canti = parseInt(cantidad) + 1;
+	
+			var direccion = "#"+desc;
+			
+			$(direccion).val(canti);
+		}
+	
+		function disminuir(cantidad, desc) {
+			
+			event.preventDefault();
+			
+			var canti = parseInt(cantidad) - 1;
+			var direccion = "#"+desc;
+	
+			if (canti <= 0) {
+				$(direccion).val(1);
+			} else {
+				$(direccion).val(canti);
+			}
+		}
+	
+		
+		
+		$(document).ready(
+				function() {
+					$('input[name="entrega"]').click(function() {
+						if ($(this).attr("value") == "casa") {
+	
 							$(".step1").hide();
-							$(".step2").show();
-							$("#infoDirEnv").show();
-							$(".pagenv").show();
-							$("#valEnv").text("$/.20.00");
-
-							//DATOS DEL RECEPTOR
-							//OBTENER VAL
-							//var nombre = $("#").val();
-							var direccion = $("#direccion").val();
-							var distrito = $("#distrito").val();
-							var provincia = $("#provincia").val();
-							var departamento = $("#departamento").val();
-							var telefono1 = $("#telefono1").val();
-							var telefono2 = $("#telefono2").val();
-
-							//SETEAR VAL
-							$("#mosNom").text("Jean Pier Barbieri");
-							$("#mosDir").text(direccion);
-							$("#mosDis").text(
-									distrito + " - " + provincia + " - "
-											+ departamento);
-							$("#mosTel").text(
-									"Telefono : " + telefono1 + "\n \n"
-											+ " Otro Telefono : " + telefono2);
-						});
-			});
-</script>
+							$(".step2").hide();
+							$(".step3").hide();
+							$("#formuCasa").show();
+							$("#boton3").show();
+						}else
+						if ($(this).attr("value") == "local") {
+	
+							$(".step1").show();
+							$("#titInDir").hide();
+							$("#infoDirEnv").hide();
+							$("#botonCambDir").hide();
+							$("#formuCasa").hide();
+							$(".step2").hide();
+							$(".step3").show();
+							
+						}
+					});
+	
+					$('#boton1').click(function() {
+						$(this).hide();
+						$(".step1").hide();
+						$(".step2").show();
+						$(".pagenv").hide();
+						$("#valEnv").text("$/.0.00");
+					});
+	
+					$('#boton3').click(function() {
+						
+						$(".step3").show();
+						$("#boton1").show();
+						$(this).hide();
+						$("#formuCasa").hide();
+						$(".step1").hide();
+						$(".step2").show();
+						$("#infoDirEnv").show();
+						$(".pagenv").show();
+						$("#valEnv").text("$/.20.00");
+	
+						//DATOS DEL RECEPTOR
+						//OBTENER VAL
+						//var nombre = $("#").val();
+						var direccion = $("#direccion").val();
+						var distrito = $("#distrito").val();
+						var provincia = $("#provincia").val();
+						var departamento = $("#departamento").val();
+						var telefono1 = $("#telefono1").val();
+						var telefono2 = $("#telefono2").val();
+	
+						//SETEAR VAL
+						$("#mosNom").text("Jean Pier Barbieri");
+						$("#mosDir").text(direccion);
+						$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
+						$("#mosTel").text("Telefono : " + telefono1 + "\n \n"+ " Otro Telefono : " + telefono2);
+					});
+		});
+		
+		function mostrar(cantidad){
+			alert(cantidad);
+		}
+	</script>
 
 </head>
 <body>
-	
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
 	<section id="cart_items">
 		<div class="container">
@@ -156,17 +169,12 @@
 								style="vertical-align: middle; text-align: center;">
 								<p>S/.59.00</p>
 							</td>
-							<td class="cart_quantity"
-								style="vertical-align: middle; text-align: center;">
+							<td class="cart_quantity" style="vertical-align: middle; text-align: center;">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href="#"
-										onclick="agregar(cantidad.value,desc.value)"> + </a> <input
-										type="hidden" value="cantidad" id="desc"> <input
-										onkeypress="return solonumerosCarr(event)" name="quantity"
-										maxlength="2" class="cart_quantity_input" type="text"
-										value="1" size="2" id="cantidad"> <a
-										class="cart_quantity_down" href="#"
-										onclick="disminuir(cantidad.value,desc.value)"> - </a>
+									<a class="cart_quantity_up" href="#"  onclick="agregar(cantidad.value,desc.value);"> + </a> 
+									<input type="hidden" value="cantidad" id="desc"> 
+									<input  onchange="cambiar(cantidad.value,desc.value);" onkeypress="return solonumerosCarr(event)" name="quantity" maxlength="2" class="cart_quantity_input" type="text" value="1" size="2" id="cantidad"> 
+									<a class="cart_quantity_down" href="#" onclick="disminuir(cantidad.value,desc.value);"> - </a>
 								</div>
 							</td>
 							<td class="cart_total"
@@ -179,37 +187,29 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="cart_product"><a href=""><img
-									src="imagesOut/cart/one.png" alt=""></a></td>
-							<td class="cart_description"
-								style="vertical-align: middle; text-align: center;">
+							<td class="cart_product"><a href="">
+								<img src="imagesOut/cart/one.png" alt=""></a>
+							</td>
+							<td class="cart_description" style="vertical-align: middle; text-align: center;">
 								<h4>
 									<a href="#">Colorblock Scuba</a>
 								</h4>
 							</td>
-							<td class="cart_price"
-								style="vertical-align: middle; text-align: center;">
+							<td class="cart_price" style="vertical-align: middle; text-align: center;">
 								<p>S/.59.00</p>
 							</td>
-							<td class="cart_quantity"
-								style="vertical-align: middle; text-align: center;">
+							<td class="cart_quantity" style="vertical-align: middle; text-align: center;">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href="#"
-										onclick="agregar(cantidad.value,desc.value);"> + </a> <input
-										type="hidden" value="cantidad" id="desc"> <input
-										onkeypress="return solonumerosCarr(event);" name="quantity"
-										maxlength="2" class="cart_quantity_input" type="text"
-										value="1" size="2" id="cantidad"> <a
-										class="cart_quantity_down" href="#"
-										onclick="disminuir(cantidad.value,desc.value);"> - </a>
+									<a style="vertical-align: middle; text-align: center;" class="cart_quantity_up" href="#"onclick="agregar(cantidad1.value,desc1.value);"> + </a> 
+									<input type="hidden" value="cantidad1" id="desc1"/> 
+									<input  onchange="cambiar(cantidad1.value,desc1.value);" onkeypress="return solonumerosCarr(event)" name="quantity" maxlength="2" class="cart_quantity_input" type="text" value="1" size="2" id="cantidad1"/> 
+									<a style="vertical-align: middle; text-align: center;" class="cart_quantity_down" href="#"  onclick="disminuir(cantidad1.value,desc1.value);"> - </a>
 								</div>
 							</td>
-							<td class="cart_total"
-								style="vertical-align: middle; text-align: center;">
+							<td class="cart_total" style="vertical-align: middle; text-align: center;">
 								<p class="cart_total_price">S/.59.00</p>
 							</td>
-							<td class="cart_delete"
-								style="vertical-align: middle; text-align: center;"><a
+							<td class="cart_delete" style="vertical-align: middle; text-align: center;"><a
 								class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
@@ -406,7 +406,7 @@
 	</section>
 	<!--/#do_action-->
 	<jsp:include page="includeOut/footer.jsp"></jsp:include>
-	
+	<jsp:include page="modals/modalGenerarPedido.jsp"></jsp:include>
 </body>
 
 <script src="js/jquery.js"></script>

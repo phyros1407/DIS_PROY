@@ -19,6 +19,9 @@ public abstract class DAOFactory {
 	public abstract UsuarioDao getUsuarioDao();
 	public abstract EmpresaDao getEmpresaDAO(); 
 	public abstract PedidoDao getPedidoDAO();
+	public abstract PersonaDao getPersonaDAO(); 
+	
+	
 	public static DAOFactory getDaoFactory(int factory){
 		
 		switch (factory) {
@@ -31,17 +34,6 @@ public abstract class DAOFactory {
 		}
 		
 	}
-	// usuario
-			public abstract PersonaDao getPersonaDAO(); 	
-			public static DAOFactory getDaoFactory1(int factory){
-				switch(factory){
-				case MYSQL:
-					return new MySqlDAOFactory();
-				default:
-					return null;
-				}
-			}
-			
-			
+
 	
 }
