@@ -16,6 +16,7 @@ public class ProductoBean {
 	private double precio;
 	private int descuento;
 	private double peso;
+	private CategoriaBean categoriaBean;
 	
 	
 	public int getIdProducto() {
@@ -95,6 +96,12 @@ public class ProductoBean {
 	}
 	public void setPeso(double peso) {
 		this.peso = peso;
+	}
+	public CategoriaBean getCategoriaBean() {
+		return categoriaBean;
+	}
+	public void setCategoriaBean(CategoriaBean categoriaBean) {
+		this.categoriaBean = categoriaBean;
 	}
 
 	
