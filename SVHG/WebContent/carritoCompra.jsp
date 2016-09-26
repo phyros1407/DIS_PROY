@@ -28,6 +28,8 @@
 	<script type="text/javascript">
 
 		var depas = [];
+		var pros = [];
+		var dist = [];
 		function cargarDep(){
 			
 			var action = "deps";
@@ -48,14 +50,74 @@
 				}
 				
 				console.log(depas[i]);
-				
-				$('#departamento').html(cadena);
+				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+				$('#departamento').html(pre+cadena);
 				
 			});
 			
 		}
 	
+		function cargarPros(id){
+			
+			var action = "pros";
+			
+			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+				
+				
+				action : action,
+				id : id
+				
+			},function(response){
+				
+				pros = new Array(response['object'].length);
+				
+				var cadena = "";
+				for(var i=0;i<response['object'].length;i++){
+					pros[i] = response['object'][i]['provincia'];
+					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['provincia']+"</option>");
+				}
+				
+				console.log(depas[i]);
+				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+				$('#provincia').html(pre+cadena);
+				
+			});
+		}
 	
+		function cargarDist(id){
+			
+			var action = "dist";
+			
+			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+				
+				
+				action : action,
+				id : id
+				
+			},function(response){
+				
+				dist = new Array(response['object'].length);
+				
+				var cadena = "";
+				for(var i=0;i<response['object'].length;i++){
+					dist[i] = response['object'][i]['distrito'];
+					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['distrito']+"</option>");
+				}
+				
+				console.log(depas[i]);
+				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+				$('#distrito').html(pre+cadena);
+				
+			});
+			
+		}
+		
+		function limpiarDist(id){
+			
+			var valor = 
+			
+		}
+		
 		function cambiar(cantidad,desc){
 			
 			alert("Entro a cambiar");
@@ -322,8 +384,8 @@
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" name="departamento"
-									id="departamento">
-									<option value="0"> -- Seleccionar --</option>
+									id="departamento" onchange="cargarPros(this.value);">
+									
 								</select>
 							</div>
 						</div>
@@ -332,18 +394,16 @@
 								<label id="titulitos">Provincia</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control" name="provincia" id="provincia">
-									<option>Lima</option>
-									<option>Ucayali</option>
+								<select class="form-control" name="provincia" id="provincia" onchange="cargarDist(this.value);">
+									
 								</select>
 							</div>
 							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Distrito </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control" id="distrito" name="distrito">
-									<option>Lima</option>
-									<option>Empresa</option>
+								<select class="form-control" id="distrito" name="distrito" >
+									
 								</select>
 							</div>
 						</div>
