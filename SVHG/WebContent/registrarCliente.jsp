@@ -123,7 +123,7 @@
 					    alert("Numero de celular incorrecto. Debe iniciar con 9");
 				  }
 				  if(longNum=='7'){
-					  alert("Numero fijo incorrecto. Formato: 5555555")
+					  alert("Numero fijo incorrecto")
 				  }
 					  alert("Ingrese numero de celular o fijo.");
 				  
