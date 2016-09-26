@@ -44,7 +44,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 				producto.setPrecio(rs.getDouble("pre"));
 				producto.setMedida(rs.getString("med"));
 				producto.setCantidad(rs.getInt("can"));
-				producto.setDescuento(rs.getInt("dsc"));;
+				producto.setDescuento(rs.getInt("est_dsc"));;
 				producto.setPeso(rs.getDouble("peso"));
 				producto.setCategoriaBean(categoria);
 				
@@ -96,7 +96,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 			
 			Statement stmt=con.createStatement();
 			
-			String query = "insert into producto (cat_id,codpro,nom,des,foto,est,med,can,pre,dsc,peso,usu_crea_regi,fec_crea_regi,ult_usu_mod_regi,fec_ult_mod_regi)  "
+			String query = "insert into producto (cat_id,codpro,nom,des,foto,est,med,can,pre,est_dsc,peso,usu_crea_regi,fec_crea_regi,ult_usu_mod_regi,fec_ult_mod_regi)  "
 						 + " values ("+producto.getIdCategoria()+",'"+producto.getCodPro().toUpperCase()+"','"+producto.getNombre().toUpperCase()+"','"+producto.getDescripcion().toUpperCase()+"','"+producto.getFoto()+"','A','"+producto.getMedida()+"',0,"+producto.getPrecio()+",0,"+producto.getPeso()+",'USU',now(),'USU',now())";
 			
 			int filas = stmt.executeUpdate(query);
@@ -225,7 +225,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 				producto.setPrecio(rs.getDouble("pre"));
 				producto.setMedida(rs.getString("med"));
 				producto.setCantidad(rs.getInt("can"));
-				producto.setDescuento(rs.getInt("dsc"));;
+				producto.setDescuento(rs.getInt("est_dsc"));;
 				producto.setPeso(rs.getDouble("peso"));
 			}
 			
