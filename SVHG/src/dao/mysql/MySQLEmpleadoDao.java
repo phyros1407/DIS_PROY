@@ -28,9 +28,10 @@ public class MySQLEmpleadoDao implements PersonaDao {
 		System.out.println("444");
 		if(filas==1){
 			String queryIdPersona="select last(id) from persona ";
-		
+			System.out.println("id; +"+queryIdPersona);
 	
-			ResultSet rs = stmt.executeQuery(queryIdPersona);
+			ResultSet rs = stmt.executeQuery(queryIdPersona);	
+			System.out.println("id: +"+rs.getInt("id"));
 			if(rs.next()){
 				int idPer=rs.getInt("id")+1;
 				System.out.println("idepersona: "+idPer);

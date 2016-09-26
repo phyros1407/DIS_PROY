@@ -66,7 +66,12 @@
 	                                <span class="title" href="" >Registrar Venta</span>
 	                        </a>
                         </li>
-                        
+                         <li class="nav-item">
+	                         <a href="<%=request.getContextPath() %>/ServletReporteVentas" class="nav-link nav-toggle">
+	                                <i class="icon-puzzle"></i>
+	                                <span class="title" href="" >Reporte de Ventas</span>
+	                        </a>
+                        </li>
                   
                                
                       
