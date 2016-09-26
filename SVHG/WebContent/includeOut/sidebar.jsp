@@ -13,12 +13,13 @@
 								</div>
 								<div id="sportswear" class="panel-collapse collapse">
 									<div class="panel-body">
-										<ul>
-											<li><a href="#">Balance </a></li>
-											<li><a href="#">Coordinacion </a></li>
-											<li><a href="#">Potencia </a></li>
-											<li><a href="#">Fuerza </a></li>
-											<li><a href="#">Otros </a></li>
+										<ul class="listado">
+											<li><a href="javascript:void(0)">TODOS</a></li>
+											<li><a href="javascript:void(0)">SUSPENSION</a></li>
+											<li><a href="javascript:void(0)">COORDINACION</a></li>
+											<li><a href="javascript:void(0)">AGILIDAD</a></li>
+											<li><a href="javascript:void(0)">POTENCIA</a></li>
+											<li><a href="javascript:void(0)">OTROS</a></li>
 										</ul>
 									</div>
 								</div>

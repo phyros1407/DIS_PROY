@@ -1,4 +1,5 @@
-  <%if(session.getAttribute("nombreApellidoPersonaAdmi")==null ) {
+  <%@page import="beans.ProductoBean"%>
+<%if(session.getAttribute("nombreApellidoPersonaAdmi")==null ) {
                   request.getRequestDispatcher("home.jsp").forward(request, response);
                   }
                   %>
@@ -8,7 +9,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%	ArrayList<UsuarioBean> usuario = (ArrayList<UsuarioBean>) request.getAttribute("usuarios");%>
+<%	ArrayList<UsuarioBean> usuario = (ArrayList<UsuarioBean>) request.getAttribute("usuarios");
+ArrayList<ProductoBean> productos=(ArrayList<ProductoBean>) request.getAttribute("productos"); %>
 	
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -83,7 +85,8 @@ div.container4 p {
 
 				<div class="col-sm-12 col-md-6">
 <br>					
-				Categoria:	<select name="selCat" id="selCat">
+				Categoria:	<select name="selCat" id="selCat" onchange="categoria()">
+				<option value="7">--Seleccionar--</option>
 				<option value="1">SUSPENSIÓN</option>
 				<option value="2">FUERZA</option>
 				<option value="3">AGILIDAD</option>
@@ -93,26 +96,20 @@ div.container4 p {
 				</select>
 				
 				Productos: 
+				<form action="ServletOferta" method="post">
 				<table class="table" style="height: 250px;width:500px;;display:block;">
 				
 				<thead style="display: inline-block;width: 100%;">
 				<tr>
 				<th>Nombre</th>
 				</tr></thead>
-				<tbody style="overflow: auto;height: 200px;display: inline-block;width: 100%;">
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>								
+				<tbody style="overflow: auto;height: 200px;display: inline-block;width: 100%;" id="tbody">					
 				</tbody>
 				</table>
 				<p align="center">
-				<input type="button" value="Agregar" class="btn btn-primary">
+				<input type="button" onclick="agregar()" value="Agregar" class="btn btn-primary">
 				</p>
+				</form>
 				<br>
 				<br>
 				<table class="table-bordered" style="height: 200px;width:500px;display:block;">
@@ -189,6 +186,12 @@ if(i<10){%>
 <br>
 <br>
 <br></div>
+
+
+<div id="prueba"></div>
+
+<% int prueba=0; %>
+
 <p align="center">
 <input type="submit" value="Guardar Oferta" class="btn btn-primary">
 </p>
@@ -219,6 +222,52 @@ if(i<10){%>
 $(document).ready(function(){
     $('#myTable').DataTable();
 });
+
+function categoria(){
+	var cat=$('#selCat').val();
+	console.log(cat);
+	
+	if(cat==7){
+		$('#tbody').html("");
+	}
+	if(cat==1){		
+		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
+		if(productos.get(i).getIdCategoria()==1){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+	}
+	if(cat==2){		
+		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
+		if(productos.get(i).getIdCategoria()==2){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+	}
+	if(cat==3){		
+		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
+		if(productos.get(i).getIdCategoria()==3){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+	}
+	if(cat==4){		
+		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
+		if(productos.get(i).getIdCategoria()==4){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+	}
+	if(cat==5){		
+		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
+		if(productos.get(i).getIdCategoria()==5){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+	}
+	if(cat==6){		
+		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
+		if(productos.get(i).getIdCategoria()==6){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+	}
+	
+}
+
+function agregar(){
+	console.log("agrega");
+	<%for(int i=0;i<productos.size()-1;i++){%>
+	if($('#ofertas'+<%=i%>+'').val()!=null){	
+	if(document.getElementById('ofertas'+<%=i%>+'').checked){
+			console.log(<%=i%>);
+		}}<%}%>
+	}
+	
+	
+
 </script>
 
 </body>

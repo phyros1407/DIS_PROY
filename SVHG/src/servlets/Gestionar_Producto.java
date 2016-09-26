@@ -44,51 +44,77 @@ public class Gestionar_Producto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
-		ProductoDao productodao = dao.getProductoDao();
-		
-		if(request.getParameter("accion")!=null){
-			String accion=request.getParameter("accion");
-			if(accion.equalsIgnoreCase("listarCat")){
-				try{
-					
-					ArrayList<CategoriaBean> categorias = productodao.listarCategorias();
-					
-					ResponseObject responseobj=null;
-					if(categorias!=null){
-						responseobj=new ResponseObject();
-						response.setContentType("application/json");
-						response.setCharacterEncoding("UTF-8");
-						responseobj.setSuccess(true);
-						responseobj.setObject(categorias);
+				DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+				ProductoDao productodao = dao.getProductoDao();
+				
+				if(request.getParameter("accion")!=null){
+					String accion=request.getParameter("accion");
+					if(accion.equalsIgnoreCase("listarCat")){
+						try{
+							
+							ArrayList<CategoriaBean> categorias = productodao.listarCategorias();
+							
+							ResponseObject responseobj=null;
+							if(categorias!=null){
+								responseobj=new ResponseObject();
+								response.setContentType("application/json");
+								response.setCharacterEncoding("UTF-8");
+								responseobj.setSuccess(true);
+								responseobj.setObject(categorias);
+							}
+							response.getWriter().write(new Gson().toJson(responseobj));
+							System.out.println("json" + new Gson().toJson(responseobj));
+							
+							
+						}catch(Exception e){
+							System.out.println(e.getMessage());
+						}
+					}else if(accion.equalsIgnoreCase("catalogo")){
+						try {
+							
+							ArrayList<ProductoBean> productos = new ArrayList<ProductoBean>();
+							productos = productodao.listarTodos();
+							
+							
+							ResponseObject responseobj=null;
+							if(productos!=null){
+								responseobj=new ResponseObject();
+								response.setContentType("application/json");
+								response.setCharacterEncoding("UTF-8");
+								responseobj.setSuccess(true);
+								responseobj.setObject(productos);
+							}
+							response.getWriter().write(new Gson().toJson(responseobj));
+							System.out.println("json" + new Gson().toJson(responseobj));
+							
+							
+							System.out.println("funciona el ajax");
+							
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
-					response.getWriter().write(new Gson().toJson(responseobj));
-					System.out.println("json" + new Gson().toJson(responseobj));
+					
+				}else{
+					try {
+						
+						ArrayList<ProductoBean> productos = new ArrayList<ProductoBean>();
+						productos = productodao.listarTodos();
+						request.setAttribute("productos", productos);
+						getServletContext().getRequestDispatcher("/GestionarProducto/GestionarProducto.jsp").forward(request, response);
+						
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					
-				}catch(Exception e){
-					System.out.println(e.getMessage());
+					
+					
+					
 				}
-			}
-		}else{
-			try {
-				
-				ArrayList<ProductoBean> productos = new ArrayList<ProductoBean>();
-				productos = productodao.listarTodos();
-				request.setAttribute("productos", productos);
-				getServletContext().getRequestDispatcher("/GestionarProducto/GestionarProducto.jsp").forward(request, response);
-				
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
-			
-			
-		}
 		
 	}
 

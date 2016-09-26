@@ -17,6 +17,7 @@ div.container4 p {
 </head>
 <body>
 <div class="col-sm-12 col-md-6">
+
 <br>					
 				Categoria:	<select name="selCat" id="selCat">
 				<option value="1">SUSPENSIÓN</option>
@@ -35,14 +36,14 @@ div.container4 p {
 				<th>Nombre</th>
 				</tr></thead>
 				<tbody style="overflow: auto;height: 200px;display: inline-block;width: 100%;">
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>
-				<tr><td><input type="radio" name="ofertas">Escaleras de coordinación</td></tr>								
+				<tr><td><input type="checkbox" name="ofertas">Escaleras de coordinación</td></tr>
+				<tr><td><input type="checkbox" name="ofertas1">Escaleras de coordinación</td></tr>
+				<tr><td><input type="checkbox" name="ofertas2">Escaleras de coordinación</td></tr>
+				<tr><td><input type="checkbox" name="ofertas3">Escaleras de coordinación</td></tr>
+				<tr><td><input type="checkbox" name="ofertas4">Escaleras de coordinación</td></tr>
+				<tr><td><input type="checkbox" name="ofertas5">Escaleras de coordinación</td></tr>
+				<tr><td><input type="checkbox" name="ofertas6">Escaleras de coordinación</td></tr>
+				<tr><td><input type="checkbox" name="ofertas7">Escaleras de coordinación</td></tr>								
 				</tbody>
 				</table>
 				<p align="center">

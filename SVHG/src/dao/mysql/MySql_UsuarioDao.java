@@ -257,7 +257,6 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 		return usuario;
 	}
 
-	@Override
 	public UsuarioBean validarIngreso(String usuario, String contraseña) {
 		// TODO Auto-generated method stub
 		UsuarioBean usu=null;
@@ -304,14 +303,6 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 						 validacion="3";
 						 usu.setIntento(validacion);
 					}else if(intento==3){
-						 insertIntento="UPDATE usuario SET INTENTO='4' WHERE ID='"+idUsu+"'";
-						validacion="4";
-						usu.setIntento(validacion);
-					}else if(intento==4){
-						 insertIntento="UPDATE usuario SET INTENTO='5' WHERE ID='"+idUsu+"'";
-						validacion="5";
-						usu.setIntento(validacion);
-					}else if(intento==5){
 						 insertIntento="UPDATE usuario SET INTENTO='0' WHERE ID='"+idUsu+"'";
 						validacion="resetearPass";
 						usu.setIntento(validacion);

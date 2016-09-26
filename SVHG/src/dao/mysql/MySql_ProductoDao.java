@@ -23,11 +23,15 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 			
 			Statement stmt=con.createStatement();
 			
-			String query="select *  from producto";
+			String query="select *  from producto a INNER JOIN categoria b ON a.cat_id=b.id ORDER BY a.pre";
 			System.out.println("QUERY DE PRODUCTOS LISTADO ---->"+query);
 			ResultSet rs=stmt.executeQuery(query);
 			ProductoBean producto=null;
+			CategoriaBean categoria=null;
 			while(rs.next()){
+				categoria= new CategoriaBean();
+				categoria.setTipo(rs.getString("b.tipo"));
+				
 				producto=new ProductoBean();
 				
 				producto.setIdProducto(rs.getInt("id"));
@@ -42,6 +46,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 				producto.setCantidad(rs.getInt("can"));
 				producto.setDescuento(rs.getInt("dsc"));;
 				producto.setPeso(rs.getDouble("peso"));
+				producto.setCategoriaBean(categoria);
 				
 				productos.add(producto);
 			}
@@ -51,7 +56,6 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 		}
 		return productos;
 	}
-
 	@Override
 	public ArrayList<CategoriaBean> listarCategorias() throws Exception {
 		// TODO Auto-generated method stub

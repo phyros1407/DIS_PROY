@@ -24,6 +24,8 @@ padding-top: 9px;
 		<div class="modal-dialog" role="document" style="width:800px;">
 			<div class="modal-content">
 				<form class="form-horizontal" action="Gestionar_Usuario" method="post">
+				<input type="hidden" name="txtDNIH" id="txtDNIH">
+				<input type="hidden" name="action" value="3">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
@@ -34,7 +36,7 @@ padding-top: 9px;
 					<input type="hidden" name="idU" value="0">					
 					<br>										
 					<div class="form-group">
-						<label class="control-label col-md-3">ContraseÃ±a antigua: <span
+						<label class="control-label col-md-3">Contraseña antigua: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-6">
@@ -43,7 +45,7 @@ padding-top: 9px;
 						</div>							
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Nueva contraseÃ±a: <span
+						<label class="control-label col-md-3">Nueva contraseña: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-6">
@@ -52,7 +54,7 @@ padding-top: 9px;
 						</div>							
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Repetir contraseÃ±a: <span
+						<label class="control-label col-md-3">Repetir contraseña: <span
 							class="required"> * </span>
 						</label>
 						<div class="col-md-6">
