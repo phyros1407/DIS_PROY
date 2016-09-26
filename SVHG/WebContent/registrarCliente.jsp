@@ -217,7 +217,7 @@
 							    	document.getElementById("divBoton").innerHTML  = "";
 							    	document.getElementById("divRazon").innerHTML  = "";
 							    }
-							  
+							   
 							    </script>
 								</div>
 								<div class="col-sm-3">
