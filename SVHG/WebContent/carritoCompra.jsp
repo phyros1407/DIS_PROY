@@ -27,6 +27,35 @@
 	</script>
 	<script type="text/javascript">
 
+		var depas = [];
+		function cargarDep(){
+			
+			var action = "deps";
+			
+			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+				
+				
+				action : action
+				
+			},function(response){
+				
+				depas = new Array(response['object'].length);
+				
+				var cadena = "";
+				for(var i=0;i<response['object'].length;i++){
+					depas[i] = response['object'][i]['departamento'];
+					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['departamento']+"</option>");
+				}
+				
+				console.log(depas[i]);
+				
+				$('#departamento').html(cadena);
+				
+			});
+			
+		}
+	
+	
 		function cambiar(cantidad,desc){
 			
 			alert("Entro a cambiar");
@@ -67,10 +96,11 @@
 		
 		
 		
-		var depas = [];
+		
 		$(document).ready(
 				function() {
 					$('input[name="entrega"]').click(function() {
+						
 						if ($(this).attr("value") == "casa") {
 	
 							$(".step1").hide();
@@ -80,35 +110,13 @@
 							$("#boton3").show();
 							
 							
-							var action = "deps";
 							
-							$.GET('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
-								action : action
-							},function(response){
-								
-								depas = new Array(response['object'].length);
-								
-								var cadena = "";
-								for(var i=0;i<response['object'].length;i++){
-									depas[i] = response['object'][i]['departamento'];
-									cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['departamento']+"</option>");
-								}
-								
-								console.log(depas[i]);
-								
-								$("#departamento").html(cadena);
-								
-							});
 							
 							
 						}else
 						if ($(this).attr("value") == "local") {
 	
-							
-							
-							
-							
-							
+		
 							$(".step1").show();
 							$("#titInDir").hide();
 							$("#infoDirEnv").hide();
@@ -164,7 +172,7 @@
 	</script>
 
 </head>
-<body>
+<body onload="cargarDep();">
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
 	<section id="cart_items">
 		<div class="container">
@@ -315,7 +323,7 @@
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" name="departamento"
 									id="departamento">
-									
+									<option value="0"> -- Seleccionar --</option>
 								</select>
 							</div>
 						</div>
