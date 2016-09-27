@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Carrito</title>
-	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
@@ -27,7 +27,8 @@
 	</script>
 	<!-- LLAMA A LOS METODOS QUE SE UTILIZAN PARA LA INTERFAZ Y LOS SERVICIOS DE UBIGEO -->
 	<script src="js/ajax_pedido.js"></script>
-
+	<!-- VALIDACIONES APLICADAS A ESTA PAGINA -->
+	<script src="js/validarTelefono.js"></script>
 </head>
 <body onload="cargarDep();">
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
@@ -155,16 +156,16 @@
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control">
-									<option>Casa</option>
-									<option>Empresa</option>
+									<option>Avenida</option>
+									<option>Jiron</option>
+									<option>Calle</option>
 								</select>
 							</div>
 							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Direccion </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input type="text" name="direccion" id="direccion"
-									class="form-control">
+								<input type="text" name="direccion" id="direccion" maxlength="95" class="form-control" onkeypress=" return validarn(event)">
 							</div>
 						</div>
 						<div class="form-group">
@@ -172,7 +173,7 @@
 								<label id="titulitos">Referencia </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input class="form-control" type="text" name="">
+								<input class="form-control" maxlength="95" name="referencia" onkeypress=" return validarn(event)">
 							</div>
 							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Departamento</label>
@@ -190,7 +191,7 @@
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" name="provincia" id="provincia" onchange="cargarDist(this.value);">
-									
+									<option value="0"> -- SELECCIONAR -- </option>
 								</select>
 							</div>
 							<div class="col-xs-2 col-sm-2">
@@ -198,7 +199,7 @@
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" id="distrito" name="distrito" >
-									
+									<option value="0"> -- SELECCIONAR -- </option>
 								</select>
 							</div>
 						</div>
@@ -207,15 +208,15 @@
 								<label id="titulitos">Telefono Celular</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input type="text" name="telefono1" id="telefono1"
-									class="form-control">
+								<input type="text" name="telefono1" id="telefono1" maxlength="9" class="form-control"  onkeyup="validarTelefono(this.value,deserror1.value);" onkeypress="return solonumeros(event);">
+								<b id="error1" style="color:red;"></b><input type="hidden" id="deserror1" value="error1">
 							</div>
 							<div class="col-xs-2 col-sm-2">
-								<label id="titulitos">Otro Telefono </label>
+								<label id="titulitos"  >Otro Telefono </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input class="form-control" type="text" name="telefono2"
-									id="telefono2">
+								<input class="form-control" maxlength="9" name="telefono2" id="telefono2"  onkeyup="validarTelefono(this.value,deserror2.value);" onkeypress="return solonumeros(event);">
+								<b id="error2" style="color:red;"></b><input type="hidden" id="deserror2" value="error2">
 							</div>
 						</div>
 					</form>

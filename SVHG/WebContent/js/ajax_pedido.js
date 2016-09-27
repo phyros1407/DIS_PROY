@@ -138,20 +138,20 @@
 						if ($(this).attr("value") == "casa") {
 	
 							$(".step1").hide();
-							$(".step2").hide();
-							$(".step3").hide();
-							$("#formuCasa").show();
-							$("#boton3").show();
+							$(".step2").hide(1000);
+							$(".step3").hide(1000);
+							$("#formuCasa").show(1000);
+							$("#boton3").show(1000);
 
 						}else
 						if ($(this).attr("value") == "local") {
 	
-		
-							$(".step1").show();
-							$("#titInDir").hide();
-							$("#infoDirEnv").hide();
-							$("#botonCambDir").hide();
-							$("#formuCasa").hide();
+							$("#boton1").show();
+							$(".step1").show(1000);
+							$("#titInDir").hide(1000);
+							$("#infoDirEnv").hide(1000);
+							$("#botonCambDir").hide(1000);
+							$("#formuCasa").hide(1000);
 							$(".step2").hide();
 							$(".step3").show();
 							
@@ -159,23 +159,24 @@
 					});
 	
 					$('#boton1').click(function() {
-						$(this).hide();
-						$(".step1").hide();
-						$(".step2").show();
-						$(".pagenv").hide();
+						$(this).hide(1000);
+						$(".step1").hide(1000);
+						$(".step2").show(1000);
+						$(".pagenv").hide(1000);
 						$("#valEnv").text("$/.0.00");
 					});
 	
+					
 					$('#boton3').click(function() {
 						
-						$(".step3").show();
-						$("#boton1").show();
-						$(this).hide();
-						$("#formuCasa").hide();
-						$(".step1").hide();
-						$(".step2").show();
-						$("#infoDirEnv").show();
-						$(".pagenv").show();
+						$(".step3").show(1000);
+						$("#boton1").show(1000);
+						$(this).hide(1000);
+						$("#formuCasa").hide(1000);
+						$(".step1").hide(1000);
+						$(".step2").show(1000);
+						$("#infoDirEnv").show(1000);
+						$(".pagenv").show(1000);
 						$("#valEnv").text("$/.20.00");
 	
 						//DATOS DEL RECEPTOR
