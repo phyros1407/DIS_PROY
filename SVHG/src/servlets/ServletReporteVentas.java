@@ -35,10 +35,7 @@ public class ServletReporteVentas extends HttpServlet {
 		System.out.print("ServletServletReporteVentas get");
 		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
 		ProductoDao productodao = dao.getProductoDao();
-		
-		
-		
-		
+
 			try {
 				
 				ArrayList<ProductoBean> productos = new ArrayList<ProductoBean>();

@@ -16,9 +16,12 @@
 <%@ include file="include/head.jsp"%>
 <script type="text/javascript" src="./js/validaciones.js" charset="UTF-8"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
 <!-- END HEAD -->
 <%
 	ArrayList<ProductoBean> productos = (ArrayList<ProductoBean>) request.getAttribute("productos");
@@ -77,19 +80,90 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="sel1">Seleccione Categoria:</label>
-						<select class="form-control" id="sel1">
-							<option>SUSPENSI</option>
-							<option>FUERZA</option>
-							<option>AGILIDAD</option>
-							<option>COORDINACION</option>
-							<option>POTENCIA</option>
-							<option>OTROS</option>
+						<select onchange="cambiarProducto()" name="categoria" class="form-control" id="categoria">
+							<option value="0">Seleccione</option>
+							<option value="1">SUSPENSI</option>
+							<option value="2">FUERZA</option>
+							<option value="3">AGILIDAD</option>
+							<option value="4">COORDINACION</option>
+							<option value="5">POTENCIA</option>
+							<option value="6">OTROS</option>
 						</select>
 					</div>
 				</div>
+				
+				
 <!----------------------------INICIO select dependientes---------------------------------------->
 <script>
-
+	function cambiarProducto(){
+		var x=document.getElementById("categoria").value;
+		var p1 = document.getElementById('p1');
+		var p2 = document.getElementById('p2');
+		var p3 = document.getElementById('p3');
+		var p4 = document.getElementById('p4');
+		var p5 = document.getElementById('p5');
+		var p6 = document.getElementById('p6');
+	
+		if(x==0){ 
+			p1.style.display = 'none';
+			p2.style.display = 'none';
+			p3.style.display = 'none';
+			p4.style.display = 'none';
+			p5.style.display = 'none';
+			p6.style.display = 'none';	
+		}
+		if(x==1){ 
+			p1.style.display = 'block';
+			p2.style.display = 'none';
+			p3.style.display = 'none';
+			p4.style.display = 'none';
+			p5.style.display = 'none';
+			p6.style.display = 'none';	
+		}
+		if(x==2){ 
+			p1.style.display = 'none';
+			p2.style.display = 'block';
+			p3.style.display = 'none';
+			p4.style.display = 'none';
+			p5.style.display = 'none';
+			p6.style.display = 'none';	
+		}
+		if(x==3){ 
+			p1.style.display = 'none';
+			p2.style.display = 'none';
+			p3.style.display = 'block';
+			p4.style.display = 'none';
+			p5.style.display = 'none';
+			p6.style.display = 'none';	
+		}
+		if(x==4){ 
+			p1.style.display = 'none';
+			p2.style.display = 'none';
+			p3.style.display = 'none';
+			p4.style.display = 'block';
+			p5.style.display = 'none';
+			p6.style.display = 'none';	
+		}
+		if(x==5){ 
+			p1.style.display = 'none';
+			p2.style.display = 'none';
+			p3.style.display = 'none';
+			p4.style.display = 'none';
+			p5.style.display = 'block';
+			p6.style.display = 'none';	
+		}
+		if(x==5){ 
+			p1.style.display = 'none';
+			p2.style.display = 'none';
+			p3.style.display = 'none';
+			p4.style.display = 'none';
+			p5.style.display = 'none';
+			p6.style.display = 'block';	
+		}
+		
+	
+		
+	}
 
 </script>
 
@@ -98,10 +172,15 @@
 				<div class="col-sm-1"></div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="sel1">Seleccione :</label>
+						<label for="sel1">Seleccione año </label>
 						<select class="form-control" id="sel1">
-							<option>Años</option>
-							<option>Meses</option>
+							<option>2011</option>
+							<option>2012</option>
+							<option>2013</option>
+							<option>2014</option>
+							<option>2015</option>
+							<option>2016</option>
+							<option>2017</option>
 						</select>
 					</div>
 				</div>
@@ -111,28 +190,80 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="sel1">Seleccione Producto:</label>
-						<!-- select producto -->
-						<select class="form-control" id="sel1">
-						<%for (int i = 0; i < productos.size(); i++) {%>
-							<option><%=productos.get(i).getNombre() %></option>
-						<%}%>
-						</select>
+<!--------------------------------------- select producto--------------------------------------- -->
+						<div id="p1" style="display:none">
+							<select class="form-control" id="producto" name="producto">
+							<option>Seleccione</option>
+							<%for (int i = 0; i < productos.size(); i++) {%>
+								<%if(productos.get(i).getIdCategoria()==1){%>
+								<option><%=productos.get(i).getNombre()%></option>
+								<%} %>
+							<%}%>
+							</select>
+						</div>
+<!--------------------------------------- select producto--------------------------------------- -->
+						<div id="p2" style="display:none">
+							<select  class="form-control"  id="sel1" id="producto" name="producto">
+							<option>Seleccione</option>
+							<%for(int i = 0; i < productos.size(); i++) {%>
+								<%if(productos.get(i).getIdCategoria()==2){%>
+								<option><%=productos.get(i).getNombre()%></option>
+								<%} %>
+							<%}%>
+							</select>
+						</div>
+<!--------------------------------------- select producto--------------------------------------- -->
+						<div id="p3" style="display:none">
+							<select  class="form-control"  id="producto" name="producto">
+							<option>Seleccione</option>
+							<%for (int i = 0; i < productos.size(); i++) {%>
+								<%if(productos.get(i).getIdCategoria()==3){%>
+								<option><%=productos.get(i).getNombre()%></option>
+								<%} %>
+							<%}%>
+							</select>
+						</div>
+<!--------------------------------------- select producto--------------------------------------- -->
+						<div id="p4" style="display:none">
+							<select class="form-control" id="producto" name="producto">
+							<option>Seleccione</option>
+							<%for (int i = 0; i < productos.size(); i++) {%>
+								<%if(productos.get(i).getIdCategoria()==4){%>
+								<option><%=productos.get(i).getNombre()%></option>
+								<%} %>
+							<%}%>
+							</select>
+						</div>
+<!--------------------------------------- select producto--------------------------------------- -->
+						<div id="p5" style="display:none">
+							<select  class="form-control" id="producto" name="producto">
+							<option>Seleccione</option>
+							<%for (int i = 0; i < productos.size(); i++) {%>
+								<%if(productos.get(i).getIdCategoria()==5){%>
+								<option><%=productos.get(i).getNombre()%></option>
+								<%} %>
+							<%}%>
+							</select>
+						</div>
+<!--------------------------------------- select producto--------------------------------------- -->
+						<div id="p6" style="display:none">
+							<select  class="form-control"  id="producto" name="producto">
+							<option>Seleccione</option>
+							<%for (int i = 0; i < productos.size(); i++) {%>
+								<%if(productos.get(i).getIdCategoria()==6){%>
+								<option><%=productos.get(i).getNombre()%></option>
+								<%} %>
+							<%}%>
+							</select>
+						</div>
+<!--------------------------------------- select producto--------------------------------------- -->
+
+
+					
 					</div>
 				</div>
 				<div class="col-sm-1"></div>
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="sel1">Seleccione :</label>
-						<select class="form-control" id="sel1">
-							<option>99</option>
-							<option>98</option>
-							<option>97</option>
-							<option>96</option>
-							<option>95</option>
-							
-						</select>
-					</div>
-				</div>
+				
 			
 			</div>
 				<br>
@@ -142,37 +273,14 @@
 				</div>
 			</div>
 </form>
+
+
+
 <!-- ----------------------GRAFICOS 1------------------>
 <div clas="row">
+	
 	<div class="col-sm-12">
-	<div id="myfirstchart" style="height: 250px;"></div>
-		<script>
 		
-		new Morris.Area({
-			  // ID of the element in which to draw the chart.
-			  element: 'myfirstchart',
-			  // Chart data records -- each entry in this array corresponds to a point on
-			  // the chart.
-			  data: [
-			    { year: '2008', value: 20 },
-			    { year: '2009', value: 10 },
-			    { year: '2010', value: 10 },
-			    { year: '2011', value: 10 },
-			    { year: '2012', value: 115 },
-			    { year: '2013', value: 5 },
-			    { year: '2014', value: 20 }
-		
-			  ],
-			  // The name of the data record attribute that contains x-values.
-			  xkey: 'year',
-			  // A list of names of data record attributes that contain y-values.
-			  ykeys: ['value'],
-			  // Labels for the ykeys -- will be displayed when you hover over the
-			  // chart.
-			  labels: ['Value']
-			});
-		
-		</script>
 	</div>
 </div>
 
