@@ -130,11 +130,7 @@
 			}
 		}
 	
-		
-		
-		
-		
-		
+
 		$(document).ready(
 				function() {
 					$('input[name="entrega"]').click(function() {
@@ -186,9 +182,9 @@
 						//OBTENER VAL
 						//var nombre = $("#").val();
 						var direccion = $("#direccion").val();
-						var distrito = $("#distrito").val();
-						var provincia = $("#provincia").val();
-						var departamento = $("#departamento").val();
+						var distrito = $("#distrito  option:selected").text();
+						var provincia = $("#provincia  option:selected").text();
+						var departamento = $("#departamento option:selected").text();
 						var telefono1 = $("#telefono1").val();
 						var telefono2 = $("#telefono2").val();
 	
