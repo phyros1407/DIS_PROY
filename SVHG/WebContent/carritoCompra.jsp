@@ -261,9 +261,7 @@
 				<div class="col-xs-12 col-sm-12 " style="margin-top: 25px;"
 					id="infoDirEnv">
 					<h3 id="titInDir">Direccion de Envio</h3>
-					<button type="button" class="btn btn-default" id="botonCambDir"
-						data-toggle="modal" data-target="#ModalModDir">Cambiar
-						direccion</button>
+					<button type="button" class="btn btn-default" id="botonCambDir" data-toggle="modal" data-target="#ModalModDir">Cambiar direccion</button>
 					<div class="col-xs-8 col-sm-8">
 						<label id="mosNom"></label><br> <label id="mosDir"></label><br>
 						<label id="mosDis"></label><br> <label id="mosTel"></label>
@@ -279,8 +277,8 @@
 						<h3>Tipo de Pago</h3>
 						</p>
 						<form>
-							<input type="radio" name="pago" selected>Contra-Entrega<br>
-							<input type="radio" name="pago">Tarjeta
+							<input type="radio" name="tipoPago"  checked >Contra-Entrega<br>
+							<input type="radio" name="tipoPago" value="tarjeta">Tarjeta
 						</form>
 					</div>
 					<div class="col-xs-4 col-sm-4">
@@ -301,6 +299,7 @@
 	<!--/#do_action-->
 	<jsp:include page="includeOut/footer.jsp"></jsp:include>
 	<jsp:include page="modals/modalGenerarPedido.jsp"></jsp:include>
+	<jsp:include page="modals/modalRegistroTarjeta.jsp"></jsp:include>
 </body>
 
 <script src="js/jquery.js"></script>

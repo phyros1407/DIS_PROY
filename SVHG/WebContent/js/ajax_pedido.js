@@ -133,6 +133,16 @@
 
 		$(document).ready(
 				function() {
+					
+					$('input[name="tipoPago"]').click(function(){
+						
+						if($(this).attr("value") == "tarjeta"){
+							
+							  $("#modalTarjeta").modal();
+							
+						}
+					});
+	
 					$('input[name="entrega"]').click(function() {
 						
 						if ($(this).attr("value") == "casa") {
@@ -169,6 +179,8 @@
 					
 					$('#boton3').click(function() {
 						
+						
+						$("#botonCambDir").show();
 						$(".step3").show(1000);
 						$("#boton1").show(1000);
 						$(this).hide(1000);
