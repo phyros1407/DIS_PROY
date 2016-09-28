@@ -112,7 +112,7 @@ div.container4 p {
 				</form>
 				<br>
 				<br>
-				<table class="table-bordered" style="height: 200px;width:500px;display:block;">
+				<table id="proAgre" class="table-bordered" style="height: 200px;width:500px;display:block;">
 				
 				<thead style="width:100%;">
 				<tr style="width:100%;">
@@ -122,23 +122,16 @@ div.container4 p {
 				<th style="width:20%;">Delete</th>
 				</tr></thead>
 				<tbody style="overflow: auto;height: 150px;display: inline-block;width: 100%;">
-				<tr><td style="width:200px;">Bosu</td>
-				<td style="width:20%;">100</td>
-				<td style="width:20%;">50</td>
-				<td style="width:20%;"><a href="#">Eliminar</a></td></tr>
-				<tr><td style="width:200px;">Vallitas de coordinación</td>
-				<td style="width:20%;">100</td>
-				<td style="width:20%;">100</td>
-				<td style="width:20%;"><a href="#">Eliminar</a></td></tr>
-							
+				
 				</tbody>
 				</table>
 				<br>
-				<p align="right" style="margin-right: 50px;"> Total : S/.150.00 </p>
+				<p align="right" style="margin-right: 50px;"> Total : S/.<label id="lblPrecio">0.00</label> </p>
 				
-				<p align="right" style="margin-right: 50px;"> Asignar Oferta : <input type="text" name="oferta" maxlength="2" size="2"> %</p>
+				<p align="right" style="margin-right: 50px;"> Asignar Oferta : <input type="text" onchange="descuento()" onkeypress="return solonumeros(event)" id="oferta" name="oferta" maxlength="2" size="2"> %</p>
+			
 				
-				<p align="right" style="margin-right: 50px;"> Precio Venta : S/.120.00</p>
+				<p align="right" style="margin-right: 50px;"> Precio Venta : S/.<label id="lblVenta">0.00</label></p>
 				
 </div>
 <div class="col-sm-12 col-md-6">
@@ -232,27 +225,27 @@ function categoria(){
 	}
 	if(cat==1){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==1){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==1){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
 	}
 	if(cat==2){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==2){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==2){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
 	}
 	if(cat==3){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==3){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==3){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
 	}
 	if(cat==4){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==4){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==4){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
 	}
 	if(cat==5){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==5){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==5){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
 	}
 	if(cat==6){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==6){%><tr id=name=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==6){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
 	}
 	
 }
@@ -262,11 +255,39 @@ function agregar(){
 	<%for(int i=0;i<productos.size()-1;i++){%>
 	if($('#ofertas'+<%=i%>+'').val()!=null){	
 	if(document.getElementById('ofertas'+<%=i%>+'').checked){
-			console.log(<%=i%>);
+			console.log(<%=productos.get(i).getIdProducto()%>);
+			$('#ofertasT'+<%=i%>+'').remove();
+			$('#proAgre').append("<tr id=ofertasA<%=i%>><td style=width:200px;><label id=nombreP<%=i%>><%=productos.get(i).getNombre()%></label></td><td style=width:20%;><%=productos.get(i).getCantidad()%></td><td style=width:20%;><%=productos.get(i).getPrecio()%></td><td style=width:20%;>"+
+			"<a href=# onclick=eliminar(<%=i%>,<%=productos.get(i).getIdProducto()%>) >Eliminar</a></td></tr>");
+			var precio=parseInt($('#lblPrecio').text());
+			console.log(precio);
+			$('#lblPrecio').text(precio+<%=productos.get(i).getPrecio()%>);
 		}}<%}%>
+		
+	descuento();	
 	}
 	
+
+function eliminar(id,valor){
 	
+	console.log("eliminar");
+	var nombre=$('#nombreP'+id).text();
+	$('#ofertasA'+id).remove();
+	$('#tbody').append("<tr id=ofertasT"+id+"><td><input type=checkbox value="+valor+" name=ofertas"+id+" id=ofertas"+id+">&nbsp;"+nombre+"</td></tr>");
+	//input hidden cada uno para indicar en que div se encuentran al momento de ser eliminados
+	
+}		
+	
+function descuento(){
+	console.log("descuento");
+	var total=parseInt($('#lblPrecio').text());
+	console.log(total);
+	var descuento=$('#oferta').val();
+	console.log(descuento);
+	var precioV=total*(descuento/100);
+	$('#lblVenta').text(precioV);
+	
+}
 
 </script>
 
