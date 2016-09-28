@@ -1,6 +1,7 @@
 		var depas = [];
 		var pros = [];
 		var dist = [];
+		
 		function cargarDep(){
 			
 			var action = "deps";
@@ -97,6 +98,7 @@
 		function cambiar(cantidad,desc){
 			
 			alert("Entro a cambiar");
+			
 			var direccion = "#"+desc;
 			
 			if(isNaN(cantidad)||cantidad == null||cantidad.trim()==""){
@@ -139,7 +141,28 @@
 						if($(this).attr("value") == "tarjeta"){
 							
 							  $("#modalTarjeta").modal();
+							  
 							
+							    var hoy = new Date();
+								
+								var anoActual = hoy.getFullYear();
+								
+								var valor  = parseInt(anoActual);
+								
+								var cadena = "<option value=00>AAAA</option><option value='"+valor+"'>"+valor+"</option>";
+								
+								
+								for(var i=0;i<29;i++){
+									
+									valor = valor + 1;
+									
+									cadena = cadena + ("<option value='"+valor+"'>"+valor+"</option>");
+									
+								}
+								
+								
+								$("#mesCad").html(cadena);
+							  
 						}
 					});
 	
@@ -205,8 +228,10 @@
 						$("#mosNom").text("Jean Pier Barbieri");
 						$("#mosDir").text(direccion);
 						$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
-						$("#mosTel").text("Telefono : " + telefono1 + "\n \n"+ " Otro Telefono : " + telefono2);
+						$("#mosTel").text("Telefono : " + telefono1 + "\n"+ " Otro Telefono : " + telefono2);
 					});
 		});
+		
+		
 		
 		

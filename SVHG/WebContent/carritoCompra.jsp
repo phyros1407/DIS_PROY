@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Carrito</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,6 +30,10 @@
 	<script src="js/ajax_pedido.js"></script>
 	<!-- VALIDACIONES APLICADAS A ESTA PAGINA -->
 	<script src="js/validarTelefono.js"></script>
+	
+	<script src="https://js.braintreegateway.com/web/3.3.0/js/client.min.js"></script>
+	<script src="https://js.braintreegateway.com/web/3.3.0/js/paypal.min.js"></script>
+	
 </head>
 <body onload="cargarDep();">
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
@@ -121,11 +126,16 @@
 					<br>
 					<div class="chose_area">
 						<ul class="user_option">
-							<li><input type="radio" name="entrega" value="local" checked>
-								<label>Recoger en el Local de la Empresa</label></li>
-
-							<li><input type="radio" name="entrega" value="casa">
-								<label>Envio a domicilio</label></li>
+							<li>
+								<div class="radio">
+									<label><input type="radio"  name="entrega" value="local" checked>Recoger en el Local de la Empresa</label>
+								</div>
+							</li>
+							<li>
+								<div class="radio">
+									<label> <input type="radio"  name="entrega" value="casa">Envio a domicilio</label>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -239,9 +249,15 @@
 					class="col-xs-4 col-sm-4">
 					<p>Fechas disponibles</p>
 					<form>
-						<input type="radio" name="fecha"> 25/10/16 <br> <input
-							type="radio" name="fecha"> 26/10/16 <br> <input
-							type="radio" name="fecha"> 28/10/16
+						<div class="radio">
+							<input type="radio" name="fecha"> 25/10/16 
+						</div>
+						<div class="radio">
+							<input type="radio" name="fecha"> 26/10/16
+						</div>
+						<div class="radio">
+							 <input type="radio" name="fecha"> 28/10/16
+						</div> 
 					</form>
 				</div>
 				<!-- SEGUNDO CUADRO-->
@@ -277,14 +293,29 @@
 						<h3>Tipo de Pago</h3>
 						</p>
 						<form>
-							<input type="radio" name="tipoPago"  checked >Contra-Entrega<br>
-							<input type="radio" name="tipoPago" value="tarjeta">Tarjeta
+							<div class="radio">
+								<input type="radio" name="tipoPago"  checked >Contra-Entrega
+							</div>
+							<div class="radio">
+								<input type="radio" name="tipoPago" value="tarjeta">Tarjeta
+							</div>
 						</form>
 					</div>
 					<div class="col-xs-4 col-sm-4">
-						<a href=""> <img src="images/paypal.png"
-							class="img-responsive" style="height: 100px; width: 150px;">
-						</a>
+						
+						
+						<form id="myContainer"method="POST" action="https://www.sandbox.paypal.com/checkoutnow?token=p73MH-N0eKjV7C0h7PnwVH9JUcn3AfyocT55SFLyK0IgZiTllV_CM4tJFPm" ></form>
+						<script>
+							window.paypalCheckoutReady = function() {
+				
+								      paypal.checkout.setup("YSKPUBXAHFT5L", {
+								          
+								          environment: 'sandbox',
+								          buttons: 'myContainer'
+								        });
+							};
+						</script>
+						<script src="//www.paypalobjects.com/api/checkout.js" async></script>
 					</div>
 				</div>
 			</div>
@@ -307,4 +338,16 @@
 <script src="js/jquery.scrollUp.min.js"></script>
 <script src="js/jquery.prettyPhoto.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+	function pagar(){
+		event.preventDefault();
+		
+		window.open("","windowName",
+        "width=400,height=600,scrollbars=no");
+		
+	}
+
+</script>
+
 </html>
