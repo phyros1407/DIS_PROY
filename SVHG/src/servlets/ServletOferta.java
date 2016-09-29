@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ProductoBean;
+import dao.interfaces.OfertaDao;
 import dao.interfaces.ProductoDao;
 import daofactory.DAOFactory;
 
@@ -57,45 +58,54 @@ public class ServletOferta extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		
-		/*PrintWriter out = response.getWriter();
-		String action=request.getParameter("action");
-				
-		System.out.println("Disponibilidad");
+		PrintWriter out = response.getWriter();		
+		System.out.println("Gurdar oferta");
 		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
-		ProductoDao productodao = dao.getProductoDao();
+		OfertaDao ofertadao = dao.getOfertaDAO();
+		int descuento=Integer.parseInt(request.getParameter("oferta"));
+		String fecIni=request.getParameter("dateD");
+		String fecFin=request.getParameter("dateH");
+		String horaFin=request.getParameter("horaOfer");
+		int cantidad=Integer.parseInt(request.getParameter("txtCan"));
 		
-		if(action.equalsIgnoreCase("Agregar")){
+		
 		System.out.println("agregar");
-		int size=Integer.parseInt(request.getParameter("size"));
-		String[] idCursos=new String[size];
+		int size=Integer.parseInt(request.getParameter("sizeP"));
+		System.out.println(size);
+		String[] idProducto=new String[size];
+		double[] prProducto=new double[size];
 		int llenos=0;
-		for(int i=0;i<=size;i++){
-			
-			if(request.getParameter("check"+i+"")!=null){
-			System.out.println(request.getParameter("check"+i+""));
-			idCursos[llenos]=request.getParameter("check"+i+"");
-			llenos++;
-			}
-			
-			if(llenos==0){
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Seleccione al menos un curso.');");
-				out.println("location='Gestionar_Docente?f=SeleccionarDocente'");
-				out.println("</script>");
-			}
-			
+		for(int i=1;i<=size;i++){
+			if(request.getParameter("ofertasAID"+i+"")!=null){
+				
+			System.out.println(request.getParameter("ofertasAID"+i+""));
+			idProducto[llenos]=request.getParameter("ofertasAID"+i+"");
+			prProducto[llenos]=Double.parseDouble(request.getParameter("ofertasAP"+i+""));
+			llenos=llenos+1;
+			System.out.println(llenos);
+			}			
 		}
-		String[] cursos=new String[llenos];
+
+		if(llenos==0){
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Seleccione al menos un producto.');");
+			out.println("location='ServletOferta'");
+			out.println("</script>");
+		}
+		String[] productoId=new String[llenos];
+		double[] productoPr=new double[llenos];
 		
-		for(int j = 0; j < cursos.length; j++) {
-		      cursos[j] = idCursos[j];
+		for(int j = 0; j < productoId.length; j++) {
+			productoId[j] = idProducto[j];
+			productoPr[j] = prProducto[j];
+			System.out.println("llenando segundos vectores");
 		}
 		
 		try {
-			if(.regDocente().guardarCursosAptos(cursos, idPer)){
-			response.sendRedirect("Gestionar_Docente?f=SeleccionarDocente");
+			if(ofertadao.registrarOferta(productoId,productoPr,descuento,fecIni,fecFin,horaFin,cantidad)){
+			response.sendRedirect("ServletOferta");
 			System.out.println("dio");
 			}else{
 				System.out.println("no dio wey");
@@ -104,49 +114,6 @@ public class ServletOferta extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}
-		
-		
-		if(action.equalsIgnoreCase("Eliminar")){
-			System.out.println("Eliminar");
-			int size=Integer.parseInt(request.getParameter("sizeE"));
-			String[] idCursos=new String[size];
-			int llenos=0;
-			for(int i=0;i<=size;i++){
-				
-				if(request.getParameter("checkE"+i+"")!=null){
-				System.out.println(request.getParameter("checkE"+i+""));
-				idCursos[llenos]=request.getParameter("checkE"+i+"");
-				llenos++;
-				}
-				
-				if(llenos==0){
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('Seleccione al menos un curso.');");
-					out.println("location='Gestionar_Docente?f=SeleccionarDocente'");
-					out.println("</script>");
-				}
-				
-			}
-			String[] cursos=new String[llenos];
-			
-			for(int j = 0; j < cursos.length; j++) {
-			      cursos[j] = idCursos[j];
-			}
-			*/
-			/*try {
-				if(regdoce.regDocente().eliminarCursosAptos(cursos, idPer)){
-				response.sendRedirect("Gestionar_Docente?f=SeleccionarDocente");
-				System.out.println("dio");
-				}else{
-					System.out.println("no dio wey");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			
-		}
-		
+	}
 
 }
