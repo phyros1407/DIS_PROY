@@ -27,6 +27,24 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="imagesOut/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="imagesOut/ico/apple-touch-icon-57-precomposed.png">
 	
+	<script type="text/javascript">
+	
+	
+	  function addProducto(id){
+							var idef=id;
+		  					var iden="iden";
+							localStorage.setItem(idef,iden);
+							alert("Producto agregado al carrito.");
+		  }
+	  
+	  function limpiar(){
+								localStorage.clear();
+								alert("El carrito ha sido limpiado.");
+		  }
+	  
+	
+	</script>
+	
 </head>
 
 <body>
@@ -106,7 +124,7 @@
 		<div class="container">
 			<div class="row">
 				<%@include file="../includeOut/sidebar.jsp" %>
-				
+				<input type="button" onclick="limpiar()" value="Vaciar Carritoooo">
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Productos</h2>
@@ -135,13 +153,6 @@
 	<script src="<%=request.getContextPath()%>/js/jquery.prettyPhoto.js"></script>
 	<script src="<%=request.getContextPath()%>/js/main.js"></script>
 	<script src="<%=request.getContextPath()%>/js/catalogo.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jQuery.paginate.js"></script>
-    <script>
-    $('#productoscatalogados').paginate({
-    	  items_per_page: 6
-    });
-    </script>
-   
 
 
 </html>

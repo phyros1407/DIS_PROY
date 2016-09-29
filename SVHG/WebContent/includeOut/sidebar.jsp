@@ -15,6 +15,7 @@
 									<div class="panel-body">
 										<ul class="listado">
 											<li><a href="javascript:void(0)">TODOS</a></li>
+											<li><a href="javascript:void(0)">FUERZA</a></li>
 											<li><a href="javascript:void(0)">SUSPENSION</a></li>
 											<li><a href="javascript:void(0)">COORDINACION</a></li>
 											<li><a href="javascript:void(0)">AGILIDAD</a></li>

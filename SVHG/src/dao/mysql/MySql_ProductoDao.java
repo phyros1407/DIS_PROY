@@ -341,6 +341,45 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 	
 	
 	
+	@Override
+	public ArrayList<ProductoBean> traerProducto(int id) throws Exception {
+		ArrayList<ProductoBean> productos=new ArrayList<ProductoBean>();
+		try {
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			String query="select *  from producto a INNER JOIN categoria b ON a.cat_id=b.id  where a.id="+id;
+			System.out.println("PROUCTO PARA EL CARRITO ---->"+query);
+			ResultSet rs=stmt.executeQuery(query);
+			ProductoBean producto=null;
+			CategoriaBean categoria=null;
+			while(rs.next()){
+				categoria= new CategoriaBean();
+				categoria.setTipo(rs.getString("b.tipo"));
+				
+				producto=new ProductoBean();
+				
+				producto.setIdProducto(rs.getInt("id"));
+				producto.setIdCategoria(rs.getInt("cat_id"));
+				producto.setCodPro(rs.getString("codpro"));
+				producto.setNombre(rs.getString("nom"));
+				producto.setDescripcion(rs.getString("des"));
+				producto.setFoto(rs.getString("foto"));
+				producto.setEstado(rs.getString("est"));
+				producto.setPrecio(rs.getDouble("pre"));
+				producto.setMedida(rs.getString("med"));
+				producto.setCantidad(rs.getInt("can"));
+				producto.setDescuento(rs.getInt("est_dsc"));;
+				producto.setPeso(rs.getDouble("peso"));
+				producto.setCategoriaBean(categoria);
+				
+				productos.add(producto);
+			}
+			con.close();
+		} catch (Exception e) {
+			System.out.println("fallo en el metodo listartodos de MySqlProductoDao"+e.getMessage());
+		}
+		return productos;
+	}
 	
 	
 	

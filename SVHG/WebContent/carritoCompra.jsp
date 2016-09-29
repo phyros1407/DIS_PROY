@@ -57,8 +57,9 @@
 							<td></td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
+					<tbody id="productosCarrito">
+						
+ 						<tr>
 							<td class="cart_product"><a href=""><img
 									src="imagesOut/cart/one.png" alt=""></a></td>
 							<td class="cart_description"
@@ -88,33 +89,7 @@
 								class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-						<tr>
-							<td class="cart_product"><a href="">
-								<img src="imagesOut/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description" style="vertical-align: middle; text-align: center;">
-								<h4>
-									<a href="#">Colorblock Scuba</a>
-								</h4>
-							</td>
-							<td class="cart_price" style="vertical-align: middle; text-align: center;">
-								<p>S/.59.00</p>
-							</td>
-							<td class="cart_quantity" style="vertical-align: middle; text-align: center;">
-								<div class="cart_quantity_button">
-									<a style="vertical-align: middle; text-align: center;" class="cart_quantity_up" href="#"onclick="agregar(cantidad1.value,desc1.value);"> + </a> 
-									<input type="hidden" value="cantidad1" id="desc1"/> 
-									<input  onchange="cambiar(cantidad1.value,desc1.value);" onkeypress="return solonumerosCarr(event)" name="quantity" maxlength="2" class="cart_quantity_input" type="text" value="1" size="2" id="cantidad1"/> 
-									<a style="vertical-align: middle; text-align: center;" class="cart_quantity_down" href="#"  onclick="disminuir(cantidad1.value,desc1.value);"> - </a>
-								</div>
-							</td>
-							<td class="cart_total" style="vertical-align: middle; text-align: center;">
-								<p class="cart_total_price">S/.59.00</p>
-							</td>
-							<td class="cart_delete" style="vertical-align: middle; text-align: center;"><a
-								class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+						
 					</tbody>
 				</table>
 			</div>

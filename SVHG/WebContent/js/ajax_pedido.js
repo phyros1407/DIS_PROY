@@ -234,4 +234,36 @@
 		
 		
 		
-		
+		$(document).ready(function(){
+	    	 var accion='addCarrito';
+	    	 var arreglo = new Array();
+	    	 for(var i=0;i<localStorage.length;i++){
+					//alert(localStorage.key(i));
+					var ide=localStorage.key(i);
+					arreglo.push(ide);
+					alert(arreglo);
+	             console.log(localStorage.length+"tamñao ->"+ide+"  orden "+i+" ARREGLOO"+arreglo[i]);
+	             }
+	    	 
+			  $.post('Carrito', {
+				  
+						accion:accion,
+						ide:JSON.stringify(localStorage),
+					}, function(response) {	
+						 
+			    		
+			    		var conta="";
+			    		
+			    		var col="col-sm-4";
+			    		for( var i=0;i<response['object'].length;i++){
+			    			
+			    			var id=response['object'][i]['idProducto'];
+			    			
+			    			conta=conta+("<div id="+response['object'][i]['categoriaBean']['tipo']+" class='"+response['object'][i]['categoriaBean']['tipo']+" col-sm-4' ><div class='product-image-wrapper'><div class='single-products'><div class='productinfo text-center'><img src="+response['object'][i]['foto']+"  /><h2>S/"+response['object'][i]['precio']+"</h2><p>NOMBRE : "+response['object'][i]['nombre']+"</p></div><div class="+'product-overlay'+"><div class='overlay-content'><h2>S/"+response['object'][i]['precio']+"</h2><p>Nombre: "+response['object'][i]['nombre']+"</p><p>Categoria : "+response['object'][i]['categoriaBean']['tipo']+"</p><a href="+"javascript:void(0)"+" id='comprar' onclick='addProducto("+id+")' class='btn btn-default add-to-cart'><i class='fa fa-shopping-cart'></i>Agregar al carrito</a></div></div></div></div></div>");
+			    		}
+			    		$('#productosCarrito').html(conta);	 
+			    		
+			  });   
+			          
+			  
+	    });

@@ -1,5 +1,6 @@
 
    
+    
     $(document).ready(function(){
     	 var accion='catalogo';
 		  $.get('Gestionar_Producto', {
@@ -10,13 +11,15 @@
 					productos = new Array(response['object'].length);
 		    		
 		    		var conta="";
+		    		
 		    		var col="col-sm-4";
 		    		for( var i=0;i<response['object'].length;i++){
 		    			
+		    			var id=response['object'][i]['idProducto'];
 		    			
-		    			conta=conta+("<div id="+response['object'][i]['categoriaBean']['tipo']+" class='"+response['object'][i]['categoriaBean']['tipo']+" col-sm-4' ><div class='product-image-wrapper'><div class='single-products'><div class='productinfo text-center'><img src="+response['object'][i]['foto']+"  /><h2>S/"+response['object'][i]['precio']+"</h2><p>NOMBRE : "+response['object'][i]['nombre']+"</p><a href="+"#"+" id='comprar' class='btn btn-default add-to-cart'><i class="+'fa fa-shopping-cart'+"></i>Agregar al carrito</a></div><div class="+'product-overlay'+"><div class='overlay-content'><h2>S/"+response['object'][i]['precio']+"</h2><p>Nombre: "+response['object'][i]['nombre']+"</p><p>Categoria : "+response['object'][i]['categoriaBean']['tipo']+"</p><a href="+"#"+" id='comprar'  class='btn btn-default add-to-cart'><i class='fa fa-shopping-cart'></i>Comprar</a></div></div></div></div></div>");
+		    			conta=conta+("<div id="+response['object'][i]['categoriaBean']['tipo']+" class='"+response['object'][i]['categoriaBean']['tipo']+" col-sm-4' ><div class='product-image-wrapper'><div class='single-products'><div class='productinfo text-center'><img src="+response['object'][i]['foto']+"  /><h2>S/"+response['object'][i]['precio']+"</h2><p>NOMBRE : "+response['object'][i]['nombre']+"</p></div><div class="+'product-overlay'+"><div class='overlay-content'><h2>S/"+response['object'][i]['precio']+"</h2><p>Nombre: "+response['object'][i]['nombre']+"</p><p>Categoria : "+response['object'][i]['categoriaBean']['tipo']+"</p><a href="+"javascript:void(0)"+" id='comprar' onclick='addProducto("+id+")' class='btn btn-default add-to-cart'><i class='fa fa-shopping-cart'></i>Agregar al carrito</a></div></div></div></div></div>");
 		    		}
-		    		$('#productoscatalogados').html(conta);	
+		    		$('#productoscatalogados').html(conta);	 
 		    		
 		  });   
 		          
@@ -24,11 +27,7 @@
     });
   
     
-    
-    $( "#comprar" ).click(function() {
-    	  alert( "Handler for .click() called." );
-    	});
-    
+   
     
    
 	$(document).ready(function(){
@@ -106,11 +105,5 @@
 		});
 	});
 
-	$(function() {
-	    $('.paginationlist').pagination({
-	        items: 100,
-	        itemsOnPage: 9,
-	        cssStyle: 'light-theme'
-	    });
-	});
+	
  
