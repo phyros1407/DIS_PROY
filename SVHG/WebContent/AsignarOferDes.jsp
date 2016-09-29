@@ -83,7 +83,8 @@ div.container4 p {
 
 <!-- fin del Floro del menú -->
 
-				<div class="col-sm-12 col-md-6">
+				<form method="post" action="ServletOferta">
+				<div class="col-sm-12 col-md-6"><input type="hidden" name="sizeP" value="<%=productos.size()%>"> 
 <br>					
 				Categoria:	<select name="selCat" id="selCat" onchange="categoria()">
 				<option value="7">--Seleccionar--</option>
@@ -96,7 +97,6 @@ div.container4 p {
 				</select>
 				
 				Productos: 
-				<form action="ServletOferta" method="post">
 				<table class="table" style="height: 250px;width:500px;;display:block;">
 				
 				<thead style="display: inline-block;width: 100%;">
@@ -109,7 +109,6 @@ div.container4 p {
 				<p align="center">
 				<input type="button" onclick="agregar()" value="Agregar" class="btn btn-primary">
 				</p>
-				</form>
 				<br>
 				<br>
 				<table id="proAgre" class="table-bordered" style="height: 200px;width:500px;display:block;">
@@ -133,7 +132,7 @@ div.container4 p {
 				
 				<p align="right" style="margin-right: 50px;"> Precio Venta : S/.<label id="lblVenta">0.00</label></p>
 				
-</div>
+				</div>
 <div class="col-sm-12 col-md-6">
 <br>
 <div class=container4 style="border:1px solid black;">
@@ -144,14 +143,14 @@ div.container4 p {
 <br>
 <div class="form-group"  >						
 <label class="control-label col-md-3">Del :	</label>
-<div class="col-md-4"><input type="date" class="form-control"></div>
+<div class="col-md-5"><input id="dateD" name="dateD" type="date" class="form-control" onchange="hasta()"></div>
 <br>
 <br>
 </div>
 
 <div class="form-group"  >	
 <label class="control-label col-md-3">Hasta :	</label>
-<div class="col-md-4"><input type="date" class="form-control"></div>
+<div class="col-md-5"><input id="dateH" name="dateH" type="date" class="form-control"></div>
 <br>
 <br>
 </div>
@@ -160,7 +159,7 @@ div.container4 p {
 <label class="control-label col-md-3">Hora Fin :	</label>
 <div class="col-md-4">
 <select name="horaOfer" class="form-control">
-<% for(int i=1;i<=24;i++){ 
+<% for(int i=1;i<=23;i++){ 
 if(i<10){%>
 <option value="<%=i%>">0<%=i %>:00</option>
 <%}else{ %>
@@ -175,7 +174,7 @@ if(i<10){%>
 </div>
 <div class="form-group"  >
 <label class="control-label col-md-3">Ingrese la cantidad (Unid) :	</label>
-<div class="col-md-4"><input type="text" class="form-control"></div>
+<div class="col-md-4"><input onkeypress="return solonumeros(event)" name="txtCan" type="text" class="form-control" maxlength="2"></div>
 <br>
 <br>
 <br></div>
@@ -189,6 +188,7 @@ if(i<10){%>
 <input type="submit" value="Guardar Oferta" class="btn btn-primary">
 </p>
 </div>
+</form>
 
 				<div class="clearfix"></div>
 
@@ -199,15 +199,6 @@ if(i<10){%>
 			<!-- END QUICK SIDEBAR -->
 		</div>
 	</div>
-	<div class="modal fade" style="" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <jsp:include page="modal_registroUsuario.jsp"></jsp:include>
-    </div>  
-    <div class="modal fade" style="" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <jsp:include page="modal_detalleUsuario.jsp"></jsp:include>
-    </div>  
-    <div class="modal fade" style="" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <jsp:include page="modal_modificarUsuario.jsp"></jsp:include>
-    </div>         
 	<!-- END CONTAINER -->
 	<%@ include file="include/footer.jsp"%>
 
@@ -225,27 +216,27 @@ function categoria(){
 	}
 	if(cat==1){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==1){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==1){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getDescripcion()%></td></tr><%}}%>");
 	}
 	if(cat==2){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==2){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==2){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getDescripcion()%></td></tr><%}}%>");
 	}
 	if(cat==3){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==3){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==3){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getDescripcion()%></td></tr><%}}%>");
 	}
 	if(cat==4){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==4){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==4){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getDescripcion()%></td></tr><%}}%>");
 	}
 	if(cat==5){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==5){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==5){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getDescripcion()%></td></tr><%}}%>");
 	}
 	if(cat==6){		
 		$('#tbody').html("<%for(int i=0;i<productos.size();i++){
-		if(productos.get(i).getIdCategoria()==6){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getNombre()%></td></tr><%}}%>");
+		if(productos.get(i).getIdCategoria()==6){%><tr id=ofertasT<%=i%>><td><input type=checkbox value=<%=productos.get(i).getIdProducto()%> name=ofertas<%=i%> id=ofertas<%=i%>>&nbsp;<%=productos.get(i).getDescripcion()%></td></tr><%}}%>");
 	}
 	
 }
@@ -257,8 +248,8 @@ function agregar(){
 	if(document.getElementById('ofertas'+<%=i%>+'').checked){
 			console.log(<%=productos.get(i).getIdProducto()%>);
 			$('#ofertasT'+<%=i%>+'').remove();
-			$('#proAgre').append("<tr id=ofertasA<%=i%>><td style=width:200px;><label id=nombreP<%=i%>><%=productos.get(i).getNombre()%></label></td><td style=width:20%;><%=productos.get(i).getCantidad()%></td><td style=width:20%;><%=productos.get(i).getPrecio()%></td><td style=width:20%;>"+
-			"<a href=# onclick=eliminar(<%=i%>,<%=productos.get(i).getIdProducto()%>) >Eliminar</a></td></tr>");
+			$('#proAgre').append("<tr id=ofertasA<%=i%>><td style=width:200px;><label id=nombreP<%=i%>><%=productos.get(i).getDescripcion()%></label></td><td style=width:20%;><%=productos.get(i).getCantidad()%></td><td style=width:20%;><%=productos.get(i).getPrecio()%></td><td style=width:20%;>"+
+			"<a href=# onclick=eliminar(<%=i%>,<%=productos.get(i).getIdProducto()%>,<%=productos.get(i).getPrecio()%>) >Eliminar</a><input type=hidden name=ofertasAID<%=i%> value=<%=productos.get(i).getIdProducto()%> ><input type=hidden name=ofertasAP<%=i%> value=<%=productos.get(i).getPrecio()%> ></td></tr>");
 			var precio=parseInt($('#lblPrecio').text());
 			console.log(precio);
 			$('#lblPrecio').text(precio+<%=productos.get(i).getPrecio()%>);
@@ -268,13 +259,16 @@ function agregar(){
 	}
 	
 
-function eliminar(id,valor){
+function eliminar(id,valor,precio){
 	
 	console.log("eliminar");
 	var nombre=$('#nombreP'+id).text();
 	$('#ofertasA'+id).remove();
 	$('#tbody').append("<tr id=ofertasT"+id+"><td><input type=checkbox value="+valor+" name=ofertas"+id+" id=ofertas"+id+">&nbsp;"+nombre+"</td></tr>");
 	//input hidden cada uno para indicar en que div se encuentran al momento de ser eliminados
+	var total=parseInt($('#lblPrecio').text());
+	$('#lblPrecio').text(total-precio);
+	descuento();
 	
 }		
 	
@@ -284,10 +278,30 @@ function descuento(){
 	console.log(total);
 	var descuento=$('#oferta').val();
 	console.log(descuento);
-	var precioV=total*(descuento/100);
+	var precioV=total*((100-descuento)/100);
 	$('#lblVenta').text(precioV);
-	
+
 }
+
+function hasta(){
+	var desde=$('#dateD').val();
+	console.log(desde);
+	document.getElementById("dateH").min=desde;
+	$('#dateH').val(desde);
+}
+
+$(document).ready(function(){
+	var f = new Date();
+	var anioS=f.getFullYear();
+	var mesS=f.getMonth()+1;
+	console.log(mesS.toString().length);
+	if(mesS.toString().length==1){
+		mesS='0'+mesS+'';
+	}
+	var diaS=f.getDate();
+	document.getElementById("dateD").min=anioS+'-'+mesS+'-'+diaS;
+	document.getElementById("dateH").min=anioS+'-'+mesS+'-'+(diaS+1);
+})
 
 </script>
 
