@@ -276,21 +276,28 @@
 							</div>
 						</form>
 					</div>
-					<div class="col-xs-4 col-sm-4">
+					
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+ <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="business" value="nano_sport_test@hotmail.it">
+<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
+<input type="hidden" name="cmd" value="_xclick">
+  <input type="hidden" name="business" value="seller@designerfotos.com">
+  <input type="hidden" name="item_name" value="Memorex 256MB Memory Stick">
+  <input type="hidden" name="item_number" value="MEM32507725">
+  <input type="hidden" name="amount" value="3">
+  <input type="hidden" name="tax" value="1">
+  <input type="hidden" name="quantity" value="1">
+  <input type="hidden" name="no_note" value="1">
+  <input type="hidden" name="currency_code" value="USD">
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+</form>
 						
+					
+					
+						  <script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 						
-						<form id="myContainer"method="POST" action="https://www.sandbox.paypal.com/checkoutnow?token=p73MH-N0eKjV7C0h7PnwVH9JUcn3AfyocT55SFLyK0IgZiTllV_CM4tJFPm" ></form>
-						<script>
-							window.paypalCheckoutReady = function() {
-				
-								      paypal.checkout.setup("YSKPUBXAHFT5L", {
-								          
-								          environment: 'sandbox',
-								          buttons: 'myContainer'
-								        });
-							};
-						</script>
-						<script src="//www.paypalobjects.com/api/checkout.js" async></script>
 					</div>
 				</div>
 			</div>
@@ -318,7 +325,7 @@
 	function pagar(){
 		event.preventDefault();
 		
-		window.open("","windowName",
+		window.open("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NDTB7REJQZUHN","windowName",
         "width=400,height=600,scrollbars=no");
 		
 	}
