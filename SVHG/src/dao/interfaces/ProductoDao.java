@@ -7,7 +7,7 @@ import beans.CategoriaBean;
 import beans.ProductoBean;
 
 public interface ProductoDao {
-	public ArrayList<ProductoBean> traerProducto(int id)throws Exception; 
+	public ArrayList<ProductoBean> traerProducto(String id)throws Exception; 
 	public ArrayList<ProductoBean> listarTodos()throws Exception; 
 	public ArrayList<CategoriaBean> listarCategorias() throws Exception;
 	public boolean agregarProducto(ProductoBean producto) throws Exception;

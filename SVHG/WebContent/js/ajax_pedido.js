@@ -248,19 +248,17 @@
 			  $.post('Carrito', {
 				  
 						accion:accion,
-						ide:JSON.stringify(localStorage),
+						ide:JSON.stringify(arreglo),
 					}, function(response) {	
 						 
-			    		
 			    		var conta="";
-			    		
 			    		var col="col-sm-4";
+			    		
 			    		for( var i=0;i<response['object'].length;i++){
-			    			
-			    			var id=response['object'][i]['idProducto'];
-			    			
-			    			conta=conta+("<div id="+response['object'][i]['categoriaBean']['tipo']+" class='"+response['object'][i]['categoriaBean']['tipo']+" col-sm-4' ><div class='product-image-wrapper'><div class='single-products'><div class='productinfo text-center'><img src="+response['object'][i]['foto']+"  /><h2>S/"+response['object'][i]['precio']+"</h2><p>NOMBRE : "+response['object'][i]['nombre']+"</p></div><div class="+'product-overlay'+"><div class='overlay-content'><h2>S/"+response['object'][i]['precio']+"</h2><p>Nombre: "+response['object'][i]['nombre']+"</p><p>Categoria : "+response['object'][i]['categoriaBean']['tipo']+"</p><a href="+"javascript:void(0)"+" id='comprar' onclick='addProducto("+id+")' class='btn btn-default add-to-cart'><i class='fa fa-shopping-cart'></i>Agregar al carrito</a></div></div></div></div></div>");
+			    					    			
+			    			conta=conta+("<tr><td class='cart_product'><a href=''><img src="+response['object'][i][0]['foto']+" alt='' width='100px' height='100px'></a></td><td class='cart_description' style='vertical-align: middle; text-align: center;'><h4><a>"+response['object'][i][0]['nombre']+"</a></h4></td><td class='cart_price'	style='vertical-align: middle; text-align: center;'><p>"+response['object'][i][0]['precio']+"</p></td><td class='cart_quantity' style='vertical-align: middle; text-align: center;'><div class='cart_quantity_button'><a class='cart_quantity_up' href='#'  onclick='agregar(cantidad"+i+".value,desc"+i+".value);'> + </a><input type='hidden' value='cantidad"+i+"' id='desc"+i+"'><input  onchange='cambiar(cantidad"+i+".value,desc"+i+".value);' onkeypress='return solonumerosCarr(event)' name='quantity' maxlength='2' class='cart_quantity_input' type='text' value='1' size='2' id='cantidad"+i+"'><a class='cart_quantity_down' href='#' onclick='disminuir(cantidad"+i+".value,desc"+i+".value);'> - </a></div></td><td class='cart_total' style='vertical-align: middle;text-align: center;'><p class='cart_total_price'>"+response['object'][i][0]['precio']+"</p></td><td class='cart_delete' style='vertical-align: middle; text-align: center;'><a class='cart_quantity_delete' href=''><i class='fa fa-times'></i></a></td></tr>");
 			    		}
+			    	
 			    		$('#productosCarrito').html(conta);	 
 			    		
 			  });   

@@ -342,7 +342,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 	
 	
 	@Override
-	public ArrayList<ProductoBean> traerProducto(int id) throws Exception {
+	public ArrayList<ProductoBean> traerProducto(String id) throws Exception {
 		ArrayList<ProductoBean> productos=new ArrayList<ProductoBean>();
 		try {
 			Connection con=MySqlDAOFactory.obtenerConexion();
