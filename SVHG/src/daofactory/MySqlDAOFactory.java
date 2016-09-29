@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import dao.interfaces.EmpresaDao;
+import dao.interfaces.OfertaDao;
 import dao.interfaces.PedidoDao;
 import dao.interfaces.PersonaDao;
 import dao.interfaces.ProductoDao;
@@ -73,5 +74,11 @@ public class MySqlDAOFactory extends DAOFactory {
 	public PedidoDao getPedidoDAO() {
 		// TODO Auto-generated method stub
 		return new MySql_PedidoDao();
+	}
+
+	@Override
+	public OfertaDao getOfertaDAO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
