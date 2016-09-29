@@ -277,27 +277,65 @@
 						</form>
 					</div>
 					
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
- <input type="hidden" name="cmd" value="_s-xclick">
-  <input type="hidden" name="business" value="nano_sport_test@hotmail.it">
-<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
-<input type="hidden" name="cmd" value="_xclick">
-  <input type="hidden" name="business" value="seller@designerfotos.com">
-  <input type="hidden" name="item_name" value="Memorex 256MB Memory Stick">
-  <input type="hidden" name="item_number" value="MEM32507725">
-  <input type="hidden" name="amount" value="3">
-  <input type="hidden" name="tax" value="1">
-  <input type="hidden" name="quantity" value="1">
-  <input type="hidden" name="no_note" value="1">
-  <input type="hidden" name="currency_code" value="USD">
-<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.sandbox.paypal.com/es_XC/i/scr/pixel.gif" width="1" height="1">
-</form>
-						
+			<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get" target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="currency_code" value="US">
+				<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
+				
+				<input type="hidden" name="item_name_1" value="Mancuernas">
+				<input type="hidden" name="amount_1" value="100">
+				<input type="hidden" name="quantity_1" value="3">
+				
+				<input type="hidden" name="item_name_2" value="Mancuernas2">
+				<input type="hidden" name="amount_2" value="100">
+				<input type="hidden" name="quantity_2" value="3">
+		
+				
+		
+				
+				<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
+				<input type="hidden" name="return" value="http://localhost:8081/SVHG/carritoCompra.jsp">
+				
+				<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				
+			</form>	
 					
+			<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get">
+				<input type="hidden" name="cmd" value="_cart">
+				
+				<input type="hidden" name="currency_code" value="US">
+				<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
+				
+				<input type="hidden" name="item_name_1" value="Mancuernas">
+				<input type="hidden" name="amount_1" value="100">
+				<input type="hidden" name="quantity_1" value="3">
+				
+				<input type="hidden" name="item_name_2" value="Mancuernas2">
+				<input type="hidden" name="amount_2" value="100">
+				<input type="hidden" name="quantity_2" value="3">
+		
+				<input type="hidden" name="first_name" value="John">
+				<input type="hidden" name="last_name" value="Doe">
+				<input type="hidden" name="address1" value="9 Elm Street">
+				<input type="hidden" name="address2" value="Apt 5">
+				<input type="hidden" name="city" value="Berwyn">
+				<input type="hidden" name="state" value="PA">
+			 	<input type="hidden" name="zip" value="19312">
+				<input type="hidden" name="night_phone_a" value="610">
+				<input type="hidden" name="night_phone_b" value="555">
+				<input type="hidden" name="night_phone_c" value="1234">
+				<input type="hidden" name="email" value="jdoe@zyzzyu.com">
+		
+				
+				
+				<input type="hidden" name="hosted_button_id" value="CMFTLNESY3FXN">
+				<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.sandbox.paypal.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+			</form>
 					
-						  <script src="http://www.paypalobjects.com/api/checkout.js" async></script>
-						
+					<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
+					
+						 
 					</div>
 				</div>
 			</div>
