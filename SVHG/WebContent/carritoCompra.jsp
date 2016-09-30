@@ -18,6 +18,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="imagesOut/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="imagesOut/ico/apple-touch-icon-57-precomposed.png">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="js/validaciones.js"></script>
@@ -28,8 +29,7 @@
 	</script>
 	<!-- LLAMA A LOS METODOS QUE SE UTILIZAN PARA LA INTERFAZ Y LOS SERVICIOS DE UBIGEO -->
 	<script src="js/ajax_pedido.js"></script>
-	<!-- VALIDACIONES APLICADAS A ESTA PAGINA -->
-	<script src="js/validarTelefono.js"></script>
+
 	
 	<script src="https://js.braintreegateway.com/web/3.3.0/js/client.min.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.3.0/js/paypal.min.js"></script>
@@ -43,7 +43,7 @@
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 					<li><a href="index.jsp">Inicio</a></li>
-					<li class="active">Carrito de Compra</li>
+					<li class="active">Carrito de Compra </li>
 				</ol>
 			</div>
 			<div id="mensaje" style="color:red;"></div>
@@ -65,8 +65,8 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
+			<div class="row" id="opcionesPrincipales">
+				<div class="col-sm-6" >
 					<div class="heading">
 						<h3>Seleccione su tipo de Entrega del Pedido</h3>
 					</div>
@@ -86,12 +86,13 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-6" >
 					<div class="total_area">
 						<ul>
-							<li>Sub Total <span>$59</span></li>
-							<li>Descuento<span>$2</span></li>
-							<li style="background-color: #ff8000; color: white;">Total <span>$61</span></li>
+							<li>Sub Total <span id="subTotal"></span><input type="hidden" id="subTotalV" value="" ></li>
+							<li>IGV<span id="igv"> </span></li>
+							<li style="background-color: #ff8000; color: white;">Total <span id="total"> </span></li>
+							
 						</ul>
 					</div>
 				</div>
@@ -108,7 +109,7 @@
 				<div class="col-sm-12 col-xs-12">
 					<h3>Direccion de Envio:</h3>
 					<br>
-					<form class="form-horizontal" action="" method="" id="form1">
+					<form class="form-horizontal"  id="form1">
 						<div class="form-group">
 							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Tipo de Direccion</label>
@@ -243,7 +244,7 @@
 						</p>
 						<form>
 							<div class="radio">
-								<input type="radio" name="tipoPago"  checked >Contra-Entrega
+								<input type="radio" name="tipoPago"  checked>Contra-Entrega
 							</div>
 							<div class="radio">
 								<input type="radio" name="tipoPago" value="tarjeta">Tarjeta
@@ -251,61 +252,23 @@
 						</form>
 					</div>
 					
-			<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get" target="_top">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="currency_code" value="US">
-				<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
-				
-				<input type="hidden" name="item_name_1" value="Mancuernas">
-				<input type="hidden" name="amount_1" value="100">
-				<input type="hidden" name="quantity_1" value="3">
-				
-				<input type="hidden" name="item_name_2" value="Mancuernas2">
-				<input type="hidden" name="amount_2" value="100">
-				<input type="hidden" name="quantity_2" value="3">
-		
-				
-		
-				
-				<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
-				<input type="hidden" name="return" value="http://localhost:8081/SVHG/carritoCompra.jsp">
-				
-				<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-				
-			</form>	
+					<!-- PAYPAL BOTON -->
+					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get" target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="currency_code" value="US">
+						<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
+						
+						<input type="hidden" name="item_name" value="Total de Importe Neto(IGV incluido) - Nano Sport Shop">
+						<input type="hidden" name="amount" id="amount" value="0">
+						
+						<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
+						<input type="hidden" name="return" value="http://localhost:8081/SVHG/carritoCompra.jsp">
+						
+						<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-60px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
+						
+					</form>	
 					
-			<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get">
-				<input type="hidden" name="cmd" value="_cart">
-				
-				<input type="hidden" name="currency_code" value="US">
-				<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
-				
-				<input type="hidden" name="item_name_1" value="Mancuernas">
-				<input type="hidden" name="amount_1" value="100">
-				<input type="hidden" name="quantity_1" value="3">
-				
-				<input type="hidden" name="item_name_2" value="Mancuernas2">
-				<input type="hidden" name="amount_2" value="100">
-				<input type="hidden" name="quantity_2" value="3">
-		
-				<input type="hidden" name="first_name" value="John">
-				<input type="hidden" name="last_name" value="Doe">
-				<input type="hidden" name="address1" value="9 Elm Street">
-				<input type="hidden" name="address2" value="Apt 5">
-				<input type="hidden" name="city" value="Berwyn">
-				<input type="hidden" name="state" value="PA">
-			 	<input type="hidden" name="zip" value="19312">
-				<input type="hidden" name="night_phone_a" value="610">
-				<input type="hidden" name="night_phone_b" value="555">
-				<input type="hidden" name="night_phone_c" value="1234">
-				<input type="hidden" name="email" value="jdoe@zyzzyu.com">
-		
-				
-				
-				<input type="hidden" name="hosted_button_id" value="CMFTLNESY3FXN">
-				<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-				<img alt="" border="0" src="https://www.sandbox.paypal.com/es_XC/i/scr/pixel.gif" width="1" height="1">
-			</form>
+			
 					
 					<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 					
@@ -319,7 +282,8 @@
 					<button id="boton2" class="btn btn-primary">Continuar</button>
 				</div>
 			</div>
-		</div>
+			<br>
+			<br>
 	</section>
 	<!--/#do_action-->
 	<jsp:include page="includeOut/footer.jsp"></jsp:include>
