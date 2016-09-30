@@ -242,7 +242,7 @@
 					var ide=localStorage.key(i);
 					arreglo.push(ide);
 					alert(arreglo);
-	             console.log(localStorage.length+"tamñao ->"+ide+"  orden "+i+" ARREGLOO"+arreglo[i]);
+	             console.log(localStorage.length+"  tamñao ->  "+ide+"  orden   "+i+"  ARREGLOO  "+arreglo[i]);
 	             }
 	    	 
 			  $.post('Carrito', {

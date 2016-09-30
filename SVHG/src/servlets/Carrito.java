@@ -5,12 +5,16 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import sun.security.util.Length;
 import util.ResponseObject;
@@ -56,18 +60,17 @@ public class Carrito extends HttpServlet {
 			
 			try {
 				ArrayList Productos = new ArrayList();
-				
-				String arreglo[]={"10","60","90","45"};
-				//ESTO resquiest.getParamteer("ide"); , recibe el arreglo de los productos añadidos al carrito.
-				//Problema : recorrerlos
-				//String arreglo[]=request.getParameter("ide");
-				//System.out.println(":OOOOOO "+arreglo.length +"que estoy recibiendo? "+arregl);
-				for(int i=0;i<arreglo.length;i++){
-					System.out.println("Producto del carrito :  "+arreglo[i]);
-					Productos.add(productodao.traerProducto(arreglo[i]));
+
+				String ari = request.getParameter("ide");
+				String arreglo1=ari.substring(1, ari.length()-1);
+				String arreglo2=arreglo1.toString().replace(",", " ");
+				String strArray[] = arreglo2.split(" ");
+	                     
+				for(int i=0;i<strArray.length;i++){
+					System.out.println("Producto del carrito PRODUCTO ! :  "+strArray[i]);
+					Productos.add(productodao.traerProducto(strArray[i]));
 					
 			};
-				//System.out.println("TAMAÑOOOO "+Productos.size());
 				 ResponseObject responseobj=null;
 				if(Productos!=null){
 					responseobj=new ResponseObject();
