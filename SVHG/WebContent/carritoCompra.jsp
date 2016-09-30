@@ -37,6 +37,7 @@
 </head>
 <body onload="cargarDep();">
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
+	
 	<section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -45,6 +46,7 @@
 					<li class="active">Carrito de Compra</li>
 				</ol>
 			</div>
+			<div id="mensaje" style="color:red;"></div>
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -59,37 +61,7 @@
 					</thead>
 					<tbody id="productosCarrito">
 						
- 						<tr>
-							<td class="cart_product"><a href=""><img
-									src="imagesOut/cart/one.png" alt=""></a></td>
-							<td class="cart_description"
-								style="vertical-align: middle; text-align: center;">
-								<h4>
-									<a>Colorblock Scuba</a>
-								</h4>
-							</td>
-							<td class="cart_price"
-								style="vertical-align: middle; text-align: center;">
-								<p>S/.59.00</p>
-							</td>
-							<td class="cart_quantity" style="vertical-align: middle; text-align: center;">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href="#"  onclick="agregar(cantidad.value,desc.value);"> + </a> 
-									<input type="hidden" value="cantidad" id="desc"> 
-									<input  onchange="cambiar(cantidad.value,desc.value);" onkeypress="return solonumerosCarr(event)" name="quantity" maxlength="2" class="cart_quantity_input" type="text" value="1" size="2" id="cantidad"> 
-									<a class="cart_quantity_down" href="#" onclick="disminuir(cantidad.value,desc.value);"> - </a>
-								</div>
-							</td>
-							<td class="cart_total"
-								style="vertical-align: middle; text-align: center;">
-								<p class="cart_total_price">S/.59.00</p>
-							</td>
-							<td class="cart_delete"
-								style="vertical-align: middle; text-align: center;"><a
-								class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						
+ 						<!-- AQUI LLEGARAN LOS PRODUCTOS AGREGADOS DEL CARRITO -->						
 					</tbody>
 				</table>
 			</div>
@@ -126,6 +98,8 @@
 			</div>
 		</div>
 	</section>
+	<br>
+	
 	<br>
 	<section id="do_action">
 		<div class="container">
