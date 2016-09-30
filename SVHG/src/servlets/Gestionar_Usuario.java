@@ -53,7 +53,7 @@ public class Gestionar_Usuario extends HttpServlet {
 					if(usuario!=null){
 						responseobj=new ResponseObject();
 						response.setContentType("application/json");
-						response.setCharacterEncoding("UTF-8");
+						response.setCharacterEncoding("UTF-8"); 
 						responseobj.setSuccess(true);
 						responseobj.setObject(usuario);
 					}
