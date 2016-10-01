@@ -1,3 +1,4 @@
+		
 		var depas = [];
 		var pros = [];
 		var dist = [];
@@ -6,24 +7,24 @@
 			
 			var action = "deps";
 			
-			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
-				
-				
-				action : action
+			$.get('servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
 				
 			},function(response){
 				
 				depas = new Array(response['object'].length);
-				
+				console.log(response['object'].length);	
 				var cadena = "";
 				for(var i=0;i<response['object'].length;i++){
 					depas[i] = response['object'][i]['departamento'];
 					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['departamento']+"</option>");
 				}
 				
-				console.log(depas[i]);
+				console.log(depas.length);
 				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+					
 				$('#departamento').html(pre+cadena);
+				
+
 				
 			});
 			
@@ -95,19 +96,75 @@
 		
 		
 		
-		function cambiar(cantidad,desc){
+		function cambiar(cantidad,desc,descImp,precio){
 			
-			alert("Entro a cambiar");
+			
 			
 			var direccion = "#"+desc;
 			
 			if(isNaN(cantidad)||cantidad == null||cantidad.trim()==""){
 				$(direccion).val(1);
+				
+				var subtotal = parseInt($("#subTotalV").val());
+				
+				
+				
+				var importeA = $("#valorImp"+descImp.substring(descImp.length-1)).val();
+				
+				
+				
+				subtotal = parseInt(subtotal) - parseInt(importeA) ;
+				
+				
+				
+				subtotal = subtotal + (1*parseInt(precio))
+				
+				var igv = subtotal*0.19;
+				
+				
+				
+				$("#"+descImp).val(1*parseInt(precio));
+				$("#subTotal").text("S/. "+subtotal);
+				$("#subTotalV").val(subtotal);
+				$("#importeM"+descImp.substring(descImp.length-1)).text(1*parseInt(precio));
+				
+				$("#igv").text("S/. "+igv);
+				$("#total").text("S/. "+(igv+subtotal));
+			}
+			else{
+				
+				var canti = cantidad;
+				
+				var subtotal = parseInt($("#subTotalV").val());
+				
+				
+				
+				var importeA = $("#valorImp"+descImp.substring(descImp.length-1)).val();
+				
+				
+				
+				subtotal = parseInt(subtotal) - parseInt(importeA) ;
+				
+				
+				
+				subtotal = subtotal + (canti*parseInt(precio))
+				
+				var igv = subtotal*0.19;
+				
+			
+				
+				$("#"+descImp).val(canti*parseInt(precio));
+				$("#subTotal").text("S/. "+subtotal);
+				$("#subTotalV").val(subtotal);
+				$("#importeM"+descImp.substring(descImp.length-1)).text(canti*parseInt(precio));
+				
+				$("#igv").text("S/. "+igv);
+				$("#total").text("S/. "+(igv+subtotal));
 			}
 			
 		}
 	
-		function agregar(cantidad, desc) {
+		function agregar(cantidad, desc,descImp,precio) {
 	
 			event.preventDefault();
 			
@@ -116,9 +173,36 @@
 			var direccion = "#"+desc;
 			
 			$(direccion).val(canti);
+			
+
+			var subtotal = parseInt($("#subTotalV").val());
+			
+			
+			
+			var importeA = $("#valorImp"+descImp.substring(descImp.length-1)).val();
+			
+			
+			
+			subtotal = parseInt(subtotal) - parseInt(importeA) ;
+			
+			
+			
+			subtotal = subtotal + (canti*parseInt(precio))
+			
+			var igv = subtotal*0.19;
+				
+		
+			
+			$("#"+descImp).val(canti*parseInt(precio));
+			$("#subTotal").text("S/. "+subtotal);
+			$("#subTotalV").val(subtotal);
+			$("#importeM"+descImp.substring(descImp.length-1)).text(canti*parseInt(precio));
+			
+			$("#igv").text("S/. "+igv);
+			$("#total").text("S/. "+(igv+subtotal));
 		}
 	
-		function disminuir(cantidad, desc) {
+		function disminuir(cantidad, desc,descImp,precio) {
 			
 			event.preventDefault();
 			
@@ -127,8 +211,44 @@
 	
 			if (canti <= 0) {
 				$(direccion).val(1);
+				$("#"+descImp).val(1*parseInt(precio));
+				
+				$("#importeM"+descImp.substring(descImp.length-1)).text(1*parseInt(precio));
+				
+				
+				
 			} else {
+				
 				$(direccion).val(canti);
+
+				var subtotal = parseInt($("#subTotalV").val());
+				
+				
+				
+				var importeA = $("#valorImp"+descImp.substring(descImp.length-1)).val();
+				
+			
+				
+				subtotal = parseInt(subtotal) - parseInt(importeA) ;
+				
+				
+				
+				subtotal = subtotal + (canti*parseInt(precio))
+				
+				var igv = subtotal*0.19;
+				
+				
+				
+				$("#"+descImp).val(canti*parseInt(precio));
+				$("#subTotal").text("S/. "+subtotal);
+				$("#subTotalV").val(subtotal);
+				$("#importeM"+descImp.substring(descImp.length-1)).text(canti*parseInt(precio));
+				
+				
+				$("#igv").text("S/. "+igv);
+				$("#total").text("S/. "+(igv+subtotal));
+				
+				
 			}
 		}
 	
@@ -237,14 +357,17 @@
 		$(document).ready(function(){
 	    	 var accion='addCarrito';
 	    	 var arreglo = new Array();
+	    	if(localStorage.length){
 	    	 for(var i=0;i<localStorage.length;i++){
 					//alert(localStorage.key(i));
 					var ide=localStorage.key(i);
 					arreglo.push(ide);
-					alert(arreglo);
+					//alert(arreglo);
 	             console.log(localStorage.length+"  tamñao ->  "+ide+"  orden   "+i+"  ARREGLOO  "+arreglo[i]);
 	             }
 	    	 
+	    	 
+
 			  $.post('Carrito', {
 				  
 						accion:accion,
@@ -254,14 +377,52 @@
 			    		var conta="";
 			    		var col="col-sm-4";
 			    		
-			    		for( var i=0;i<response['object'].length;i++){
-			    					    			
-			    			conta=conta+("<tr><td class='cart_product'><a href='#'><img src="+response['object'][i][0]['foto']+" alt='' width='100px' height='100px'></a></td><td class='cart_description' style='vertical-align: middle; text-align: center;'><h4><a>"+response['object'][i][0]['nombre']+"</a></h4></td><td class='cart_price'	style='vertical-align: middle; text-align: center;'><p>"+response['object'][i][0]['precio']+"</p></td><td class='cart_quantity' style='vertical-align: middle; text-align: center;'><div class='cart_quantity_button'><a class='cart_quantity_up' href='#'  onclick='agregar(cantidad"+i+".value,desc"+i+".value);'> + </a><input type='hidden' value='cantidad"+i+"' id='desc"+i+"'><input  onchange='cambiar(cantidad"+i+".value,desc"+i+".value);' onkeypress='return solonumerosCarr(event)' name='quantity' maxlength='2' class='cart_quantity_input' type='text' value='1' size='2' id='cantidad"+i+"'><a class='cart_quantity_down' href='#' onclick='disminuir(cantidad"+i+".value,desc"+i+".value);'> - </a></div></td><td class='cart_total' style='vertical-align: middle;text-align: center;'><p class='cart_total_price'>"+response['object'][i][0]['precio']+"</p></td><td class='cart_delete' style='vertical-align: middle; text-align: center;'><a class='cart_quantity_delete' href=''><i class='fa fa-times'></i></a></td></tr>");
-			    		}
-			    	
-			    		$('#productosCarrito').html(conta);	 
+			    		var subtotal = 0;
 			    		
+			    		for( var i=0;i<response['object'].length;i++){
+			    			
+			    			subtotal = subtotal + parseInt(response['object'][i][0]['precio']);
+			    			conta=conta+("<tr><td class='cart_product'><input type='hidden' value='"+response['object'][i][0]['idProducto']+"' name='ids'><a href='#'><img src="+response['object'][i][0]['foto']+" alt='' width='100px' height='100px'></a></td><td class='cart_description' style='vertical-align: middle; text-align: center;'><h4><a>"+response['object'][i][0]['nombre']+"</a></h4></td><td class='cart_price' style='vertical-align: middle; text-align: center;'><p>S/. "+response['object'][i][0]['precio']+"<input type='hidden' value='"+response['object'][i][0]['precio']+"' id='precios"+i+"' ></p></td><td class='cart_quantity' style='vertical-align: middle; text-align: center;'><div class='cart_quantity_button'><a class='cart_quantity_up' href='#'  onclick='agregar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> + </a><input type='hidden' value='cantidad"+i+"' id='desc"+i+"'><input  onchange='cambiar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);' onkeypress='return solonumerosCarr(event)' name='cantidades' maxlength='2' class='cart_quantity_input' type='text' value='1' size='2' id='cantidad"+i+"'><a class='cart_quantity_down' href='#' onclick='disminuir(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> - </a></div></td><td class='cart_total' style='vertical-align: middle;text-align: center;'><p class='cart_total_price'>S/. <label id='importeM"+i+"'>"+response['object'][i][0]['precio']*1+"</label><input type='hidden' id='nomImp"+i+"' value='valorImp"+i+"' ><input type='hidden' id='valorImp"+i+"' value='"+response['object'][i][0]['precio']+"' name='importes' ></p></td><td class='cart_delete' style='vertical-align: middle; text-align: center;'><a class='cart_quantity_delete' href='' onClick='quitardelcarrito("+response['object'][i][0]['idProducto']+")'><i class='fa fa-times'></i></a></td></tr>");
+			    		}
+			    		
+			    			
+			    			
+			    			$('#productosCarrito').html(conta);
+			    			$('#subTotalV').val(subtotal);
+			    			$('#subTotal').text("S/. "+subtotal);
+			    			
+			    			var igv = subtotal*0.19;
+			    			
+			    			$("#igv").text("S/. "+igv);
+							$("#total").text("S/. "+(igv+subtotal));
+							$("#amount").val(igv+subtotal);
+
 			  });   
-			          
 			  
+	    	}else{
+	    		$('#mensaje').html("<h3>Usted no cuenta con productos agregados en su carrito de compras.</h3>");
+	    		
+	    								
+					$('#opcionesPrincipales').hide();
+					$('#do_action').hide();
+					
+	    	}
+	    	 
 	    });
+		
+		
+		function quitardelcarrito(id) {
+					
+			 for(var i=0;i<localStorage.length;i++){
+					if(localStorage.key(i)==id){
+						localStorage.removeItem(id);
+						alert("El producto ha sido removido del carrito.");
+						$("#cantidadProductos").text(localStorage.length);
+					};
+		      }
+		}
+		
+		
+		
+		
+		
