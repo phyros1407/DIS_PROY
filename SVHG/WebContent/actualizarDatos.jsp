@@ -1,3 +1,4 @@
+<%@page import="beans.EmpresaBean"%>
 <%@page import="beans.PersonaBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -24,7 +25,7 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 	 <%
 	 PersonaBean persona=(PersonaBean) request.getAttribute("persona");
-		
+	 EmpresaBean empresa=(EmpresaBean) request.getAttribute("empresa");
 	%>
 </head>
 S
@@ -165,9 +166,25 @@ S
 							        	<input value="<%=persona.getApellidoMaterno()%>" type="text" name="txtApeMat"  id="txtApeMat" class="form-control" readonly> 
 								</div>	
 							</div>
-							
-						
 						<hr>
+						<!-- JURIDICO -->
+						<%if(empresa!=null){ %>
+						<br>
+							<div class="row">
+								<center><h2>Datos Juridicos</h2></center>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+							       		<label >Razon Social:</label>
+							        	<input value="<%=empresa.getRazonSocial()%>" type="text" name="razonSocial"  id="razonSocial" class="form-control" readonly> 
+								</div>	
+								<div class="col-sm-4">
+							       		<label >RUC:</label>
+							        	<input value="<%=empresa.getRuc()%>" type="text" name="razonSocial"  id="razonSocial" class="form-control" readonly> 
+								</div>
+							</div>
+						<hr>
+						<%} %>
 						<!-- Fila 5 -->
 						<br>
 							<div class="row">

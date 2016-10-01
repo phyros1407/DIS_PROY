@@ -27,13 +27,16 @@ public class MySQLEmpleadoDao implements PersonaDao {
 		int filas = stmt.executeUpdate(queryPersona);
 		System.out.println("444");
 		if(filas==1){
-			String queryIdPersona="select last(id) from persona ";
-			System.out.println("id; +"+queryIdPersona);
-	
+			String queryIdPersona="select max(p.id) as idPersonaMax from persona p";
+			System.out.println("id : "+queryIdPersona);
+		 
 			ResultSet rs = stmt.executeQuery(queryIdPersona);	
-			System.out.println("id: +"+rs.getInt("id"));
+		
+		
 			if(rs.next()){
-				int idPer=rs.getInt("id")+1;
+				System.out.println("321123: ");
+				int idPer=rs.getInt("idPersonaMax");
+				//idPer=28;
 				System.out.println("idepersona: "+idPer);
 				String queryUsuario="insert into usuario (CAR_ID,PER_ID,USU,PAS,EST_ACT,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"
 						+ "  values ('5','"+idPer+"','"+persona.getNombre().charAt(0)+persona.getApellidoPaterno()+persona.getApellidoMaterno().charAt(0)+"','"+persona.getPass()+"','A', 'USER',now(), 'USER',now())";
@@ -52,7 +55,9 @@ public class MySQLEmpleadoDao implements PersonaDao {
 			
 		}
 		} catch (Exception e) {
+			
 			System.out.println(e.getMessage());
+			
 		}
 		
 		return flag;

@@ -1,11 +1,13 @@
 package dao.mysql;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import dao.interfaces.EmpresaDao;
 import daofactory.MySqlDAOFactory;
 import beans.EmpresaBean;
+import beans.PersonaBean;
 
 public class MySQLEmpresaDao extends MySqlDAOFactory implements EmpresaDao {
 	
@@ -35,5 +37,33 @@ public class MySQLEmpresaDao extends MySqlDAOFactory implements EmpresaDao {
 			
 			return flag;
 	}
+
+	
+	@Override
+	public EmpresaBean buscarEmpresa(int id) throws Exception {
+		EmpresaBean empresa = null;
+		try {
+			Connection con = MySqlDAOFactory.obtenerConexion();
+			Statement stmt = con.createStatement();
+		System.out.println("usaurio id: "+id);
+	
+		String query = "select e.ruc,e.raz_soc from empresa e where e.emp_id='"+id+"'";
+			ResultSet rs = stmt.executeQuery(query);
+		
+			if(rs.next()){
+				empresa = new EmpresaBean();
+				empresa.setRuc(rs.getString("ruc"));
+				empresa.setRazonSocial(rs.getString("raz_soc"));
+			}	
+			con.close();
+		} catch (Exception e) {
+			System.out.println("ERROR de BuscarEmpresa en MysqlEmpresa.java");
+			System.out.println(e.getMessage());
+		}
+		return empresa;
+	}
+
+	
+
 
 }

@@ -27,49 +27,92 @@
 <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
 </head>
 	<script type="text/javascript">
+	var x=false;
+	var a=false;
 		function buscarReniec(){
-		  var dni = $('#txtDni').val();
-		 // console.log("asdasd"+dni);
-		 var accion='buscarDni';
-		  $.get('http://env-6803205.jelasticlw.com.br/service/Gestionar_Persona', {
-					accion : accion,
-					dni:dni
-				}, function(response) {		
-					console.log("entasd"+response);
-					if (response!=null) {
-						console.log("entrooo");	
-							$('#txtNombres').val(response['object']['nombres']); ; 
-							$('#txtApePat').val(response['object']['apePat']); 
-							$('#txtApeMat').val(response['object']['apeMat']); 
-					}else{
-						alert("El número de DNI es incorrecto o no está registrado en la RENIEC")
-
-					}		
-		  });
-	}
-		
-		function buscarRuc(){
-			  var ruc = $('#txtRuc').val();
+			
+		 var y=document.getElementById("txtDni");
+		 
+		 if(x){
+			 document.getElementById("txtNombres").value="";
+			 document.getElementById("txtApePat").value="";
+			 document.getElementById("txtApeMat").value="";
+			 
+			 x=false;
+			 y.readOnly=false; 
+			 y.value="";
+		 }else{
+			var dni = $('#txtDni').val();
+			x=true;
+			y.readOnly =true;
 			 // console.log("asdasd"+dni);
-			 var accion='buscarRuc';
-			  $.get('http://env-6803205.jelasticlw.com.br/service/Gestionar_Empresa', {
-				  
+			 var accion='buscarDni';
+			  $.get('http://env-3384797.jelasticlw.com.br/service/Gestionar_Persona', {
+				 
 						accion : accion,
-						ruc:ruc
+						dni:dni
 					}, function(response) {		
 						console.log("entasd"+response);
 						if (response!=null) {
 							console.log("entrooo");	
-								$('#txtRazon').val(response['object']['razonSocial']); ; 
+								$('#txtNombres').val(response['object']['nombres']); ; 
+								$('#txtApePat').val(response['object']['apePat']); 
+								$('#txtApeMat').val(response['object']['apeMat']); 
 								
 						}else{
-							alert("El número de RUC es incorrecto o no está registrado en la SUNAT")
-
-						}			
+							x=false;
+							 y.readOnly=false; 
+							 y.value="";
+							alert("El número de DNI es incorrecto o no está registrado en la RENIEC")
+							
+						}		
 			  });
+		 }
+		 
+	}
+		
+		function buscarRuc(){
+			var y=document.getElementById("txtRuc");
+			
+			if(a){
+				 document.getElementById("txtRazon").value="";
+				 document.getElementById("txtRuc").value="";
+			
+				 a=false;
+				 y.readOnly=false; 
+				 y.value="";
+				 
+			}else{
+				 var ruc = $('#txtRuc').val();
+				 a=true;
+					y.readOnly =true;
+				 // console.log("asdasd"+dni);
+				 var accion='buscarRuc';
+				  $.get('http://env-3384797.jelasticlw.com.br/service/Gestionar_Empresa', {
+					  
+							accion : accion,
+							ruc:ruc
+						}, function(response) {		
+							console.log("entasd"+response);
+							if (response!=null) {
+								console.log("entrooo");	
+									$('#txtRazon').val(response['object']['razonSocial']); ; 
+									
+							}else{
+								a=false;
+								 y.readOnly=false; 
+								 y.value="";
+								alert("El número de RUC es incorrecto o no está registrado en la SUNAT")
+
+							}			
+				  });
+				
+			}
+			
+			 
 		}
 			
-		
+		var xx="persona";
 		function registrarCliente(){
 			  var txt_dni = $('#txtDni').val();
 			  var txt_nombre = $('#txtNombres').val();
@@ -81,21 +124,18 @@
 			  var txtCelular = $('#txtCelular').val();
 			  var txtRuc=$('#txtRuc').val();
 			  var txtRazon=$('#txtRazon').val();
-			  var optradio=$('#optradio').val();
+			  var optradio=xx;
+			
+			 
 			  var usuario=(txt_nombre.charAt(0)+txt_apepat+txt_apemat.charAt(0)).toUpperCase();
 			  
-			  
+			 
 			  var longNum=txtCelular.length;
 			  var  num=txtCelular.charAt(0);
 			  var y=0;
 			  if((num!='9' && longNum=='9') || ((num=='1' || num=='8' || num=='9'  ) && longNum=='7' ) || longNum<7) {
 				  y=1;
 			  }
-			 
-			    
-		
-			
-			  
 			  var x;
 			  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 			 	if(emailRegex.test(txtCorreo)){
@@ -200,7 +240,7 @@
 								<div class="col-sm-4">
 									<!-- Tipo de cliene -->
 									<div class="radio">
-							     		<label><input checked="checked"  type="radio" onclick="desaparecerCampoRuc()" id="optradio" name="optradio" value="persona">Persona</label>
+							     		<label><input type="radio" onclick="desaparecerCampoRuc()" id="optradio" name="optradio" value="persona">Persona</label>
 							    	</div>
 							   		<div class="radio">
 							     		<label><input type="radio" onclick="aparecerCampoRuc()"id="optradio" name="optradio" value="empresa">Empresa</label>
@@ -208,11 +248,13 @@
 							    	
 							    <script type="text/javascript">
 							    function aparecerCampoRuc(){
+							    	xx="empresa";
 							    	document.getElementById("divRuc").innerHTML  = "<label>RUC</label><input  type=number class=form-control name=campoRuc id=txtRuc>";		    	
 							    	document.getElementById("divBoton").innerHTML  = "<input type=button class=btn btn-warning onclick='buscarRuc();' value=Buscar>";		    	
 							    	document.getElementById("divRazon").innerHTML  = "<label>Razon Social</label><input readonly type=text class=form-control name=campoRazon id=txtRazon>";
 							    }
 							    function desaparecerCampoRuc(){
+							    	xx="persona";
 							    	document.getElementById("divRuc").innerHTML  = "";
 							    	document.getElementById("divBoton").innerHTML  = "";
 							    	document.getElementById("divRazon").innerHTML  = "";

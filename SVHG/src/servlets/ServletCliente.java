@@ -58,8 +58,15 @@ public class ServletCliente extends HttpServlet {
 					
 					int x=(int) misesion.getAttribute("usuId");
 					PersonaBean persona=personadao.buscarXIdUsuario(x);
+					
+					EmpresaDao empresaDao = dao.getEmpresaDAO();
+					EmpresaBean empresa=empresaDao.buscarEmpresa(x);
+					System.out.println("empresa x: "+empresa);
+					request.setAttribute("empresa", empresa);	
 					request.setAttribute("persona", persona);		
 					ResponseObject responseobj=null;
+					
+					
 					if(persona!=null){
 						System.out.print("servletcliente, dopost actualizardatos");
 						responseobj=new ResponseObject();
@@ -67,6 +74,7 @@ public class ServletCliente extends HttpServlet {
 						response.setCharacterEncoding("UTF-8");
 						responseobj.setSuccess(true);
 						responseobj.setObject(persona);
+						responseobj.setObject(empresa);
 					}
 					
 					response.getWriter().write(new Gson().toJson(responseobj));
@@ -109,7 +117,7 @@ public class ServletCliente extends HttpServlet {
 				persona.setTelefono(request.getParameter("txtCelular"));
 				
 				flag = ipersonadao.registrarCliente(persona);
-				
+				System.out.print("xxxxxxxxxxxTIPO: "+tipo);
 				if(tipo.equalsIgnoreCase("empresa")){
 					//---------------BUSCAR POR CORREO Y DNI---------------------------------
 					System.out.println("asdada2");
