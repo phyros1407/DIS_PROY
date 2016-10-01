@@ -69,6 +69,7 @@ public class ServletOferta extends HttpServlet {
 		String fecFin=request.getParameter("dateH");
 		String horaFin=request.getParameter("horaOfer");
 		int cantidad=Integer.parseInt(request.getParameter("txtCan"));
+		String fotoOfer=request.getParameter("fotoOfer");
 		
 		
 		System.out.println("agregar");
@@ -104,8 +105,11 @@ public class ServletOferta extends HttpServlet {
 		}
 		
 		try {
-			if(ofertadao.registrarOferta(productoId,productoPr,descuento,fecIni,fecFin,horaFin,cantidad)){
-			response.sendRedirect("ServletOferta");
+			if(ofertadao.registrarOferta(productoId,productoPr,descuento,fecIni,fecFin,horaFin,cantidad,fotoOfer)){
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('La oferta se guardó satisfactoriamente');");
+				out.println("location='ServletOferta'");
+				out.println("</script>");
 			System.out.println("dio");
 			}else{
 				System.out.println("no dio wey");

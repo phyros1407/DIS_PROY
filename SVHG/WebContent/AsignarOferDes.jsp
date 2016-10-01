@@ -139,7 +139,7 @@ div.container4 p {
   <p>IMAGEN!
 </div>
 <br>
-<input type="file" class="file">
+<input type="file" class="file" onchange="control(this)" name="fotoOfer">
 <br>
 <div class="form-group"  >						
 <label class="control-label col-md-3">Del :	</label>

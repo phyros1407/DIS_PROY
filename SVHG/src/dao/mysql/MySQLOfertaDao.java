@@ -14,7 +14,7 @@ public class MySQLOfertaDao implements OfertaDao {
 
 	@Override
 	public boolean registrarOferta(String[] productoId, double[] productoP, int descuento, String fecIni, String fecFin,
-			String horaFin, int cantidad) throws Exception {
+			String horaFin, int cantidad, String fotoOfer) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("registrarOferta");
 		try {
@@ -24,7 +24,7 @@ public class MySQLOfertaDao implements OfertaDao {
 			int maxId=1;
 			System.out.println(descuento/100.00);
 			String query="insert into ofertas(dsc,fec_ini,fec_fin,hor_fin,can_afe,FOTO,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI) "+
-					"VALUES ("+(descuento/100.00)+",'"+fecIni+"','"+fecFin+"','"+horaFin+":00:00',"+cantidad+",'images/default.jpg','USER','2016-09-29 11:01:16','USER','2016-09-29 11:01:16');";
+					"VALUES ("+(descuento/100.00)+",'"+fecIni+"','"+fecFin+"','"+horaFin+":00:00',"+cantidad+",'"+fotoOfer+"','USER','2016-09-29 11:01:16','USER','2016-09-29 11:01:16');";
 			
 			System.out.println(query);
 			

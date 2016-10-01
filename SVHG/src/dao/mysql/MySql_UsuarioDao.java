@@ -79,6 +79,14 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			Statement stmt1= con.createStatement();
 			Statement stmt2= con.createStatement();
 			Statement stmt3= con.createStatement();
+			String carL="";
+			
+			switch(cargo){
+			case 1: carL="adm"; break;
+			case 2: carL="alm"; break;
+			case 3: carL="ven"; break;
+			case 4: carL="pro"; break;
+			}
 			
 			String query="insert into persona(dni,nom,ape_pat,ape_mat,fec_nac,est,dir,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"+ 
                     "values('"+dni+"','"+nombres+"','"+apePat+"','"+apeMat+"','"+fechaNac+"','A','"+direccion+"','Cristhian','2016-08-31','Cristhian','2016-08-31');";
@@ -89,7 +97,7 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 					"values ((select id from persona where dni='"+dni+"'),'P',"+ruc+",'"+razsoc+"','Cristhian','2016-08-31','Cristhian','2016-08-31');";
 			
 			String query3="insert into usuario(car_id,per_id,usu,pas,est_act,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI) "+
-					"values("+cargo+",(select id from persona where dni='"+dni+"'),'"+apePat+"','"+contraseña1+"','A','Cristhian','2016-08-26','Cristhian','2016-08-26');";
+					"values("+cargo+",(select id from persona where dni='"+dni+"'),'"+carL+""+nombres.charAt(0)+""+apePat+""+apeMat.charAt(0)+"','"+contraseña1+"','A','Cristhian','2016-08-26','Cristhian','2016-08-26');";
 			
 			int filas = stmt.executeUpdate(query);
 			if(filas>0){
@@ -354,5 +362,27 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			System.out.println(e.getMessage());
 		}
 		return usu;
+	}
+
+	@Override
+	public String obtenerUsuarioC(int dni) {
+		// TODO Auto-generated method stub
+		try {
+		Connection con=MySqlDAOFactory.obtenerConexion();
+		Statement stmt=con.createStatement();
+		String query="select u.usu from usuario u,persona p where u.per_id=p.id and p.dni='71020745' and u.car_id<>5;";
+		ResultSet rs=stmt.executeQuery(query);
+		String usuario="";
+		
+		while(rs.next()){
+			usuario=rs.getString("u.usu");
+		}
+		return usuario;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		return "";
 	}
 }
