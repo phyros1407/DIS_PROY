@@ -7,6 +7,7 @@ public class PedidoBean {
 	private String numPedido;
 	private String estado;
 	private String fechaEntrega;
+	private String fechaCreacion;
 	private String direccion;
 	private String distrto;
 	private String tipoPago;
@@ -18,10 +19,44 @@ public class PedidoBean {
 	private String medidaProducto;
 	private double precioUnidad;
 	private double pesoUnidad;
+	private int dni;
+	private String tipoPedido;
+	private String nombrePersona;
+	private Double impProd;
 	
 	
 	
 	
+	public String getFechaCreacion() {
+		return fechaCreacion;
+	}
+	public void setFechaCreacion(String fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+	public int getDni() {
+		return dni;
+	}
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+	public String getTipoPedido() {
+		return tipoPedido;
+	}
+	public void setTipoPedido(String tipoPedido) {
+		this.tipoPedido = tipoPedido;
+	}
+	public String getNombrePersona() {
+		return nombrePersona;
+	}
+	public void setNombrePersona(String nombrePersona) {
+		this.nombrePersona = nombrePersona;
+	}
+	public Double getImpProd() {
+		return impProd;
+	}
+	public void setImpProd(Double impProd) {
+		this.impProd = impProd;
+	}
 	public String getProductoId() {
 		return ProductoId;
 	}

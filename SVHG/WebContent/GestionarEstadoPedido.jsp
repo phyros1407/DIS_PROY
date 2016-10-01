@@ -52,47 +52,109 @@
 
 
 				<br><br>
-				<div>
-					<table id="myTable">
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<div class="col-sm-12 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Actualizar Estado del Pedido</h2>
+						
+						
+							<br><br>
+						
+							<div class="row" id="formBusqueda">
+								<div class="col-sm-4">
+						       		<label >Ingrese Número de Orden Pedido:</label>
+						        	  <input required  id="txtNumPedido"  type="number" min="100" max="999" class="form-control">
+								</div>	
+								<div class="col-sm-4">
+								<br>
+							
+						        	   <input type="button" value="Continuar" onclick="buscarPedido()" class="btn btn-success">
+									<label id="mensaje" style="color:red"></label>
+								</div>			
+							</div>
+							
+								<br><br>
+				<br><br>
+					</div><!--features_items-->
+					</div>
+							
+			
+				
+				<div class="hide" id="datos">
+				
+				<div class="row">
+							<hr><hr>
+								<div><label><h3>Datos de la Orden</h3></div>
+								<div class="col-md-4">
+						       		<label >N° Orden  de Pedido :</label><input id="idpedido"  class="form-control" readonly="readonly">
+								</div>	
+								<div class="col-md-4">
+								<label >Estado :</label><input id="estado"  class="form-control" readonly="readonly">
+								</div>
+								<div class="col-md-4">
+								<label >Fecha :</label><input id="fechaCreacion"  class="form-control" readonly="readonly">
+								</div>
+								<div class="col-md-4">
+								<label >Tipo de Pago:</label><input id="tipoPago"  class="form-control" readonly="readonly">
+								</div>				
+							</div>
+							<br>
+					<div class="row">
+								<div><label><h3>Datos del Cliente</h3></label></div>
+								<div class="col-md-4">
+						       		<label >DNI :</label><input id="dni"  class="form-control" readonly="readonly">
+								</div>	
+								<div class="col-md-4">
+								<label >Nombre :</label><input id="nombrePersona"  class="form-control" readonly="readonly">
+								</div>
+								<div class="col-md-4">
+								<label >Direccion:</label><input id="direccion"  class="form-control" readonly="readonly">
+								</div>
+					</div>
+									
+											
+							
+				
+					
+					<hr>
+					<hr>
+					<br>
+					<div><label><h3>Detalle del Pedido</h3></label></div>
+					<br>
+					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>CODIGO PEDIDO</th>
-								<th>NOMBRE DEL CLIENTE</th>
-								<th>FECHA PEDIDO</th>
-								<th>ESTADO</th>
-								<th>OPCION</th>
-								
+								<th>CODIGO PRODUCTO</th>
+								<th>NOMBRE DEL PRODUCTO</th>
+								<th>PESO</th>
+								<th>CANTIDAD</th>
+								<th>PRECIO UNITARIO</th>
+								<th>PRECIO TOTAL</th>
 							</tr>
 						</thead>
-						<tbody>
-									<tr>
-										<td>12341</td>
-										<td>rhonnald</td>
-										<td>2016-09-09</td>
-										<td>Pendiente</td>
-										<td> <Button class="btn green"  data-toggle="modal" data-target="#modalCambiarEstado" style="left: 160px;" > 
-                                                    Cambiar
-                                                        
-                                                    </Button></td>
-									</tr>
-									<tr>
-										<td>1231</td>
-										<td>rhonnald</td>
-										<td>2016-09-09</td>
-										<td>terminado</td>
-										<td> <Button class="btn green"  data-toggle="modal" data-target="#modalCambiarEstado" style="left: 160px;" > 
-                                                    Cambiar
-                                                        
-                                                    </Button></td>
-									</tr>
-							
+						<tbody id="detalleProd">
+									
+									
 						</tbody>
 					</table>
 
 				</div>
-
+				<br>
+				<br>
+				<hr>
 				<div class="clearfix"></div>
-
+				
 			</div>
 			<!-- END CONTENT -->
 			<!-- BEGIN QUICK SIDEBAR -->
@@ -103,88 +165,101 @@
 	<!-- END CONTAINER -->
 	<%@ include file="include/footer.jsp"%>
 
-	             <!-- ----------------------modal cambiar estado-------------------------------------------- -->
-                 			<div class="modal fade" id="modalCambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  							 <div class="modal-dialog" role="document">
-   							 <div class="modal-content">
-                 				<form class="form-horizontal" >
-                                      <div class="modal-header">
-        						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       							 <h4 class="modal-title" id="myModalLabel">Cambiar Estado</h4>
-    							  </div>
-                                        
-                                 		<input type="hidden" maxlength="8" id="txtIdPersona2"  name="txtIdPersona" onkeypress="return solonumeros(event)" name="txtDni1" data-required="1" class="form-control" required />
-                                       
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">CODIGO PEDIDO
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-6">
-                                                    <input type="text" maxlength="8" id="txtPedido" onkeypress="return solonumeros(event)" name="txtPedido" data-required="1" class="form-control" disabled /> </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">NOMBRE
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-6">
-                                                    <input name="txtNombres1" id="txtNombres2" type="text" onkeypress="return sololetras(event)"   data-required="1" class="form-control" disabled/> </div>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">APELLIDO PATERNO
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-6">
-                                                    <input name="txtApePat1" id="txtApePat2" type="text" class="form-control" onkeypress="return sololetras(event)" data-required="1"  disabled/> </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">APELLIDO MATERNO
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-6">
-                                                    <input name="txtApeMat1" id="txtApeMat2" type="text" class="form-control"onkeypress="return sololetras(event)" data-required="1"  disabled/> </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">ESTADO
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-6">
-                                                    <select class="form-control" id="selectCategoria" name="select" >
-                                                        <option>Pendiente</option>
-                                                        <option>Terminado</option>
-                                                        <option>En proceso</option>
-                                                    </select>
-                                                     </div>
-                                            </div>
-                                            
-                                        
-                                            
-                                            
-                                          
-                                          <div id ="registro" style="visibility: hidden;">
-    										<div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >El Cliente ya se encuentra Registrado</label>
-   											 </div>
-    											</div>
-    											<div id ="validar" style="visibility: hidden;">
-    										<div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' > Por favor ingrese todos los campos</label>
-   											 </div>
-    											</div>
-                                         <div class="modal-footer">
-      			  						
-                                         <button type="button" class="btn btn-default" onclick="limpiarRegistro();" data-dismiss="modal">Cerrar</button>
-        									<input  type="button" class="btn btn-primary"   onclick="registrarCliente();" value="Modificar ">
-       
-      										</div>   
-                            				
-                            		  </form>
-               
-               					  </div></div></div>
+	        
                
  <!--------------------------------------------------------------fin cambiar estado-------------------------------------->
 <script type="text/javascript">
 $(document).ready(function(){
     $('#myTable').DataTable();
 });
+
+
+//AJAX BUSCARPEEDIDO
+function buscarPedido(){
+		
+		var id=document.getElementById("txtNumPedido").value;
+		var accion = "buscarPedido";
+		
+		$.post('ServletPedido',{
+
+			accion:accion,
+			id:id
+			
+		},function(response){
+			
+			if(response['object'].length<1){
+				
+				$('#mensaje').html(' El Nº de Orden de pedido no existe. ');
+			}else{
+				var impTotal=0;			
+				
+				var cadena = "";
+				var cadena2="";
+				var cadena3="";
+				var dni=response['object'][0]['dni'];
+				var estado=response['object'][0]['estado'];
+				var tipoPedido=response['object'][0]['tipoPedido'];
+				var fechaCreacion=response['object'][0]['fechaCreacion'];
+				var direccion=response['object'][0]['direccion'];
+				var nombrePersona=response['object'][0]['nombrePersona'];
+				
+				
+				
+				$('#formBusqueda').addClass('hide');
+				$('#idpedido').val(id);
+				$('#dni').val(dni);
+				if(estado=='P'){
+					$('#estado').val('PENDIENTE');
+				}else if(estado=='C'){
+					$('#estado').val('CANCELADO');
+				}
+				
+				$('#fechaCreacion').val(fechaCreacion);
+				$('#direccion').val(direccion);
+				$('#nombrePersona').val(nombrePersona);
+				if(tipoPedido=="CE"){
+					
+					$('#tipoPago').val('CONTRA ENTREGA');
+				}else if(tipoPedido=='TA'){
+					$('#tipoPago').val('TARJETA DE CREDITO');
+				}else if(tipoPedido=='PP'){
+					$('#tipoPago').val('PAYPAL');
+				}
+				
+				for(var i=0;i<response['object'].length;i++){
+					impTotal+=response['object'][i]['impProd'];
+					
+					cadena = cadena+("<tr><td>"+response['object'][i]['ProductoId']+"</td><td>"+response['object'][i]['productoNombre']+"</td><td>"+response['object'][i]['pesoUnidad']+" Kg</td><td>"+response['object'][i]['cantidad']+"</td><td>"+response['object'][i]['precioUnidad']+"</td><td>S/"+response['object'][i]['impProd']+".00</td></tr>");
+				}
+				cadena2="<tr><td colspan='4'></td><td class='danger'>TOTAL A PAGAR </td><td class='warning'>S/"+impTotal+".00</td></tr>";
+				cadena3="<tr><td colspan='4'><label id='mensaje2' style='color:red'></label><td><input type='button' id='actualizar' class='btn btn-success' onclick='actualizarPedido("+id+")' value='Actualizar'></td><td><input type='button' class='btn btn-danger' onClick='location.reload()' value='Cancelar'></td></tr>";
+				$('#datos').fadeIn().removeClass('hide');
+				$('#detalleProd').html(cadena+cadena2+cadena3);
+			}
+			
+		});
+ }
+ 
+function actualizarPedido(id){
+	
+	var accion = "actualizarPedido";
+	
+	$.post('ServletPedido',{
+
+		accion:accion,
+		id:id
+		
+	},function(response){
+		
+			$("#actualizar").addClass("disabled");
+			alert("Estado actualizado");
+			var tipPag=document.getElementById("tipoPago").value;
+			if(tipPag=='CONTRA ENTREGA'){
+			$('#mensaje2').html('Se ha enviado la boleta o factura, al correo registrado.');
+			}
+	});
+}
+ 
 </script>
 </body>
 

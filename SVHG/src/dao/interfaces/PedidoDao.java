@@ -15,5 +15,7 @@ public interface PedidoDao {
 	
 	public ArrayList<PedidoBean> listarProductosPedido() throws Exception;
 	
+	public ArrayList<PedidoBean> buscarDetallePedido(String idPedido) throws Exception;
 	
+	public boolean actualizarEstadoPedido(String idTransaccion) throws Exception;
 }

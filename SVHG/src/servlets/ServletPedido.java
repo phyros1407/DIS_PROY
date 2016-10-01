@@ -100,8 +100,72 @@ public class ServletPedido extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession misesion=request.getSession();
+		String usuId=misesion.getAttribute("usuId")+"";
+		
+		
+					DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+					PedidoDao pedidoDao = dao.getPedidoDAO();
+					String accion=request.getParameter("accion");
+					
+					if(accion!=null){
+							if(accion.equals("buscarPedido")){
+								String id=request.getParameter("id");
+								try {
+									ArrayList<PedidoBean> pedidos=pedidoDao.buscarDetallePedido(id);
+									
+									
+										 ResponseObject responseobj=null;
+											if(pedidos!=null){
+												responseobj=new ResponseObject();
+												response.setContentType("application/json");
+												response.setCharacterEncoding("UTF-8");
+												responseobj.setSuccess(true);
+												responseobj.setObject(pedidos);
+												
+											}
+											response.getWriter().write(new Gson().toJson(responseobj));
+											System.out.println("json " + new Gson().toJson(responseobj));
+											
+											
+											System.out.println("Detalle del los PEDIDOS !!!");
+											
+									
+									
+									
+								} catch (Exception e) {
+									System.out.println("fallo listar pedidos: "+e.getMessage());
+								}
+							}else if(accion.equals("actualizarPedido")){
+								String id=request.getParameter("id");
+								try {
+									boolean flag=pedidoDao.actualizarEstadoPedido(id);
+									
+									
+										 ResponseObject responseobj=null;
+											if(flag!=false){
+												responseobj=new ResponseObject();
+												response.setContentType("application/json");
+												response.setCharacterEncoding("UTF-8");
+												responseobj.setSuccess(true);
+												responseobj.setObject(flag);
+												
+											}
+											response.getWriter().write(new Gson().toJson(responseobj));
+											System.out.println("VERDAD O FALSE? " + new Gson().toJson(responseobj));
+											
+											
+											
+											
+									
+									
+									
+								} catch (Exception e) {
+									System.out.println("fallo listar pedidos: "+e.getMessage());
+								}
+								
+							}
+					}
 	}
 
 }

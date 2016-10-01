@@ -112,4 +112,64 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 		}
 		return productos;
 	}
+	
+	@Override
+	public ArrayList<PedidoBean> buscarDetallePedido(String idPedido){
+	// TODO Auto-generated method stub
+			ArrayList<PedidoBean> pedidos=new ArrayList<PedidoBean>();
+			try {
+				Connection con=MySqlDAOFactory.obtenerConexion();
+				
+				Statement stmt=con.createStatement();
+				//pe.EST_ENT ,pe.TIP_ENT , pe.FEC_CREA_REGI,p.DNI,p.NOM,p.DIR,pr.ID,pr.NOM ,pr.PESO,dt.CAN,pr.PRE,dt.IMP
+				String query="Select * from persona p  INNER JOIN usuario u ON p.id=u.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO  INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID  INNER JOIN producto pr ON dt.PRO_ID=pr.ID and pe.EST_ENT='P' and pe.PED_ID ='"+idPedido+"'";
+				System.out.println("QUERY DE VENTAS LISTADO ---->"+query);
+				ResultSet rs=stmt.executeQuery(query);
+				PedidoBean pedido=null;
+				while(rs.next()){
+					pedido=new PedidoBean();
+					pedido.setEstado(rs.getString("pe.EST_ENT"));
+					pedido.setTipoPedido(rs.getString("pe.TIPO_PAG"));
+					pedido.setFechaCreacion(rs.getString("pe.FEC_CREA_REGI"));
+					pedido.setDni(rs.getInt("p.DNI"));
+					pedido.setDireccion(rs.getString("p.DIR"));
+					pedido.setNombrePersona(rs.getString("p.NOM"));
+					pedido.setProductoId(rs.getString("pr.CODPRO"));
+					pedido.setProductoNombre(rs.getString("pr.NOM"));
+					pedido.setPesoUnidad(rs.getDouble("pr.PESO"));
+					pedido.setCantidad(rs.getInt("dt.CAN"));
+					pedido.setPrecioUnidad(rs.getDouble("pr.PRE"));
+					pedido.setImpProd(rs.getDouble("dt.IMP")); 
+
+					pedidos.add(pedido);
+
+				}
+				con.close();
+			} catch (Exception e) {
+				System.out.println("fallo en el metodo listartodos de MySqlPedidoDao: "+e.getMessage());
+			}
+			return pedidos;
+	}
+	@Override
+	public boolean actualizarEstadoPedido(String idTransaccion) throws Exception {
+		// TODO Auto-generated method stub
+				boolean flag=false;
+				try {
+					Connection con=MySqlDAOFactory.obtenerConexion();
+					
+					Statement stmt=con.createStatement();
+					
+					String query="UPDATE pedido set EST_ENT='E' where PED_ID='"+idTransaccion+"'";
+					
+					int filas=stmt.executeUpdate(query);
+					if(filas==1){
+						flag=true;
+					}
+					
+					con.close();
+				} catch (Exception e) {
+					System.out.println("fallo en el metodo actualizar de MySqlPedidoDao: "+e.getMessage());
+				}
+				return flag;
+	}
 }
