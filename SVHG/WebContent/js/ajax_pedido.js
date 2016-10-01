@@ -1,3 +1,4 @@
+		
 		var depas = [];
 		var pros = [];
 		var dist = [];
@@ -6,27 +7,24 @@
 			
 			var action = "deps";
 			
-			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
-				
-				
-				action : action
+			$.get('servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
 				
 			},function(response){
 				
 				depas = new Array(response['object'].length);
-				
+				console.log(response['object'].length);	
 				var cadena = "";
 				for(var i=0;i<response['object'].length;i++){
 					depas[i] = response['object'][i]['departamento'];
 					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['departamento']+"</option>");
 				}
 				
-				console.log(depas[i]);
+				console.log(depas.length);
 				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+					
 				$('#departamento').html(pre+cadena);
 				
-				
-				
+
 				
 			});
 			
@@ -239,7 +237,7 @@
 				
 				var igv = subtotal*0.19;
 				
-				alert(igv);
+				
 				
 				$("#"+descImp).val(canti*parseInt(precio));
 				$("#subTotal").text("S/. "+subtotal);
@@ -424,16 +422,6 @@
 		      }
 		}
 		
-		function sum (object) {
-		    var data = object;
-		    var tmpSum
-
-		     for (var i in object){
-		      tmpSum =+ object[i].value;
-		    }
-
-		    $scope.sum = tmpSum 
-		};
 		
 		
 		

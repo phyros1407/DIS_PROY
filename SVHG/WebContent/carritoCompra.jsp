@@ -29,8 +29,6 @@
 	</script>
 	<!-- LLAMA A LOS METODOS QUE SE UTILIZAN PARA LA INTERFAZ Y LOS SERVICIOS DE UBIGEO -->
 	<script src="js/ajax_pedido.js"></script>
-
-	
 	<script src="https://js.braintreegateway.com/web/3.3.0/js/client.min.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.3.0/js/paypal.min.js"></script>
 	
@@ -297,15 +295,6 @@
 <script src="js/jquery.prettyPhoto.js"></script>
 <script src="js/main.js"></script>
 
-<script>
-	function pagar(){
-		event.preventDefault();
-		
-		window.open("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NDTB7REJQZUHN","windowName",
-        "width=400,height=600,scrollbars=no");
-		
-	}
 
-</script>
 
 </html>

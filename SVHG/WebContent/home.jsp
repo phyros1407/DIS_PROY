@@ -42,7 +42,7 @@
 								localStorage.clear();
 								alert("El carrito ha sido limpiado.");
 								$("#cantidadProductos").text(localStorage.length);
-								$("#cantidadProductos").text(localStorage.length);
+								
 		  }
 	  
 	
