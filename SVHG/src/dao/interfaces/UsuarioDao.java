@@ -23,4 +23,6 @@ public UsuarioBean agregarPersona(String dni, String nombre,String apellidoPater
 	public UsuarioBean validarIngreso(String usuario,String contraseña);
 	
 	public emailBean buscarCorreo(String correo,String idUsu);
+	
+	public String obtenerUsuarioC(int dni);
 }

@@ -146,7 +146,6 @@ public class Gestionar_Usuario extends HttpServlet {
 			String direccion=request.getParameter("txtDireccion");
 			String fechaNac=request.getParameter("dateFecNac");
 			int cargo=Integer.parseInt(request.getParameter("selCar"));
-			String fechaLab=request.getParameter("dateFecLab");
 			String correo=request.getParameter("txtCorreo");
 			int telefono=Integer.parseInt(request.getParameter("txtTel"));
 			int ruc;String razsoc;
@@ -158,9 +157,10 @@ public class Gestionar_Usuario extends HttpServlet {
 			razsoc="";
 			}
 			if(usuariodao.agregar(dni, nombres, apePat, apeMat, direccion, contraseña1,correo,telefono,fechaNac, cargo,ruc,razsoc)){
+				String usuarioC=usuariodao.obtenerUsuarioC(dni);
 				System.out.println("Guardó");
 				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Operación realizada correctamente.');");
+				out.println("alert('Operación realizada correctamente, su nuevo usuario es: "+usuarioC+"');");
 				out.println("location='Gestionar_Usuario'");
 				out.println("</script>");
 			};
