@@ -9,7 +9,7 @@ public class PedidoBean {
 	private String fechaEntrega;
 	private String fechaCreacion;
 	private String direccion;
-	private String distrto;
+	private String distrto, provincia, departamento;;
 	private String tipoPago;
 	private String ProductoId;
 	private String productoNombre;
@@ -23,10 +23,29 @@ public class PedidoBean {
 	private String tipoPedido;
 	private String nombrePersona;
 	private Double impProd;
+	private String tipoEntrega;
 	
 	
 	
 	
+	public String getProvincia() {
+		return provincia;
+	}
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+	public String getDepartamento() {
+		return departamento;
+	}
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+	public String getTipoEntrega() {
+		return tipoEntrega;
+	}
+	public void setTipoEntrega(String tipoEntrega) {
+		this.tipoEntrega = tipoEntrega;
+	}
 	public String getFechaCreacion() {
 		return fechaCreacion;
 	}

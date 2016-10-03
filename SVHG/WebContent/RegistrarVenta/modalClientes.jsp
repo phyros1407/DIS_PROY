@@ -66,7 +66,7 @@
                                             
                                             
                                              <div class="form-group">
-                                                <label class="control-label col-md-3">Dirección
+                                                <label class="control-label col-md-3">Direccion
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
@@ -117,9 +117,10 @@
                                                 </label>
                                                 <div class="col-md-6">
                                                     <select class="form-control" id="selectCriterio" name="selectCriterio" >
-                                                        <option>DNI</option>
-                                                        <option>NOMBRE</option>
-                                                        <option>APELLIDO PATERNO</option>
+                                                        <option value="0">SELECCIONAR</option> 
+                                                        <option value="1">DNI</option>
+                                                        <option value="2">NOMBRE</option>
+                                                        <option value="3">APELLIDOS</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -129,12 +130,12 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="name"  id="txtdatoBuscar" data-required="1" class="form-control" /> </div>
+                                                    <input type="text" name="name"  id="txtDatoC" data-required="1" class="form-control" /> </div>
                                             </div>
                                              <br>    <br>
                                              <div >
                       <p align="center">
-                      <input  type="button" id="iddiv" class="btn btn-primary" data-dismiss=""  onclick="buscar1();" value="Buscar Cliente">            
+                      <input  type="button" id="iddiv" class="btn btn-primary" data-dismiss=""  onclick="buscarCriterioCliente();" value="Buscar Cliente">            
 					  </p>
 					  </div>
                                             <br>    <br>  
@@ -152,10 +153,7 @@
                                                 
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                           
-                                           
-                                        </tbody>
+                                        
                       </table> 
                       <br><br><br>
                        </div>             
@@ -180,6 +178,59 @@
   </div>
 </div>
 <!--------------------------------------------------------------fin del modal buscarCliente-------------------------------------->  
+<script>
+function buscarCriterioCliente(){
+var flag = $('#selectCriterio').val();
+//alert("flag: "+flag);
+var dato = $('#txtDatoC').val();
+$("#table-cliente").html("<thead><tr><th>DNI</th><th>NOMBRES</th><th>APELLIDO PATERNO</th><th>APELLIDO MATERNO</th><th>OPCION</th></tr></thead>");
+var  contador=0;
+//alert("flag: "+dato);
+var accion='buscarCriterio'
 
+$.post('<%=request.getContextPath() %>/ServletCliente', {
+	
+	dato:dato,
+			flag: flag,
+			accion : accion
+		}, function(response) {
+			if (response!=null) {
+				var i=0;
+				 var conta="<tbody>";
+			    	for( i=0;i<response['object'].length;i++){
+			    		contador++;
+			    		//<input id='jalar' type='hidden' value='"+response['object'][i]['id']+"'>
+			    		conta=conta+("<tr><td>"+response['object'][i]['dni']+
+								"</td><td>"+response['object'][i]['nombre']+
+								"</td><td>"+response['object'][i]['apePat']+
+								"</td><td>"+response['object'][i]['apeMat']+
+								"</td><td style='display:none;'>"+response['object'][i]['correo']+
+								"</td><td style='display:none;'>"+response['object'][i]['telefono']+
+								"</td><td style='display:none;'>"+response['object'][i]['direccion']+
+								"</td><td style='display:none;'><input id=jalar"+i+" type='text' value='"+response['object'][i]['id']+"'>"+response['object'][i]['id']+
+								"</td><td><input type='button' class='btn btn-primary btn-circle'   onclick='enviarDatos("+response['object'][i]['id']+");' value='seleccionar'>"+
+								"</td><tr>");
+						
+					
+			    	}
+			    
+			    	//$("#nombreApe").html(name);
+					conta=conta+("</tbody>");
+					//$("#boton").html("<input type='submit' id='btnAsignar' name='btnAsignar'  class='btn btn-primary'  style='margin-left: 224px;'   value='Asignar' >");
+					$("#table-cliente").append(conta);
+					console.log(contador)
+					//alert(contador)
+					console.log (conta)
+
+			}else {
+				alert("no existe");
+				
+				 error.style.visibility = "visible";		
+			}
+	
+		});
+
+}
+</script>
 </body>
 </html>

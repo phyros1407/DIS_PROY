@@ -52,17 +52,26 @@ public class ServletPedido extends HttpServlet {
 		if(request.getParameter("accion")!=null){
 			String accion=request.getParameter("accion");
 			
-			if(accion.equals("listarPedidosPendientes")){
+			if(accion.equals("listarPedidos")){
+			
+				String estado=request.getParameter("estado");
 				
 				try {
-					ArrayList<PedidoBean> pedidos=pedidoDao.listarPedidosPendientes(idUsuario);
+					ArrayList<PedidoBean> pedidos=pedidoDao.listarPedidos(idUsuario,estado);
 					
 					if(pedidos!=null){
 						ArrayList<PedidoBean> productos=pedidoDao.listarProductosPedido();
 						if(productos!=null){
 							request.setAttribute("pedidos", pedidos);
 							request.setAttribute("productos", productos);
-							request.setAttribute("estado", "Pendientes");
+							if(estado.equalsIgnoreCase("P")){
+								request.setAttribute("estado", "Pendientes");
+							}else if(estado.equalsIgnoreCase("R")){
+								request.setAttribute("estado", "Recibidos");
+							}else{
+								request.setAttribute("estado", "Cancelados");
+							}
+							
 							request.getServletContext().getRequestDispatcher("/pedidos.jsp").forward(request, response);
 						}
 					}
@@ -72,26 +81,25 @@ public class ServletPedido extends HttpServlet {
 					System.out.println("fallo listar pedidos: "+e.getMessage());
 				}
 			}
-			if(accion.equals("listarPedidosEntregados")){
+			if(accion.equals("cancelarPedido")){
+				String id=request.getParameter("id");
 				
 				try {
-					ArrayList<PedidoBean> pedidos=pedidoDao.listarPedidosEntregados(idUsuario);
+					PedidoBean pedido=pedidoDao.cambiarEstadoPedido(Integer.parseInt(id));
 					
-					if(pedidos!=null){
-						ArrayList<PedidoBean> productos=pedidoDao.listarProductosPedido();
-						if(productos!=null){
-							request.setAttribute("pedidos", pedidos);
-							request.setAttribute("productos", productos);
-							request.setAttribute("estado", "Entregados");
-							request.getServletContext().getRequestDispatcher("/pedidos.jsp").forward(request, response);
-						}
+					if(pedido!=null){//cambio estado
+						request.getServletContext().getRequestDispatcher("/ServletPedido?accion=listarPedidos&estado=PENDIENTE").forward(request, response);
+					}else{//no cambio estado
+						
 					}
 					
 					
 				} catch (Exception e) {
-					System.out.println("fallo listar pedidos: "+e.getMessage());
+					System.out.println("fallo cambiar estado pedido eliminado: "+e.getMessage());
 				}
 			}
+			
+			
 		}
 		
 	}

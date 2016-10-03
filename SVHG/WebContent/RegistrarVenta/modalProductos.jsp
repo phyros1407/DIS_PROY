@@ -8,7 +8,7 @@
 </head>
 <body>
   <!----------------------------------------------------inicio  Modal registrar producto---------------------------------->            
-         	<div class="modal fade" id="modalProductoRegistrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!--          	<div class="modal fade" id="modalProductoRegistrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   							 <div class="modal-dialog" role="document">
    							 <div class="modal-content">
                  				<form class="form-horizontal" >
@@ -54,7 +54,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <select class="form-control" name="selectCategoria" id="selectCategoria2">
+                                                    <select class="form-control" name="selecCategoria2" id="selecCategoria2">
                                                       
                                                     </select>
                                                 </div>
@@ -77,13 +77,13 @@
                             				
                             		  </form>
                
-               					  </div></div></div>      
+               					  </div></div></div>       -->
  <!----------------------------------------------------fin  Modal registrar producto---------------------------------->
        <!---------------------------------------------------- Modal buscar producto---------------------------------->
- <div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+ <div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <form >
+    <div class="modal-content" style="weight: 1000px;">
+   
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Buscar Producto</h4>
@@ -96,36 +96,57 @@
     <div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >Ingrese un Nro. de Dni</label>
     </div>
     </div>
-     	<div class="form-group">
-                                                <label class="control-label col-md-5">CRITERIO DE BÚSQUEDA
+    
+     
+     									<div class="form-group">
+                                                <label class="control-label col-md-2">CRITERIO DE BÚSQUEDA
                                                     <span class="required"> * </span>
                                                 </label>
-                                                <div class="col-md-6">
-                                                    <select class="form-control" id="selectCriterio" name="selectCriterio" >
-                                                        <option>CODIGO</option>
-                                                        <option>NOMBRE</option>
-                                                        <option>CATEGORIA</option>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" id="selectCriterioP" name="selectCriterioP" >
+                                                      <option value="0">SELECCIONAR</option>
+                                                        <option value="1">CODIGO</option>
+                                                        <option value="2">NOMBRE</option>
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
-                                            <br>    <br>    <br>    <br> 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-5">DATO A BUSCAR
+                                            
+                                           <div class="form-group">
+                                                <label class="control-label col-md-2">CATEGORIA
                                                     <span class="required"> * </span>
                                                 </label>
-                                                <div class="col-md-6">
-                                                    <input type="text" name="name"  id="txtdatoBuscar" data-required="1" class="form-control" /> </div>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" id="selecCategoria" name="selecCategoria" >
+                                                         <option value="0">SELECCIONAR</option>
+                                                        <option value="1">SUSPENSION</option>
+                                                        <option value="2">FUERZA</option>
+                                                        <option value="3">AGILIDAD</option>
+                                                         <option value="4">COORDINACION</option>
+                                                          <option value="5">POTENCIA</option>
+                                                           <option value="6">OTROS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+    
+                                            <br>    <br>    <br>    <br>  <br>    <br>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">DATO A BUSCAR
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="txtDatoP"  id="txtDatoP"  class="form-control" /> </div>
                                             </div>
                                             <br><br>
                                                                     <div >
                       <p align="center">
-                      <input  type="button" id="iddiv" class="btn btn-primary" data-dismiss=""  onclick="buscar1();" value="Buscar Producto">            
+                      <input  type="button" id="iddiv" class="btn btn-primary" data-dismiss=""  onclick="buscarCriterio();" value="Buscar Producto">            
 					  </p>
 					  </div>
                                             <br>    <br>  
                                              <div>
                     
-                    <table class="table table-striped table-hover table-bordered" id="table-cliente" name="table-cliente">
+                    <table class="table table-striped table-hover table-bordered" id="table-producto" >
                                         <thead>
                                             <tr>
                                                 <th> CODIGO </th>
@@ -136,10 +157,7 @@
                                                 
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                           
-                                           
-                                        </tbody>
+                                      
                       </table> 
                       <br><br><br>
                        </div> 
@@ -156,12 +174,72 @@
       </div>
       
 
-      
-      </form>
+     
     </div>
   </div>
 </div>         
   <!----------------------------------- fin del modal buscar producto---------------------------------------------------------->                  
-       
+       <script>
+function buscarCriterio(){
+
+	var flagC = $('#selecCategoria').val();
+var flag = $('#selectCriterioP').val();
+$("#table-producto").html("<thead><tr><th>CODIGO</th><th>NOMBRE</th><th>PRECIO</th><th>DESCRIPCION</th><th>OPCION</th></tr></thead>");
+console.log(flagC)
+//alert("flagCategoria: "+flagC);
+//alert("flag: "+flag);
+
+var dato = $('#txtDatoP').val();
+var  contador=0;
+//alert("dato: "+dato);
+var accion='buscarCriterio'
+
+$.post('<%=request.getContextPath() %>/Gestionar_Producto', {
+			dato:dato,
+			flag: flag,
+			flagC: flagC,
+			accion : accion
+		}, function(response) {
+			if (response!=null) {
+				var i=0;
+				 var conta="<tbody>";
+			    	for( i=0;i<response['object'].length;i++){
+			    		contador++;
+			    		
+			    		conta=conta+("<tr><td>"+response['object'][i]['codPro']+
+								"</td><td>"+response['object'][i]['nombre']+
+								"</td><td>"+response['object'][i]['precio']+
+								"</td><td>"+response['object'][i]['descripcion']+
+								"</td><td style='display:none;'>"+response['object'][i]['categoria']+
+								"</td><td style='display:none;'>"+response['object'][i]['idProducto']+
+								"</td><td><input type='button'  class='btn btn-primary btn-circle' onclick='enviarDatosProducto("+response['object'][i]['idProducto']+");' value='seleccionar'>"+
+								"</td><tr>");
+						
+					
+			    	}
+			    	//$("#nombreApe").html(name);
+					conta=conta+("</tbody>");
+					//$("#boton").html("<input type='submit' id='btnAsignar' name='btnAsignar'  class='btn btn-primary'  style='margin-left: 224px;'   value='Asignar' >");
+					$("#table-producto").append(conta);
+					
+					console.log(contador)
+					//alert(contador)
+					console.log ("conta:"+conta)
+					
+				
+
+			}else {
+				alert("no existe");
+				
+				 error.style.visibility = "visible";		
+			}
+	
+		});
+
+}
+
+
+
+</script>
 </body>
 </html>

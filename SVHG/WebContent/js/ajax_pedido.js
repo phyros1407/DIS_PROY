@@ -7,7 +7,7 @@
 			
 			var action = "deps";
 			
-			$.get('servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
 				
 			},function(response){
 				
@@ -130,6 +130,7 @@
 				
 				$("#igv").text("S/. "+igv);
 				$("#total").text("S/. "+(igv+subtotal));
+				$("#amount").val(igv+subtotal);
 			}
 			else{
 				
@@ -160,6 +161,7 @@
 				
 				$("#igv").text("S/. "+igv);
 				$("#total").text("S/. "+(igv+subtotal));
+				$("#amount").val(igv+subtotal);
 			}
 			
 		}
@@ -200,6 +202,7 @@
 			
 			$("#igv").text("S/. "+igv);
 			$("#total").text("S/. "+(igv+subtotal));
+			$("#amount").val(igv+subtotal);
 		}
 	
 		function disminuir(cantidad, desc,descImp,precio) {
@@ -247,6 +250,7 @@
 				
 				$("#igv").text("S/. "+igv);
 				$("#total").text("S/. "+(igv+subtotal));
+				$("#amount").val(igv+subtotal);
 				
 				
 			}

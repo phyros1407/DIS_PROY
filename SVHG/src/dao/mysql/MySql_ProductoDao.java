@@ -381,6 +381,83 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 		return productos;
 	}
 	
+
+	/*-------------------rhonnald-----------------------------------*/
+	@Override
+	public ArrayList<ProductoBean> buscarXcriterio(String dato, int flag,
+			int flagC) throws Exception {
+		ArrayList<ProductoBean> productos = new ArrayList<ProductoBean>();
+		try {
+			Connection con = MySqlDAOFactory.obtenerConexion();
+			Statement stmt = con.createStatement();
+			String query="select prod.id,prod.codpro,prod.nom,prod.des,prod.pre,prod.cat_id,prod.can,ca.tipo "
+					+ "from producto prod inner join  categoria ca on prod.cat_id=ca.id where ";
+			
+			if(flag==1){
+				query+="prod.codpro like '%"+dato+"%';";				
+			}else if(flag==2){
+				query+="prod.nom like '%"+dato+"%';";
+			}else{
+				query+="prod.nom like '%"+dato+"%' and prod.codpro like '%"+dato+"%' and prod.cat_id='"+flagC+"';";
+			
+			}
+			System.out.println("query: "+query);
+			ResultSet rs = stmt.executeQuery(query);
+			ProductoBean producto=null;
+			while(rs.next()){
+				producto=new ProductoBean();
+				producto.setIdProducto(rs.getInt("prod.id"));
+				producto.setIdCategoria(rs.getInt("prod.cat_id"));
+				producto.setCodPro(rs.getString("prod.codpro"));
+				producto.setNombre(rs.getString("prod.nom"));
+				producto.setDescripcion(rs.getString("prod.des"));
+				producto.setPrecio(rs.getDouble("prod.pre"));
+				producto.setCategoria(rs.getString("ca.tipo"));
+				producto.setCantidad(rs.getInt("prod.can"));
+			
+				productos.add(producto);
+			}
+			
+			con.close();
+		} catch (Exception e) {
+			System.out.print("error de buscarxcriterio en MysqlProductoDao.java");
+		}
+		System.out.println("qerasdadad"+ productos);
+		return productos;
+	}
+
+	@Override
+	public ProductoBean datosProducto(int id) throws Exception {
+		ProductoBean producto = null;
+		try {
+			Connection con = MySqlDAOFactory.obtenerConexion();
+			Statement stmt = con.createStatement();
+			String query = "select prod.id,prod.codpro,prod.nom,prod.des,prod.pre,prod.cat_id,prod.can,ca.tipo "
+					+ "from producto prod inner join  categoria ca on prod.cat_id=ca.id where prod.id="+id+"";
+			
+			
+			System.out.println("query: "+query);
+			ResultSet rs = stmt.executeQuery(query);
+			
+			while(rs.next()){
+				producto=new ProductoBean();
+				producto.setIdProducto(rs.getInt("prod.id"));
+				producto.setCodPro(rs.getString("prod.codpro"));
+				producto.setNombre(rs.getString("prod.nom"));
+				producto.setDescripcion(rs.getString("prod.des"));
+				producto.setPrecio(rs.getDouble("prod.pre"));
+				producto.setCategoria(rs.getString("ca.tipo"));
+				producto.setCantidad(rs.getInt("prod.can"));
+				producto.setIdCategoria(rs.getInt("prod.cat_id"));
+				
+			}	
+			con.close();
+		} catch (Exception e) {
+			System.out.print("error de datosCliente en MysqlProductoDao.java");
+		}
+		System.out.println("qerasdadad"+ producto);
+		return producto;
+	}
 	
 	
 

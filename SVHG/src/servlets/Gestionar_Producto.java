@@ -413,6 +413,63 @@ public class Gestionar_Producto extends HttpServlet {
 			
 			
 		}
+
+/*----------------------------rhonnald------------------------------------*/
+		
+		if(accion.equals("buscarCriterio")){
+			ArrayList<ProductoBean> producto =null;
+			try {
+				
+				System.out.println("entro buscar Criterio");
+				String dato= request.getParameter("dato");
+				
+				int flag= Integer.parseInt(request.getParameter("flag"));
+				int flagC=Integer.parseInt(request.getParameter("flagC"));;
+				producto = productodao.buscarXcriterio(dato, flag, flagC);
+				System.out.println("asdas"+producto);
+				if(producto!=null){		
+					
+				    ResponseObject responseobj=null;
+					responseobj=new ResponseObject();
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					responseobj.setSuccess(true);
+					responseobj.setObject(producto);
+					response.getWriter().write(new Gson().toJson(responseobj));
+					System.out.println("json" + new Gson().toJson(responseobj));
+			}	
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+if(accion.equals("seleccionProductoId")){
+			
+			ProductoBean producto = new ProductoBean();
+			try {
+				System.out.println("Entro al triii");
+				
+				
+				int id =Integer.parseInt(request.getParameter("id"));
+			
+				producto=productodao.datosProducto(id);
+			ResponseObject responseobj=null;
+			if (producto!=null) {
+				responseobj=new ResponseObject();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				responseobj.setSuccess(true);
+				responseobj.setObject(producto);
+				
+			}
+			response.getWriter().write(new Gson().toJson(responseobj));
+			System.out.println("json" + new Gson().toJson(responseobj));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
 	}
+
+	
 
 }

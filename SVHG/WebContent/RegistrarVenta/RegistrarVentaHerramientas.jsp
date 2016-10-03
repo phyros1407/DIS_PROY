@@ -1,420 +1,17 @@
 
+<%@page import="beans.CategoriaBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% String numero = request.getParameter("numero"); %>
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 <%@ include file="/include/head.jsp" %>
-  <script type="text/javascript">
-
-  
-
-  function buscar1(){
-
-							event.preventDefault();
-
-  							var txt_dni = $('#form-txtDni').val();
-  						
-  						
-  							if($('#form-txtDni').val()==""){
-  								 var validardni = document.getElementById("validardni");
-  								 validardni.style.visibility	=	"visible";
-
-  								var encontroCliente = document.getElementById("encontroCliente");
-  	  							encontroCliente.style.visibility = "hidden";
-  								alert("ingresa nro un dni");
-  								
-  								  $('#txtDni').val("");
-  								$('#txtNombres').val(""); 
-  								$('#txtApePat').val(""); 
-  								$('#txtApeMat').val(""); 
-  								$('#txtCorreo').val(""); 
-  								$('#txtTelefono').val(""); 
-  								$('#txtCelular').val(""); 
-  								$('#txtDireccion ').val(""); 
-  								$('#txtApePat').val(""); 
-  								
-  							}else{
-  							var accion ='buscarDni';
-  							// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-  							$.post('<%=request.getContextPath() %>/Mantener_Cliente', {
-  								txt_dni : txt_dni,
-  								accion : accion
-  							}, function(response) {
-  								var error = document.getElementById("error");
-  							
-  							
-  								if (response!=null) {
-  									$('#txtIdPersona').val(response['object']['idPersona']);
-  									$('#txtDni1').val(response['object']['dni']);
-  									$('#txtNombres1').val(response['object']['nombres']); 
-  	  								$('#txtApePat1').val(response['object']['apePat']); 
-  	  								$('#txtApeMat1').val(response['object']['apeMat']); 
-  	  								$('#txtCorreo1').val(response['object']['correo']); 
-  	  								$('#txtTelefono1').val(response['object']['telefono']); 
-  	  								$('#txtCelular1').val(response['object']['celular']); 
-  	  								$('#txtDireccion1').val(response['object']['direccion']); 
-
-  	  							var encontroCliente = document.getElementById("encontroCliente");
-  	  							encontroCliente.style.visibility = "visible";
-
-  	  								
-  	  								error.style.visibility = "hidden";
-  	  							//$('#iddiv').attr("data-dismiss","modal");
-  	  							var validardni = document.getElementById("validardni");
-  	  								validardni.style.visibility = "hidden";
-  	  						
-  									
-  								}else {
-										alert("no existe");
-										
-  									 error.style.visibility = "visible";
-  									
-  								}
-  								//var nrocontrato=response['object']['nroContrato'];
-  								//var codigocliente=response['object']['codigoPersona'];
-  								//var nombre=response['object']['nombre'];
-  								//Aqui vamos a colocar todo los var que nos trae response
-  								
-  								//var conta="<option value='-1'>Seleccionar</option>";
-  								
-  								/////
-  								
-  						
-  							});
-  							}
-  				
-
-  }
-
-  function registrarCliente(){
-	  var txt_dni2 = $('#txtDni2').val();
-	  var txt_nombre2 = $('#txtNombres2').val();
-	  var txt_apepat2 = $('#txtApePat2').val();
-	  var txt_apemat2 = $('#txtApeMat2').val();
-	  var txt_correo2 = $('#txtCorreo2').val();
-	  var txt_telefono2 = $('#txtTelefono2').val();
-	  var txt_celular2 = $('#txtCelular2').val();
-	  var txt_direccion2 = $('#txtDireccion2').val();
-	 if(txt_dni2=="" || txt_nombre2=="" || txt_apepat2=="" || txt_apemat2=="" || txt_correo2=="" || txt_telefono2=="" || txt_celular2=="" || txt_direccion2==""){
-		 var validar = document.getElementById("validar");
-		 validar.style.visibility	=	"visible";
-			alert("Por favor complete todos los campos");
-		 }else{
-	 var accion='agregar';
-	  $.post('<%=request.getContextPath() %>/Mantener_Cliente', {
-		  	txt_dni2 : txt_dni2,
-		  	txt_nombre2 : txt_nombre2,
-		  	txt_apemat2 : txt_apemat2,
-		  	txt_apepat2 : txt_apepat2,
-		  	txt_correo2 : txt_correo2,
-		  	txt_telefono2 : txt_telefono2,
-		  	txt_celular2 : txt_celular2,
-		  	txt_direccion2 : txt_direccion2,
-				accion : accion
-			}, function(response) {
-				var registro = document.getElementById("registro");
-				if (response.success==true) {
-					location.reload();
-				
-						alert("cliente Registrado")
-					registro.style.visibility = "visible";
-					}else{
-
-						alert("Cliente existe");
-						registro.style.visibility = "visible";
-					}
-				
-	  });}
-  }
-
-function limpiarRegistro(){
-	 var validar = document.getElementById("validar");
-	 validar.style.visibility	=	"hidden";
-	 var registro = document.getElementById("registro");
-	 validar.style.visibility	=	"hidden";	
-	 $('#txtDni2').val("");
-		$('#txtNombres2').val(""); 
-		$('#txtApePat2').val(""); 
-		$('#txtApeMat2').val(""); 
-		$('#txtCorreo2').val(""); 
-		$('#txtTelefono2').val(""); 
-		$('#txtCelular2').val(""); 
-		$('#txtDireccion2').val(""); 
-		$('#txtApePat2').val(""); 
-		
-}
-
-function limpiarBuscar(){
-	var error = document.getElementById("error");
-	 error.style.visibility	= "hidden";
-	 var validardni = document.getElementById("validardni");
-	 validardni.style.visibility	= "hidden";
-	 var encontroCliente = document.getElementById("encontroCliente");
-	 encontroCliente.style.visibility="hidden";
-	 
-	 $('#form-txtDni').val("");
-	
-}
-  
-  </script>
-
-<script type="text/javascript">
-
- 
-
-  function buscarProducto(){
-
-							event.preventDefault();
-
-  							var txt_txtCodProducto = $('#form-txtCodProducto').val();
-  							
-  						
-  							if($('#form-txtCodProducto').val()==""){
-  								 var validardni = document.getElementById("validardni");
-  								 validardni.style.visibility	=	"visible";
-
-  								var encontroCliente = document.getElementById("encontroCliente");
-  	  							encontroCliente.style.visibility = "hidden";
-  								alert("ingresa codigo del producto");
-  								
-  								  $('#txtCodProducto').val("");
-  								$('#txtNombresProd').val(""); 
-  								$('#txtDescripcion').val(""); 
-  								$('#txtPrecio').val(""); 
-  								$('#selectInventario').val(""); 
-  								$('#selectCategoria').val(""); 
-  								 
-  								
-  							}else{
-  							var accion ='buscarProducto';
-  							// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-  							$.post('<%=request.getContextPath() %>/Mantener_Producto', {
-  								txt_txtCodProducto : txt_txtCodProducto,
-  								accion : accion
-  							}, function(response) {
-  								var error = document.getElementById("error");
-  							
-  							
-  								if (response!=null) {
-  									$('#txtIdProducto').val(response['object']['idProducto']);
-  									$('#txtCodProducto').val(response['object']['codigo']);
-  									$('#txtNombresProd').val(response['object']['nombre']); 
-  	  								$('#txtDescripcion').val(response['object']['descripcion']); 
-  	  								$('#txtPrecio').val(response['object']['precio']); 
-  	  								$('#selectInventario').val(response['object']['idInventario']); 
-  	  								$('#selectCategoria').val(response['object']['idCategoria']); 
-  	  							
-
-  	  							var encontroCliente = document.getElementById("encontroCliente");
-  	  							encontroCliente.style.visibility = "visible";
-
-  	  								
-  	  								error.style.visibility = "hidden";
-  	  							//$('#iddiv').attr("data-dismiss","modal");
-  	  							var validardni = document.getElementById("validardni");
-  	  								validardni.style.visibility = "hidden";
-  	  						
-  									
-  								}else {
-										alert("asdad");
-										
-  									 error.style.visibility = "visible";
-  									
-  								}
-  								//var nrocontrato=response['object']['nroContrato'];
-  								//var codigocliente=response['object']['codigoPersona'];
-  								//var nombre=response['object']['nombre'];
-  								//Aqui vamos a colocar todo los var que nos trae response
-  								
-  								//var conta="<option value='-1'>Seleccionar</option>";
-  								
-  								/////
-  								
-  						
-  							});
-  							}
-  				
-
-  }
-
-  function registrarProducto(){
-	  var txt_CodProducto2 = $('#txtCodProducto2').val();
-	  var txt_NombresProd2 = $('#txtNombresProd2').val();
-	  var txt_Descripcion2 = $('#txtDescripcion2').val();
-	  var txt_Precio2 = $('#txtPrecio2').val();
-	  var select_Categoria2 = $('#selectCategoria2').val();
-	  var select_Inventario2 = $('#selectInventario2').val();
-	  
-	 if(txt_CodProducto2=="" || txt_NombresProd2=="" || txt_Descripcion2=="" || txt_Precio2=="" || select_Categoria2=="" || select_Inventario2=="" ){
-		 var validar = document.getElementById("validar");
-		 validar.style.visibility	=	"visible";
-			alert("Por favor complete todos los campos");
-		 }else{
-	 var accion='agregar';
-	  $.post('<%=request.getContextPath() %>/Mantener_Producto', {
-		  txt_CodProducto2 : txt_CodProducto2,
-		  txt_NombresProd2 : txt_NombresProd2,
-		  txt_Descripcion2 : txt_Descripcion2,
-		  txt_Precio2 : txt_Precio2,
-		  select_Categoria2 : select_Categoria2,
-		  select_Inventario2 : select_Inventario2,
-		  	
-				accion : accion
-			}, function(response) {
-				var registro = document.getElementById("registro");
-				if (response.success==true) {
-					location.reload();
-				
-						alert("Producto Registrado")
-					registro.style.visibility = "visible";
-					}else{
-
-						alert("Producto existe");
-						registro.style.visibility = "visible";
-					}
-				
-	  });}
-  }
-
-  function registrarTabla(){
-	  var txt_idProducto = $('#txtIdProducto').val(); 
-	  alert(txt_idProducto);
-	  var txt_NombresProd2 = $('#txtNombresProd').val();
-	  var txt_Precio2 = $('#txtPrecio').val();
-	  var txt_Cantidad2 = $('#txtCantidad2').val();
-	  var txt_importe = txt_Precio2*txt_Cantidad2;
-	  
-	  
-	  
-		alert(txt_NombresProd2+"||"+txt_Precio2+"||"+txt_Cantidad2+"||"+txt_importe);
-	 $('#table-producto').append("<tr><td style='display:none;'>"+txt_idProducto+"</td><td>"+txt_NombresProd2+"</td><td>"+txt_Precio2+"</td><td>"+txt_Cantidad2+"</td><td>"+txt_importe+"</td><td><input type='button'  onclick='deleteRow(this);' value='eliminar' ></td></tr>");
-
-	 
- 	 var importetotal=0;
-
-   $("#table-producto tr").find('td:eq(0)').each(function () {
-	   trDelResultado=$(this).parent();
-       cantidad=trDelResultado.find("td:eq(4)").html();
-	   importetotal=importetotal+parseFloat(cantidad);
-      // n= trDelResultado.find("td:eq(3)").html("");
-	   
-        
-        
-   });
- 
-	  var txt_IGV =importetotal*0.18 ;
-	  var txt_Total = txt_IGV + importetotal;
-	  	
-	  $('#txtSubtotal').val(importetotal);	
-	  //$('#temporalsubtotal').val(temp)
-	 $('#txtIGV').val(txt_IGV);
-	 $('#txtTotal').val(txt_Total);
-
-	
-}
-  function deleteRow(r) {
-	    var i = r.parentNode.parentNode.rowIndex;
-	    document.getElementById("table-producto").deleteRow(i);
-	}
-
-  
-  </script>
-  
-	<script type="text/javascript">
-	function registrarVenta(){
-			var total="";
-		   $("#table-producto tr").find('td:eq(0)').each(function () {
-			   trDelResultado=$(this).parent();
-			   var1=trDelResultado.find("td:eq(0)").html();
-		       //var2=trDelResultado.find("td:eq(1)").html();
-		       var3=trDelResultado.find("td:eq(3)").html();
-		       var4=trDelResultado.find("td:eq(4)").html();
-		       
-			  total=total+var1+","+var3+","+var4+";";
-
-		   });
-		 
-		//venta identificador
-		var txt_fecha = $('#txt_fechaactual').val();
-		var txt_nroVenta = $('#txt_numeroVenta').val();	
-		var txt_subtotal= $('#txtSubtotal').val();
-		var txt_igv= $('#txtIGV').val();
-		var txt_total= $('#txtTotal').val();
-	//ventaXproducto
-		var txt_idProducto = $('#txtIdProducto2').val();
-		var txt_idVenta = $('#txt_idVenta').val();
-		var txt_importe = $('#txtImporte').val();
-		var txt_cantidad = $('#txtCantidad2').val();
-	//comprobante idventa,fecha,estado,numerocomprobante,numeroserie
-		var select_tipo = $('#selectTipo').val();
-
-		
-		  $.post('<%=request.getContextPath() %>/Registrar_Venta', {
-			  total : total,
-			  	txt_fecha : txt_fecha,
-			  	txt_nroVenta : txt_nroVenta,
-			  	txt_subtotal : txt_subtotal,
-			  	txt_igv : txt_igv,
-			  	txt_total : txt_total,
-			  	txt_idProducto : txt_idProducto,
-			  	txt_idVenta : txt_idVenta,
-			  	txt_importe : txt_importe,
-			  	txt_cantidad : txt_cantidad,
-			  	select_tipo : select_tipo,	
-				}, function(response) {
-					
-					if (response.success==true) {
-						location.reload();
-					
-							alert(" Registrado")
-					
-						}else{
-
-							alert(" Venta Registrada Satisfactoriamente");
-							
-						}
-					
-		  });
 
 
-
-		
-		}
-
-	</script>
-	
-	
-	
-	
-	<script type="text/javascript">
-	$( document ).ready(function() {
-		
-		var today = new Date();
-	    var dd = today.getDate();
-	    var mm = today.getMonth()+1; //January is 0!
-
-	    var yyyy = today.getFullYear();
-	    if(dd<10){
-	        dd='0'+dd
-	    } 
-	    if(mm<10){
-	        mm='0'+mm
-	    } 
-	
-	    var today = dd+mm+yyyy;
-	     
-	     document.getElementById("txt_numeroVenta").value = today;
-	     
-	});
-	</script>
-	
-	
-	
-	
-	
 		<script type="text/javascript">
 	$( document ).ready(function() {
 		
@@ -443,7 +40,7 @@ function limpiarBuscar(){
 	
 	});
 	</script>
-	
+
     <!-- END HEAD -->
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
@@ -517,7 +114,7 @@ function limpiarBuscar(){
                                                     
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text"  id="txt_numeroVenta"  name=""  class="form-control" disabled /> </div>
+                                                    <input type="text"  id="txt_numeroVenta"  name="numero"  class="form-control" value="TRAN-000000000459" disabled /> </div>
                                            		 </div>
                         </div>
                         
@@ -545,27 +142,28 @@ function limpiarBuscar(){
                                 <div class="" >
                                 
                                 <!-- CREAR REGISTRAR PERSONA -->
-                             
+                            
                                    	 
                                 <div  id="form_sample_1" class="form-horizontal">
+                                 
                                        <div class="col-md-6">
                                         <input type="hidden" maxlength="8" id="temporalsubtotal" class="form-control" value="0"  />
                                  <input type="hidden" maxlength="8" id="txtIdPersona"  name="txtIdPersona" onkeypress="return solonumeros(event)" name="txtDni1"  class="form-control"  />
-                                       
+                                       <br>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">DNI
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
                                                     <input type="text" maxlength="8" id="txtDni1" onkeypress="return solonumeros(event)" name="txtDni"  class="form-control" disabled /> </div>
-                                            </div>
+                                            </div><br>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">NOMBRES
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
                                                     <input name="txtNombres1" id="txtNombres1" type="text" onkeypress="return sololetras(event)"    class="form-control"  disabled/> </div>
-                                            </div>
+                                            </div><br>
                                             
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">APELLIDO PATERNO
@@ -573,21 +171,21 @@ function limpiarBuscar(){
                                                 </label>
                                                 <div class="col-md-6">
                                                     <input name="txtApePat1" id="txtApePat1" type="text" class="form-control" onkeypress="return sololetras(event)"   disabled/> </div>
-                                            </div>
+                                            </div><br>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">APELLIDO MATERNO
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
                                                     <input name="txtApeMat1" id="txtApeMat1" type="text" class="form-control"onkeypress="return sololetras(event)"    disabled/> </div>
-                                            </div>
+                                            </div><br>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">CORREO
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
                                                     <input name="txtCorreo1" id="txtCorreo1" type="text" class="form-control"    disabled/> </div>
-                                            </div>
+                                            </div><br>
                                             
                                              
                                             
@@ -595,6 +193,7 @@ function limpiarBuscar(){
                             		</div>
                             		
                             		  <div class="col-md-6">
+                            		  <br>
                                           <div class="table-toolbar">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -642,13 +241,53 @@ function limpiarBuscar(){
                                             </div>
                                             
                             				</div>
+                            				<div class="col-md-12" id="empresa" Style="display:none;" >
+                            				<div class="col-md-6">
+                            				 <div class="form-group">
+                                                <label class="control-label col-md-3">RUC
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="txtDireccion1" id="txtDireccion1"  class="form-control"    disabled /> </div>
+                                            </div></div>
+                                            <div class="col-md-6">
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3">Razon Social
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="txtDireccion1" id="txtDireccion1"  class="form-control"    disabled /> 
+                                                    </div>
+                                                     <div class="col-md-3">
+                                                    <button    class="form-control btn-primary" >EDITAR</button> 
+                                                    </div>
+                                            </div></div>
+                            				</div>
+                            				<script>
+function aparecer() {
+	
+	var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    console.log(selectedValue);
+    if(selectedValue==2){
+        
+	document.getElementById('empresa').style.display = 'block';
+	}else{
+		document.getElementById('empresa').style.display = 'none';
+		console.log("oculto"+document.getElementById('empresa').style.display);
+		}
+}
+</script>
+                            				
                             		  </div>
                             	</div>
                             </div>
                             </div>	
                             </div>
                             	 <!-- ----------------------fin del formulario cliente-------------------------------------------- -->
+                      
                       <%@ include file="/RegistrarVenta/modalClientes.jsp" %>
+                      
   <!--------------------------------------------------------------Formulario Producto-------------------------------------->           
              
               <div class="row">
@@ -747,8 +386,14 @@ function limpiarBuscar(){
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <select class="form-control" id="selectCategoria" name="select" disabled>
-                                                        
+                                                    <select class="form-control" id="categoria" name="categoria" disabled>
+                                                        <option value="0">SELECCCIONAR</option>
+                                                        <option value="1">SUSPENCION</option>
+                                                        <option value="2">FUERZA</option>
+                                                        <option value="3">AGILIDAD</option>
+                                                        <option value="4">COORDINACION</option>
+                                                        <option value="5">POTENCIA</option>
+                                                        <option value="6">OTROS</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -758,10 +403,10 @@ function limpiarBuscar(){
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <select class="form-control" id="selectTipo" name="select" >
+                                                    <select class="form-control" id="selectBox" onclick="aparecer();" name="select" >
                                                        
-                                                        <option value="boleta">Boleta</option>
-                                                        <option value="factura">Factura</option>
+                                                        <option value="1">Boleta</option>
+                                                        <option  value="2">Factura</option>
                                                         
                                                     </select>
                                                 </div>
@@ -771,8 +416,10 @@ function limpiarBuscar(){
                                                 <label class="control-label col-md-3">Cantidad
                                                     <span class="required"> * </span>
                                                 </label>
-                                                <div class="col-md-6">
-                                                    <input type="text" name="name" id="txtCantidad2" data-required="1" class="form-control" /> </div>
+                                                <div class="col-md-6"> 
+                                                
+                                                    <input type="text" name="name" id="txtCantidad" data-required="1" class="form-control"  /> </div>
+                                            		
                                             </div>
                              
                                             
@@ -790,10 +437,10 @@ function limpiarBuscar(){
   <%@ include file="modalProductos.jsp" %>             
                     <div>
                     
-                    <table class="table table-striped table-hover table-bordered" id="table-producto" name="table-producto">
+                    <table class="table table-striped table-hover table-bordered" id="table-producto2" name="table-producto2">
                                         <thead>
                                             <tr>
-                                                <th> Arreglo Floral </th>
+                                                <th> Producto</th>
                                                 <th> Precio </th>
                                                 <th> Cantidad </th>
                                                 <th> Importe </th>
@@ -898,12 +545,15 @@ function limpiarBuscar(){
             
         </div>
          </div>
-   
-         
+   <script type="text/javascript">
+   	</script>
+          <script src="<%=request.getContextPath() %>/RegistrarVenta/ventas.js" type="text/javascript"></script>
      
-         
+          <script src="<%=request.getContextPath() %>/RegistrarVenta/modals.js" type="text/javascript"></script>
         <!-- END CONTAINER -->
         <%@ include file="/include/footer.jsp" %>
+        
+     
     
 </body>
 </html>

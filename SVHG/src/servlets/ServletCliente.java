@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
+import dao.interfaces.ClienteDao;
 import dao.interfaces.EmpresaDao;
 import dao.interfaces.PersonaDao;
 import dao.interfaces.ProductoDao;
@@ -221,7 +222,68 @@ public class ServletCliente extends HttpServlet {
 				// TODO: handle exception
 			}
 		}	
-	
+
+		/*------------------rhonnald-------------------------*/
+		if(accion.equals("buscarCriterio")){
+			ArrayList<PersonaBean> persona =null;
+			try {
+				
+				
+				DAOFactory dao= DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+				ClienteDao iclienteDao =dao.getClienteDao();
+				System.out.println("entro buscar Criterio");
+				String dato= request.getParameter("dato");
+				
+				int flagBusqueda= Integer.parseInt(request.getParameter("flag"));
+				
+				persona = iclienteDao.buscarXcriterio(dato,flagBusqueda);
+				System.out.println("asdas"+persona);
+				if(persona!=null){		
+					
+				    ResponseObject responseobj=null;
+					responseobj=new ResponseObject();
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					responseobj.setSuccess(true);
+					responseobj.setObject(persona);
+					response.getWriter().write(new Gson().toJson(responseobj));
+					System.out.println("json" + new Gson().toJson(responseobj));
+			}	
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		
+		if(accion.equals("seleccionId")){
+			
+			PersonaBean persona = new PersonaBean();
+			try {
+				System.out.println("Entro al triii");
+			
+			DAOFactory dao= DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+			ClienteDao iclienteDao =dao.getClienteDao();
+		
+			
+			int id =Integer.parseInt(request.getParameter("id"));
+			System.out.println("ID: "+id);
+			System.out.println("sadadsasdasdasdasdadsasDNI: "+id);
+			persona = iclienteDao.datosCliente(id);
+			ResponseObject responseobj=null;
+			if (persona!=null) {
+				responseobj=new ResponseObject();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				responseobj.setSuccess(true);
+				responseobj.setObject(persona);
+				
+			}
+			response.getWriter().write(new Gson().toJson(responseobj));
+			System.out.println("json" + new Gson().toJson(responseobj));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
 	}
 
 }

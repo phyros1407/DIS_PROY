@@ -8,14 +8,15 @@ import beans.PedidoBean;
 
 public interface PedidoDao {
 
+
 	
-	public ArrayList<PedidoBean> listarPedidosPendientes(int idUsuario) throws Exception;
-	
-	public ArrayList<PedidoBean> listarPedidosEntregados(int idUsuario) throws Exception;
-	
-	public ArrayList<PedidoBean> listarProductosPedido() throws Exception;
-	
+	public boolean actualizarEstadoPedido(String id) throws Exception;
+
 	public ArrayList<PedidoBean> buscarDetallePedido(String idPedido) throws Exception;
 	
-	public boolean actualizarEstadoPedido(String idTransaccion) throws Exception;
+	public ArrayList<PedidoBean> listarPedidos(int idUsuario,String estado) throws Exception;
+	
+	public PedidoBean cambiarEstadoPedido(int id) throws Exception;
+	
+	public ArrayList<PedidoBean> listarProductosPedido() throws Exception;
 }

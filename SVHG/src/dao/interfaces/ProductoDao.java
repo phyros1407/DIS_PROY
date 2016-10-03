@@ -17,4 +17,6 @@ public interface ProductoDao {
 	public boolean habilitar(int id) throws Exception;
 	public boolean desabilitar(int id) throws Exception;
 	public boolean buscarCoincidencia(int id,double peso, String nombre) throws Exception;
+	public ArrayList<ProductoBean>  buscarXcriterio(String dato,int flag,int flagC) throws Exception;
+	public ProductoBean datosProducto(int id) throws Exception;
 }
