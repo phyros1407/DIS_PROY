@@ -9,6 +9,8 @@
 			
 			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
 				
+				action:action
+				
 			},function(response){
 				
 				depas = new Array(response['object'].length);
@@ -20,9 +22,9 @@
 				}
 				
 				console.log(depas.length);
-				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+				var pre = "<option value='0'> -- SELECCIONAR -- </option>";
 					
-				$('#departamento').html(pre+cadena);
+				$("#departamento").html(pre+cadena);
 				
 
 				
@@ -294,12 +296,15 @@
 						
 						if ($(this).attr("value") == "casa") {
 	
+							cargarDep();
 							$(".step1").hide();
 							$(".step2").hide(1000);
 							$(".step3").hide(1000);
 							$("#formuCasa").show(1000);
 							$("#boton3").show(1000);
-
+							
+							
+							
 						}else
 						if ($(this).attr("value") == "local") {
 	

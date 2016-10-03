@@ -33,7 +33,7 @@
 	<script src="https://js.braintreegateway.com/web/3.3.0/js/paypal.min.js"></script>
 	
 </head>
-<body onload="cargarDep();">
+<body >
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
 	
 	<section id="cart_items">
@@ -210,15 +210,7 @@
 				</div>
 				<!-- SEGUNDO CUADRO-->
 				<div class="col-xs-2 col-sm-2"></div>
-				<div
-					style="border: 2px solid #ffbf00; border-radius: 8px; padding: 15px; height: auto;"
-					class="col-xs-6 col-sm-6">
-					<label>Sub-Total :</label>&nbsp; <label>S/.160.00</label><br>
-					<label class="pagenv">Pag. Envio :</label>&nbsp; <label id="valEnv"
-						class="pagenv">----</label><br> <label>Descuento :</label>&nbsp;
-					<label>S/.0.00</label> <br> <label>Tot. Pagar :</label>&nbsp;
-					<label>S/.170.00</label>
-				</div>
+				<div class="col-xs-6 col-sm-6"></div>
 			</div>
 			<!-- DIRECCION DE ENVIO -->
 			<div class="step3" style="display: none;">
@@ -265,9 +257,6 @@
 						<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-60px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
 						
 					</form>	
-					
-			
-					
 					<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 					
 						 
