@@ -140,7 +140,7 @@ public class ServletPedido extends HttpServlet {
 											
 									
 									
-									
+							 		
 								} catch (Exception e) {
 									System.out.println("fallo listar pedidos: "+e.getMessage());
 								}
@@ -161,13 +161,7 @@ public class ServletPedido extends HttpServlet {
 											}
 											response.getWriter().write(new Gson().toJson(responseobj));
 											System.out.println("VERDAD O FALSE? " + new Gson().toJson(responseobj));
-											
-											
-											
-											
-									
-									
-									
+	
 								} catch (Exception e) {
 									System.out.println("fallo listar pedidos: "+e.getMessage());
 								}

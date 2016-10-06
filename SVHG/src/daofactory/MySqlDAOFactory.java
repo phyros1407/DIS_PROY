@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import dao.interfaces.ClienteDao;
+import dao.interfaces.DetalleTransaccionDao;
 import dao.interfaces.EmpresaDao;
 import dao.interfaces.OfertaDao;
 import dao.interfaces.PedidoDao;
@@ -15,6 +16,7 @@ import dao.mysql.MySQLEmpleadoDao;
 import dao.mysql.MySQLEmpresaDao;
 import dao.mysql.MySQLOfertaDao;
 import dao.mysql.MySql_ClienteDao;
+import dao.mysql.MySql_DetalleTransaccionDao;
 import dao.mysql.MySql_PedidoDao;
 import dao.mysql.MySql_ProductoDao;
 import dao.mysql.MySql_ProveedorDao;
@@ -89,5 +91,11 @@ public class MySqlDAOFactory extends DAOFactory {
 	public ClienteDao getClienteDao() {
 		// TODO Auto-generated method stub
 		return new MySql_ClienteDao();
+	}
+
+	@Override
+	public DetalleTransaccionDao geDetalleTransaccionDao() {
+		// TODO Auto-generated method stub
+		return new MySql_DetalleTransaccionDao();
 	}
 }

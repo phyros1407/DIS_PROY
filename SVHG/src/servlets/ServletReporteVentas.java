@@ -8,10 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
+import beans.CategoriaBean;
+import beans.DetalleTransaccionBean;
+import beans.PersonaBean;
 import beans.ProductoBean;
+import dao.interfaces.DetalleTransaccionDao;
+import dao.interfaces.PersonaDao;
 import dao.interfaces.ProductoDao;
 import daofactory.DAOFactory;
+import util.ResponseObject;
 
 /**
  * Servlet implementation class ServletReporteVentas
@@ -54,8 +63,36 @@ public class ServletReporteVentas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
+		String accion=request.getParameter("accion");
+		
+		if(accion.equals("reporte1")){		
+			try {
+				DetalleTransaccionBean detalleTransaccion = new DetalleTransaccionBean();
+				DAOFactory dao= DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+				DetalleTransaccionDao idetalleTransacciondao = dao.geDetalleTransaccionDao();
+				
+				String anio=request.getParameter("anio");
+				int idProducto=Integer.parseInt(request.getParameter("producto"));
+				System.out.println("idProducto: "+idProducto);
+			
+				ArrayList<DetalleTransaccionBean> listaDetalleTransaccion = idetalleTransacciondao.listarReporte1(anio, idProducto) ;
+				
+				ResponseObject responseobj=null;
+				if(listaDetalleTransaccion!=null){
+					responseobj=new ResponseObject();
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					responseobj.setSuccess(true);
+					responseobj.setObject(listaDetalleTransaccion);
+				}
+				response.getWriter().write(new Gson().toJson(responseobj));
+				System.out.println("json" + new Gson().toJson(responseobj));
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 		
 		
 	}

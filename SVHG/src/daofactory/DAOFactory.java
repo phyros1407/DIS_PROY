@@ -1,6 +1,7 @@
 package daofactory;
 
 import dao.interfaces.ClienteDao;
+import dao.interfaces.DetalleTransaccionDao;
 import dao.interfaces.EmpresaDao;
 import dao.interfaces.OfertaDao;
 import dao.interfaces.PedidoDao;
@@ -24,6 +25,7 @@ public abstract class DAOFactory {
 	public abstract PersonaDao getPersonaDAO(); 
 	public abstract OfertaDao getOfertaDAO();
 	public abstract ClienteDao getClienteDao();
+	public abstract DetalleTransaccionDao geDetalleTransaccionDao();
 	
 	public static DAOFactory getDaoFactory(int factory){
 		

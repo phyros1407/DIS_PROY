@@ -37,7 +37,7 @@ public class MySql_DetalleTransaccionDao implements DetalleTransaccionDao {
 			}
 			con.close();
 		} catch (Exception e) {
-			System.out.println("fallo en el metodo listartodos de MySqlProductoDao");
+			System.out.println("fallo en el metodo listartodos de MySqlDetalleTransaccionDao");
 		}
 		return listaReporte;
 	}
