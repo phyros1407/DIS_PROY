@@ -70,7 +70,7 @@ var chart = AmCharts.makeChart( "chartdiv", {
     "country": "Junio",
     "visits": 1114
   }, {
-    "country": "Julio",
+    "country": "Julio", 
     "visits": 984
   }, {
     "country": "Agosto",

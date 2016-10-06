@@ -130,7 +130,7 @@ public class ServletCliente extends HttpServlet {
 					DAOFactory daoEmpresa= DAOFactory.getDaoFactory(DAOFactory.MYSQL);
 					EmpresaDao iempresadao = daoEmpresa.getEmpresaDAO();
 					
-					
+					  
 					empresa.setEmp_ide(String.valueOf(id.getId()));
 					empresa.setIde("C");
 					empresa.setRazonSocial(request.getParameter("txtRazon"));
