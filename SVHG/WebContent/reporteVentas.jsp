@@ -64,35 +64,48 @@
 
 	function cambiarProducto(){
 		var x=document.getElementById("categoria").value;
-		var array[];
-		
+		var a;
+		alert(x);
 		<%int p;%>
 		if(x=='SUSPENSI'){ 
-		
-			<%p=1;%>
-			alert(<%=p%>);
+			a=1;
 		}
 		if(x=='FUERZA'){ 
-			<%p=2;%>alert(<%=p%>);
+			a=2;
 		}
 		if(x=='AGILIDAD'){ 
-			<%p=3;%>alert(<%=p%>);
+			a=3;
 		}
 		if(x=='COORDINACION'){ 
-			<%p=4;%>alert(<%=p%>);
+			a=4;
 		}
 		if(x=='POTENCIA'){ 
-			<%p=5;%>alert(<%=p%>);
+			a=5;
 		}
+		
 		if(x=='OTROS'){ 
-			<%p=6;%>alert(<%=p%>);
+			a=6
 		}
-		<%for (int i = 0; i < productos.size(); i++) {%>
-			<%if(productos.get(i).getIdCategoria()==p){%>
-			<option><%=productos.get(i).getNombre()%></option>
-			<%} %>
-		<%}%>
-	
+			
+
+		if(a==1){
+		document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==1){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+		}
+		if(a==2){
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==2){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			}
+		if(a==3){
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==3){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			}
+		if(a==4){
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==4){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			}
+		if(a==5){
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==5){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			}
+		if(a==6){
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==6){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			}
 	}
 	</script>
 <!----------------------------------------- script------------------------------------------------>
@@ -109,7 +122,7 @@
 					<div class="form-group">
 					<!-- onchange="cambiarProducto()" -->
 						<label for="sel1">Seleccione Categoria:</label>
-						<select  name="categoria" class="form-control" id="categoria">
+						<select onchange="cambiarProducto()"  name="categoria" class="form-control" id="categoria">
 							<option value="">Seleccione</option>
 							<option value="SUSPENSI">SUSPENSI</option>
 							<option value="FUERZA">FUERZA</option>
@@ -141,18 +154,10 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="sel1">Seleccione Producto:</label>
+						
 <!--------------------------------------- select producto--------------------------------------- -->
-						<div id="p1" >
-							<select class="form-control" id="producto" name="producto">
-							<option>Seleccione</option>
-							<%for (int i = 0; i < productos.size(); i++) {%>
-								<%if(productos.get(i).getIdCategoria()==1){%>
-								<option><%=productos.get(i).getNombre()%></option>
-								<%} %>
-							<%}%>
-							</select>
-						</div>
+					
+						<div id="demo"></div>
 <!--------------------------------------- select producto--------------------------------------- -->
 
 					</div>

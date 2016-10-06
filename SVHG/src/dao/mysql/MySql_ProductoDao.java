@@ -47,7 +47,6 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 				producto.setDescuento(rs.getInt("est_dsc"));;
 				producto.setPeso(rs.getDouble("peso"));
 				producto.setCategoriaBean(categoria);
-				
 				productos.add(producto);
 			}
 			con.close();

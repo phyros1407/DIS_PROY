@@ -208,7 +208,7 @@ public class ServletCliente extends HttpServlet {
 	
 				
 				if(flag){		
-					System.out.println("7321312312321");
+				
 					    ResponseObject responseobj=null;
 						responseobj=new ResponseObject();
 						response.setContentType("application/json");

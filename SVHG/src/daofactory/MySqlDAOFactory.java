@@ -36,7 +36,7 @@ public class MySqlDAOFactory extends DAOFactory {
 		 try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/bd_gym_4.0_data";
-			conexion = DriverManager.getConnection(url,"root","root");
+			conexion = DriverManager.getConnection(url,"root","");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
