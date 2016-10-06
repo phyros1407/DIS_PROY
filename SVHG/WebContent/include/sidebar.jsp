@@ -72,6 +72,12 @@
 	                                <span class="title" href="" >Reporte de Ventas</span>
 	                        </a>
                         </li>
+                         <li class="nav-item">
+	                         <a href="<%=request.getContextPath() %>/ServletReporteUtilidades" class="nav-link nav-toggle">
+	                                <i class="icon-puzzle"></i>
+	                                <span class="title" href="" >Reporte de Utilidades</span>
+	                        </a>
+                        </li>
                         <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/ServletOferta" class="nav-link nav-toggle">
 	                                <i class="icon-diamond"></i>
