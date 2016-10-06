@@ -120,20 +120,6 @@
 								</select>
 							</div>
 							<div class="col-xs-2 col-sm-2">
-								<label id="titulitos">Direccion </label>
-							</div>
-							<div class="col-xs-4 col-sm-4">
-								<input type="text" name="direccion" id="direccion" maxlength="95" class="form-control" onkeypress=" return validarn(event)">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-2 col-sm-2">
-								<label id="titulitos">Referencia </label>
-							</div>
-							<div class="col-xs-4 col-sm-4">
-								<input class="form-control" maxlength="95" name="referencia" onkeypress=" return validarn(event)">
-							</div>
-							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Departamento</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
@@ -145,12 +131,28 @@
 						</div>
 						<div class="form-group">
 							<div class="col-xs-2 col-sm-2">
+								<label id="titulitos">Direccion </label>
+							</div>
+							<div class="col-xs-4 col-sm-4">
+								<input type="text" name="direccion" id="direccion" maxlength="95" class="form-control" onkeypress=" return validarn(event)">
+							</div>
+							
+							
+							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Provincia</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" name="provincia" id="provincia" onchange="cargarDist(this.value);">
 									<option value="0"> -- SELECCIONAR -- </option>
 								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-2 col-sm-2">
+								<label id="titulitos">Referencia </label>
+							</div>
+							<div class="col-xs-4 col-sm-4">
+								<input class="form-control" maxlength="95" name="referencia" onkeypress=" return validarn(event)">
 							</div>
 							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Distrito </label>
@@ -190,13 +192,11 @@
 					<button id="boton1" class="btn btn-primary btn-md">Continuar</button>
 				</div>
 			</div>
-			<div class="step2" style="display: none;">
-				<!-- CUADRO FECHAS-->
-				<div
-					style="border: 2px solid #ffbf00; border-radius: 8px; padding: 15px; height: 150px;"
-					class="col-xs-4 col-sm-4">
-					<p>Fechas disponibles</p>
-					<form>
+			<div class="step2 col-xs-12 col-sm-12" style="display: none;">
+				<!-- TITULOS -->
+				<div class="col-xs-6 col-sm-6">
+					<h3><b>Fechas disponibles</b></h3>
+					<form id="radios_fechas">
 						<div class="radio">
 							<input type="radio" name="fecha"> 25/10/16 
 						</div>
@@ -204,16 +204,60 @@
 							<input type="radio" name="fecha"> 26/10/16
 						</div>
 						<div class="radio">
-							 <input type="radio" name="fecha"> 28/10/16
+							<input type="radio" name="fecha"> 28/10/16
 						</div> 
 					</form>
 				</div>
-				<!-- SEGUNDO CUADRO-->
-				<div class="col-xs-2 col-sm-2"></div>
-				<div class="col-xs-6 col-sm-6"></div>
+				<div class="col-xs-6 col-sm-6">
+					<div class="col-xs-12 col-sm-12">
+							<h3><b>Paga Aqui!</b></h3>
+					</div>
+					<div class="col-xs-12 col-sm-12" style="margin-top:30px;">
+						<div class="col-xs-6 col-sm-6">
+						<select class="form-control " id="facturacion" name="comprobante_pago" onchange="facturacion(this.value);">
+								<option value="boleta">Boleta</option>
+								<option value="factura">Factura</option>
+							</select>
+						</div>
+						<div class="col-xs-5 col-sm-5">
+							<input style="display:none;" type="text"class="form-control" name="ruc_fac" onkeypress="return solonumeros(event);" id="ruc_fac" maxlength="11">
+						</div>
+						<div class="col-xs-1 col-sm-1">
+							<a href="#" style="display:none;" id="icono"><span class="glyphicon glyphicon-pencil" style="margin-top:10px;"></span></a>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12" style="margin-top:30px;">
+						<div class="col-xs-4 col-sm-4">
+						<!-- PAYPAL BOTON -->
+							<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get" target="_top">
+								<input type="hidden" name="cmd" value="_s-xclick">
+								<input type="hidden" name="currency_code" value="US">
+								<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
+								
+								<input type="hidden" name="item_name" value="Total de Importe Neto(IGV incluido) - Nano Sport Shop">
+								<input type="hidden" name="amount" id="amount" value="0">
+								
+								<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
+								<input type="hidden" name="return" value="http://localhost:8081/SVHG/carritoCompra.jsp">
+								
+								<input type="image" style="border-radius:4px;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
+								
+							</form>	
+							<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<img data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;"alt="Visa y Mastercard" src="http://www.hinckleyprecisiondental.com/wp-content/uploads/2014/12/visa_mastercard.png">
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<img style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid"alt="Visa y Mastercard" src="http://www.floreriaswayta.com/shop/img/cms/Pagos%20Contra%20Entrega.png">
+						</div>
+					</div>
+
+				</div>
+				
 			</div>
 			<!-- DIRECCION DE ENVIO -->
-			<div class="step3" style="display: none;">
+			<div class="step3" style="display:none;">
 				<div class="col-xs-12 col-sm-12 " style="margin-top: 25px;"
 					id="infoDirEnv">
 					<h3 id="titInDir">Direccion de Envio</h3>
@@ -225,13 +269,13 @@
 				</div>
 			</div>
 			<!-- TIPO DE PAGO-->
-			<br> <br>
+			<br> <br><!-- 
 			<div class="step2" style="display: none;">
 				<div class="col-xs-12 col-sm-12" style="margin-top: 25px;">
 					<div class="col-xs-6 col-sm-6">
-						<p>
+						
 						<h3>Tipo de Pago</h3>
-						</p>
+						
 						<form>
 							<div class="radio">
 								<input type="radio" name="tipoPago"  checked>Contra-Entrega
@@ -241,28 +285,10 @@
 							</div>
 						</form>
 					</div>
-					
-					<!-- PAYPAL BOTON -->
-					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get" target="_top">
-						<input type="hidden" name="cmd" value="_s-xclick">
-						<input type="hidden" name="currency_code" value="US">
-						<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
-						
-						<input type="hidden" name="item_name" value="Total de Importe Neto(IGV incluido) - Nano Sport Shop">
-						<input type="hidden" name="amount" id="amount" value="0">
-						
-						<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
-						<input type="hidden" name="return" value="http://localhost:8081/SVHG/carritoCompra.jsp">
-						
-						<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-60px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
-						
-					</form>	
-					<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
-					
-						 
-					</div>
 				</div>
 			</div>
+			 -->
+		</div>
 			<!-- SEGUNDO BOTON CONTINUAR -->
 			<div class="form-group step2" style="display: none;">
 				<div class="col-xs-3 col-sm-3 col-xs-offset-8 col-sm-offset-8">

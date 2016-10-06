@@ -287,7 +287,7 @@
 								}
 								
 								
-								$("#mesCad").html(cadena);
+								$("#anioCad").html(cadena);
 							  
 						}
 					});
@@ -431,7 +431,20 @@
 		      }
 		}
 		
-		
+		function facturacion(comprobante){
+			
+			if(comprobante=="recibo"){
+				$("#ruc_fac").slideToggle();
+				$("#icono").slideToggle();
+			}else{
+				$("#ruc_fac").slideToggle();
+				$("#icono").slideToggle();
+			}
+			
+			
+			
+			
+		}
 		
 		
 		
