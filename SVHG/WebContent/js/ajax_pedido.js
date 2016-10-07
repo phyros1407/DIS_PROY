@@ -262,13 +262,8 @@
 		$(document).ready(
 				function() {
 					
-					$('input[name="tipoPago"]').click(function(){
+					$("#btnTarjeta").click(function(){
 						
-						if($(this).attr("value") == "tarjeta"){
-							
-							  $("#modalTarjeta").modal();
-							  
-							
 							    var hoy = new Date();
 								
 								var anoActual = hoy.getFullYear();
@@ -288,14 +283,28 @@
 								
 								
 								$("#anioCad").html(cadena);
-							  
-						}
+				
 					});
 	
+					
+					$("#").click(function(){
+						
+						
+						
+					});
+					
+					
 					$('input[name="entrega"]').click(function() {
 						
 						if ($(this).attr("value") == "casa") {
 	
+						if($("#validacion").val()=="napc"){
+							
+							alert("Necesita loguearse para continuar");
+							
+						}else{
+							
+							
 							cargarDep();
 							$(".step1").hide();
 							$(".step2").hide(1000);
@@ -305,59 +314,86 @@
 							
 							
 							
+						}
+							
+							
 						}else
 						if ($(this).attr("value") == "local") {
 	
-							$("#boton1").show();
-							$(".step1").show(1000);
-							$("#titInDir").hide(1000);
-							$("#infoDirEnv").hide(1000);
-							$("#botonCambDir").hide(1000);
-							$("#formuCasa").hide(1000);
-							$(".step2").hide();
-							$(".step3").show();
 							
+								
+								$("#boton1").show();
+								$(".step1").show(1000);
+								$("#titInDir").hide(1000);
+								$("#infoDirEnv").hide(1000);
+								$("#botonCambDir").hide(1000);
+								$("#formuCasa").hide(1000);
+								$(".step2").hide();
+								$(".step3").show();
+								
+							
+			
 						}
 					});
 	
 					$('#boton1').click(function() {
-						$(this).hide(1000);
-						$(".step1").hide(1000);
-						$(".step2").show(1000);
-						$(".pagenv").hide(1000);
-						$("#valEnv").text("$/.0.00");
+						
+						if($("#validacion").val()=="napc"){
+							
+							alert("Necesita loguearse para continuar");
+							
+						}else{
+							
+							$(this).hide(1000);
+							$(".step1").hide(1000);
+							$(".step2").show(1000);
+							$(".pagenv").hide(1000);
+							$("#valEnv").text("$/.0.00");
+							
+						}
+						
+						
 					});
 	
 					
 					$('#boton3').click(function() {
 						
+						if($("#validacion").val()=="napc"){
+							
+							alert("Necesita loguearse para continuar");
+							
+						}else{
 						
-						$("#botonCambDir").show();
-						$(".step3").show(1000);
-						$("#boton1").show(1000);
-						$(this).hide(1000);
-						$("#formuCasa").hide(1000);
-						$(".step1").hide(1000);
-						$(".step2").show(1000);
-						$("#infoDirEnv").show(1000);
-						$(".pagenv").show(1000);
-						$("#valEnv").text("$/.20.00");
-	
-						//DATOS DEL RECEPTOR
-						//OBTENER VAL
-						//var nombre = $("#").val();
-						var direccion = $("#direccion").val();
-						var distrito = $("#distrito  option:selected").text();
-						var provincia = $("#provincia  option:selected").text();
-						var departamento = $("#departamento option:selected").text();
-						var telefono1 = $("#telefono1").val();
-						var telefono2 = $("#telefono2").val();
-	
-						//SETEAR VAL
-						$("#mosNom").text("Jean Pier Barbieri");
-						$("#mosDir").text(direccion);
-						$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
-						$("#mosTel").text("Telefono : " + telefono1 + "\n"+ " Otro Telefono : " + telefono2);
+
+							$("#botonCambDir").show();
+							$(".step3").show(1000);
+							$("#boton1").show(1000);
+							$(this).hide(1000);
+							$("#formuCasa").hide(1000);
+							$(".step1").hide(1000);
+							$(".step2").show(1000);
+							$("#infoDirEnv").show(1000);
+							$(".pagenv").show(1000);
+							$("#valEnv").text("$/.20.00");
+		
+							//DATOS DEL RECEPTOR
+							//OBTENER VAL
+							//var nombre = $("#").val();
+							var direccion = $("#direccion").val();
+							var distrito = $("#distrito  option:selected").text();
+							var provincia = $("#provincia  option:selected").text();
+							var departamento = $("#departamento option:selected").text();
+							var telefono1 = $("#telefono1").val();
+							var telefono2 = $("#telefono2").val();
+		
+							//SETEAR VAL
+							$("#mosNom").text("Jean Pier Barbieri");
+							$("#mosDir").text(direccion);
+							$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
+							$("#mosTel").text("Telefono : " + telefono1 + "\n"+ " Otro Telefono : " + telefono2);
+						
+						}
+						
 					});
 		});
 		
@@ -374,9 +410,6 @@
 					//alert(arreglo);
 	             console.log(localStorage.length+"  tamñao ->  "+ide+"  orden   "+i+"  ARREGLOO  "+arreglo[i]);
 	             }
-	    	 
-	    	 
-
 			  $.post('Carrito', {
 				  
 						accion:accion,
@@ -387,25 +420,84 @@
 			    		var col="col-sm-4";
 			    		
 			    		var subtotal = 0;
+			    		var subCantidad = 0;
 			    		
 			    		for( var i=0;i<response['object'].length;i++){
 			    			
 			    			subtotal = subtotal + parseInt(response['object'][i][0]['precio']);
+			    			subCantidad = subCantidad + parseFloat(response['object'][i][0]['peso']);
 			    			conta=conta+("<tr><td class='cart_product'><input type='hidden' value='"+response['object'][i][0]['idProducto']+"' name='ids'><a href='#'><img src="+response['object'][i][0]['foto']+" alt='' width='100px' height='100px'></a></td><td class='cart_description' style='vertical-align: middle; text-align: center;'><h4><a>"+response['object'][i][0]['nombre']+"</a></h4></td><td class='cart_price' style='vertical-align: middle; text-align: center;'><p>S/. "+response['object'][i][0]['precio']+"<input type='hidden' value='"+response['object'][i][0]['precio']+"' id='precios"+i+"' ></p></td><td class='cart_quantity' style='vertical-align: middle; text-align: center;'><div class='cart_quantity_button'><a class='cart_quantity_up' href='#'  onclick='agregar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> + </a><input type='hidden' value='cantidad"+i+"' id='desc"+i+"'><input  onchange='cambiar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);' onkeypress='return solonumerosCarr(event)' name='cantidades' maxlength='2' class='cart_quantity_input' type='text' value='1' size='2' id='cantidad"+i+"'><a class='cart_quantity_down' href='#' onclick='disminuir(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> - </a></div></td><td class='cart_total' style='vertical-align: middle;text-align: center;'><p class='cart_total_price'>S/. <label id='importeM"+i+"'>"+response['object'][i][0]['precio']*1+"</label><input type='hidden' id='nomImp"+i+"' value='valorImp"+i+"' ><input type='hidden' id='valorImp"+i+"' value='"+response['object'][i][0]['precio']+"' name='importes' ></p></td><td class='cart_delete' style='vertical-align: middle; text-align: center;'><a class='cart_quantity_delete' href='' onClick='quitardelcarrito("+response['object'][i][0]['idProducto']+")'><i class='fa fa-times'></i></a></td></tr>");
 			    		}
-			    		
-			    			
 			    			
 			    			$('#productosCarrito').html(conta);
-			    			$('#subTotalV').val(subtotal);
-			    			$('#subTotal').text("S/. "+subtotal);
+			    			$('#subTotalV').val(subtotal.toFixed(2));
+			    			$('#subTotal').text("S/. "+subtotal.toFixed(2));
 			    			
 			    			var igv = subtotal*0.19;
 			    			
-			    			$("#igv").text("S/. "+igv);
-							$("#total").text("S/. "+(igv+subtotal));
-							$("#amount").val(igv+subtotal);
+			    			$("#igv").text("S/. "+igv.toFixed(2));
+							$("#total").text("S/. "+(igv+subtotal).toFixed(2));
+							$("#amount").val((igv+subtotal).toFixed(2));
+							
+							$("#totaldelpeso").val(subCantidad.toFixed(2));
+							
+							//MODIFICAR FECHA
+								
+							var cadenafechas = "";
+							var daysI = 0;
+							
+							if(subCantidad<=15.00){
+									daysI = 1;
+									milisegundos=parseInt(daysI*24*60*60*1000);
+									
+							}else{
+									daysI = 2;
+									milisegundos=parseInt(daysI*24*60*60*1000);
+									
+							}
+							
+							
+							//FECHA EN RELACION AL PESO
+							fecha=new Date();
 
+							tiempo=fecha.getTime();
+
+							total=fecha.setTime(tiempo+milisegundos);
+
+							day=fecha.getDate();
+
+							month=fecha.getMonth()+1;
+
+							year=fecha.getFullYear();
+							
+							cadeha = "<div class='radio'> <input type='radio' name='fecha' value='"+year+"-"+month+"-"+day+"'>"+day+"/"+month+"/"+year+"</div>";
+							
+							for(var i = 0;i<3;i++){
+							    				
+								daysI = daysI +1;
+								milisegundos=parseInt(daysI*24*60*60*1000);
+								
+								
+								fecha=new Date();
+
+								tiempo=fecha.getTime();
+
+								total=fecha.setTime(tiempo+milisegundos);
+
+								day=fecha.getDate();
+
+								month=fecha.getMonth()+1;
+
+								year=fecha.getFullYear();	
+								
+							  cadenafechas = cadenafechas + ("<div class='radio'> <input type='radio' name='fecha' value='"+year+"-"+month+"-"+day+"'>"+day+"/"+month+"/"+year+"</div>");
+							    	
+							}
+							
+							$("#radios_fechas").html(cadenafechas);
+							
+							//
+							
 			  });   
 			  
 	    	}else{

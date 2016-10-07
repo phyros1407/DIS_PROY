@@ -196,16 +196,9 @@
 				<!-- TITULOS -->
 				<div class="col-xs-6 col-sm-6">
 					<h3><b>Fechas disponibles</b></h3>
+					<input type="hidden" id="totaldelpeso">
 					<form id="radios_fechas">
-						<div class="radio">
-							<input type="radio" name="fecha"> 25/10/16 
-						</div>
-						<div class="radio">
-							<input type="radio" name="fecha"> 26/10/16
-						</div>
-						<div class="radio">
-							<input type="radio" name="fecha"> 28/10/16
-						</div> 
+						
 					</form>
 				</div>
 				<div class="col-xs-6 col-sm-6">
@@ -246,10 +239,10 @@
 							<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<img data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;"alt="Visa y Mastercard" src="http://www.hinckleyprecisiondental.com/wp-content/uploads/2014/12/visa_mastercard.png">
+							<img id="btnTarjeta" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<img style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid"alt="Visa y Mastercard" src="http://www.floreriaswayta.com/shop/img/cms/Pagos%20Contra%20Entrega.png">
+							<img style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
 						</div>
 					</div>
 
