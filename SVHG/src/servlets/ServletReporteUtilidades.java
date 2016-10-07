@@ -41,7 +41,7 @@ public class ServletReporteUtilidades extends HttpServlet {
 				ArrayList<ProductoBean> productos = new ArrayList<ProductoBean>();
 				productos = productodao.listarTodos();
 				request.setAttribute("productos", productos);
-				getServletContext().getRequestDispatcher("/reporteUtilidades.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/reportarUtilidades.jsp").forward(request, response);
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

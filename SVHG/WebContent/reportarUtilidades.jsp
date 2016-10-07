@@ -44,7 +44,7 @@
 					<ul class="page-breadcrumb">
 						<li><a href="inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
 						</li>
-						<li><span>Reporte de Ventas</span></li>
+						<li><span>Reporte de Utilidades</span></li>
 					</ul>
 					<div class="page-toolbar">
 						<div id="dashboard-report-range"
@@ -137,7 +137,7 @@
 				<div class="col-sm-1"></div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="sel1">Seleccione año </label>
+						<label for="sel1">Seleccione Año Inicio</label>
 						<select class="form-control" id="selFecha" name="selFecha">
 							<option>2011</option>
 							<option>2012</option>
