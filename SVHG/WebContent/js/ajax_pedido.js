@@ -1,7 +1,9 @@
 		
 		var depas = [];
 		var pros = [];
-		var dist = [];
+		var dist = []
+		
+		var  igvS = 1.19; //THE REAL IGV NO FAKE 100%
 		
 		function cargarDep(){
 			
@@ -298,23 +300,27 @@
 						
 						if ($(this).attr("value") == "casa") {
 	
-						if($("#validacion").val()=="napc"){
-							
-							alert("Necesita loguearse para continuar");
-							
-						}else{
-							
-							
-							cargarDep();
-							$(".step1").hide();
-							$(".step2").hide(1000);
-							$(".step3").hide(1000);
-							$("#formuCasa").show(1000);
-							$("#boton3").show(1000);
-							
-							
-							
-						}
+							if($("#validacion").val()=="napc"){
+								
+								if(confirm("Debe iniciar Sesion para continuar! Desea iniciar sesion?") == true){
+									
+									$('#modalLogin').modal();   
+									
+								}
+								
+							}else{
+								
+								
+								cargarDep();
+								$(".step1").hide();
+								$(".step2").hide(1000);
+								$(".step3").hide(1000);
+								$("#formuCasa").show(1000);
+								$("#boton3").show(1000);
+								
+								
+								
+							}
 							
 							
 						}else
@@ -340,7 +346,12 @@
 						
 						if($("#validacion").val()=="napc"){
 							
-							alert("Necesita loguearse para continuar");
+							
+							if(confirm("Debe iniciar Sesion para continuar! Desea iniciar sesion?") == true){
+								
+								$('#modalLogin').modal();   
+								
+							}
 							
 						}else{
 							
@@ -360,8 +371,12 @@
 						
 						if($("#validacion").val()=="napc"){
 							
-							alert("Necesita loguearse para continuar");
 							
+							if(confirm("Debe iniciar Sesion para continuar! Desea iniciar sesion?") == true){
+								
+								$('#modalLogin').modal();   
+								
+							}
 						}else{
 						
 
@@ -424,20 +439,21 @@
 			    		
 			    		for( var i=0;i<response['object'].length;i++){
 			    			
-			    			subtotal = subtotal + parseInt(response['object'][i][0]['precio']);
+			    			subtotal = subtotal + response['object'][i][0]['precio']*parseFloat(igvS);
 			    			subCantidad = subCantidad + parseFloat(response['object'][i][0]['peso']);
-			    			conta=conta+("<tr><td class='cart_product'><input type='hidden' value='"+response['object'][i][0]['idProducto']+"' name='ids'><a href='#'><img src="+response['object'][i][0]['foto']+" alt='' width='100px' height='100px'></a></td><td class='cart_description' style='vertical-align: middle; text-align: center;'><h4><a>"+response['object'][i][0]['nombre']+"</a></h4></td><td class='cart_price' style='vertical-align: middle; text-align: center;'><p>S/. "+response['object'][i][0]['precio']+"<input type='hidden' value='"+response['object'][i][0]['precio']+"' id='precios"+i+"' ></p></td><td class='cart_quantity' style='vertical-align: middle; text-align: center;'><div class='cart_quantity_button'><a class='cart_quantity_up' href='#'  onclick='agregar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> + </a><input type='hidden' value='cantidad"+i+"' id='desc"+i+"'><input  onchange='cambiar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);' onkeypress='return solonumerosCarr(event)' name='cantidades' maxlength='2' class='cart_quantity_input' type='text' value='1' size='2' id='cantidad"+i+"'><a class='cart_quantity_down' href='#' onclick='disminuir(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> - </a></div></td><td class='cart_total' style='vertical-align: middle;text-align: center;'><p class='cart_total_price'>S/. <label id='importeM"+i+"'>"+response['object'][i][0]['precio']*1+"</label><input type='hidden' id='nomImp"+i+"' value='valorImp"+i+"' ><input type='hidden' id='valorImp"+i+"' value='"+response['object'][i][0]['precio']+"' name='importes' ></p></td><td class='cart_delete' style='vertical-align: middle; text-align: center;'><a class='cart_quantity_delete' href='' onClick='quitardelcarrito("+response['object'][i][0]['idProducto']+")'><i class='fa fa-times'></i></a></td></tr>");
+			    			conta=conta+("<tr><td class='cart_product'><input type='hidden' value='"+response['object'][i][0]['idProducto']+"' name='ids'><a href='#'><img src="+response['object'][i][0]['foto']+" alt='' width='100px' height='100px'></a></td><td class='cart_description' style='vertical-align: middle; text-align: center;'><h4><a>"+response['object'][i][0]['nombre']+"</a></h4></td><td class='cart_price' style='vertical-align: middle; text-align: center;'><p>S/. "+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"<input type='hidden' value='"+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"' id='precios"+i+"' ></p></td><td class='cart_quantity' style='vertical-align: middle; text-align: center;'><div class='cart_quantity_button' style='margin-left:150px;'><a class='cart_quantity_up' href='#' onclick='agregar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> + </a><input type='hidden' value='cantidad"+i+"' id='desc"+i+"'><input  onchange='cambiar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);' onkeypress='return solonumerosCarr(event)' name='cantidades' maxlength='2' class='cart_quantity_input' type='text' value='1' size='2' id='cantidad"+i+"'><a class='cart_quantity_down' href='#' onclick='disminuir(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> - </a></div></td><td class='cart_total' style='vertical-align: middle;text-align: center;'><p class='cart_total_price'>S/. <label id='importeM"+i+"'>"+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"</label><input type='hidden' id='nomImp"+i+"' value='valorImp"+i+"' ><input type='hidden' id='valorImp"+i+"' value='"+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"' name='importes' ></p></td><td class='cart_delete' style='vertical-align: middle; text-align: center;'><a class='cart_quantity_delete' href='' onClick='quitardelcarrito("+response['object'][i][0]['idProducto']+")'><i class='fa fa-times'></i></a></td></tr>");
 			    		}
 			    			
 			    			$('#productosCarrito').html(conta);
 			    			$('#subTotalV').val(subtotal.toFixed(2));
 			    			$('#subTotal').text("S/. "+subtotal.toFixed(2));
 			    			
-			    			var igv = subtotal*0.19;
 			    			
-			    			$("#igv").text("S/. "+igv.toFixed(2));
-							$("#total").text("S/. "+(igv+subtotal).toFixed(2));
-							$("#amount").val((igv+subtotal).toFixed(2));
+			    			
+			    			//$("#igv").text("S/. "+igv.toFixed(2));
+			    			
+							$("#total").text("S/. "+subtotal.toFixed(2));
+							$("#amount").val(subtotal.toFixed(2));
 							
 							$("#totaldelpeso").val(subCantidad.toFixed(2));
 							
