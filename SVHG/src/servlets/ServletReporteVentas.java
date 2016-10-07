@@ -63,22 +63,26 @@ public class ServletReporteVentas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("ServletReporteVentas");
 		String accion=request.getParameter("accion");
-		
+		System.out.println("accion: "+accion);
 		if(accion.equals("reporte1")){		
 			try {
 				DetalleTransaccionBean detalleTransaccion = new DetalleTransaccionBean();
 				DAOFactory dao= DAOFactory.getDaoFactory(DAOFactory.MYSQL);
 				DetalleTransaccionDao idetalleTransacciondao = dao.geDetalleTransaccionDao();
-				
 				String anio=request.getParameter("anio");
+				System.out.println("Anio: "+anio);
 				int idProducto=Integer.parseInt(request.getParameter("producto"));
-				System.out.println("idProducto: "+idProducto);
+				System.out.println("Producto: "+idProducto);
 			
 				ArrayList<DetalleTransaccionBean> listaDetalleTransaccion = idetalleTransacciondao.listarReporte1(anio, idProducto) ;
+				request.setAttribute("listaDetalle", listaDetalleTransaccion);
+				System.out.println("xfdasfafdafaf111111");
+		
 				
-				ResponseObject responseobj=null;
+				
+				/*	ResponseObject responseobj=null;
 				if(listaDetalleTransaccion!=null){
 					responseobj=new ResponseObject();
 					response.setContentType("application/json");
@@ -87,11 +91,12 @@ public class ServletReporteVentas extends HttpServlet {
 					responseobj.setObject(listaDetalleTransaccion);
 				}
 				response.getWriter().write(new Gson().toJson(responseobj));
-				System.out.println("json" + new Gson().toJson(responseobj));
+				System.out.println("json" + new Gson().toJson(responseobj));*/
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+			getServletContext().getRequestDispatcher("/reporte.jsp").forward(request, response);
 		}
 		
 		
