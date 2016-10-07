@@ -245,7 +245,6 @@
 							<img style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
 						</div>
 					</div>
-
 				</div>
 				
 			</div>
