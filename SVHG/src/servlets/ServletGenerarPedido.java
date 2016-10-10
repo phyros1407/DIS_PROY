@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.interfaces.PedidoDao;
+import daofactory.DAOFactory;
+
 /**
  * Servlet implementation class ServletGenerarPedido
  */
@@ -62,6 +65,48 @@ public class ServletGenerarPedido extends HttpServlet {
 		String telefono2 = request.getParameter("telefono_entrega_pedido2");
 		
 		int cuotas = Integer.parseInt(request.getParameter("cuotas_entrega_pedido"));
+		
+		
+		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+		PedidoDao pedidodao = dao.getPedidoDAO();
+		
+		try{
+			
+			String codigoAntiguo = pedidodao.generarNumeroTransaccion();
+			System.out.println("CODIGO ANTIGUO -->"+codigoAntiguo);
+			
+			String premisa = codigoAntiguo.substring(1,5);
+			int numero = Integer.parseInt(codigoAntiguo.substring(6));
+			System.out.println("NUMERO A SUMAR --->"+numero);
+			int nuevoNumero = numero+1;
+			System.out.println("NUEVO NUMERO --->"+nuevoNumero);
+			
+			String cadena =(String.valueOf(nuevoNumero));
+			
+			for(int i = 0;i<11;i++){
+				
+				if(cadena.length()<12){
+					
+					cadena = "0"+cadena;
+					
+				}else{
+					
+					break;
+					
+				}
+				
+			}
+			
+			String codigoNuevo = premisa+cadena;
+			System.out.println("NUEVO CODIGO DE TRANSACCION --->"+codigoNuevo+"\n Y SU MEDIDA ES ---->"+codigoNuevo.length());
+			
+			
+			
+			
+		}catch(Exception e){
+			e.getMessage();
+		}
+		
 		
 		
 		

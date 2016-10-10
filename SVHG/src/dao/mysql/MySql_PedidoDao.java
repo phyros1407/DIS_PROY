@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import beans.PedidoBean;
 import beans.ProductoBean;
+import beans.TransaccionBean;
 import dao.interfaces.PedidoDao;
 
 import daofactory.MySqlDAOFactory;
@@ -191,4 +192,75 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				}
 				return flag;
 	}
+
+
+	@Override
+	public String generarNumeroTransaccion() throws Exception {
+		// TODO Auto-generated method stub
+		
+		String num = "";
+		
+		try{
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			
+			Statement stmt=con.createStatement();
+			
+			String query = "SELECT NUM FROM transaccion ORDER BY NUM DESC LIMIT 1";
+			
+			ResultSet rs = stmt.executeQuery(query);
+			
+			while(rs.next()){
+				num = rs.getString("NUM");
+			}
+			
+			
+		}catch(Exception e){
+			e.getMessage();
+		}
+		
+		return num;
+	}
+
+	@Override
+	public String guardarTransaccion(TransaccionBean transaccion) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public String guardarPedido(PedidoBean pedido) throws Exception {
+		// TODO Auto-generated method stub
+
+		PedidoBean NuevoPedido = new PedidoBean();
+		String codigoTransaccion = "";
+		
+		try{
+			
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			
+			
+			String query = "";
+			
+			
+		}catch(Exception e){
+			e.getMessage();
+		}
+		
+		
+		return "";
+	}
+
+	@Override
+	public boolean guardarDetallePedido() throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean guardarComprobante() throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

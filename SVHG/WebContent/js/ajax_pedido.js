@@ -813,7 +813,7 @@
 		
 		function ejecutarForm(){
 			
-			$("#").submit();
+			$("#form_generar_pedido").submit();
 			
 		}
 		
