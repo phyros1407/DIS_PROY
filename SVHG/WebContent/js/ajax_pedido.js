@@ -1,7 +1,7 @@
 		
 		var depas = [];
 		var pros = [];
-		var dist = []
+		var dist = [];
 		
 		var  igvS = 1.19; //THE REAL IGV NO FAKE 100%
 		
@@ -9,7 +9,7 @@
 			
 			var action = "deps";
 			
-			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+			$.get('http://servicios.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
 				
 				action:action
 				
@@ -47,7 +47,7 @@
 			
 			var action = "pros";
 			
-			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+			$.get('http://servicios.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
 				
 				
 				action : action,
@@ -74,7 +74,7 @@
 			
 			var action = "dist";
 			
-			$.get('http://servicios-ubigeo.azurewebsites.net/SERVICIOS_SVHG/servicios',{
+			$.get('http://servicios.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
 				
 				
 				action : action,
@@ -289,12 +289,6 @@
 					});
 	
 					
-					$("#").click(function(){
-						
-						
-						
-					});
-					
 					
 					$('input[name="entrega"]').click(function() {
 						
@@ -486,9 +480,9 @@
 
 							year=fecha.getFullYear();
 							
-							cadeha = "<div class='radio'> <input type='radio' name='fecha' value='"+year+"-"+month+"-"+day+"'>"+day+"/"+month+"/"+year+"</div>";
+							cadena = "<div class='radio'> <input type='radio' name='fecha' value='"+year+"-"+month+"-"+day+"' checked>"+day+"/"+month+"/"+year+"</div>";
 							
-							for(var i = 0;i<3;i++){
+							for(var i = 0;i<2;i++){
 							    				
 								daysI = daysI +1;
 								milisegundos=parseInt(daysI*24*60*60*1000);
@@ -506,11 +500,11 @@
 
 								year=fecha.getFullYear();	
 								
-							  cadenafechas = cadenafechas + ("<div class='radio'> <input type='radio' name='fecha' value='"+year+"-"+month+"-"+day+"'>"+day+"/"+month+"/"+year+"</div>");
+							  cadenafechas = cadenafechas + ("<div class='radio'> <input type='radio' name='fecha' value='"+year+"-"+month+"-"+day+"' >"+day+"/"+month+"/"+year+"</div>");
 							    	
 							}
 							
-							$("#radios_fechas").html(cadenafechas);
+							$("#radios_fechas").html(cadena+cadenafechas);
 							
 							//
 							
@@ -543,16 +537,289 @@
 			
 			if(comprobante=="recibo"){
 				$("#ruc_fac").slideToggle();
+				$("#rs_fac").slideToggle();
 				$("#icono").slideToggle();
 			}else{
 				$("#ruc_fac").slideToggle();
+				$("#rs_fac").slideToggle();
 				$("#icono").slideToggle();
 			}
 			
+		}
+		
+		
+		function datosAlForm(){
+			
+			var tipoI = "text";
+			
+			//LIMPIANDO FORM
+			
+			//DETALLES DEL USUARIO
+			$('input[name="usuario_generar_pedido"]').remove();
+			
+			//DETALLES DE LOS PRODUCTOS
+			$('input[name="productosIds"]').remove();
+			$('input[name="productosCantidad"]').remove();
+			$('input[name="productosImporte"]').remove();
+			
+			//DETALLES DE LA ENTREGA
+			$('input[name="tipo_entrega_pedido"]').remove();
+			$('input[name="departamento_entrega_pedido"]').remove();
+			$('input[name="provincia_entrega_pedido"]').remove();
+			$('input[name="direccion_entrega_pedido"]').remove();
+			$('input[name="distrito_entrega_pedido"]').remove();
+			$('input[name="referencia_entrega_pedido"]').remove();
+			$('input[name="telefono_entrega_pedido"]').remove();
+			$('input[name="telefono_entrega_pedido2"]').remove();
+			$('input[name="cuotas_entrega_pedido"]').remove();
+			
+			//DETALLES FACTURACION
+			$('input[name="facturacion_generar_pedido"]').remove();
+			$('input[name="rs_entrega_pedido"]').remove();
+			$('input[name="ruc_entrega_pedido"]').remove();
+			
+			//DETALLE DE LAS FECHAS
+			$('input[name="fecha_generar_pedido"]').remove();
+			
+			var cantidades = [];
+			var importes = [];
+			var productos = [];
+		
+			$('input[name="importes"]').each(function() {
+				
+				importes.push($(this).val());
+					
+			});
+			
+			$('input[name="cantidades"]').each(function() {
+				
+				cantidades.push($(this).val());
+				
+			});
+			
+			$('input[name="ids"]').each(function() {
+				
+				productos.push($(this).val());
+				
+			});
 			
 			
+			
+			for(var i=0;i<importes.length;i++){
+				
+				//AGREGAR IDS AL FORM 
+				$("<input type='text'/>")
+			     .attr("id", "producto"+i)
+			     .attr("value", productos[i])
+			     .attr("name", "productosIds")
+			     .appendTo("#form_generar_pedido");
+				
+				//AGREGAR CANTIDADES AL FORM 
+				$("<input type='text'/>")
+			     .attr("id", "cantidad"+i)
+			     .attr("value", cantidades[i])
+			     .attr("name", "productosCantidad")
+			     .appendTo("#form_generar_pedido");
+				
+				
+				//AGREGAR IMPORTES AL FORM 
+				$("<input type='text'/>")
+			     .attr("id", "importe"+i)
+			     .attr("value", importes[i])
+			     .attr("name", "productosImporte")
+			     .appendTo("#form_generar_pedido");
+				
+			}
+			
+			
+			$("<input type='text'/>")
+		     .attr("id", "lugar_entrega")
+		     .attr("value",$('input:radio[name=entrega]:checked').val())
+		     .attr("name", "tipo_entrega_pedido")
+		     .appendTo("#form_generar_pedido");
+			
+			
+			$("<input type='text'/>")
+		     .attr("value",$("input:radio[name=fecha]:checked").val())
+		     .attr("name", "fecha_generar_pedido")
+		     .appendTo("#form_generar_pedido");
+			
+			$("<input type='"+tipoI+"'/>")
+		     .attr("value",$("#diu").val())
+		     .attr("name", "usuario_generar_pedido")
+		     .appendTo("#form_generar_pedido");
+			
+			
+			
+			
+			if($('input:radio[name=entrega]:checked').val()=="local"){
+				
+				if($("#facturacion").val()=="boleta"){
+					
+					$("<input type='text'/>")
+				     .attr("value","")
+				     .attr("name", "ruc_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+					$("<input type='text'/>")
+				     .attr("value","")
+				     .attr("name", "rs_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+				}else{
+					
+					$("<input type='text'/>")
+				     .attr("value",$("#ruc_fac").val())
+				     .attr("name", "ruc_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+					$("<input type='text'/>")
+				     .attr("value",$("#").val())
+				     .attr("name", "rs_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+				}
+				
+				$("#ce_facturacion").text($("#facturacion").val());
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#facturacion").val())
+			     .attr("name", "facturacion_generar_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","LIMA")
+			     .attr("name", "departamento_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","LIMA")
+			     .attr("name", "provincia_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","BREÑA")
+			     .attr("name", "distrito_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","LIMA")
+			     .attr("name", "referencia_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","JR. INDEPENDENCIA")
+			     .attr("name", "direccion_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","999999999")
+			     .attr("name", "telefono_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","5555555")
+			     .attr("name", "telefono_entrega_pedido2")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value","0")
+			     .attr("name", "cuotas_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+		
+			}
+			
+			if($('input:radio[name=entrega]:checked').val()=="casa"){
+					
+				if($("#facturacion").val()=="boleta"){
+					
+					$("<input type='text'/>")
+				     .attr("value","")
+				     .attr("name", "ruc_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+					$("<input type='text'/>")
+				     .attr("value","")
+				     .attr("name", "rs_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+				}else{
+					
+					$("<input type='text'/>")
+				     .attr("value",$("#ruc_fac").val())
+				     .attr("name", "ruc_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+					$("<input type='text'/>")
+				     .attr("value",$("#rs_fac").val())
+				     .attr("name", "rs_entrega_pedido")
+				     .appendTo("#form_generar_pedido");
+					
+				}
+				
+				
+				$("#ce_facturacion").text($("#facturacion").val());
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#facturacion").val())
+			     .attr("name", "facturacion_generar_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#departamento option:selected").text())
+			     .attr("name", "departamento_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#provincia option:selected").text())
+			     .attr("name", "provincia_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#distrito option:selected").text())
+			     .attr("name", "distrito_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#direccion").val())
+			     .attr("name", "direccion_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#referencia").val())
+			     .attr("name", "referencia_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#telefono1").val())
+			     .attr("name", "telefono_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#telefono2").val())
+			     .attr("name", "telefono_entrega_pedido2")
+			     .appendTo("#form_generar_pedido");
+				
+				$("<input type='text'/>")
+			     .attr("value",$("#cuota_tarjeta").val())
+			     .attr("name", "cuotas_entrega_pedido")
+			     .appendTo("#form_generar_pedido");
+				
+			}
+		     
+
+		}
+		
+		
+		function ejecutarForm(){
+			
+			$("#").submit();
 			
 		}
+		
+		
+		
+		
 		
 		
 		

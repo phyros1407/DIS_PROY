@@ -68,7 +68,7 @@
 			  		<div class="input-group ">
 				  		<span class="input-group-addon" id="search-query"><span class="glyphicon glyphicon-calendar"></span></span>
 				  		<select class="form-control " name="mesCad" >
-				  			<option value="00">MM</option>
+				  			<option value="">MM</option>
 				  			<option value="01">01</option>
 				  			<option value="02">02</option>
 				  			<option value="03">03</option>
@@ -101,7 +101,7 @@
 			  	<div class="form-group col-sm-6 col-xs-6" style="display:none;"  id="cuotas"  >
 			  		<div class="input-group" >
 				  		<span class="input-group-addon" id="search-query"><span class="glyphicon glyphicon-piggy-bank"></span></span>
-				  		<input class="form-control" maxlength="1" onkeypress="return solonumeros(event);" placeholder="Cuotas" aria-describedby="search-query"> 
+				  		<input class="form-control" maxlength="1" onkeypress="return solonumeros(event);" placeholder="Cuotas" id="cuota_tarjeta" aria-describedby="search-query"> 
 			  		</div>
 			  	</div>
 		  </form>

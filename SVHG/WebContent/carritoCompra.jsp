@@ -3,7 +3,7 @@
 <head>
 	<title>Carrito</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="ISO-8859-1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
@@ -113,7 +113,7 @@
 								<label id="titulitos">Tipo de Direccion</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control">
+								<select class="form-control" id="tipo_direccion">
 									<option>Avenida</option>
 									<option>Jiron</option>
 									<option>Calle</option>
@@ -123,8 +123,7 @@
 								<label id="titulitos">Departamento</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control" name="departamento"
-									id="departamento" onchange="cargarPros(this.value);">
+								<select class="form-control" id="departamento" onchange="cargarPros(this.value);">
 									
 								</select>
 							</div>
@@ -134,7 +133,7 @@
 								<label id="titulitos">Direccion </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input type="text" name="direccion" id="direccion" maxlength="95" class="form-control" onkeypress=" return validarn(event)">
+								<input type="text"  id="direccion" maxlength="95" class="form-control" onkeypress=" return validarn(event)">
 							</div>
 							
 							
@@ -142,7 +141,7 @@
 								<label id="titulitos">Provincia</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control" name="provincia" id="provincia" onchange="cargarDist(this.value);">
+								<select class="form-control"  id="provincia" onchange="cargarDist(this.value);">
 									<option value="0"> -- SELECCIONAR -- </option>
 								</select>
 							</div>
@@ -152,13 +151,13 @@
 								<label id="titulitos">Referencia </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input class="form-control" maxlength="95" name="referencia" onkeypress=" return validarn(event)">
+								<input class="form-control" maxlength="95" id="referencia" onkeypress=" return validarn(event)">
 							</div>
 							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos">Distrito </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control" id="distrito" name="distrito" >
+								<select class="form-control" id="distrito"  >
 									<option value="0"> -- SELECCIONAR -- </option>
 								</select>
 							</div>
@@ -168,14 +167,14 @@
 								<label id="titulitos">Telefono Celular</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input type="text" name="telefono1" id="telefono1" maxlength="9" class="form-control"  onkeyup="validarTelefono(this.value,deserror1.value);" onkeypress="return solonumeros(event);">
+								<input type="text" id="telefono1" maxlength="9" class="form-control"  onkeyup="validarTelefono(this.value,deserror1.value);" onkeypress="return solonumeros(event);">
 								<b id="error1" style="color:red;"></b><input type="hidden" id="deserror1" value="error1">
 							</div>
 							<div class="col-xs-2 col-sm-2">
 								<label id="titulitos"  >Otro Telefono </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<input class="form-control" maxlength="9" name="telefono2" id="telefono2"  onkeyup="validarTelefono(this.value,deserror2.value);" onkeypress="return solonumeros(event);">
+								<input class="form-control" maxlength="9" id="telefono2"  onkeyup="validarTelefono(this.value,deserror2.value);" onkeypress="return solonumeros(event);">
 								<b id="error2" style="color:red;"></b><input type="hidden" id="deserror2" value="error2">
 							</div>
 						</div>
@@ -207,16 +206,21 @@
 					</div>
 					<div class="col-xs-12 col-sm-12" style="margin-top:30px;">
 						<div class="col-xs-6 col-sm-6">
-						<select class="form-control " id="facturacion" name="comprobante_pago" onchange="facturacion(this.value);">
+						<select class="form-control" id="facturacion"  onchange="facturacion(this.value);">
 								<option value="boleta">Boleta</option>
 								<option value="factura">Factura</option>
 							</select>
 						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12" style="margin-top:30px;">
 						<div class="col-xs-5 col-sm-5">
-							<input style="display:none;" type="text"class="form-control" name="ruc_fac" onkeypress="return solonumeros(event);" id="ruc_fac" maxlength="11">
+							<input disabled style="display:none;" type="text"class="form-control" name="ruc_fac" onkeypress="return solonumeros(event);" id="ruc_fac" maxlength="11">
+						</div>
+						<div class="col-xs-6 col-sm-6">
+							<input disabled style="display:none;" type="text"class="form-control" name="rs_fac" onkeypress="" id="rs_fac" >
 						</div>
 						<div class="col-xs-1 col-sm-1">
-							<a href="#" style="display:none;" id="icono"><span class="glyphicon glyphicon-pencil" style="margin-top:10px;"></span></a>
+							<a href="#"  style="display:none;" id="icono"><span class="glyphicon glyphicon-pencil" style="margin-top:10px;"></span></a>
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-12" style="margin-top:30px;">
@@ -242,7 +246,7 @@
 							<img id="btnTarjeta" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<img style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
+							<img onclick = "datosAlForm();" data-target="#contra_entrega" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
 						</div>
 					</div>
 				</div>
@@ -274,6 +278,7 @@
 	<jsp:include page="includeOut/footer.jsp"></jsp:include>
 	<jsp:include page="modals/modalGenerarPedido.jsp"></jsp:include>
 	<jsp:include page="modals/modalRegistroTarjeta.jsp"></jsp:include>
+	<jsp:include page="modals/modalContra_Entrega.jsp"></jsp:include>
 </body>
 
 <script src="js/jquery.js"></script>
