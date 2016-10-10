@@ -67,7 +67,7 @@
 								<%if(session.getAttribute("mostrarLogin")=="no"){ %>
 								 
 							
-								<li><a href="ServletLogin?accion=cerrarSesion"><i class="fa fa-lock"></i> Cerrar Sesión</a><input type="hidden" id="validacion" value="apc"><input type="hidden" id="validacion" value="apc"></li>
+								<li><a href="ServletLogin?accion=cerrarSesion"><i class="fa fa-lock"></i> Cerrar Sesión</a><input type="hidden" id="validacion" value="apc"><input type="hidden" id="diu" value="<%=session.getAttribute("usuId") %>"></li>
 								
 								<%}else{ %>
 								<li><a  data-toggle="modal" data-target="#modalLogin"><i class="fa fa-lock"></i> Iniciar Sesión</a><input type="hidden" id="validacion" value="napc"></li>

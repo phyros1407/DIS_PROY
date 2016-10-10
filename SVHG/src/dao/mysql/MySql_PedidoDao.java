@@ -222,17 +222,50 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 	}
 
 	@Override
-	public String guardarTransaccion(TransaccionBean transaccion) throws Exception {
+	public int guardarTransaccion(TransaccionBean transaccion) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		
+		int  idGenerado = 0;
+		
+		try{
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			
+			String query = "INSER INTO transaccion (ID_USUARIO,IDE,NUM,EST,FEC_ENT,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI) "
+					+ "VALUES ("+transaccion.getId_usuario()+",'"+transaccion.getIde()+"','"+transaccion.getNum()+"','"+transaccion.getEst()+"','"+transaccion.getFec_ent()+"','USER',now(),'USER',now()) ;";
+			
+			System.out.println("QUERY PARA GUARDAR TRANSACCION ----> "+query);
+			
+			int filas = stmt.executeUpdate(query);
+			
+			if(filas == 1){
+				
+				String query2 = "SELECT ID FROM transaccion ORDER BY ID DESC LIMIT 1";
+				
+				ResultSet rs = stmt.executeQuery(query2);
+				
+				while(rs.next()){
+					
+					idGenerado = rs.getInt("ID");	
+					
+				}
+				
+			}
+			
+		}catch(Exception e){
+			
+			e.getMessage();
+			
+		}
+		
+		return idGenerado;
 	}
 	
 	@Override
-	public String guardarPedido(PedidoBean pedido) throws Exception {
+	public boolean guardarPedido(PedidoBean pedido) throws Exception {
 		// TODO Auto-generated method stub
 
-		PedidoBean NuevoPedido = new PedidoBean();
-		String codigoTransaccion = "";
+		boolean flag = false;
 		
 		try{
 			
@@ -248,7 +281,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 		}
 		
 		
-		return "";
+		return false;
 	}
 
 	@Override

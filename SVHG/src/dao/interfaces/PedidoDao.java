@@ -11,8 +11,8 @@ public interface PedidoDao {
 	
 	//GENERAR PEDIDO
 	public String generarNumeroTransaccion () throws Exception;
-	public String guardarTransaccion(TransaccionBean transaccion) throws Exception;
-	public String guardarPedido(PedidoBean pedido) throws Exception;
+	public int guardarTransaccion(TransaccionBean transaccion) throws Exception;
+	public boolean guardarPedido(PedidoBean pedido) throws Exception;
 	public boolean guardarDetallePedido() throws Exception;
 	public boolean guardarComprobante() throws Exception;
 	

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.PedidoBean;
+import beans.TransaccionBean;
 import dao.interfaces.PedidoDao;
 import daofactory.DAOFactory;
 
@@ -40,7 +42,7 @@ public class ServletGenerarPedido extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		//USUARIO
-		int id = Integer.parseInt(request.getParameter("usuario_generar_pedido"));
+		int id_usuario = Integer.parseInt(request.getParameter("usuario_generar_pedido"));
 
 		//ARRAYS DE LOS PRODUCTOS SELECCIONADOS
 		String ids [] = request.getParameterValues("productosIds");
@@ -53,8 +55,12 @@ public class ServletGenerarPedido extends HttpServlet {
 		
 		
 		String facturacion = request.getParameter("facturacion_generar_pedido");
-		String ruc = request.getParameter("ruc_entrega_pedido");
-		String rus = request.getParameter("rs_entrega_pedido");
+		
+		if(facturacion.equalsIgnoreCase("factura")){
+			String ruc = request.getParameter("ruc_entrega_pedido");
+			String rus = request.getParameter("rs_entrega_pedido");
+		}
+		
 		
 		String departamento = request.getParameter("departamento_entrega_pedido");
 		String provincia = request.getParameter("provincia_entrega_pedido");
@@ -72,17 +78,15 @@ public class ServletGenerarPedido extends HttpServlet {
 		
 		try{
 			
+			//GENERAR NUEVO CODIGO PARA TRANSACCION
 			String codigoAntiguo = pedidodao.generarNumeroTransaccion();
 			System.out.println("CODIGO ANTIGUO -->"+codigoAntiguo);
-			
-			String premisa = codigoAntiguo.substring(1,5);
+			String premisa = codigoAntiguo.substring(0,5);
 			int numero = Integer.parseInt(codigoAntiguo.substring(6));
 			System.out.println("NUMERO A SUMAR --->"+numero);
 			int nuevoNumero = numero+1;
 			System.out.println("NUEVO NUMERO --->"+nuevoNumero);
-			
 			String cadena =(String.valueOf(nuevoNumero));
-			
 			for(int i = 0;i<11;i++){
 				
 				if(cadena.length()<12){
@@ -96,27 +100,46 @@ public class ServletGenerarPedido extends HttpServlet {
 				}
 				
 			}
-			
 			String codigoNuevo = premisa+cadena;
 			System.out.println("NUEVO CODIGO DE TRANSACCION --->"+codigoNuevo+"\n Y SU MEDIDA ES ---->"+codigoNuevo.length());
 			
+			//GRABAR TRANSACCION
+			TransaccionBean transaccion = new TransaccionBean();
+			transaccion.setId_usuario(id_usuario);
+			transaccion.setIde("P");//IDENTIFICADOR PEDIDO
+			transaccion.setNum(codigoNuevo);
+			transaccion.setEst("P");//ESTADO PENDIENTE
+			transaccion.setFec_ent(fecha);
 			
-			
+			int idGenerado = pedidodao.guardarTransaccion(transaccion);
+			if(idGenerado!=0){
+				
+				//GRABAR PEDIDO
+				PedidoBean pedido = new PedidoBean();
+				pedido.setId(idGenerado);
+				if(tipo_entrega.equalsIgnoreCase("local")){
+					
+					pedido.setTipoEntrega("RL");
+					
+				}
+				if(tipo_entrega.equalsIgnoreCase("casa")){
+				
+					pedido.setTipoEntrega("EC");
+					
+				}
+		
+				
+			}else{
+				
+				
+				
+			}
 			
 		}catch(Exception e){
+			
 			e.getMessage();
+			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 	}
