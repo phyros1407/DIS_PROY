@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DetalleTransaccionBean;
 import beans.PedidoBean;
 import beans.TransaccionBean;
 import dao.interfaces.PedidoDao;
@@ -49,7 +50,7 @@ public class ServletGenerarPedido extends HttpServlet {
 		String cantidades [] = request.getParameterValues("productosCantidad");
 		String importes [] = request.getParameterValues("productosImporte");
 		
-		
+		String tipo_pago = request.getParameter("tipo_pago");
 		String tipo_entrega = request.getParameter("tipo_entrega_pedido");
 		String fecha = request.getParameter("fecha_generar_pedido");
 		
@@ -67,8 +68,8 @@ public class ServletGenerarPedido extends HttpServlet {
 		String distrito = request.getParameter("distrito_entrega_pedido");
 		String direccion = request.getParameter("distrito_entrega_pedido");
 		String referencia = request.getParameter("referencia_entrega_pedido");
-		String telefono = request.getParameter("telefono_entrega_pedido");
-		String telefono2 = request.getParameter("telefono_entrega_pedido2");
+		
+		
 		
 		int cuotas = Integer.parseInt(request.getParameter("cuotas_entrega_pedido"));
 		
@@ -114,6 +115,7 @@ public class ServletGenerarPedido extends HttpServlet {
 			int idGenerado = pedidodao.guardarTransaccion(transaccion);
 			if(idGenerado!=0){
 				
+				System.out.println("SE GUARDO DATOS GENERALES DE LA TRANSACCION");
 				//GRABAR PEDIDO
 				PedidoBean pedido = new PedidoBean();
 				pedido.setId(idGenerado);
@@ -127,7 +129,55 @@ public class ServletGenerarPedido extends HttpServlet {
 					pedido.setTipoEntrega("EC");
 					
 				}
+				pedido.setTipoPago(tipo_pago);
+				pedido.setDepartamento(departamento);
+				pedido.setProvincia(provincia);
+				pedido.setDistrto(distrito);
+				pedido.setDireccion(direccion);
+				pedido.setReferencia(referencia);
+				
+				if(!(request.getParameter("telefono_entrega_pedido")).equalsIgnoreCase("")){
+					pedido.setTelefono1(request.getParameter("telefono_entrega_pedido"));
+				}else{
+					pedido.setTelefono1("NO CONT.");
+				}
+				
+				if(!(request.getParameter("telefono_entrega_pedido2")).equalsIgnoreCase("")){
+					pedido.setTelefono1(request.getParameter("telefono_entrega_pedido2"));
+				}else{
+					pedido.setTelefono1("NO CONT.");
+				}
+				
+				pedido.setEstado("P");
+				pedido.setCuota(cuotas);
+				
+				if(pedidodao.guardarPedido(pedido)){
+					System.out.println("SE GUARDO DATOS GENERALES DEL PEDIDOs");
+					//GRABAR DETALLE_TRANSACCION
+					for(int i = 0;i<ids.length;i++){
+						DetalleTransaccionBean detalle = new DetalleTransaccionBean();
+						detalle.setVentaId(idGenerado);
+						detalle.setProductoId(Integer.parseInt(ids[i]));
+						detalle.setCantidad(Integer.parseInt(cantidades[i]));
+						detalle.setImporte(Double.parseDouble(importes[i]));
+						
+						if(pedidodao.guardarDetallePedido(detalle)){
+							System.out.println("SE GUARDO EL DETALLE NUMERO --->"+i);
+						}else{
+							System.out.println(" NO SE GUARDO EL DETALLE NUMERO --->"+i);
+						}
+					}
+					
+					System.out.println("SE GUARDO DATOS DE LOS DETALLES DEL PEDIDOs");
+					
+					
+					
 		
+				}else{
+					
+					
+					
+				}
 				
 			}else{
 				

@@ -8,6 +8,8 @@ public class TransaccionBean {
 	private String num;
 	private String est;
 	private String fec_ent;
+	
+	//AUDITORIA
 	private String usu_crea_regi;
 	private String fec_crea_regi;
 	private String ult_usu_mod_regi;

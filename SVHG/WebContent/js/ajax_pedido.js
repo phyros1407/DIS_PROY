@@ -713,12 +713,12 @@
 			     .appendTo("#form_generar_pedido");
 				
 				$("<input type='text'/>")
-			     .attr("value","999999999")
+			     .attr("value","")
 			     .attr("name", "telefono_entrega_pedido")
 			     .appendTo("#form_generar_pedido");
 				
 				$("<input type='text'/>")
-			     .attr("value","5555555")
+			     .attr("value","")
 			     .attr("name", "telefono_entrega_pedido2")
 			     .appendTo("#form_generar_pedido");
 				
@@ -809,7 +809,6 @@
 		     
 
 		}
-		
 		
 		function ejecutarForm(){
 			

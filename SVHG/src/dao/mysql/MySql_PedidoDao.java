@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import beans.DetalleTransaccionBean;
 import beans.PedidoBean;
 import beans.ProductoBean;
 import beans.TransaccionBean;
@@ -273,26 +274,62 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			Statement stmt=con.createStatement();
 			
 			
-			String query = "";
+			String query = " INSERT INTO pedido (PED_ID,TIP_ENT,TIPO_PAG,DEP_ENT,PRO_ENT,DIS_ENT,DIR_ENT,REF,TEL_REF_1,TEL_REF_2,EST_ENT,CUO) "
+					+ " VALUES("+pedido.getId()+",'"+pedido.getTipoEntrega()+"','"+pedido.getTipoPago()+"','"+pedido.getDepartamento()+"','"+pedido.getProvincia()+"','"+pedido.getDistrto()+"','"+pedido.getDireccion()+"','"+pedido.getReferencia()+"','"+pedido.getTelefono1()+"','"+pedido.getTelefono2()+"',"+pedido.getCuota()+");";
 			
+			System.out.println("QUERY PARA GUARDAR PEDIDO ----> "+query);
+			
+			int filas = stmt.executeUpdate(query);
+			
+			if(filas == 1){
+				flag = true;
+			}
 			
 		}catch(Exception e){
 			e.getMessage();
 		}
 		
 		
-		return false;
+		return flag;
 	}
 
 	@Override
-	public boolean guardarDetallePedido() throws Exception {
+	public boolean guardarDetallePedido(DetalleTransaccionBean detalle) throws Exception {
 		// TODO Auto-generated method stub
-		return false;
+		
+		boolean flag  = false;
+		
+		try{
+			
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			
+			String query = " INSERT INTO detalle_transaccion (VEN_ID,PRO_ID,CAN,IMP) "
+					+ " VALUES ("+detalle.getVentaId()+","+detalle.getProductoId()+","+detalle.getCantidad()+","+detalle.getImporte()+")";
+			
+			System.out.println("QUERY PARA GUARDAR DETALLE ----> "+query);
+			
+			int filas = stmt.executeUpdate(query);
+			
+			if(filas == 1){
+				flag = true;
+			}
+			
+		}catch(Exception e){
+			
+			e.getMessage();
+			
+		}
+		
+		return flag;
 	}
 
 	@Override
 	public boolean guardarComprobante() throws Exception {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return false;
 	}
 

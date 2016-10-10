@@ -9,7 +9,7 @@ public class PedidoBean {
 	private String fechaEntrega;
 	private String fechaCreacion;
 	private String direccion;
-	private String distrto, provincia, departamento;;
+	private String distrto, provincia, departamento,referencia;
 	private String tipoPago;
 	private String ProductoId;
 	private String productoNombre;
@@ -24,6 +24,15 @@ public class PedidoBean {
 	private String nombrePersona;
 	private Double impProd;
 	private String tipoEntrega;
+	private String telefono1,telefono2;
+	private int cuota;
+	
+	//AUDITORIA 
+	private String usu_crea_regi;
+	private String fec_crea_regi;
+	private String ult_usu_mod_regi;
+	private String fec_ult_mod_regi;
+	
 	
 	
 	
@@ -167,6 +176,56 @@ public class PedidoBean {
 	public void setDistrto(String distrto) {
 		this.distrto = distrto;
 	}
+	public String getReferencia() {
+		return referencia;
+	}
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+	public String getTelefono1() {
+		return telefono1;
+	}
+	public void setTelefono1(String telefono1) {
+		this.telefono1 = telefono1;
+	}
+	public String getTelefono2() {
+		return telefono2;
+	}
+	public void setTelefono2(String telefono2) {
+		this.telefono2 = telefono2;
+	}
+	public int getCuota() {
+		return cuota;
+	}
+	public void setCuota(int cuota) {
+		this.cuota = cuota;
+	}
+	public String getUsu_crea_regi() {
+		return usu_crea_regi;
+	}
+	public void setUsu_crea_regi(String usu_crea_regi) {
+		this.usu_crea_regi = usu_crea_regi;
+	}
+	public String getFec_crea_regi() {
+		return fec_crea_regi;
+	}
+	public void setFec_crea_regi(String fec_crea_regi) {
+		this.fec_crea_regi = fec_crea_regi;
+	}
+	public String getUlt_usu_mod_regi() {
+		return ult_usu_mod_regi;
+	}
+	public void setUlt_usu_mod_regi(String ult_usu_mod_regi) {
+		this.ult_usu_mod_regi = ult_usu_mod_regi;
+	}
+	public String getFec_ult_mod_regi() {
+		return fec_ult_mod_regi;
+	}
+	public void setFec_ult_mod_regi(String fec_ult_mod_regi) {
+		this.fec_ult_mod_regi = fec_ult_mod_regi;
+	}
+	
+	
 	
 	
 }

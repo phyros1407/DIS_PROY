@@ -6,7 +6,7 @@ public class DetalleTransaccionBean {
 	private int ventaId;
 	private int productoId;
 	private int cantidad;
-	private float impuesto;
+	private double importe;
 	
 	private String fc;
 	
@@ -40,11 +40,11 @@ public class DetalleTransaccionBean {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	public float getImpuesto() {
-		return impuesto;
+	public double getImporte() {
+		return importe;
 	}
-	public void setImpuesto(float impuesto) {
-		this.impuesto = impuesto;
+	public void setImporte(double impuesto) {
+		this.importe = impuesto;
 	}
 	
 	
