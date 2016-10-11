@@ -5,7 +5,7 @@
     pageEncoding="ISO-8859-1"%>
 <% String numero = request.getParameter("numero"); %>
  
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
@@ -27,7 +27,7 @@
 	        mm='0'+mm
 	    } 
 	
-	    var today = dd+'-'+mm+'-'+yyyy;
+	    var today = yyyy+'-'+mm+'-'+dd;
 	     
 	     document.getElementById("txt_fechaactual").value = today;
 	     
@@ -43,7 +43,8 @@
 
     <!-- END HEAD -->
 
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white" onload="numero();">
+     
         <!-- BEGIN HEADER -->
         <%@ include file="/include/headSideBar.jsp" %>
         <!-- END HEADER -->
@@ -63,7 +64,7 @@
                     <!-- BEGIN THEME PANEL -->
                                         <!-- END THEME PANEL -->
                     <!-- BEGIN PAGE BAR -->
-
+	<form id="registrar" action="../ServletVenta?accion=registrarVenta1" method="post"></form>
                    
 
                     <div class="page-bar">
@@ -104,7 +105,7 @@
                                                     
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text"  id="txt_fechaactual"  name=""  class="form-control" disabled /> </div>
+                                                    <input type="text"  id="txt_fechaactual"  name="txt_fechaactual"  form="registrar" class="form-control" readonly /> </div>
                                             </div>
                         </div>
                         <div class="col-md-6">
@@ -114,7 +115,7 @@
                                                     
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text"  id="txt_numeroVenta"  name="numero"  class="form-control" value="TRAN-000000000459" disabled /> </div>
+                                                    <input type="text"  id="txt_numeroVenta"  name="txt_numeroVenta"  form="registrar" class="form-control"  readonly /> </div>
                                            		 </div>
                         </div>
                         
@@ -148,7 +149,7 @@
                                  
                                        <div class="col-md-6">
                                         <input type="hidden" maxlength="8" id="temporalsubtotal" class="form-control" value="0"  />
-                                 <input type="hidden" maxlength="8" id="txtIdPersona"  name="txtIdPersona" onkeypress="return solonumeros(event)" name="txtDni1"  class="form-control"  />
+                                 <input type="hidden" maxlength="8" id="txtusuario" form="registrar" name="txtusuario" onkeypress="return solonumeros(event)"   class="form-control"  />
                                        <br>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">DNI
@@ -248,7 +249,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtDireccion1" id="txtDireccion1"  class="form-control"    disabled /> </div>
+                                                    <input type="text" name="txtRuc1" id="txtRuc1"  onkeyup="buscarRuc()"class="form-control"     /> </div>
                                             </div></div>
                                             <div class="col-md-6">
                                              <div class="form-group">
@@ -256,10 +257,10 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtDireccion1" id="txtDireccion1"  class="form-control"    disabled /> 
+                                                    <input type="text" name="txtrazonsocial1" id="txtrazonsocial1"  class="form-control"      /> 
                                                     </div>
                                                      <div class="col-md-3">
-                                                    <button    class="form-control btn-primary" >EDITAR</button> 
+                                                    <input id="botoneditar" type=image src="../images/editar.png" onclick="sd();" width="30" height="30">
                                                     </div>
                                             </div></div>
                             				</div>
@@ -272,10 +273,44 @@ function aparecer() {
     if(selectedValue==2){
         
 	document.getElementById('empresa').style.display = 'block';
+	txtRuc1.disabled=true;
+	txtrazonsocial1.disabled = true;
+
+	
 	}else{
 		document.getElementById('empresa').style.display = 'none';
 		console.log("oculto"+document.getElementById('empresa').style.display);
 		}
+}
+function sd(){
+	
+	txtRuc1.disabled=false;
+	txtrazonsocial1.disabled = false;
+	document.getElementById("txtrazonsocial1").readOnly = true;
+	}
+	
+function buscarRuc(){
+	  var ruc = $('#txtRuc1').val();
+	 // console.log("asdasd"+dni);
+	 var accion='buscarRuc';
+	  $.get('http://env-3384797.jelasticlw.com.br/service/Gestionar_Empresa', {
+		  
+				accion : accion,
+				ruc:ruc
+			}, function(response) {		
+				console.log("entasd"+response);
+				if (response!=null) {
+					console.log("entrooo");	
+					console.log("ruc: "+ruc)
+						$('#txtrazonsocial1').val(response['object']['razonSocial']); ; 
+						//$( "#btnRegistro" ).prop( 'disabled', false );
+				}else{
+					$('#txtrazonsocial1').val("");
+					//$( "#btnRegistro" ).prop( 'disabled', true );
+					//document.getElementById("ruc").style.visibility = "visible";
+					//jQuery("label[for='lblRUC']").html("El número de RUC es incorrecto o no está registrado");
+				}		
+	  });
 }
 </script>
                             				
@@ -308,7 +343,7 @@ function aparecer() {
                                 
                                 <div action="#" id="form_sample_1" class="form-horizontal">
                                        <div class="col-md-6">
-                                            <input type="hidden" name="name"  id="txtIdProducto" data-required="1" class="form-control" />
+                                            <input type="hidden" name="txtIdProducto"  id="txtIdProducto" form="registrar" data-required="1" class="form-control" /> 
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Código Producto
                                                     <span class="required"> * </span>
@@ -418,7 +453,8 @@ function aparecer() {
                                                 </label>
                                                 <div class="col-md-6"> 
                                                 
-                                                    <input type="text" name="name" id="txtCantidad" data-required="1" class="form-control"  /> </div>
+                                                    <input type="text" name="name" id="txtCantidad" data-required="1" class="form-control" maxlength="3" onkeypress="return solonumeros(event)"/> 
+                                                    </div>
                                             		
                                             </div>
                              
@@ -454,16 +490,18 @@ function aparecer() {
                                         </tbody>
                       </table> 
                 <div action="#" id="form_sample_1" class="form-horizontal" >
-                                       <div class="col-md-6" style="left:600px">
+                                       <div class="col-md-7" style="left:600px">
                                            
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Subtotal
+                                                <label class="control-label col-md-4">Monto Total<small>(Incl.IGV)</small>
                                                     <span class="required"> * </span>
-                                                </label>
+                                                </label> 
                                                 <div class="col-md-6">
-                                                    <input type="text" name="name"  id="txtSubtotal" data-required="1" class="form-control" disabled/> </div>
+                                                    <input type="text" name="name"  id="txtSubtotal" data-required="1"   class="form-control" disabled/> </div>
+                                                                                     
                                             </div>
-                                            <div class="form-group">
+                                            <input type="hidden" id="txtsize" name="txtsize" form="registrar" >
+                                    <!--         <div class="form-group">
                                                 <label class="control-label col-md-3">IGV
                                                     <span class="required"> * </span>
                                                 </label>
@@ -476,12 +514,17 @@ function aparecer() {
                                                 </label>
                                                 <div class="col-md-6">
                                                     <input name="text" id="txtTotal" type="text" class="form-control" data-required="1"  required disabled/> </div>
-                                            </div>
+                                            </div>--> 
                                            
                                          
                             				</div>
                    </div>
-                   </div>   
+                   </div>  
+                   <script type="text/javascript"> 
+                   function decimal(event) {
+    				this.value = parseFloat(this.value).toFixed(2);
+						}
+                   </script>
        <!-------------------------------------inicio botones----------------------------->                  
                     
                     <div class="col-md-12 ">
@@ -504,9 +547,10 @@ function aparecer() {
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="btn-group">
-                                                    <button id="" class="btn green" onclick="registrarVenta()" style="left: 160px;"> Registrar Venta
+                                                   <!--  <button type="submit" class="btn green" onclick="registrarVentas();"  style="left: 160px;"> Registrar Venta
                                                         
-                                                    </button>
+                                                    </button> -->
+                                                    <input type="submit" class="btn green" form="registrar" value="registrar Venta" style="left: 160px;">
                                                 </div>
                                             </div>
                                           
@@ -541,14 +585,16 @@ function aparecer() {
                                             <!-- END: Actions -->
                                        
                 <!-- END CONTENT BODY -->
+                
             </div>
             
         </div>
          </div>
+       
    <script type="text/javascript">
    	</script>
           <script src="<%=request.getContextPath() %>/RegistrarVenta/ventas.js" type="text/javascript"></script>
-     
+     	  <script src="<%=request.getContextPath() %>/js/validaciones.js" type="text/javascript"></script>
           <script src="<%=request.getContextPath() %>/RegistrarVenta/modals.js" type="text/javascript"></script>
         <!-- END CONTAINER -->
         <%@ include file="/include/footer.jsp" %>

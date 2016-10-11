@@ -44,8 +44,9 @@
 					$('#txtTelefono1').val(response['object']['telefono']); 
 					$('#txtCelular1').val(response['object']['celular']); 
 					$('#txtDireccion1').val(response['object']['direccion']); 
-						
-					 
+					$('#txtRuc1').val(response['object']['ruc']);
+					$('#txtrazonsocial1').val(response['object']['razonsocial']);	
+					$('#txtusuario').val(response['object']['idusuario']);
 					 $('#modalCliente').modal('hide');
 				}else {
 					alert("no existe");
@@ -95,7 +96,7 @@
 				//$(this).removeData('modalCliente');
 				 //$("#table-cliente > tr").remove();
 				 $('#txtDatoP').val("");
-				 $('#selectCriterioP').val("SELECCIONAR");
+				 //$('#selectCriterioP').val("SELECCIONAR");
 				$('#table-producto td').remove();
 		
 			});

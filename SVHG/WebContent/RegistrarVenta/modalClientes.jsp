@@ -9,85 +9,124 @@
 <body>
                <!-- ----------------------modal registrar cliente-------------------------------------------- -->
                  			<div class="modal fade" id="modalClienteRegistrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  							 <div class="modal-dialog" role="document">
+  							 <div class="modal-dialog modal-lg" role="document">
    							 <div class="modal-content">
-                 				<form class="form-horizontal" >
+                 				<div class="form-horizontal" >
                                       <div class="modal-header">
         						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
        							 <h4 class="modal-title" id="myModalLabel">Registrar Cliente</h4>
     							  </div>
-                                        
+    							<div class="modal-body col-md-12">
+    								<div class="col-md-12 portlet light portlet-fit bordered" >
+    								<br> <br>
+    								<div class="col-md-6">
+                                                <label class="control-label col-md-6">Persona
+                                                   
+                                                </label>
+                                                <div class="col-md-6">
+                                                    <input type="radio" id="rdnpersona"  name="rdn" onclick="aparecer3();" value="1" data-required="1" class="form-control"  /> </div>
+                                            	
+                                     </div>
+                                     <div class="col-md-6">
+                                                <label class="control-label col-md-6">Empresa
+                                                   
+                                                </label>
+                                                <div class="col-md-6">
+                                                    <input type="radio" id="rdnempresa"  name="rdn"  onclick="aparecer2();" value="1" data-required="1" class="form-control"  /> </div>
+                                            	
+                                     </div>
+                                       
+                                       
+    								</div>
+    							
+                                         <div class="col-md-6">
+                                           <br>
                                  		<input type="hidden" maxlength="8" id="txtIdPersona2"  name="txtIdPersona" onkeypress="return solonumeros(event)" name="txtDni1" data-required="1" class="form-control" required />
                                        
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">DNI
+                                                <label class="control-label col-md-4">DNI
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" maxlength="8" id="txtDni2" onkeypress="return solonumeros(event)" name="txtDni1" data-required="1" class="form-control" required /> </div>
+                                                    <input type="text" maxlength="8" id="txtDni2" onkeypress="return solonumeros(event)" name="txtDni1" data-required="1" class="form-control"  /> </div>
+                                            	<input id="botonbuscar" type="image" src="../images/buscarP.png" onclick="buscarReniec();" width="30" height="30">
                                             </div>
+                                             
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">NOMBRES
+                                                <label class="control-label col-md-4">NOMBRES
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input name="txtNombres1" id="txtNombres2" type="text" onkeypress="return sololetras(event)"   data-required="1" class="form-control" required/> </div>
+                                                    <input name="txtNombres2" id="txtNombres2" type="text" onkeypress="return sololetras(event)"   data-required="1" class="form-control"  disabled/> </div>
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">APELLIDO PATERNO
+                                                <label class="control-label col-md-4">APELLIDO PATERNO
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input name="txtApePat1" id="txtApePat2" type="text" class="form-control" onkeypress="return sololetras(event)" data-required="1"  required/> </div>
+                                                    <input name="txtApePat2" id="txtApePat2" type="text" class="form-control" onkeypress="return sololetras(event)" data-required="1"   disabled/> </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">APELLIDO MATERNO
+                                                <label class="control-label col-md-4">APELLIDO MATERNO
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input name="txtApeMat1" id="txtApeMat2" type="text" class="form-control"onkeypress="return sololetras(event)" data-required="1"  required/> </div>
+                                                    <input name="txtApeMat2" id="txtApeMat2" type="text" class="form-control"onkeypress="return sololetras(event)" data-required="1"   disabled/> </div>
                                             </div>
+                                            </div>
+                                            
+                                               <div class="col-md-6">
+                                               <br>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">CORREO
+                                                <label class="control-label col-md-4">CORREO
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input name="txtCorreo1" id="txtCorreo2" type="text" class="form-control" data-required="1"  required/> </div>
+                                                    <input name="txtCorreo2" id="txtCorreo2" onkeyup="buscarCorreo()" type="text" class="form-control" data-required="1"  /> </div>
                                             </div>
                                             
                                          <div class="form-group">
-                                                <label class="control-label col-md-3">Teléfono
+                                                <label class="control-label col-md-4">TELÉFONO <br>(Fijo o Celular)
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtTelefono1" id="txtTelefono2" data-required="1" class="form-control" maxlength="7" onkeypress="return solonumeros(event)" required/> </div>
+                                                    <input type="text" name="txtTelefono2" id="txtTelefono2" data-required="1" class="form-control" maxlength="7" onkeypress="return solonumeros(event)" /> </div>
                                             </div>
                                             
-                                            
-                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Direccion
+                            
+    									</div>
+    										<div class="col-md-12 portlet light portlet-fit bordered" id="empresa2" Style="visibility: hidden;">
+    										<br>
+    										 <div class="col-md-6">
+    										  <div class="form-group">
+                                                <label class="control-label col-md-4">RUC
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtDireccion1" id="txtDireccion2"  class="form-control" data-required="1"  required /> </div>
+                                                    <input name="txtruc2" id="txtruc2" type="text" onkeypress="return solonumeros(event)"    class="form-control" /> </div>
+                                          			<input id="botonbuscarEmp" type="image" src="../images/buscarE.png" onclick="buscarRuc3();" width="35" height="35">
                                             </div>
-                                          <div id ="registro" style="visibility: hidden;">
-    										<div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >El Cliente ya se encuentra Registrado</label>
-   											 </div>
-    											</div>
-    											<div id ="validar" style="visibility: hidden;">
-    										<div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' > Por favor ingrese todos los campos</label>
-   											 </div>
-    											</div>
+                                             </div>
+                                             <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4"> RAZON SOCIAL
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-6">
+                                                    <input name="txtrazon2" id="txtrazon2" type="text" class="form-control" onkeypress="return sololetras(event)"    disabled/> </div>
+                                            </div>
+    										 </div>
+    										 </div>
+    									 </div>
                                          <div class="modal-footer">
       			  						
                                          <button type="button" class="btn btn-default" onclick="limpiarRegistro();" data-dismiss="modal">Cerrar</button>
         									<input  type="button" class="btn btn-primary"   onclick="registrarCliente();" value="Registrar Cliente">
        
       										</div>   
-                            				
-                            		  </form>
+                            				 	
+                            		  </div>
                
                					  </div></div></div>
                
@@ -178,14 +217,26 @@
   </div>
 </div>
 <!--------------------------------------------------------------fin del modal buscarCliente-------------------------------------->  
+
+
 <script>
 function buscarCriterioCliente(){
 var flag = $('#selectCriterio').val();
 //alert("flag: "+flag);
 var dato = $('#txtDatoC').val();
+if(document.getElementById("selectCriterio").value==0){
+alert("seleccione opcion");
+
+
 $("#table-cliente").html("<thead><tr><th>DNI</th><th>NOMBRES</th><th>APELLIDO PATERNO</th><th>APELLIDO MATERNO</th><th>OPCION</th></tr></thead>");
 var  contador=0;
 //alert("flag: "+dato);
+
+}else{
+	if( $('#txtDatoC').val()==""){
+		alert("llene el campo")
+	}else{	
+		
 var accion='buscarCriterio'
 
 $.post('<%=request.getContextPath() %>/ServletCliente', {
@@ -204,6 +255,7 @@ $.post('<%=request.getContextPath() %>/ServletCliente', {
 								"</td><td>"+response['object'][i]['nombre']+
 								"</td><td>"+response['object'][i]['apePat']+
 								"</td><td>"+response['object'][i]['apeMat']+
+								"</td><td style='display:none;'>"+response['object'][i]['idusuario']+
 								"</td><td style='display:none;'>"+response['object'][i]['correo']+
 								"</td><td style='display:none;'>"+response['object'][i]['telefono']+
 								"</td><td style='display:none;'>"+response['object'][i]['direccion']+
@@ -211,7 +263,7 @@ $.post('<%=request.getContextPath() %>/ServletCliente', {
 								"</td><td><input type='button' class='btn btn-primary btn-circle'   onclick='enviarDatos("+response['object'][i]['id']+");' value='seleccionar'>"+
 								"</td><tr>");
 						
-					
+						
 			    	}
 			    
 			    	//$("#nombreApe").html(name);
@@ -221,16 +273,19 @@ $.post('<%=request.getContextPath() %>/ServletCliente', {
 					console.log(contador)
 					//alert(contador)
 					console.log (conta)
-
+					
+					
 			}else {
 				alert("no existe");
 				
-				 error.style.visibility = "visible";		
+				
 			}
 	
-		});
+		});}
+}
 
 }
 </script>
+  <script src="<%=request.getContextPath() %>/RegistrarVenta/busquedasServicios.js" type="text/javascript"></script>
 </body>
 </html>
