@@ -50,7 +50,7 @@ public class MySQLOfertaDao implements OfertaDao {
 					double impAfe=(productoP[i-1])*cantidad*descuento/100;
 					System.out.println("importe afectado"+impAfe);
 					String query1="insert into detalle_oferta(OFE_ID,PRO_ID,IMP_AFE,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"
-							+"VALUES("+maxId+","+productoId[i-1]+","+impAfe+",'USER','2016-09-29 11:01:16','USER','2016-09-29 11:01:16');";
+							+"VALUES("+maxId+","+productoId[i-1]+",images/"+impAfe+",'USER','2016-09-29 11:01:16','USER','2016-09-29 11:01:16');";
 					System.out.println(query1);
 					int filas1=stmt1.executeUpdate(query1);
 					if(filas1>0){
