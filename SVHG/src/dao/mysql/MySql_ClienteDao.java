@@ -17,7 +17,7 @@ public class MySql_ClienteDao extends MySqlDAOFactory implements ClienteDao {
 		try {
 			Connection con = MySqlDAOFactory.obtenerConexion();
 			Statement stmt = con.createStatement();
-			String query = "select per.id,per.est,per.dni,per.nom,per.ape_pat,per.ape_mat, usu.car_id, per.dir, con.cor, con.tel "
+			String query = "select usu.id,per.id,per.est,per.dni,per.nom,per.ape_pat,per.ape_mat, usu.car_id, per.dir, con.cor, con.tel "
 					+ "from persona per "
 					+ "inner join usuario usu on per.id= usu.per_id "
 					+ "inner join contacto con on per.id=con.per_id "
@@ -45,6 +45,7 @@ public class MySql_ClienteDao extends MySqlDAOFactory implements ClienteDao {
 				persona.setDireccion(rs.getString("per.dir"));
 				persona.setCorreo(rs.getString("con.cor"));
 				persona.setTelefono(rs.getString("con.tel"));
+				persona.setIdusuario(rs.getInt("usu.id"));
 				personas.add(persona);
 				System.out.println(","+ rs.getInt("per.id"));
 			}	
@@ -62,10 +63,11 @@ public class MySql_ClienteDao extends MySqlDAOFactory implements ClienteDao {
 		try {
 			Connection con = MySqlDAOFactory.obtenerConexion();
 			Statement stmt = con.createStatement();
-			String query = "select per.id,per.est,per.dni,per.nom,per.ape_pat,per.ape_mat, usu.car_id, per.dir, con.cor, con.tel "
+			String query = "select usu.id,per.id,per.est,per.dni,per.nom,per.ape_pat,per.ape_mat, usu.car_id, per.dir, con.cor, con.tel , em.ruc , em.raz_soc "
 					+ "from persona per "
 					+ "inner join usuario usu on per.id= usu.per_id "
 					+ "inner join contacto con on per.id=con.per_id "
+					+ "left join empresa em on per.id=em.emp_id "
 					+ " where per.est='a' "
 					+ "and usu.car_id=5 and per.id="+id+"";
 			
@@ -83,7 +85,9 @@ public class MySql_ClienteDao extends MySqlDAOFactory implements ClienteDao {
 				persona.setDireccion(rs.getString("per.dir"));
 				persona.setCorreo(rs.getString("con.cor"));
 				persona.setTelefono(rs.getString("con.tel"));
-			
+				persona.setRuc(rs.getString("em.ruc"));
+				persona.setRazonsocial(rs.getString("em.raz_soc"));
+				persona.setIdusuario(rs.getInt("usu.id"));
 				System.out.println(","+ rs.getInt("per.id"));
 			}	
 			con.close();
