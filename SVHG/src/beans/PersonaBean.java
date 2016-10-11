@@ -12,7 +12,7 @@ public class PersonaBean {
 	private String apellidoPaterno;
 	private String apellidoMaterno;
 	private String fechaNacimiento;
-
+/**/
 	private String pass;
 	private String correo;
 	private String telefono;
