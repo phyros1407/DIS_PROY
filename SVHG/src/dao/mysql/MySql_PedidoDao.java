@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import beans.ComprobanteBean;
 import beans.DetalleTransaccionBean;
 import beans.PedidoBean;
 import beans.ProductoBean;
@@ -324,13 +325,68 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 		return flag;
 	}
 
+	
 	@Override
-	public boolean guardarComprobante() throws Exception {
+	public boolean guardarComprobante(ComprobanteBean comprobante) throws Exception {
 		// TODO Auto-generated method stub
 		
+		boolean flag = false;
+		
+		try{
+			
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			
+			String query = " INSERT INTO comprobante_pago (VEN_ID,TIPO,RUC,RAZ_SOC,NUM_COM,IGV,FEC_EMI,FEC_CAN) "
+					+ " VALUES ("+comprobante.getVen_id()+",'"+comprobante.getTipo()+"','"+comprobante.getRuc()+"','"+comprobante.getRaz_soc()+"','"+comprobante.getNum_com()+"',"+comprobante.getIgv()+","+comprobante.getFec_emi()+","+comprobante.getFec_can()+");";
+			
+			int filas = stmt.executeUpdate(query);
+			
+			if(filas == 1){
+				flag = true;
+			}
+			
+			
+		}catch(Exception e){
+			
+			e.getMessage();
+			
+		}
+		
+		return flag;
+	}
+
+	@Override
+	public String obtenerUltimoNumeroComprobantexTipo(String tipo) throws Exception {
+		// TODO Auto-generated method stub
+		
+		String num_com = "";
+		
+		try{
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			
+			String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' ORDER BY NUM_COM DESC LIMIT 1";
+			
+			ResultSet rs = stmt.executeQuery(query);
+			
+			if(rs.isBeforeFirst()){
+				
+				if(rs.next()){
+					
+					num_com = rs.getString("NUM_COM");
+					
+				}
+				
+			}
+			
+			
+		}catch(Exception e){
+			e.getMessage();
+		}
 		
 		
-		return false;
+		return num_com;
 	}
 
 }

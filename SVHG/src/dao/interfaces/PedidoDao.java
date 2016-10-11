@@ -2,6 +2,7 @@ package dao.interfaces;
 
 import java.util.ArrayList;
 
+import beans.ComprobanteBean;
 import beans.DetalleTransaccionBean;
 import beans.PedidoBean;
 import beans.TransaccionBean;
@@ -15,7 +16,8 @@ public interface PedidoDao {
 	public int guardarTransaccion(TransaccionBean transaccion) throws Exception;
 	public boolean guardarPedido(PedidoBean pedido) throws Exception;
 	public boolean guardarDetallePedido(DetalleTransaccionBean detalle) throws Exception;
-	public boolean guardarComprobante() throws Exception;
+	public String obtenerUltimoNumeroComprobantexTipo(String tipo) throws Exception;
+	public boolean guardarComprobante(ComprobanteBean comprobante) throws Exception;
 	
 	public boolean actualizarEstadoPedido(String id) throws Exception;
 

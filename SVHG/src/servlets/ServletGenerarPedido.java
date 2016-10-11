@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.ComprobanteBean;
 import beans.DetalleTransaccionBean;
 import beans.PedidoBean;
 import beans.TransaccionBean;
@@ -57,10 +58,7 @@ public class ServletGenerarPedido extends HttpServlet {
 		
 		String facturacion = request.getParameter("facturacion_generar_pedido");
 		
-		if(facturacion.equalsIgnoreCase("factura")){
-			String ruc = request.getParameter("ruc_entrega_pedido");
-			String rus = request.getParameter("rs_entrega_pedido");
-		}
+	
 		
 		
 		String departamento = request.getParameter("departamento_entrega_pedido");
@@ -154,12 +152,17 @@ public class ServletGenerarPedido extends HttpServlet {
 				if(pedidodao.guardarPedido(pedido)){
 					System.out.println("SE GUARDO DATOS GENERALES DEL PEDIDOs");
 					//GRABAR DETALLE_TRANSACCION
+					
+					double total = 0;
 					for(int i = 0;i<ids.length;i++){
+						
 						DetalleTransaccionBean detalle = new DetalleTransaccionBean();
 						detalle.setVentaId(idGenerado);
 						detalle.setProductoId(Integer.parseInt(ids[i]));
 						detalle.setCantidad(Integer.parseInt(cantidades[i]));
 						detalle.setImporte(Double.parseDouble(importes[i]));
+						
+						total = total + Double.parseDouble(importes[i]);
 						
 						if(pedidodao.guardarDetallePedido(detalle)){
 							System.out.println("SE GUARDO EL DETALLE NUMERO --->"+i);
@@ -170,17 +173,99 @@ public class ServletGenerarPedido extends HttpServlet {
 					
 					System.out.println("SE GUARDO DATOS DE LOS DETALLES DEL PEDIDOs");
 					
+					//GUARDAR COMPROBANTE
+					String preSerie = "";
 					
+					ComprobanteBean comprobante = new ComprobanteBean();
+					comprobante.setVen_id(idGenerado);
+					comprobante.setTipo(facturacion.toUpperCase());
+
+					if(facturacion.equalsIgnoreCase("factura")){
+						comprobante.setRuc(request.getParameter("ruc_entrega_pedido"));
+						comprobante.setRaz_soc(request.getParameter("rs_entrega_pedido"));
+						preSerie = "FV";
+					}else{
+						comprobante.setRuc("");
+						comprobante.setRaz_soc("");
+						preSerie = "BV";
+					}
 					
+					String antiguoNumeroComprobante = pedidodao.obtenerUltimoNumeroComprobantexTipo(facturacion.toUpperCase());
 		
+					String numeroSerie = antiguoNumeroComprobante.substring(0,5);
+					System.out.println("NUMERO DE SERIE ANTIGUO -->"+numeroSerie);
+					String numeroComprobante = antiguoNumeroComprobante.substring(6);
+					System.out.println("NUMERO DE COMPROBANTE ANTIGUO --->"+numeroComprobante);
+					
+					if(antiguoNumeroComprobante.trim().equalsIgnoreCase("")){
+						
+						comprobante.setNum_com(preSerie+"01-00000001");
+						
+						
+					}else if(Integer.parseInt(numeroComprobante)==99999999){
+						
+						String primeraPartSerie = numeroSerie.substring(0,2);
+						String segundaPatSerie = numeroSerie.substring(3,4);
+						
+						int nuevoNumSerie = Integer.parseInt(segundaPatSerie)+1;
+						
+						if(String.valueOf(nuevoNumSerie).length()<2){
+							
+							comprobante.setNum_com(primeraPartSerie+"0"+nuevoNumSerie+"-00000001");
+							
+						}else{
+							
+							comprobante.setNum_com(primeraPartSerie+nuevoNumSerie+"-00000001");
+							
+						}
+
+					}else{
+						
+						int nuevoNumComprobante = Integer.parseInt(numeroComprobante)+1;
+						
+						String cadena1 = String.valueOf(nuevoNumComprobante);
+						for(int i = 0;i<8;i++){
+							
+							if(cadena1.length()<8){
+								cadena1 = "0"+cadena1;
+							}else{
+								break;
+							}
+	
+						}
+						
+						comprobante.setNum_com(numeroSerie+cadena1);
+						
+					}
+					
+					comprobante.setIgv(total/1.19);
+					comprobante.setFec_emi("now()");
+					
+					if(tipo_pago.equalsIgnoreCase("CE")){
+						comprobante.setFec_can("");
+					}else{
+						comprobante.setFec_can("now()");
+					}
+
+					if(pedidodao.guardarComprobante(comprobante)){
+						
+						request.setAttribute("mensaje", "Su pedido ha sido Procesado con exito");
+						
+					}else{
+						
+						request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
+						
+					}
+
 				}else{
 					
-					
-					
+					request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
+						
 				}
 				
 			}else{
 				
+				request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
 				
 				
 			}

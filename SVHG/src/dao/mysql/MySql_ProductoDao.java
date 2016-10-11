@@ -44,7 +44,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 				producto.setPrecio(rs.getDouble("pre"));
 				producto.setMedida(rs.getString("med"));
 				producto.setCantidad(rs.getInt("can"));
-				producto.setDescuento(rs.getInt("est_dsc"));;
+				producto.setDescuento(rs.getString("est_dsc"));;
 				producto.setPeso(rs.getDouble("peso"));
 				producto.setCategoriaBean(categoria);
 				productos.add(producto);
@@ -224,7 +224,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 				producto.setPrecio(rs.getDouble("pre"));
 				producto.setMedida(rs.getString("med"));
 				producto.setCantidad(rs.getInt("can"));
-				producto.setDescuento(rs.getInt("est_dsc"));;
+				producto.setDescuento(rs.getString("est_dsc"));;
 				producto.setPeso(rs.getDouble("peso"));
 			}
 			
@@ -367,7 +367,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 				producto.setPrecio(rs.getDouble("pre"));
 				producto.setMedida(rs.getString("med"));
 				producto.setCantidad(rs.getInt("can"));
-				producto.setDescuento(rs.getInt("est_dsc"));;
+				producto.setDescuento(rs.getString("est_dsc"));;
 				producto.setPeso(rs.getDouble("peso"));
 				producto.setCategoriaBean(categoria);
 				
