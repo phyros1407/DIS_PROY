@@ -9,6 +9,7 @@ import dao.interfaces.PersonaDao;
 import dao.interfaces.ProductoDao;
 import dao.interfaces.ProveedorDao;
 import dao.interfaces.UsuarioDao;
+import dao.interfaces.VentaDao;
 
 public abstract class DAOFactory {
 	
@@ -26,7 +27,7 @@ public abstract class DAOFactory {
 	public abstract OfertaDao getOfertaDAO();
 	public abstract ClienteDao getClienteDao();
 	public abstract DetalleTransaccionDao geDetalleTransaccionDao();
-	
+	public abstract VentaDao getVentaDao();
 	public static DAOFactory getDaoFactory(int factory){
 		
 		switch (factory) {

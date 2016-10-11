@@ -12,6 +12,7 @@ import dao.interfaces.PersonaDao;
 import dao.interfaces.ProductoDao;
 import dao.interfaces.ProveedorDao;
 import dao.interfaces.UsuarioDao;
+import dao.interfaces.VentaDao;
 import dao.mysql.MySQLEmpleadoDao;
 import dao.mysql.MySQLEmpresaDao;
 import dao.mysql.MySQLOfertaDao;
@@ -21,6 +22,7 @@ import dao.mysql.MySql_PedidoDao;
 import dao.mysql.MySql_ProductoDao;
 import dao.mysql.MySql_ProveedorDao;
 import dao.mysql.MySql_UsuarioDao;
+import dao.mysql.MySql_VentaDao;
 
 public class MySqlDAOFactory extends DAOFactory {
 	
@@ -97,5 +99,11 @@ public class MySqlDAOFactory extends DAOFactory {
 	public DetalleTransaccionDao geDetalleTransaccionDao() {
 		// TODO Auto-generated method stub
 		return new MySql_DetalleTransaccionDao();
+	}
+	
+	@Override
+	public VentaDao getVentaDao() {
+		// TODO Auto-generated method stub
+		return new MySql_VentaDao();
 	}
 }
