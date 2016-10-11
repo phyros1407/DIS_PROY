@@ -16,7 +16,16 @@ public class PersonaBean {
 	private String pass;
 	private String correo;
 	private String telefono;
+	private String ruc;
+	private String razonsocial;
+	private int idusuario;
 	
+	public int getIdusuario() {
+		return idusuario;
+	}
+	public void setIdusuario(int idusuario) {
+		this.idusuario = idusuario;
+	}
 	public String getApellidoPaterno() {
 		return apellidoPaterno;
 	}
@@ -94,6 +103,18 @@ public class PersonaBean {
 	}
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+	public String getRuc() {
+		return ruc;
+	}
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
+	}
+	public String getRazonsocial() {
+		return razonsocial;
+	}
+	public void setRazonsocial(String razonsocial) {
+		this.razonsocial = razonsocial;
 	}
 	
 	
