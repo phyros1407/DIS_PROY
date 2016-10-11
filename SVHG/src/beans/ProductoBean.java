@@ -14,7 +14,7 @@ public class ProductoBean {
 	private String medida;
 	private int cantidad;
 	private double precio;
-	private int descuento;
+	private String descuento;
 	private double peso;
 	private CategoriaBean categoriaBean;
 	
@@ -85,10 +85,10 @@ public class ProductoBean {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	public int getDescuento() {
+	public String getDescuento() {
 		return descuento;
 	}
-	public void setDescuento(int descuento) {
+	public void setDescuento(String descuento) {
 		this.descuento = descuento;
 	}
 	public double getPeso() {
