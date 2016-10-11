@@ -127,7 +127,7 @@ div.container4 p {
 				<br>
 				<p align="right" style="margin-right: 50px;"> Total : S/.<label id="lblPrecio">0.00</label> </p>
 				
-				<p align="right" style="margin-right: 50px;"> Asignar Oferta : <input type="text" onchange="descuento()" onkeypress="return solonumeros(event)" id="oferta" name="oferta" maxlength="2" size="2"> %</p>
+				<p align="right" style="margin-right: 50px;"> Asignar Oferta : <input type="text" onchange="descuento()" onkeypress="return solonumeros(event)" id="oferta" name="oferta" maxlength="2" size="2" required> %</p>
 			
 				
 				<p align="right" style="margin-right: 50px;"> Precio Venta : S/.<label id="lblVenta">0.00</label></p>
@@ -136,21 +136,21 @@ div.container4 p {
 <div class="col-sm-12 col-md-6">
 <br>
 <div class=container4 style="border:1px solid black;">
-  <p>IMAGEN!
+  <img alt="" src="images/default.jpg" style="height: 250px; width: 450px;">
 </div>
 <br>
-<input type="file" class="file" onchange="control(this)" name="fotoOfer">
+<input type="file" class="file" onchange="control(this)" name="fotoOfer" required>
 <br>
 <div class="form-group"  >						
 <label class="control-label col-md-3">Del :	</label>
-<div class="col-md-5"><input id="dateD" name="dateD" type="date" class="form-control" onchange="hasta()"></div>
+<div class="col-md-5"><input id="dateD" name="dateD" type="date" class="form-control" onchange="hasta()" required></div>
 <br>
 <br>
 </div>
 
 <div class="form-group"  >	
 <label class="control-label col-md-3">Hasta :	</label>
-<div class="col-md-5"><input id="dateH" name="dateH" type="date" class="form-control"></div>
+<div class="col-md-5"><input id="dateH" name="dateH" type="date" class="form-control" required></div>
 <br>
 <br>
 </div>
@@ -158,7 +158,7 @@ div.container4 p {
 <div class="form-group"  >	
 <label class="control-label col-md-3">Hora Fin :	</label>
 <div class="col-md-4">
-<select name="horaOfer" class="form-control">
+<select name="horaOfer" class="form-control" required>
 <% for(int i=1;i<=23;i++){ 
 if(i<10){%>
 <option value="<%=i%>">0<%=i %>:00</option>
@@ -174,7 +174,7 @@ if(i<10){%>
 </div>
 <div class="form-group"  >
 <label class="control-label col-md-3">Ingrese la cantidad (Unid) :	</label>
-<div class="col-md-4"><input onkeypress="return solonumeros(event)" name="txtCan" type="text" class="form-control" maxlength="2"></div>
+<div class="col-md-4"><input onkeypress="return solonumeros(event)" name="txtCan" type="text" class="form-control" maxlength="2" required></div>
 <br>
 <br>
 <br></div>
@@ -204,7 +204,22 @@ if(i<10){%>
 
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#myTable').DataTable();
+    var f = new Date();
+    var anioS=f.getFullYear();
+    var mesS=f.getMonth()+1;
+    var diaS=f.getDate();
+    var diaH=diaS+1;
+    console.log(mesS.toString().length);
+    
+    if(mesS.toString().length==1){
+    mesS='0'+mesS+'';
+    }
+    if(diaS.toString().length==1){
+        diaS='0'+diaS+'';
+        diaH='0'+diaH+'';
+        }
+    document.getElementById("dateD").min=anioS+'-'+mesS+'-'+diaS;
+    document.getElementById("dateH").min=anioS+'-'+mesS+'-'+diaH;
 });
 
 function categoria(){
@@ -290,18 +305,7 @@ function hasta(){
 	$('#dateH').val(desde);
 }
 
-$(document).ready(function(){
-	var f = new Date();
-	var anioS=f.getFullYear();
-	var mesS=f.getMonth()+1;
-	console.log(mesS.toString().length);
-	if(mesS.toString().length==1){
-		mesS='0'+mesS+'';
-	}
-	var diaS=f.getDate();
-	document.getElementById("dateD").min=anioS+'-'+mesS+'-'+diaS;
-	document.getElementById("dateH").min=anioS+'-'+mesS+'-'+(diaS+1);
-})
+
 
 </script>
 
