@@ -62,6 +62,7 @@ function control(f){
     var t=f.cloneNode(true);
     t.value='';
     f.parentNode.replaceChild(t,f);
+    
     alert("¡ARCHIVO INVALIDO, SELECCIONE OTRO!");;
 }
 

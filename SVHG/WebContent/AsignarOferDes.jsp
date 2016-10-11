@@ -36,7 +36,11 @@ div.container4 p {
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) }</style>
+    transform: translate(-50%, -50%) }
+    
+stock{
+}   
+    </style>
 
 <!-- END HEAD -->
 
@@ -136,10 +140,10 @@ div.container4 p {
 <div class="col-sm-12 col-md-6">
 <br>
 <div class=container4 style="border:1px solid black;">
-  <img alt="" src="images/default.jpg" style="height: 250px; width: 450px;">
+  <img alt="" src="images/default.jpg" style="height: 250px; width: 450px;" id="imgSel">
 </div>
 <br>
-<input type="file" class="file" onchange="control(this)" name="fotoOfer" required>
+<input type="file" class="file" onchange="validarImg(this)" name="fotoOfer" id="fotoOfer" required>
 <br>
 <div class="form-group"  >						
 <label class="control-label col-md-3">Del :	</label>
@@ -174,7 +178,7 @@ if(i<10){%>
 </div>
 <div class="form-group"  >
 <label class="control-label col-md-3">Ingrese la cantidad (Unid) :	</label>
-<div class="col-md-4"><input onkeypress="return solonumeros(event)" name="txtCan" type="text" class="form-control" maxlength="2" required></div>
+<div class="col-md-4"><input onkeypress="return solonumeros(event)" id="txtCan" name="txtCan" type="number" class="form-control" max="99" min="1" required></div>
 <br>
 <br>
 <br></div>
@@ -263,14 +267,15 @@ function agregar(){
 	if(document.getElementById('ofertas'+<%=i%>+'').checked){
 			console.log(<%=productos.get(i).getIdProducto()%>);
 			$('#ofertasT'+<%=i%>+'').remove();
-			$('#proAgre').append("<tr id=ofertasA<%=i%>><td style=width:200px;><label id=nombreP<%=i%>><%=productos.get(i).getDescripcion()%></label></td><td style=width:20%;><%=productos.get(i).getCantidad()%></td><td style=width:20%;><%=productos.get(i).getPrecio()%></td><td style=width:20%;>"+
+			$('#proAgre').append("<tr id=ofertasA<%=i%>><td style=width:200px;><label id=nombreP<%=i%>><%=productos.get(i).getDescripcion()%></label></td><td style=width:20%; class=stock ><%=productos.get(i).getCantidad()%></td><td style=width:20%;><%=productos.get(i).getPrecio()%></td><td style=width:20%;>"+
 			"<a href=# onclick=eliminar(<%=i%>,<%=productos.get(i).getIdProducto()%>,<%=productos.get(i).getPrecio()%>) >Eliminar</a><input type=hidden name=ofertasAID<%=i%> value=<%=productos.get(i).getIdProducto()%> ><input type=hidden name=ofertasAP<%=i%> value=<%=productos.get(i).getPrecio()%> ></td></tr>");
 			var precio=parseInt($('#lblPrecio').text());
 			console.log(precio);
 			$('#lblPrecio').text(precio+<%=productos.get(i).getPrecio()%>);
 		}}<%}%>
 		
-	descuento();	
+	descuento();
+	compStock();
 	}
 	
 
@@ -284,6 +289,7 @@ function eliminar(id,valor,precio){
 	var total=parseInt($('#lblPrecio').text());
 	$('#lblPrecio').text(total-precio);
 	descuento();
+	compStock();
 	
 }		
 	
@@ -303,6 +309,56 @@ function hasta(){
 	console.log(desde);
 	document.getElementById("dateH").min=desde;
 	$('#dateH').val(desde);
+}
+
+function compStock(){
+	var stockM=10000;
+	$('#proAgre .stock').each(function()
+			{			  	
+			  var stock=($(this).html());
+			  if(stock<stockM){
+				  stockM=stock;
+				  console.log(stockM)
+			  }
+			});
+	document.getElementById("txtCan").max=stockM;
+}
+
+function mostrarImg(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imgSel').attr('src', e.target.result);
+
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function validarImg(f){
+	var ext=['gif','jpg','jpeg','png'];
+    var v=f.value.split('.').pop().toLowerCase();
+    var cont=0;
+    console.log(cont);
+    for(var i=0,n;n=ext[i];i++){
+        if(n.toLowerCase()==v){            
+        cont=cont+1;
+        console.log(cont);      
+        }
+        
+    }    
+    if(cont==0){
+
+        $('#imgSel').attr('src','images/default.jpg');
+        alert("¡ARCHIVO INVALIDO, SELECCIONE OTRO!");
+        var t=f.cloneNode(true);
+        t.value='';
+        f.parentNode.replaceChild(t,f);
+    }else{    
+    	mostrarImg(f);
+    }
 }
 
 
