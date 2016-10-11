@@ -105,15 +105,21 @@ public class ServletOferta extends HttpServlet {
 		}
 		
 		try {
+			if(llenos==1){
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Descuento activado.');");
+				out.println("location='ServletOferta'");
+				out.println("</script>");
+			}else{
 			if(ofertadao.registrarOferta(productoId,productoPr,descuento,fecIni,fecFin,horaFin,cantidad,fotoOfer)){
 				out.println("<script type=\"text/javascript\">");
-				out.println("alert('La oferta se guardó satisfactoriamente');");
+				out.println("alert('Oferta activada');");
 				out.println("location='ServletOferta'");
 				out.println("</script>");
 			System.out.println("dio");
 			}else{
 				System.out.println("no dio wey");
-			}
+			}}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
