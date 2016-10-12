@@ -217,12 +217,15 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 			
 		}catch(Exception e){
-			e.getMessage();
+			System.out.println("ERROR :"+e.getMessage());
 		}
 		
 		return num;
 	}
 
+	
+	
+	//------------------------------------------------------------------BARBIERI----------------------------------------------------------------------------------------------
 	@Override
 	public int guardarTransaccion(TransaccionBean transaccion) throws Exception {
 		// TODO Auto-generated method stub
@@ -233,7 +236,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			Connection con=MySqlDAOFactory.obtenerConexion();
 			Statement stmt=con.createStatement();
 			
-			String query = "INSER INTO transaccion (ID_USUARIO,IDE,NUM,EST,FEC_ENT,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI) "
+			String query = "INSERT INTO transaccion (ID_USUARIO,IDE,NUM,EST,FEC_ENT,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI) "
 					+ "VALUES ("+transaccion.getId_usuario()+",'"+transaccion.getIde()+"','"+transaccion.getNum()+"','"+transaccion.getEst()+"','"+transaccion.getFec_ent()+"','USER',now(),'USER',now()) ;";
 			
 			System.out.println("QUERY PARA GUARDAR TRANSACCION ----> "+query);
@@ -256,7 +259,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 		}catch(Exception e){
 			
-			e.getMessage();
+			System.out.println("ERROR :"+e.getMessage());
 			
 		}
 		
@@ -276,7 +279,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 			
 			String query = " INSERT INTO pedido (PED_ID,TIP_ENT,TIPO_PAG,DEP_ENT,PRO_ENT,DIS_ENT,DIR_ENT,REF,TEL_REF_1,TEL_REF_2,EST_ENT,CUO) "
-					+ " VALUES("+pedido.getId()+",'"+pedido.getTipoEntrega()+"','"+pedido.getTipoPago()+"','"+pedido.getDepartamento()+"','"+pedido.getProvincia()+"','"+pedido.getDistrto()+"','"+pedido.getDireccion()+"','"+pedido.getReferencia()+"','"+pedido.getTelefono1()+"','"+pedido.getTelefono2()+"',"+pedido.getCuota()+");";
+					+ " VALUES("+pedido.getId()+",'"+pedido.getTipoEntrega()+"','"+pedido.getTipoPago()+"','"+pedido.getDepartamento()+"','"+pedido.getProvincia()+"','"+pedido.getDistrto().replace("Ã?", "Ñ")+"','"+pedido.getDireccion()+"','"+pedido.getReferencia()+"','"+pedido.getTelefono1()+"','"+pedido.getTelefono2()+"','P',"+pedido.getCuota()+");";
 			
 			System.out.println("QUERY PARA GUARDAR PEDIDO ----> "+query);
 			
@@ -287,7 +290,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			}
 			
 		}catch(Exception e){
-			e.getMessage();
+			System.out.println("ERROR :"+e.getMessage());
 		}
 		
 		
@@ -318,7 +321,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 		}catch(Exception e){
 			
-			e.getMessage();
+			System.out.println("ERROR :"+e.getMessage());
 			
 		}
 		
@@ -337,19 +340,22 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			Connection con=MySqlDAOFactory.obtenerConexion();
 			Statement stmt=con.createStatement();
 			
-			String query = " INSERT INTO comprobante_pago (VEN_ID,TIPO,RUC,RAZ_SOC,NUM_COM,IGV,FEC_EMI,FEC_CAN) "
-					+ " VALUES ("+comprobante.getVen_id()+",'"+comprobante.getTipo()+"','"+comprobante.getRuc()+"','"+comprobante.getRaz_soc()+"','"+comprobante.getNum_com()+"',"+comprobante.getIgv()+","+comprobante.getFec_emi()+","+comprobante.getFec_can()+");";
+			String query = " INSERT INTO comprobante_pago (VEN_ID ,TIPO ,RUC ,RAZ_SOC ,NUM_COM ,IGV ,FEC_EMI ,FEC_CAN ) "
+					+ " VALUES ( "+comprobante.getVen_id()+" , '"+comprobante.getTipo()+"','"+comprobante.getRuc()+"','"+comprobante.getRaz_soc()+"','"+comprobante.getNum_com()+"',"+comprobante.getIgv()+","+comprobante.getFec_emi()+","+comprobante.getFec_can()+" )";
+			
+			System.out.println("QUERY PARA GUARDAR COMPROBANTE ---> "+query);
 			
 			int filas = stmt.executeUpdate(query);
 			
 			if(filas == 1){
+				System.out.println("SE GUARDO CON EXITO :DDDDD");
 				flag = true;
 			}
 			
 			
 		}catch(Exception e){
 			
-			e.getMessage();
+			System.out.println("ERROR :"+e.getMessage());
 			
 		}
 		
@@ -366,8 +372,9 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			Connection con=MySqlDAOFactory.obtenerConexion();
 			Statement stmt=con.createStatement();
 			
-			String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' ORDER BY NUM_COM DESC LIMIT 1";
-			
+			//String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' ORDER BY NUM_COM DESC LIMIT 1";
+			String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'BV' ORDER BY NUM_COM DESC LIMIT 1";
+			System.out.println("QUERY PARA OBTENER EL ULTIMO NUMERO DE COMPROBANTE ---->"+query);
 			ResultSet rs = stmt.executeQuery(query);
 			
 			if(rs.isBeforeFirst()){
@@ -382,7 +389,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 			
 		}catch(Exception e){
-			e.getMessage();
+			System.out.println("ERROR :"+e.getMessage());
 		}
 		
 		

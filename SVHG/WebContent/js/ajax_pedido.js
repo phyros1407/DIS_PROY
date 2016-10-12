@@ -260,34 +260,34 @@
 			}
 		}
 	
-
+		function anios(){
+			
+			 var hoy = new Date();
+				
+				var anoActual = hoy.getFullYear();
+				
+				var valor  = parseInt(anoActual);
+				
+				var cadena = "";
+				
+				
+				for(var i=0;i<29;i++){
+					
+					valor = valor + 1;
+					
+					cadena = cadena + ("<option value='"+valor+"'>"+valor+"</option>");
+					
+				}
+				
+				
+				$("#anioCad").html(cadena);
+			
+			
+		}
+		
+		
 		$(document).ready(
 				function() {
-					
-					$("#btnTarjeta").click(function(){
-						
-							    var hoy = new Date();
-								
-								var anoActual = hoy.getFullYear();
-								
-								var valor  = parseInt(anoActual);
-								
-								var cadena = "<option value=00>AAAA</option><option value='"+valor+"'>"+valor+"</option>";
-								
-								
-								for(var i=0;i<29;i++){
-									
-									valor = valor + 1;
-									
-									cadena = cadena + ("<option value='"+valor+"'>"+valor+"</option>");
-									
-								}
-								
-								
-								$("#anioCad").html(cadena);
-				
-					});
-	
 					
 					
 					$('input[name="entrega"]').click(function() {
@@ -311,7 +311,8 @@
 								$(".step3").hide(1000);
 								$("#formuCasa").show(1000);
 								$("#boton3").show(1000);
-								
+								$("#para_local").hide(1000);
+								$("#para_casa").hide(1000);
 								
 								
 							}
@@ -330,6 +331,8 @@
 								$("#formuCasa").hide(1000);
 								$(".step2").hide();
 								$(".step3").show();
+								$("#para_local").hide(1000);
+								$("#para_casa").hide(1000);
 								
 							
 			
@@ -354,7 +357,7 @@
 							$(".step2").show(1000);
 							$(".pagenv").hide(1000);
 							$("#valEnv").text("$/.0.00");
-							
+							$("#para_local").show(1000);
 						}
 						
 						
@@ -384,7 +387,7 @@
 							$("#infoDirEnv").show(1000);
 							$(".pagenv").show(1000);
 							$("#valEnv").text("$/.20.00");
-		
+							$("#para_casa").show(1000);
 							//DATOS DEL RECEPTOR
 							//OBTENER VAL
 							//var nombre = $("#").val();
@@ -548,7 +551,9 @@
 		}
 		
 		
-		function datosAlForm(){
+		function datosAlForm(formularioDestino){
+			
+			alert(formularioDestino);
 			
 			var tipoI = "text";
 			
@@ -612,14 +617,14 @@
 			     .attr("id", "producto"+i)
 			     .attr("value", productos[i])
 			     .attr("name", "productosIds")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				//AGREGAR CANTIDADES AL FORM 
 				$("<input type='text'/>")
 			     .attr("id", "cantidad"+i)
 			     .attr("value", cantidades[i])
 			     .attr("name", "productosCantidad")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				
 				//AGREGAR IMPORTES AL FORM 
@@ -627,7 +632,7 @@
 			     .attr("id", "importe"+i)
 			     .attr("value", importes[i])
 			     .attr("name", "productosImporte")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 			}
 			
@@ -636,18 +641,18 @@
 		     .attr("id", "lugar_entrega")
 		     .attr("value",$('input:radio[name=entrega]:checked').val())
 		     .attr("name", "tipo_entrega_pedido")
-		     .appendTo("#form_generar_pedido");
+		     .appendTo(formularioDestino);
 			
 			
 			$("<input type='text'/>")
 		     .attr("value",$("input:radio[name=fecha]:checked").val())
 		     .attr("name", "fecha_generar_pedido")
-		     .appendTo("#form_generar_pedido");
+		     .appendTo(formularioDestino);
 			
 			$("<input type='"+tipoI+"'/>")
 		     .attr("value",$("#diu").val())
 		     .attr("name", "usuario_generar_pedido")
-		     .appendTo("#form_generar_pedido");
+		     .appendTo(formularioDestino);
 			
 			
 			
@@ -659,24 +664,24 @@
 					$("<input type='text'/>")
 				     .attr("value","")
 				     .attr("name", "ruc_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 					$("<input type='text'/>")
 				     .attr("value","")
 				     .attr("name", "rs_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 				}else{
 					
 					$("<input type='text'/>")
 				     .attr("value",$("#ruc_fac").val())
 				     .attr("name", "ruc_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 					$("<input type='text'/>")
 				     .attr("value",$("#").val())
 				     .attr("name", "rs_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 				}
 				
@@ -685,47 +690,48 @@
 				$("<input type='text'/>")
 			     .attr("value",$("#facturacion").val())
 			     .attr("name", "facturacion_generar_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value","LIMA")
 			     .attr("name", "departamento_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value","LIMA")
 			     .attr("name", "provincia_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value","BREÑA")
 			     .attr("name", "distrito_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value","LIMA")
 			     .attr("name", "referencia_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value","JR. INDEPENDENCIA")
 			     .attr("name", "direccion_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value","")
 			     .attr("name", "telefono_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value","")
 			     .attr("name", "telefono_entrega_pedido2")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
+				 .attr("id", "cuota_form")
 			     .attr("value","0")
 			     .attr("name", "cuotas_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 		
 			}
 			
@@ -736,24 +742,24 @@
 					$("<input type='text'/>")
 				     .attr("value","")
 				     .attr("name", "ruc_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 					$("<input type='text'/>")
 				     .attr("value","")
 				     .attr("name", "rs_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 				}else{
 					
 					$("<input type='text'/>")
 				     .attr("value",$("#ruc_fac").val())
 				     .attr("name", "ruc_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 					$("<input type='text'/>")
 				     .attr("value",$("#rs_fac").val())
 				     .attr("name", "rs_entrega_pedido")
-				     .appendTo("#form_generar_pedido");
+				     .appendTo(formularioDestino);
 					
 				}
 				
@@ -763,60 +769,115 @@
 				$("<input type='text'/>")
 			     .attr("value",$("#facturacion").val())
 			     .attr("name", "facturacion_generar_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value",$("#departamento option:selected").text())
 			     .attr("name", "departamento_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value",$("#provincia option:selected").text())
 			     .attr("name", "provincia_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value",$("#distrito option:selected").text())
 			     .attr("name", "distrito_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value",$("#direccion").val())
 			     .attr("name", "direccion_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value",$("#referencia").val())
 			     .attr("name", "referencia_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value",$("#telefono1").val())
 			     .attr("name", "telefono_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
 			     .attr("value",$("#telefono2").val())
 			     .attr("name", "telefono_entrega_pedido2")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 				$("<input type='text'/>")
-			     .attr("value",$("#cuota_tarjeta").val())
+				 .attr("id", "cuota_form")
+			     .attr("value","0")
 			     .attr("name", "cuotas_entrega_pedido")
-			     .appendTo("#form_generar_pedido");
+			     .appendTo(formularioDestino);
 				
 			}
 		     
 
 		}
 		
-		function ejecutarForm(){
+		//EJECUTAR
+		function ejecutarForm(formularioDestino){
 			
-			$("#form_generar_pedido").submit();
+			$(formularioDestino).submit();
 			
 		}
 		
-		
+         function pagar(){
+        	 
+        	 var tipo_tarjeta = $("#tipo_tarjeta").val();
+        	 var marca_tarjeta = $("#marca_tarjeta").val();
+        	 var num_tar = $("#num_tar").val();
+        	 var mesCad = $("#mesCad").val();
+        	 var anioCad = $("#anioCad").val();
+        	 var cvc = $("#cvc").val();
+        	 var cuota_tarjeta = $("#cuota_tarjeta").val();
+        	 var monto = $("#subTotalV").val();
+        	 var action = "pagos";
+        	 
+        	 alert(cvc);
+        	 
+        	 if(tipo_tarjeta==""||marca_tarjeta==""||num_tar==""||mesCad==""||anioCad==""||cvc.trim()==""||cuota_tarjeta==""){
+        		 
+        		 alert("Llene todo los campos requeridos");
+        		 
+        	 }else{
+        		 $.get('http://servicios.j.facilcloud.com/SERVICIOS_PAGO_TARJETA/servicios',{
+     				
+     				action : action,
+     				tip_tar : tipo_tarjeta,
+     				mar_tar : marca_tarjeta,
+     				numero : num_tar,
+     				cvc : cvc,
+     				mes : mesCad,
+     				anio : anioCad,
+     				monto : monto
+     				
+     			},function(response){
+     				
+     				var respuesta = response['object'];
+     			
+     				if(respuesta == "APROBADO"){
+     					
+     					alert(respuesta);
+     					
+     					ejecutarForm("#generar_pedido_tarjeta");
+     					
+     				}else{
+     					
+     					alert("no se aprobo");
+     					
+     				}
+
+     				
+     			});
+     			
+
+        	 }
+        	 
+
+         }
 		
 		
 		

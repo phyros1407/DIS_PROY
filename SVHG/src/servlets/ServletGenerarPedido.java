@@ -64,13 +64,13 @@ public class ServletGenerarPedido extends HttpServlet {
 		String departamento = request.getParameter("departamento_entrega_pedido");
 		String provincia = request.getParameter("provincia_entrega_pedido");
 		String distrito = request.getParameter("distrito_entrega_pedido");
-		String direccion = request.getParameter("distrito_entrega_pedido");
+		String direccion = request.getParameter("direccion_entrega_pedido");
 		String referencia = request.getParameter("referencia_entrega_pedido");
 		
 		
 		
 		int cuotas = Integer.parseInt(request.getParameter("cuotas_entrega_pedido"));
-		
+		System.out.println("CUOTAS -----> "+ cuotas );
 		
 		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
 		PedidoDao pedidodao = dao.getPedidoDAO();
@@ -107,7 +107,12 @@ public class ServletGenerarPedido extends HttpServlet {
 			transaccion.setId_usuario(id_usuario);
 			transaccion.setIde("P");//IDENTIFICADOR PEDIDO
 			transaccion.setNum(codigoNuevo);
-			transaccion.setEst("P");//ESTADO PENDIENTE
+			if(tipo_pago.equalsIgnoreCase("CE")){
+				transaccion.setEst("P");//ESTADO PENDIENTE
+			}else{
+				transaccion.setEst("C");//ESTADO PENDIENTE
+			}
+			
 			transaccion.setFec_ent(fecha);
 			
 			int idGenerado = pedidodao.guardarTransaccion(transaccion);
@@ -141,9 +146,9 @@ public class ServletGenerarPedido extends HttpServlet {
 				}
 				
 				if(!(request.getParameter("telefono_entrega_pedido2")).equalsIgnoreCase("")){
-					pedido.setTelefono1(request.getParameter("telefono_entrega_pedido2"));
+					pedido.setTelefono2(request.getParameter("telefono_entrega_pedido2"));
 				}else{
-					pedido.setTelefono1("NO CONT.");
+					pedido.setTelefono2("NO CONT.");
 				}
 				
 				pedido.setEstado("P");
@@ -190,85 +195,98 @@ public class ServletGenerarPedido extends HttpServlet {
 						preSerie = "BV";
 					}
 					
+					
 					String antiguoNumeroComprobante = pedidodao.obtenerUltimoNumeroComprobantexTipo(facturacion.toUpperCase());
-		
-					String numeroSerie = antiguoNumeroComprobante.substring(0,5);
-					System.out.println("NUMERO DE SERIE ANTIGUO -->"+numeroSerie);
-					String numeroComprobante = antiguoNumeroComprobante.substring(6);
-					System.out.println("NUMERO DE COMPROBANTE ANTIGUO --->"+numeroComprobante);
+					
+					
 					
 					if(antiguoNumeroComprobante.trim().equalsIgnoreCase("")){
 						
 						comprobante.setNum_com(preSerie+"01-00000001");
 						
 						
-					}else if(Integer.parseInt(numeroComprobante)==99999999){
-						
-						String primeraPartSerie = numeroSerie.substring(0,2);
-						String segundaPatSerie = numeroSerie.substring(3,4);
-						
-						int nuevoNumSerie = Integer.parseInt(segundaPatSerie)+1;
-						
-						if(String.valueOf(nuevoNumSerie).length()<2){
-							
-							comprobante.setNum_com(primeraPartSerie+"0"+nuevoNumSerie+"-00000001");
-							
-						}else{
-							
-							comprobante.setNum_com(primeraPartSerie+nuevoNumSerie+"-00000001");
-							
-						}
-
 					}else{
+						System.out.println("ESTO ES LO QUE DEVUELE EN ANTIGUO COMPROBANTE ----> "+antiguoNumeroComprobante);
+						String numeroSerie = antiguoNumeroComprobante.substring(0,5);
+						System.out.println("NUMERO DE SERIE ANTIGUO -->"+numeroSerie);
+						String numeroComprobante = antiguoNumeroComprobante.substring(6);
+						System.out.println("NUMERO DE COMPROBANTE ANTIGUO --->"+numeroComprobante);
 						
-						int nuevoNumComprobante = Integer.parseInt(numeroComprobante)+1;
-						
-						String cadena1 = String.valueOf(nuevoNumComprobante);
-						for(int i = 0;i<8;i++){
+					
+						if(Integer.parseInt(numeroComprobante)==99999999){
 							
-							if(cadena1.length()<8){
-								cadena1 = "0"+cadena1;
+							String primeraPartSerie = numeroSerie.substring(0,2);
+							String segundaPatSerie = numeroSerie.substring(3,4);
+							
+							int nuevoNumSerie = Integer.parseInt(segundaPatSerie)+1;
+							
+							if(String.valueOf(nuevoNumSerie).length()<2){
+								
+								comprobante.setNum_com(primeraPartSerie+"0"+nuevoNumSerie+"-00000001");
+								
 							}else{
-								break;
+								
+								comprobante.setNum_com(primeraPartSerie+nuevoNumSerie+"-00000001");
+								
 							}
-	
+
+						}else{
+						
+							int nuevoNumComprobante = Integer.parseInt(numeroComprobante)+1;
+							
+							String cadena1 = String.valueOf(nuevoNumComprobante);
+							for(int i = 0;i<8;i++){
+								
+								if(cadena1.length()<8){
+									cadena1 = "0"+cadena1;
+								}else{
+									break;
+								}
+		
+							}
+							
+							comprobante.setNum_com(numeroSerie+cadena1);
+						
 						}
-						
-						comprobante.setNum_com(numeroSerie+cadena1);
-						
 					}
 					
-					comprobante.setIgv(total/1.19);
+					double igvTotal = total/1.19;
+					
+					comprobante.setIgv(Math.round(igvTotal * 100.00) / 100.00);
 					comprobante.setFec_emi("now()");
 					
 					if(tipo_pago.equalsIgnoreCase("CE")){
-						comprobante.setFec_can("");
+						comprobante.setFec_can("null");
 					}else{
 						comprobante.setFec_can("now()");
 					}
 
 					if(pedidodao.guardarComprobante(comprobante)){
 						
+						System.out.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 						request.setAttribute("mensaje", "Su pedido ha sido Procesado con exito");
 						
 					}else{
-						
+						System.out.println( "NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 						request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
 						
 					}
 
 				}else{
-					
+					System.out.println(" NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 					request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
 						
 				}
 				
 			}else{
 				
+				System.out.println(" NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 				request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
 				
 				
 			}
+			
+			response.sendRedirect("home.jsp");
 			
 		}catch(Exception e){
 			
