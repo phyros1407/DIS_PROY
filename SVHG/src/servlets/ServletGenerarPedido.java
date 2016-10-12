@@ -7,12 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import beans.ComprobanteBean;
 import beans.DetalleTransaccionBean;
+import beans.EmpresaBean;
 import beans.PedidoBean;
 import beans.TransaccionBean;
 import dao.interfaces.PedidoDao;
 import daofactory.DAOFactory;
+import util.ResponseObject;
 
 /**
  * Servlet implementation class ServletGenerarPedido
@@ -34,7 +38,36 @@ public class ServletGenerarPedido extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		int  id = Integer.parseInt(request.getParameter("id"));
+		
+		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+		PedidoDao pedidodao = dao.getPedidoDAO();
+		
+		EmpresaBean empresa;
+		try {
+			empresa = pedidodao.buscarEmpresaXUsuario(id);
+			
+			ResponseObject responseobj=null;
+			if(empresa!=null){
+			responseobj=new ResponseObject();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			responseobj.setSuccess(true);
+			responseobj.setObject(empresa);
+			}
+			response.getWriter().write(new Gson().toJson(responseobj));
+			System.out.println("json" + new Gson().toJson(responseobj));
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 	/**
@@ -58,7 +91,7 @@ public class ServletGenerarPedido extends HttpServlet {
 		
 		String facturacion = request.getParameter("facturacion_generar_pedido");
 		
-	
+		double rec_ent = Double.parseDouble(request.getParameter("cargo_entrega_pedido"));
 		
 		
 		String departamento = request.getParameter("departamento_entrega_pedido");
@@ -153,6 +186,7 @@ public class ServletGenerarPedido extends HttpServlet {
 				
 				pedido.setEstado("P");
 				pedido.setCuota(cuotas);
+				pedido.setCargo_entrega(rec_ent);
 				
 				if(pedidodao.guardarPedido(pedido)){
 					System.out.println("SE GUARDO DATOS GENERALES DEL PEDIDOs");
@@ -202,7 +236,7 @@ public class ServletGenerarPedido extends HttpServlet {
 					
 					if(antiguoNumeroComprobante.trim().equalsIgnoreCase("")){
 						
-						comprobante.setNum_com(preSerie+"01-00000001");
+						comprobante.setNum_com(preSerie+"00-00000001");
 						
 						
 					}else{

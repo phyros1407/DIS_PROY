@@ -16,7 +16,7 @@
       	<form id="form_generar_pedido" method="post" action="ServletGenerarPedido">
       		<input type="text" value="CE" name="tipo_pago">
       	</form>
-      		<button type="button" onclick="ejecutarForm('form_generar_pedido');" class="btn btn-default">Generar Pedido</button>
+      		<button type="button" onclick="ejecutarForm('#form_generar_pedido');" class="btn btn-default">Generar Pedido</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>
     </div>

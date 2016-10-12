@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import beans.ComprobanteBean;
 import beans.DetalleTransaccionBean;
+import beans.EmpresaBean;
 import beans.PedidoBean;
 import beans.TransaccionBean;
 
@@ -18,6 +19,7 @@ public interface PedidoDao {
 	public boolean guardarDetallePedido(DetalleTransaccionBean detalle) throws Exception;
 	public String obtenerUltimoNumeroComprobantexTipo(String tipo) throws Exception;
 	public boolean guardarComprobante(ComprobanteBean comprobante) throws Exception;
+	public EmpresaBean buscarEmpresaXUsuario(int id)throws Exception;
 	
 	public boolean actualizarEstadoPedido(String id) throws Exception;
 

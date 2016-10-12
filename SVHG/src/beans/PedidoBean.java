@@ -26,6 +26,7 @@ public class PedidoBean {
 	private String tipoEntrega;
 	private String telefono1,telefono2;
 	private int cuota;
+	private double cargo_entrega;
 	
 	//AUDITORIA 
 	private String usu_crea_regi;
@@ -199,6 +200,14 @@ public class PedidoBean {
 	}
 	public void setCuota(int cuota) {
 		this.cuota = cuota;
+	}
+	
+	
+	public double getCargo_entrega() {
+		return cargo_entrega;
+	}
+	public void setCargo_entrega(double cargo_entrega) {
+		this.cargo_entrega = cargo_entrega;
 	}
 	public String getUsu_crea_regi() {
 		return usu_crea_regi;

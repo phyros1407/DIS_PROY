@@ -288,6 +288,8 @@
 		
 		$(document).ready(
 				function() {
+
+					
 					
 					
 					$('input[name="entrega"]').click(function() {
@@ -305,6 +307,24 @@
 							}else{
 								
 								
+								$("#lista_cargo_entrega").slideDown();
+								
+								var subtotal = $("#subTotalV").val();
+								
+								if(parseFloat(subtotal)<200){
+									
+									$("#cargo_entrega").text("S/. 0.00");
+									$("#total").text("S/. "+(parseFloat(subtotal)));
+									$("#totalV").val("S/. "+(parseFloat(subtotal)));
+									
+								}else{
+									
+									$("#cargo_entrega").text("S/. 20.00");
+									$("#total").text("S/. "+(parseFloat(subtotal)+parseFloat(20.00)));
+									$("#totalV").val("S/. "+(parseFloat(subtotal)+parseFloat(20.00)));
+									
+								}
+								
 								cargarDep();
 								$(".step1").hide();
 								$(".step2").hide(1000);
@@ -314,6 +334,7 @@
 								$("#para_local").hide(1000);
 								$("#para_casa").hide(1000);
 								
+							
 								
 							}
 							
@@ -334,7 +355,31 @@
 								$("#para_local").hide(1000);
 								$("#para_casa").hide(1000);
 								
-							
+					
+								$("#lista_cargo_entrega").slideUp();
+								
+								var subtotal1 = $("#totalV").val();
+								
+								var total = parseFloat(subtotal1-20.00);
+						
+								
+								if(total<200){
+									
+									$("#cargo_entrega").text("S/. 0.00");
+									
+									$("#total").text("S/. "(parseFloat(subtotal1)));
+									$("#totalV").val("S/. "+(parseFloat(subtotal1)));
+									
+								}else{
+									
+									$("#cargo_entrega").text("S/. 20.00");
+		
+									$("#total").text("S/. "+total.toFixed(2));
+									$("#totalV").val("S/. "+total.toFixed(2));
+									
+								}
+								
+								
 			
 						}
 					});
@@ -358,6 +403,7 @@
 							$(".pagenv").hide(1000);
 							$("#valEnv").text("$/.0.00");
 							$("#para_local").show(1000);
+							
 						}
 						
 						
@@ -420,7 +466,7 @@
 					var ide=localStorage.key(i);
 					arreglo.push(ide);
 					//alert(arreglo);
-	             console.log(localStorage.length+"  tamñao ->  "+ide+"  orden   "+i+"  ARREGLOO  "+arreglo[i]);
+	             console.log(localStorage.length+"  tamaño ->  "+ide+"  orden   "+i+"  ARREGLOO  "+arreglo[i]);
 	             }
 			  $.post('Carrito', {
 				  
@@ -447,9 +493,13 @@
 			    			
 			    			
 			    			
+			    			
+			    			
+			    			
 			    			//$("#igv").text("S/. "+igv.toFixed(2));
 			    			
 							$("#total").text("S/. "+subtotal.toFixed(2));
+							$('#totalV').val(subtotal.toFixed(2));
 							$("#amount").val(subtotal.toFixed(2));
 							
 							$("#totaldelpeso").val(subCantidad.toFixed(2));
@@ -538,14 +588,55 @@
 		
 		function facturacion(comprobante){
 			
-			if(comprobante=="recibo"){
-				$("#ruc_fac").slideToggle();
-				$("#rs_fac").slideToggle();
-				$("#icono").slideToggle();
+			
+			
+			if(comprobante=="factura"){
+				
+
+				$("#ruc_fac").slideDown();
+				$("#rs_fac").slideDown();
+				
+				var id = $("#diu").val();
+
+				//BUSCA LA EMPRESA DEL CLIENTE
+				$.get('ServletGenerarPedido', {
+
+					id:id
+					
+				}, function(response) {		
+		
+					
+					if (response!=null) { 
+					
+						var ruc = response['object']['ruc'];
+						var rs = response['object']['razonSocial'];
+						
+	
+							
+				
+					}else{
+						var ruc = "";
+						var rs = "";
+					}		
+					
+					
+					
+					$("#ruc_fac").val(ruc);
+					$("#rs_fac").val(rs);  
+					
+				});
+				
+				
+				
+				
 			}else{
-				$("#ruc_fac").slideToggle();
-				$("#rs_fac").slideToggle();
-				$("#icono").slideToggle();
+				
+					$("ruc_fac").val("");
+					$("rs_fac").val("");
+					
+					$("#ruc_fac").slideUp();
+					$("#rs_fac").slideUp();
+
 			}
 			
 		}
@@ -577,6 +668,8 @@
 			$('input[name="telefono_entrega_pedido"]').remove();
 			$('input[name="telefono_entrega_pedido2"]').remove();
 			$('input[name="cuotas_entrega_pedido"]').remove();
+			$('input[name="cargo_entrega_pedido"]').remove();
+			
 			
 			//DETALLES FACTURACION
 			$('input[name="facturacion_generar_pedido"]').remove();
@@ -679,7 +772,7 @@
 				     .appendTo(formularioDestino);
 					
 					$("<input type='text'/>")
-				     .attr("value",$("#").val())
+				     .attr("value",$("#rs_fac").val())
 				     .attr("name", "rs_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
@@ -732,6 +825,13 @@
 			     .attr("value","0")
 			     .attr("name", "cuotas_entrega_pedido")
 			     .appendTo(formularioDestino);
+				
+				$("<input type='text'/>")
+			     .attr("value","0")
+			     .attr("name", "cargo_entrega_pedido")
+			     .appendTo(formularioDestino);
+				
+				
 		
 			}
 			
@@ -812,6 +912,24 @@
 			     .attr("name", "cuotas_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
+				var subtotal = $("#subTotalV").val();
+				
+				if(parseFloat(subtotal)<200){
+					
+					$("<input type='text'/>")
+				     .attr("value","0")
+				     .attr("name", "cargo_entrega_pedido")
+				     .appendTo(formularioDestino);
+					
+				}else{
+					
+					$("<input type='text'/>")
+				     .attr("value","20")
+				     .attr("name", "cargo_entrega_pedido")
+				     .appendTo(formularioDestino);
+					
+				}
+				
 			}
 		     
 
@@ -879,7 +997,39 @@
 
          }
 		
-		
-		
-		
+	
+         //BUSCAR RUC CUANDO NO TIENE MOD DE RHONNACHAS
+         function buscarRuc3(){
+ 			
+			 var ruc = $('#ruc_fac').val();
+			
+			 var accion='buscarRuc';
+			
+			 $('#precarga').html('<img id="image_carga" src=" imagesOut/cart/ajax-loader.gif"/>');
+
+			  $.get('http://env-3384797.jelasticlw.com.br/service/Gestionar_Empresa', {
+				  
+						accion : accion,
+						ruc:ruc
+					}, function(response) {		
+						
+						
+						$('#image_carga').hide(1000);
+						
+						if (response!=null) { 
+						
+							 	$('#precarga').html('<span class="glyphicon glyphicon-ok" style="margin-top:10px;color:green;"></span>');
+								$('#rs_fac').val(response['object']['razonSocial']);  
+								
+						
+						}else{
+							
+							
+							$('#rs_fac').val("");
+						}			
+			  });
+			
+		}	 
+			
+	
 		

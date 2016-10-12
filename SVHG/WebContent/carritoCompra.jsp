@@ -88,8 +88,9 @@
 					<div class="total_area">
 						<ul>
 							<li>Sub Total <span id="subTotal"></span><input type="hidden" id="subTotalV" value="" ></li>
-							<li>IGV<span id="igv"> </span></li>
-							<li style="background-color: #ff8000; color: white;">Total <span id="total"> </span></li>
+							<!-- <li>IGV<span id="igv"> </span></li> -->
+							<li id="lista_cargo_entrega" style="display:none;">Cargo por Envio<span id="cargo_entrega"></span></li>
+							<li style="background-color: #ff8000; color: white;">Total <span id="total"> </span><input type="hidden" id="totalV" value=""></li>
 							
 						</ul>
 					</div>
@@ -103,7 +104,7 @@
 	<section id="do_action">
 		<div class="container">
 			<!-- FORMULARIO 1-->
-			<div id="formuCasa" style="display: none;">
+			<div id="formuCasa" style="display: none;">|
 				<div class="col-sm-12 col-xs-12">
 					<h3>Direccion de Envio:</h3>
 					<br>
@@ -212,18 +213,18 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-12" style="margin-top:30px;">
+					<div class="col-xs-12 col-sm-12" style="margin-top:15px;">
 						<div class="col-xs-5 col-sm-5">
-							<input disabled style="display:none;" type="text"class="form-control" name="ruc_fac" onkeypress="return solonumeros(event);" id="ruc_fac" maxlength="11">
+							<input  style="display:none;" type="text"class="form-control" placeholder="RUC" name="ruc_fac" onkeypress="return solonumeros(event);"   onkeyup="buscarRuc3();" id="ruc_fac" maxlength="11">
 						</div>
 						<div class="col-xs-6 col-sm-6">
-							<input disabled style="display:none;" type="text"class="form-control" name="rs_fac" onkeypress="" id="rs_fac" >
+							<input disabled style="display:none;" type="text"class="form-control" name="rs_fac"  id="rs_fac" placeholder="Razon Social">
 						</div>
-						<div class="col-xs-1 col-sm-1">
-							<a href="#"  style="display:none;" id="icono"><span class="glyphicon glyphicon-pencil" style="margin-top:10px;"></span></a>
+						<div class="col-xs-1 col-sm-1" id="precarga" >
+							<!-- <a  href="#"  style="display:none;" id="icono"></a> -->
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-12" style="margin-top:30px;">
+					<div class="col-xs-12 col-sm-12" style="margin-top:15px;">
 						<div id="para_casa" style="display:none;">
 							<div class="col-xs-6 col-sm-6">
 								<!-- PAYPAL BOTON -->
@@ -293,15 +294,10 @@
 				</div>
 			</div>
 		</div>
-			<!-- SEGUNDO BOTON CONTINUAR -->
-			<div class="form-group step2" style="display: none;">
-				<div class="col-xs-3 col-sm-3 col-xs-offset-8 col-sm-offset-8">
-					<button id="boton2" class="btn btn-primary">Continuar</button>
-				</div>
-			</div>
-			<br>
-			<br>
 	</section>
+	
+	
+	
 	<!--/#do_action-->
 	<jsp:include page="includeOut/footer.jsp"></jsp:include>
 	<jsp:include page="modals/modalGenerarPedido.jsp"></jsp:include>
