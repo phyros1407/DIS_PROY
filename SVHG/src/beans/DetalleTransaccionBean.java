@@ -8,6 +8,7 @@ public class DetalleTransaccionBean {
 	private int cantidad;
 	private double importe;
 	
+	
 	private String fc;
 	
 	public String getFc() {

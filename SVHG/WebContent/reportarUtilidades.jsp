@@ -65,8 +65,8 @@
 	function cambiarProducto(){
 		var x=document.getElementById("categoria").value;
 		var a;
-		alert(x);
-		<%int p;%>
+
+
 		if(x=='SUSPENSI'){ 
 			a=1;
 		}
@@ -89,31 +89,70 @@
 			
 
 		if(a==1){
-		document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==1){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+		document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==1){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 		}
 		if(a==2){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==2){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==2){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==3){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==3){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==3){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==4){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==4){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==4){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==5){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==5){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==5){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==6){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==6){%><option><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==6){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 	}
 	</script>
 <!----------------------------------------- script------------------------------------------------>
+<script type="text/javascript">
+
+		function generarReporte(){
+		
+			  var anio = $('#anio').val();
+			  var producto = $('#producto').val();
+		
+			 	
+				if(producto==''){
+				
+				alert('ss');
+			  }else{ 
+				  alert('123s');
+				  var accion='reporte1';
+				  $.post('<%=request.getContextPath() %>/ServletReporteVentas', {
+					  anio : anio,
+					  producto : producto,
+
+							accion : accion
+						}, function(response) {
+							 alert('12313213');
+							if (response.success==true) {
+								location.reload();
+									alert("Cliente Registrado. Su usuario es: "+usuario)
+									document.location.href="home.jsp";
+								}else{
+
+									alert("	 existe");
+									
+								}	
+				  });
+			  }
+			
+		  }
+		
+		
+		
+
+	</script>
 <!----------------------------------------- BODY------------------------------------------------>
-<form>
+<form action="<%=getServletContext().getContextPath() %>/ServletReporteUtilidades" method="post" role="form">
 			<div class="row">
 				<div class="col-sm-11">
-					<h1>Reporte de Ventas</h1>
+					<h1>Reporte de Utilidades</h1>
 				</div>
 			</div>
 				<br>
@@ -122,7 +161,7 @@
 					<div class="form-group">
 					<!-- onchange="cambiarProducto()" -->
 						<label for="sel1">Seleccione Categoria:</label>
-						<select onchange="cambiarProducto()"  name="categoria" class="form-control" id="categoria">
+						<select required onchange="cambiarProducto()"  name="categoria" class="form-control" id="categoria">
 							<option value="">Seleccione</option>
 							<option value="SUSPENSI">SUSPENSI</option>
 							<option value="FUERZA">FUERZA</option>
@@ -133,19 +172,20 @@
 						</select>
 					</div>
 				</div>
-				
+				<input type="text" hidden name="accion" value="reporte1">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="sel1">Seleccione Año Inicio</label>
-						<select class="form-control" id="selFecha" name="selFecha">
-							<option>2011</option>
-							<option>2012</option>
-							<option>2013</option>
-							<option>2014</option>
-							<option>2015</option>
-							<option>2016</option>
-							<option>2017</option>
+						<label for="sel1">Seleccione año </label>
+						<select required class="form-control" id="anio" name="anio">
+							<option value="">Seleccione</option>
+							<option value="2011">2011</option>
+							<option value="2012">2012</option>
+							<option value="2013">2013</option>
+							<option value="2014">2014</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
 						</select>
 					</div>
 				</div>
@@ -169,9 +209,11 @@
 				<br>
 			<div class="row">
 				<div class="col-sm-3">
-					<a href="<%=request.getContextPath() %>/reporte.jsp" class="btn btn-warning" role="button">Ver Reporte</a>
+					<button  type="submit" id="botonSubmit"  class="btn btn-warning" >Ver ReporteG</button>
+					
 				</div>
 			</div>
+		
 </form>
 
 

@@ -25,10 +25,10 @@ public class MySql_DetalleTransaccionDao implements DetalleTransaccionDao {
 			String query="select cp.fec_can,dt.can as producto "
 					+ "from comprobante_pago cp, detalle_transaccion dt "
 					+ "where cp.fec_can like '"+año+"' and cp.ven_id=dt.ven_id and dt.pro_id='"+productoId+"' ";
-		
+			
 			ResultSet rs=stmt.executeQuery(query);
 			DetalleTransaccionBean dTransaccion=null;
-			System.out.println("xfadsfa");
+			System.out.println("query reporte1==>"+query);
 			while(rs.next()){
 				dTransaccion=new DetalleTransaccionBean();
 				dTransaccion.setFc(rs.getString("fec_can"));
@@ -42,6 +42,40 @@ public class MySql_DetalleTransaccionDao implements DetalleTransaccionDao {
 		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println("fallo en el metodo listartodos de MySqlDetalleTransaccionDao");
+		}
+		return listaReporte;
+	}
+	@Override
+	public ArrayList<DetalleTransaccionBean> listarReporte2(String año, int productoId) throws Exception {
+		
+		ArrayList<DetalleTransaccionBean> listaReporte=new ArrayList<DetalleTransaccionBean>();
+		año=año+"%";
+		
+		try {
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+		 
+			String query="select cp.fec_can,dt.pro_id as id_pro,dt.imp as utilidad "
+					+ " from comprobante_pago cp, detalle_transaccion dt  "
+					+ " where cp.fec_can like '"+año+"' and cp.ven_id=dt.ven_id   "
+					+ " and dt.pro_id='"+productoId+"' ";
+			
+			ResultSet rs=stmt.executeQuery(query);
+			DetalleTransaccionBean dTransaccion=null;
+			System.out.println("query reporte2==>"+query);
+			while(rs.next()){
+				dTransaccion=new DetalleTransaccionBean();
+				dTransaccion.setFc(rs.getString("fec_can"));
+				dTransaccion.setProductoId(rs.getInt("id_pro"));
+				dTransaccion.setImporte(rs.getDouble("utilidad"));
+				listaReporte.add(dTransaccion);
+
+			}
+			 
+			con.close();
+		} catch (Exception e) {
+ 
+			System.out.println("fallo en el metodo listarReporte2 de MySqlDetalleTransaccionDao==>"+e.getMessage());
 		}
 		return listaReporte;
 	}
