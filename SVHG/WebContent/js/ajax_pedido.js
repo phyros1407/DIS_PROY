@@ -355,27 +355,26 @@
 								$("#para_local").hide(1000);
 								$("#para_casa").hide(1000);
 								
-					
+
 								$("#lista_cargo_entrega").slideUp();
 								
-								var subtotal1 = $("#totalV").val();
+								var total = $("#totalV").val();
 								
-								var total = parseFloat(subtotal1-20.00);
-						
+								var subtotal2 = parseFloat(total)-parseFloat(20);
 								
-								if(total<200){
+								alert(subtotal2);
+								
+								if(parseFloat(subtotal2)<200){
 									
 									$("#cargo_entrega").text("S/. 0.00");
-									
-									$("#total").text("S/. "(parseFloat(subtotal1)));
-									$("#totalV").val("S/. "+(parseFloat(subtotal1)));
+									$("#total").text("S/. "+(parseFloat(total)));
+									$("#totalV").val("S/. "+(parseFloat(total)));
 									
 								}else{
 									
 									$("#cargo_entrega").text("S/. 20.00");
-		
-									$("#total").text("S/. "+total.toFixed(2));
-									$("#totalV").val("S/. "+total.toFixed(2));
+									$("#total").text("S/. "+(parseFloat(subtotal2)));
+									$("#totalV").val("S/. "+(parseFloat(subtotal2)));
 									
 								}
 								
@@ -636,7 +635,9 @@
 					
 					$("#ruc_fac").slideUp();
 					$("#rs_fac").slideUp();
-
+					$("#confirmacion").hide();
+					$("#image_carga").slideUp();
+					
 			}
 			
 		}
@@ -1018,7 +1019,7 @@
 						
 						if (response!=null) { 
 						
-							 	$('#precarga').html('<span class="glyphicon glyphicon-ok" style="margin-top:10px;color:green;"></span>');
+							 	$('#precarga').html('<span id="confirmacion" class="glyphicon glyphicon-ok" style="margin-top:10px;color:green;"></span>');
 								$('#rs_fac').val(response['object']['razonSocial']);  
 								
 						
