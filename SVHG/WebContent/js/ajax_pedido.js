@@ -104,10 +104,10 @@
 
 			var direccion = "#"+desc;
 			
-			if(isNaN(cantidad)||cantidad == null||cantidad.trim()==""){
+			if(isNaN(cantidad)||cantidad == null||cantidad.trim()==""||cantidad.trim()==0){
 				$(direccion).val(1);
 				
-				var subtotal = parseInt($("#subTotalV").val());
+				var subtotal = parseFloat($("#subTotalV").val());
 				
 				
 				
@@ -596,11 +596,12 @@
 				$("#rs_fac").slideDown();
 				
 				var id = $("#diu").val();
-
+				var accion = "buscar";
 				//BUSCA LA EMPRESA DEL CLIENTE
 				$.get('ServletGenerarPedido', {
 
-					id:id
+					id:id,
+					accion : accion
 					
 				}, function(response) {		
 		
@@ -999,7 +1000,7 @@
          }
 		
 	
-         //BUSCAR RUC CUANDO NO TIENE MOD DE RHONNACHAS
+         //BUSCAR RUC CUANDO NO TIENE MOD DE RHONNACHAS --------------------------------------------------------------------------------------------
          function buscarRuc3(){
  			
 			 var ruc = $('#ruc_fac').val();
@@ -1030,7 +1031,11 @@
 						}			
 			  });
 			
-		}	 
+		}	
+        
+         
+         
+         
 			
 	
 		

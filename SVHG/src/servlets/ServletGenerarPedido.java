@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,34 +41,52 @@ public class ServletGenerarPedido extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
-		int  id = Integer.parseInt(request.getParameter("id"));
-		
-		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
-		PedidoDao pedidodao = dao.getPedidoDAO();
-		
-		EmpresaBean empresa;
-		try {
-			empresa = pedidodao.buscarEmpresaXUsuario(id);
+		if(request.getParameter("accion")!=null){
 			
-			ResponseObject responseobj=null;
-			if(empresa!=null){
-			responseobj=new ResponseObject();
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			responseobj.setSuccess(true);
-			responseobj.setObject(empresa);
+			if(request.getParameter("accion").equalsIgnoreCase("buscar")){
+				
+				int  id = Integer.parseInt(request.getParameter("id"));
+				
+				DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+				PedidoDao pedidodao = dao.getPedidoDAO();
+				
+				EmpresaBean empresa;
+				try {
+					empresa = pedidodao.buscarEmpresaXUsuario(id);
+					
+					ResponseObject responseobj=null;
+					if(empresa!=null){
+					responseobj=new ResponseObject();
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					responseobj.setSuccess(true);
+					responseobj.setObject(empresa);
+					}
+					response.getWriter().write(new Gson().toJson(responseobj));
+					System.out.println("json" + new Gson().toJson(responseobj));
+					
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			response.getWriter().write(new Gson().toJson(responseobj));
-			System.out.println("json" + new Gson().toJson(responseobj));
+		}else{
+			
+			try{
+				
+				System.out.println("entro aca");
+				
+				getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+				
+			}catch(Exception e){
+				
+				System.out.println("ERROR --->"+e.getMessage());
+				
+			}
 			
 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		
 		
 	}
 
@@ -75,6 +95,7 @@ public class ServletGenerarPedido extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
 		
 		//USUARIO
 		int id_usuario = Integer.parseInt(request.getParameter("usuario_generar_pedido"));
@@ -298,29 +319,36 @@ public class ServletGenerarPedido extends HttpServlet {
 					if(pedidodao.guardarComprobante(comprobante)){
 						
 						System.out.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
-						request.setAttribute("mensaje", "Su pedido ha sido Procesado con exito");
+						
+						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Su pedido ha sido Procesado con exito');");
+						out.println("location='ServletGenerarPedido';");
+						out.println("localStorage.clear();");
+						out.println("$('#cantidadProductos').text(localStorage.length);");
+						out.println("</script>");
+						
 						
 					}else{
 						System.out.println( "NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
-						request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
+						
 						
 					}
 
 				}else{
 					System.out.println(" NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
-					request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
+					
 						
 				}
 				
 			}else{
 				
 				System.out.println(" NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
-				request.setAttribute("mensaje", "Ocurrio un error, su pedido no fue procesado!");
+				
 				
 				
 			}
 			
-			response.sendRedirect("home.jsp");
+			
 			
 		}catch(Exception e){
 			

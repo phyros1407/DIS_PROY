@@ -45,12 +45,19 @@
 								
 		  }
 	  
+	  function limpiarDespuesRespuesta(){
+		  
+			localStorage.clear();
+			$("#cantidadProductos").text(localStorage.length);
+	  }
 	
 	</script>
 	
 </head>
 
+
 <body>
+
 	<%@include file="../includeOut/header.jsp" %>
 
 	

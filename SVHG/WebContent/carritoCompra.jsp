@@ -239,13 +239,13 @@
 									<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
 									<input type="hidden" name="return" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
 									<input type="hidden" name="rm" value="2">
-									<input type="image" style="border-radius:4px;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
+									<input type="image" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
 									
 								</form>	
 								<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 							</div>
 							<div class="col-xs-6 col-sm-6">
-								<img onclick="datosAlForm('#generar_pedido_tarjeta');anios();" id="btnTarjeta" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
+								<img onclick="datosAlForm('#generar_pedido_tarjeta');anios();" id="btnTarjeta" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 							</div>
 							<!--  <div class="col-xs-4 col-sm-4">
 								<img onclick = "datosAlForm('#form_generar_pedido');" data-target="#contra_entrega" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
@@ -265,16 +265,16 @@
 									<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
 									<input type="hidden" name="return" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
 									<input type="hidden" name="rm" value="2">
-									<input type="image" style="border-radius:4px;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
+									<input type="image" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
 									
 								</form>	
 								<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<img id="btnTarjeta" onclick="datosAlForm('#generar_pedido_tarjeta');anios();" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
+								<img id="btnTarjeta" onclick="datosAlForm('#generar_pedido_tarjeta');anios();" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<img onclick = "datosAlForm('#form_generar_pedido');" data-target="#contra_entrega" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
+								<img onclick = "datosAlForm('#form_generar_pedido');" data-target="#contra_entrega" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid ;vertical-align: middle; text-align: center;" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
 							</div>
 						</div>
 					</div>
