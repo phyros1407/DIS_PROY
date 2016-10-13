@@ -234,7 +234,7 @@
 									<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
 									
 									<input type="hidden" name="item_name" value=" Total de Importe Neto(IGV incluido) - Nano Sport Shop">
-									<input type="hidden" name="amount" id="amount" value="0">
+									<input type="hidden" name="amount" id="amount2" >
 									
 									<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
 									<input type="hidden" name="return" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
@@ -260,7 +260,7 @@
 									<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
 									
 									<input type="hidden" name="item_name" value=" Total de Importe Neto(IGV incluido) - Nano Sport Shop">
-									<input type="hidden" name="amount" id="amount" value="0">
+									<input type="hidden" name="amount" id="amount1" value="0">
 									
 									<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
 									<input type="hidden" name="return" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">

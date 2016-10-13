@@ -101,9 +101,7 @@
 		
 		
 		function cambiar(cantidad,desc,descImp,precio){
-			
-			
-			
+
 			var direccion = "#"+desc;
 			
 			if(isNaN(cantidad)||cantidad == null||cantidad.trim()==""){
@@ -117,30 +115,33 @@
 				
 				
 				
-				subtotal = parseInt(subtotal) - parseInt(importeA) ;
+				subtotal = parseFloat(subtotal) - parseFloat(importeA) ;
 				
 				
 				
-				subtotal = subtotal + (1*parseInt(precio))
-				
-				var igv = subtotal*0.19;
+				subtotal = subtotal + (parseFloat(precio))
 				
 				
 				
-				$("#"+descImp).val(1*parseInt(precio));
-				$("#subTotal").text("S/. "+subtotal);
-				$("#subTotalV").val(subtotal);
-				$("#importeM"+descImp.substring(descImp.length-1)).text(1*parseInt(precio));
 				
-				$("#igv").text("S/. "+igv);
-				$("#total").text("S/. "+(igv+subtotal));
-				$("#amount").val(igv+subtotal);
+				
+				$("#"+descImp).val((1*parseFloat(precio)).toFixed(2));
+				$("#subTotal").text("S/. "+subtotal.toFixed(2));
+				$("#subTotalV").val(subtotal.toFixed(2));
+				$("#importeM"+descImp.substring(descImp.length-1)).text((1*parseFloat(precio)).toFixed(2));
+				
+				
+				$("#total").text("S/. "+(subtotal.toFixed(2)));
+				$("#totalV").val((subtotal.toFixed(2)));
+				
+				$("#amount1").val(subtotal.toFixed(2));
+				$("#amount2").val(subtotal.toFixed(2));
 			}
 			else{
 				
 				var canti = cantidad;
 				
-				var subtotal = parseInt($("#subTotalV").val());
+				var subtotal = parseFloat($("#subTotalV").val());
 				
 				
 				
@@ -148,24 +149,26 @@
 				
 				
 				
-				subtotal = parseInt(subtotal) - parseInt(importeA) ;
+				subtotal = parseFloat(subtotal) - parseFloat(importeA) ;
 				
 				
 				
-				subtotal = subtotal + (canti*parseInt(precio))
+				subtotal = subtotal + (canti*parseFloat(precio))
 				
-				var igv = subtotal*0.19;
 				
 			
 				
-				$("#"+descImp).val(canti*parseInt(precio));
-				$("#subTotal").text("S/. "+subtotal);
-				$("#subTotalV").val(subtotal);
-				$("#importeM"+descImp.substring(descImp.length-1)).text(canti*parseInt(precio));
+				$("#"+descImp).val((canti*parseFloat(precio)).toFixed(2));
+				$("#subTotal").text("S/. "+subtotal.toFixed(2));
+				$("#subTotalV").val(subtotal.toFixed(2));
+				$("#importeM"+descImp.substring(descImp.length-1)).text((canti*parseFloat(precio)).toFixed(2));
 				
-				$("#igv").text("S/. "+igv);
-				$("#total").text("S/. "+(igv+subtotal));
-				$("#amount").val(igv+subtotal);
+				$("#amount1").val(subtotal.toFixed(2));
+				$("#amount2").val(subtotal.toFixed(2));
+				
+				$("#total").text("S/. "+(subtotal.toFixed(2)));
+				$("#totalV").val((subtotal.toFixed(2)));
+				
 			}
 			
 		}
@@ -181,7 +184,7 @@
 			$(direccion).val(canti);
 			
 
-			var subtotal = parseInt($("#subTotalV").val());
+			var subtotal = parseFloat($("#subTotalV").val());
 			
 			
 			
@@ -189,24 +192,24 @@
 			
 			
 			
-			subtotal = parseInt(subtotal) - parseInt(importeA) ;
+			subtotal = parseFloat(subtotal) - parseFloat(importeA) ;
 			
 			
 			
-			subtotal = subtotal + (canti*parseInt(precio))
+			subtotal = subtotal + (canti*parseFloat(precio))
 			
-			var igv = subtotal*0.19;
-				
-		
 			
-			$("#"+descImp).val(canti*parseInt(precio));
-			$("#subTotal").text("S/. "+subtotal);
-			$("#subTotalV").val(subtotal);
-			$("#importeM"+descImp.substring(descImp.length-1)).text(canti*parseInt(precio));
+			$("#"+descImp).val((canti*parseFloat(precio)).toFixed(2));
+			$("#subTotal").text("S/. "+subtotal.toFixed(2));
+			$("#subTotalV").val(subtotal.toFixed(2));
+			$("#importeM"+descImp.substring(descImp.length-1)).text((canti*parseFloat(precio)).toFixed(2));
 			
-			$("#igv").text("S/. "+igv);
-			$("#total").text("S/. "+(igv+subtotal));
-			$("#amount").val(igv+subtotal);
+			$("#amount1").val(subtotal.toFixed(2));
+			$("#amount2").val(subtotal.toFixed(2));
+			
+			$("#total").text("S/. "+(subtotal.toFixed(2)));
+			$("#totalV").val((subtotal.toFixed(2)));
+			
 		}
 	
 		function disminuir(cantidad, desc,descImp,precio) {
@@ -218,9 +221,9 @@
 	
 			if (canti <= 0) {
 				$(direccion).val(1);
-				$("#"+descImp).val(1*parseInt(precio));
+				$("#"+descImp).val((1*parseFloat(precio)).toFixed(2));
 				
-				$("#importeM"+descImp.substring(descImp.length-1)).text(1*parseInt(precio));
+				$("#importeM"+descImp.substring(descImp.length-1)).text((1*parseFloat(precio)).toFixed(2));
 				
 				
 				
@@ -228,7 +231,7 @@
 				
 				$(direccion).val(canti);
 
-				var subtotal = parseInt($("#subTotalV").val());
+				var subtotal = parseFloat($("#subTotalV").val());
 				
 				
 				
@@ -236,25 +239,27 @@
 				
 			
 				
-				subtotal = parseInt(subtotal) - parseInt(importeA) ;
+				subtotal = parseFloat(subtotal) - parseFloat(importeA) ;
 				
 				
 				
-				subtotal = subtotal + (canti*parseInt(precio))
+				subtotal = subtotal + (canti*parseFloat(precio))
 				
 				var igv = subtotal*0.19;
 				
 				
 				
-				$("#"+descImp).val(canti*parseInt(precio));
-				$("#subTotal").text("S/. "+subtotal);
-				$("#subTotalV").val(subtotal);
-				$("#importeM"+descImp.substring(descImp.length-1)).text(canti*parseInt(precio));
+				$("#"+descImp).val((canti*parseFloat(precio)).toFixed(2));
+				$("#subTotal").text("S/. "+subtotal.toFixed(2));
+				$("#subTotalV").val(subtotal.toFixed(2));
+				$("#importeM"+descImp.substring(descImp.length-1)).text((canti*parseFloat(precio)).toFixed(2));
 				
+				$("#amount1").val((parseFloat(subtotal).toFixed(2)));
+				$("#amount2").val((parseFloat(subtotal).toFixed(2)));
 				
-				$("#igv").text("S/. "+igv);
-				$("#total").text("S/. "+(igv+subtotal));
-				$("#amount").val(igv+subtotal);
+				$("#total").text("S/. "+(subtotal.toFixed(2)));
+				$("#totalV").val((subtotal.toFixed(2)));
+				
 				
 				
 			}
@@ -289,9 +294,6 @@
 		$(document).ready(
 				function() {
 
-					
-					
-					
 					$('input[name="entrega"]').click(function() {
 						
 						if ($(this).attr("value") == "casa") {
@@ -306,7 +308,6 @@
 								
 							}else{
 								
-								
 								$("#lista_cargo_entrega").slideDown();
 								
 								var subtotal = $("#subTotalV").val();
@@ -314,14 +315,22 @@
 								if(parseFloat(subtotal)<200){
 									
 									$("#cargo_entrega").text("S/. 0.00");
-									$("#total").text("S/. "+(parseFloat(subtotal)));
-									$("#totalV").val("S/. "+(parseFloat(subtotal)));
+									$("#total").text("S/. "+(parseFloat(subtotal)).toFixed(2));
+									$("#totalV").val((parseFloat(subtotal)).toFixed(2));
+									
+
+									$("#amount1").val((parseFloat(subtotal).toFixed(2)));
+									$("#amount2").val((parseFloat(subtotal).toFixed(2)));
 									
 								}else{
 									
 									$("#cargo_entrega").text("S/. 20.00");
-									$("#total").text("S/. "+(parseFloat(subtotal)+parseFloat(20.00)));
-									$("#totalV").val("S/. "+(parseFloat(subtotal)+parseFloat(20.00)));
+									$("#total").text("S/. "+(parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+									$("#totalV").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+									
+
+									$("#amount1").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+									$("#amount2").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
 									
 								}
 								
@@ -334,16 +343,37 @@
 								$("#para_local").hide(1000);
 								$("#para_casa").hide(1000);
 								
-							
-								
 							}
 							
-							
-						}else
-						if ($(this).attr("value") == "local") {
-	
-							
+						}else if ($(this).attr("value") == "local") {
+				
+								var total = $("#totalV").val();
 								
+								var subtotal2 = parseFloat(total)-(parseFloat("20"));
+
+								if(total!=$("#subTotalV").val()){
+								
+									if(parseFloat(subtotal2)<200){
+										
+										$("#cargo_entrega").text("S/. 0.00");
+										$("#total").text("S/. "+(parseFloat(total)).toFixed(2));
+										$("#totalV").val((parseFloat(total)).toFixed(2));
+										$("#amount1").val((parseFloat(total).toFixed(2)));
+										$("#amount2").val((parseFloat(total).toFixed(2)));
+										
+									}else{
+										
+										$("#cargo_entrega").text("S/. 20.00");
+										$("#total").text("S/. "+(parseFloat(subtotal2)).toFixed(2));
+										$("#totalV").val((parseFloat(subtotal2)).toFixed(2));
+										$("#amount1").val((parseFloat(subtotal2).toFixed(2)));
+										$("#amount2").val((parseFloat(subtotal2).toFixed(2)));
+										
+									}
+							
+								}
+								
+								$("#lista_cargo_entrega").slideUp();
 								$("#boton1").show();
 								$(".step1").show(1000);
 								$("#titInDir").hide(1000);
@@ -354,32 +384,7 @@
 								$(".step3").show();
 								$("#para_local").hide(1000);
 								$("#para_casa").hide(1000);
-								
 
-								$("#lista_cargo_entrega").slideUp();
-								
-								var total = $("#totalV").val();
-								
-								var subtotal2 = parseFloat(total)-parseFloat(20);
-								
-								alert(subtotal2);
-								
-								if(parseFloat(subtotal2)<200){
-									
-									$("#cargo_entrega").text("S/. 0.00");
-									$("#total").text("S/. "+(parseFloat(total)));
-									$("#totalV").val("S/. "+(parseFloat(total)));
-									
-								}else{
-									
-									$("#cargo_entrega").text("S/. 20.00");
-									$("#total").text("S/. "+(parseFloat(subtotal2)));
-									$("#totalV").val("S/. "+(parseFloat(subtotal2)));
-									
-								}
-								
-								
-			
 						}
 					});
 	
@@ -486,20 +491,15 @@
 			    			conta=conta+("<tr><td class='cart_product'><input type='hidden' value='"+response['object'][i][0]['idProducto']+"' name='ids'><a href='#'><img src="+response['object'][i][0]['foto']+" alt='' width='100px' height='100px'></a></td><td class='cart_description' style='vertical-align: middle; text-align: center;'><h4><a>"+response['object'][i][0]['nombre']+"</a></h4></td><td class='cart_price' style='vertical-align: middle; text-align: center;'><p>S/. "+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"<input type='hidden' value='"+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"' id='precios"+i+"' ></p></td><td class='cart_quantity' style='vertical-align: middle; text-align: center;'><div class='cart_quantity_button' style='margin-left:150px;'><a class='cart_quantity_up' href='#' onclick='agregar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> + </a><input type='hidden' value='cantidad"+i+"' id='desc"+i+"'><input  onchange='cambiar(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);' onkeypress='return solonumerosCarr(event)' name='cantidades' maxlength='2' class='cart_quantity_input' type='text' value='1' size='2' id='cantidad"+i+"'><a class='cart_quantity_down' href='#' onclick='disminuir(cantidad"+i+".value,desc"+i+".value,nomImp"+i+".value,precios"+i+".value);'> - </a></div></td><td class='cart_total' style='vertical-align: middle;text-align: center;'><p class='cart_total_price'>S/. <label id='importeM"+i+"'>"+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"</label><input type='hidden' id='nomImp"+i+"' value='valorImp"+i+"' ><input type='hidden' id='valorImp"+i+"' value='"+(response['object'][i][0]['precio']*parseFloat(igvS)).toFixed(2)+"' name='importes' ></p></td><td class='cart_delete' style='vertical-align: middle; text-align: center;'><a class='cart_quantity_delete' href='' onClick='quitardelcarrito("+response['object'][i][0]['idProducto']+")'><i class='fa fa-times'></i></a></td></tr>");
 			    		}
 			    			
-			    			$('#productosCarrito').html(conta);
-			    			$('#subTotalV').val(subtotal.toFixed(2));
-			    			$('#subTotal').text("S/. "+subtotal.toFixed(2));
-			    			
-			    			
-			    			
-			    			
-			    			
-			    			
-			    			//$("#igv").text("S/. "+igv.toFixed(2));
+			    			$("#productosCarrito").html(conta);
+			    			$("#subTotalV").val(subtotal.toFixed(2));
+			    			$("#subTotal").text("S/. "+subtotal.toFixed(2));
+			    			$("#amount1").val(parseFloat(subtotal).toFixed(2));
+			    			$("#amount2").val(parseFloat(subtotal).toFixed(2));
 			    			
 							$("#total").text("S/. "+subtotal.toFixed(2));
-							$('#totalV').val(subtotal.toFixed(2));
-							$("#amount").val(subtotal.toFixed(2));
+							$("#totalV").val(subtotal.toFixed(2));
+							
 							
 							$("#totaldelpeso").val(subCantidad.toFixed(2));
 							

@@ -90,7 +90,7 @@ public class ServletGenerarPedido extends HttpServlet {
 		
 		
 		String facturacion = request.getParameter("facturacion_generar_pedido");
-		
+		System.out.println("EL COMPROBNATE ES --->" +facturacion);
 		double rec_ent = Double.parseDouble(request.getParameter("cargo_entrega_pedido"));
 		
 		

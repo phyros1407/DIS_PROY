@@ -372,9 +372,14 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 		try{
 			Connection con=MySqlDAOFactory.obtenerConexion();
 			Statement stmt=con.createStatement();
-			
+			String query = "";
 			//String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' ORDER BY NUM_COM DESC LIMIT 1";
-			String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'BV' ORDER BY NUM_COM DESC LIMIT 1";
+			if(tipo.equalsIgnoreCase("boleta")){
+				 query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'BV' ORDER BY NUM_COM DESC LIMIT 1";
+			}else{
+				 query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'FV' ORDER BY NUM_COM DESC LIMIT 1";
+			}
+			
 			System.out.println("QUERY PARA OBTENER EL ULTIMO NUMERO DE COMPROBANTE ---->"+query);
 			ResultSet rs = stmt.executeQuery(query);
 			
