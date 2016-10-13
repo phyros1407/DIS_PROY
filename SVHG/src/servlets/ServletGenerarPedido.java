@@ -97,39 +97,44 @@ public class ServletGenerarPedido extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		
-		//USUARIO
-		int id_usuario = Integer.parseInt(request.getParameter("usuario_generar_pedido"));
-
-		//ARRAYS DE LOS PRODUCTOS SELECCIONADOS
-		String ids [] = request.getParameterValues("productosIds");
-		String cantidades [] = request.getParameterValues("productosCantidad");
-		String importes [] = request.getParameterValues("productosImporte");
 		
-		String tipo_pago = request.getParameter("tipo_pago");
-		String tipo_entrega = request.getParameter("tipo_entrega_pedido");
-		String fecha = request.getParameter("fecha_generar_pedido");
-		
-		
-		String facturacion = request.getParameter("facturacion_generar_pedido");
-		System.out.println("EL COMPROBNATE ES --->" +facturacion);
-		double rec_ent = Double.parseDouble(request.getParameter("cargo_entrega_pedido"));
-		
-		
-		String departamento = request.getParameter("departamento_entrega_pedido");
-		String provincia = request.getParameter("provincia_entrega_pedido");
-		String distrito = request.getParameter("distrito_entrega_pedido");
-		String direccion = request.getParameter("direccion_entrega_pedido");
-		String referencia = request.getParameter("referencia_entrega_pedido");
-		
-		
-		
-		int cuotas = Integer.parseInt(request.getParameter("cuotas_entrega_pedido"));
-		System.out.println("CUOTAS -----> "+ cuotas );
-		
-		DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
-		PedidoDao pedidodao = dao.getPedidoDAO();
 		
 		try{
+			
+			//USUARIO
+			int id_usuario = Integer.parseInt(request.getParameter("usuario_generar_pedido"));
+
+			//ARRAYS DE LOS PRODUCTOS SELECCIONADOS
+			String ids [] = request.getParameterValues("productosIds");
+			String cantidades [] = request.getParameterValues("productosCantidad");
+			String importes [] = request.getParameterValues("productosImporte");
+			
+			String tipo_pago = request.getParameter("tipo_pago");
+			String tipo_entrega = request.getParameter("tipo_entrega_pedido");
+			String fecha = request.getParameter("fecha_generar_pedido");
+			
+			
+			String facturacion = request.getParameter("facturacion_generar_pedido");
+			System.out.println("EL COMPROBNATE ES --->" +facturacion);
+			double rec_ent = Double.parseDouble(request.getParameter("cargo_entrega_pedido"));
+			
+			
+			String departamento = request.getParameter("departamento_entrega_pedido");
+			String provincia = request.getParameter("provincia_entrega_pedido");
+			String distrito = request.getParameter("distrito_entrega_pedido");
+			String direccion = request.getParameter("direccion_entrega_pedido");
+			String referencia = request.getParameter("referencia_entrega_pedido");
+			
+			
+			
+			int cuotas = Integer.parseInt(request.getParameter("cuotas_entrega_pedido"));
+			System.out.println("CUOTAS -----> "+ cuotas );
+			
+			DAOFactory dao = DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+			PedidoDao pedidodao = dao.getPedidoDAO();
+			
+			
+			
 			
 			//GENERAR NUEVO CODIGO PARA TRANSACCION
 			String codigoAntiguo = pedidodao.generarNumeroTransaccion();
@@ -321,7 +326,7 @@ public class ServletGenerarPedido extends HttpServlet {
 						System.out.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 						
 						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Su pedido ha sido Procesado con exito');");
+						out.println("alert('Su pedido ha sido Procesado con exito! Su numero de pedido es  : "+idGenerado+"');");
 						out.println("location='ServletGenerarPedido';");
 						out.println("localStorage.clear();");
 						out.println("$('#cantidadProductos').text(localStorage.length);");
@@ -329,21 +334,35 @@ public class ServletGenerarPedido extends HttpServlet {
 						
 						
 					}else{
-						System.out.println( "NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 						
+						
+						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Su pedido no ha sido Procesado con exito! ');");
+						out.println("location='ServletGenerarPedido';");
+						out.println("$('#cantidadProductos').text(localStorage.length);");
+						out.println("</script>");
 						
 					}
 
 				}else{
-					System.out.println(" NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
+					
+					out.println("<script type=\"text/javascript\">");
+					out.println("alert('Su pedido no ha sido Procesado con exito! ');");
+					out.println("location='ServletGenerarPedido';");
+					out.println("$('#cantidadProductos').text(localStorage.length);");
+					out.println("</script>");
 					
 						
 				}
 				
 			}else{
 				
-				System.out.println(" NO SE GUARDO CORRECTAMENTE EL COMPROBANTE");
-				
+
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Su pedido no ha sido Procesado con exito! ');");
+				out.println("location='ServletGenerarPedido';");
+				out.println("$('#cantidadProductos').text(localStorage.length);");
+				out.println("</script>");
 				
 				
 			}
@@ -352,7 +371,8 @@ public class ServletGenerarPedido extends HttpServlet {
 			
 		}catch(Exception e){
 			
-			e.getMessage();
+			System.out.println("ERROR ----> "+e.getMessage());
+			response.sendRedirect("home.jsp");
 			
 		}
 		

@@ -228,7 +228,7 @@
 						<div id="para_casa" style="display:none;">
 							<div class="col-xs-6 col-sm-6">
 								<!-- PAYPAL BOTON -->
-								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="fomr2" method="get" target="_blank">
 									<input type="hidden" name="cmd" value="_s-xclick">
 									<input type="hidden" name="currency_code" value="US">
 									<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
@@ -237,44 +237,42 @@
 									<input type="hidden" name="amount" id="amount2" >
 									
 									<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
-									<input type="hidden" name="return" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
+									<input type="hidden" name="return" id="return2" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
 									<input type="hidden" name="rm" value="2">
-									<input type="image" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
+									<input type="image" onclick="generarUrl('form2')" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
 									
 								</form>	
 								<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 							</div>
 							<div class="col-xs-6 col-sm-6">
-								<img onclick="datosAlForm('#generar_pedido_tarjeta');anios();" id="btnTarjeta" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
+								<img onclick="anios();validarFacturacion('#generar_pedido_tarjeta','#modalTarjeta');" id="btnTarjeta"  style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 							</div>
-							<!--  <div class="col-xs-4 col-sm-4">
-								<img onclick = "datosAlForm('#form_generar_pedido');" data-target="#contra_entrega" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
-							</div>-->
+							
 						</div>
 						<div id="para_local" style="display:none;">
 							<div class="col-xs-4 col-sm-4">
 								<!-- PAYPAL BOTON -->
-								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="form1" method="get" target="_blank">
 									<input type="hidden" name="cmd" value="_s-xclick">
 									<input type="hidden" name="currency_code" value="US">
 									<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
 									
 									<input type="hidden" name="item_name" value=" Total de Importe Neto(IGV incluido) - Nano Sport Shop">
-									<input type="hidden" name="amount" id="amount1" value="0">
+									<input type="hidden" name="amount" id="amount1" >
 									
 									<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
-									<input type="hidden" name="return" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
+									<input type="hidden" name="return" id="return1" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
 									<input type="hidden" name="rm" value="2">
-									<input type="image" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
+									<input type="image" onclick="validarFacturacion2('form1');" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
 									
 								</form>	
 								<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<img id="btnTarjeta" onclick="datosAlForm('#generar_pedido_tarjeta');anios();" data-target="#modalTarjeta" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
+								<img id="btnTarjeta" onclick="anios();validarFacturacion('#generar_pedido_tarjeta','#modalTarjeta');" style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<img onclick = "datosAlForm('#form_generar_pedido');" data-target="#contra_entrega" data-toggle="modal" style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid ;vertical-align: middle; text-align: center;" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
+								<img onclick = "validarFacturacion('#form_generar_pedido','#contra_entrega');"  style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid ;vertical-align: middle; text-align: center;" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
 							</div>
 						</div>
 					</div>

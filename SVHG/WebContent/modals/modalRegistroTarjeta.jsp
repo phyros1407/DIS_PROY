@@ -121,7 +121,7 @@
         </div>
         <div class="modal-footer" >
           <form method="post" action="ServletGenerarPedido" id="generar_pedido_tarjeta">
-          	<input type="text" value="TA" name="tipo_pago">
+          	<input type="hidden" value="TA" name="tipo_pago">
           </form>
           <button class="btn btn-primary" onclick="pagar();" style="border-radius:4px;">Pagar Monto S/170.00</button>
           <button class="btn btn-default" data-dismiss="modal" style="border-radius:4px;margin-top:15px;">Cancelar</button>

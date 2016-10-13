@@ -426,33 +426,43 @@
 							}
 						}else{
 						
-
-							$("#botonCambDir").show();
-							$(".step3").show(1000);
-							$("#boton1").show(1000);
-							$(this).hide(1000);
-							$("#formuCasa").hide(1000);
-							$(".step1").hide(1000);
-							$(".step2").show(1000);
-							$("#infoDirEnv").show(1000);
-							$(".pagenv").show(1000);
-							$("#valEnv").text("$/.20.00");
-							$("#para_casa").show(1000);
-							//DATOS DEL RECEPTOR
-							//OBTENER VAL
-							//var nombre = $("#").val();
-							var direccion = $("#direccion").val();
-							var distrito = $("#distrito  option:selected").text();
-							var provincia = $("#provincia  option:selected").text();
-							var departamento = $("#departamento option:selected").text();
-							var telefono1 = $("#telefono1").val();
-							var telefono2 = $("#telefono2").val();
-		
-							//SETEAR VAL
-							$("#mosNom").text("Jean Pier Barbieri");
-							$("#mosDir").text(direccion);
-							$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
-							$("#mosTel").text("Telefono : " + telefono1 + "\n"+ " Otro Telefono : " + telefono2);
+							if($("#direccion").val()==""||$("#departamento").val()==0||$("#provincia").val()==0||$("#distrito").val()==0||$("#referencia").val()==""||$("#telefono1").val()==""||$("#telefono2").val()==""){
+							
+								alert("Por favor complete todos los campos");
+								
+							}else{
+							
+								$("#botonCambDir").show();
+								$(".step3").show(1000);
+								$("#boton1").show(1000);
+								$(this).hide(1000);
+								$("#formuCasa").hide(1000);
+								$(".step1").hide(1000);
+								$(".step2").show(1000);
+								$("#infoDirEnv").show(1000);
+								$(".pagenv").show(1000);
+								$("#valEnv").text("$/.20.00");
+								$("#para_casa").show(1000);
+								//DATOS DEL RECEPTOR
+								//OBTENER VAL
+								//var nombre = $("#").val();
+								var direccion = $("#direccion").val();
+								var distrito = $("#distrito  option:selected").text();
+								var provincia = $("#provincia  option:selected").text();
+								var departamento = $("#departamento option:selected").text();
+								var telefono1 = $("#telefono1").val();
+								var telefono2 = $("#telefono2").val();
+			
+								//SETEAR VAL
+								$("#mosNom").text("Jean Pier Barbieri");
+								$("#mosDir").text(direccion);
+								$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
+								$("#mosTel").text("Telefono : " + telefono1 + "\n"+ " Otro Telefono : " + telefono2);
+								
+							}
+							
+							
+						
 						
 						}
 						
@@ -643,10 +653,62 @@
 			
 		}
 		
+		function validarFacturacion(destino,modal){
+			
+
+			if($("#facturacion").val()=="factura"){
+				
+				if($("#ruc_fac").val()==""||$("#rs_fac").val()==""){
+					
+					alert("Por favor completar los datos para la facturacion !");
+					
+				}else{
+					
+					$(modal).modal();
+					datosAlForm(destino);
+					
+					
+				}
+				
+			}else{
+				
+				$(modal).modal();
+				datosAlForm(destino);
+				
+			}
+			
+		}
+		
+		
+		function validarFacturacion2(destino){
+			
+
+			if($("#facturacion").val()=="factura"){
+				
+				if($("#ruc_fac").val()==""||$("#rs_fac").val()==""){
+					
+					alert("Por favor completar los datos para la facturacion !");
+					
+				}else{
+					
+					
+					generarUrl(destino);
+					
+				}
+				
+			}else{
+				
+				
+				generarUrl(destino);
+				
+			}
+			
+		}
 		
 		function datosAlForm(formularioDestino){
 			
-			alert(formularioDestino);
+			
+			//alert(formularioDestino);
 			
 			var tipoI = "text";
 			
@@ -708,14 +770,14 @@
 			for(var i=0;i<importes.length;i++){
 				
 				//AGREGAR IDS AL FORM 
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("id", "producto"+i)
 			     .attr("value", productos[i])
 			     .attr("name", "productosIds")
 			     .appendTo(formularioDestino);
 				
 				//AGREGAR CANTIDADES AL FORM 
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("id", "cantidad"+i)
 			     .attr("value", cantidades[i])
 			     .attr("name", "productosCantidad")
@@ -723,7 +785,7 @@
 				
 				
 				//AGREGAR IMPORTES AL FORM 
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("id", "importe"+i)
 			     .attr("value", importes[i])
 			     .attr("name", "productosImporte")
@@ -732,19 +794,19 @@
 			}
 			
 			
-			$("<input type='text'/>")
+			$("<input type='hidden'/>")
 		     .attr("id", "lugar_entrega")
 		     .attr("value",$('input:radio[name=entrega]:checked').val())
 		     .attr("name", "tipo_entrega_pedido")
 		     .appendTo(formularioDestino);
 			
 			
-			$("<input type='text'/>")
+			$("<input type='hidden'/>")
 		     .attr("value",$("input:radio[name=fecha]:checked").val())
 		     .attr("name", "fecha_generar_pedido")
 		     .appendTo(formularioDestino);
 			
-			$("<input type='"+tipoI+"'/>")
+			$("<input type='hidden'/>")
 		     .attr("value",$("#diu").val())
 		     .attr("name", "usuario_generar_pedido")
 		     .appendTo(formularioDestino);
@@ -756,24 +818,24 @@
 				
 				if($("#facturacion").val()=="boleta"){
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value","")
 				     .attr("name", "ruc_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value","")
 				     .attr("name", "rs_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
 				}else{
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value",$("#ruc_fac").val())
 				     .attr("name", "ruc_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value",$("#rs_fac").val())
 				     .attr("name", "rs_entrega_pedido")
 				     .appendTo(formularioDestino);
@@ -782,53 +844,53 @@
 				
 				$("#ce_facturacion").text($("#facturacion").val());
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#facturacion").val())
 			     .attr("name", "facturacion_generar_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","LIMA")
 			     .attr("name", "departamento_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","LIMA")
 			     .attr("name", "provincia_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","BREÑA")
 			     .attr("name", "distrito_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","LIMA")
 			     .attr("name", "referencia_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","JR. INDEPENDENCIA")
 			     .attr("name", "direccion_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","")
 			     .attr("name", "telefono_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","")
 			     .attr("name", "telefono_entrega_pedido2")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 				 .attr("id", "cuota_form")
 			     .attr("value","0")
 			     .attr("name", "cuotas_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value","0")
 			     .attr("name", "cargo_entrega_pedido")
 			     .appendTo(formularioDestino);
@@ -841,24 +903,24 @@
 					
 				if($("#facturacion").val()=="boleta"){
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value","")
 				     .attr("name", "ruc_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value","")
 				     .attr("name", "rs_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
 				}else{
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value",$("#ruc_fac").val())
 				     .attr("name", "ruc_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value",$("#rs_fac").val())
 				     .attr("name", "rs_entrega_pedido")
 				     .appendTo(formularioDestino);
@@ -868,47 +930,47 @@
 				
 				$("#ce_facturacion").text($("#facturacion").val());
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#facturacion").val())
 			     .attr("name", "facturacion_generar_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#departamento option:selected").text())
 			     .attr("name", "departamento_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#provincia option:selected").text())
 			     .attr("name", "provincia_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#distrito option:selected").text())
 			     .attr("name", "distrito_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#direccion").val())
 			     .attr("name", "direccion_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#referencia").val())
 			     .attr("name", "referencia_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#telefono1").val())
 			     .attr("name", "telefono_entrega_pedido")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 			     .attr("value",$("#telefono2").val())
 			     .attr("name", "telefono_entrega_pedido2")
 			     .appendTo(formularioDestino);
 				
-				$("<input type='text'/>")
+				$("<input type='hidden'/>")
 				 .attr("id", "cuota_form")
 			     .attr("value","0")
 			     .attr("name", "cuotas_entrega_pedido")
@@ -918,14 +980,14 @@
 				
 				if(parseFloat(subtotal)<200){
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value","0")
 				     .attr("name", "cargo_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
 				}else{
 					
-					$("<input type='text'/>")
+					$("<input type='hidden'/>")
 				     .attr("value","20")
 				     .attr("name", "cargo_entrega_pedido")
 				     .appendTo(formularioDestino);
@@ -956,7 +1018,7 @@
         	 var monto = $("#subTotalV").val();
         	 var action = "pagos";
         	 
-        	 alert(cvc);
+        	 //alert(cvc);
         	 
         	 if(tipo_tarjeta==""||marca_tarjeta==""||num_tar==""||mesCad==""||anioCad==""||cvc.trim()==""||cuota_tarjeta==""){
         		 
@@ -980,7 +1042,7 @@
      			
      				if(respuesta == "APROBADO"){
      					
-     					alert(respuesta);
+     					alert("¡ Su transaccion ha sido aprobada por su bando !");
      					
      					ejecutarForm("#generar_pedido_tarjeta");
      					
@@ -1035,7 +1097,92 @@
         
          
          
-         
+         function generarUrl(formulario_destino){
+        	 
+
+        	var url = "http://localhost:8081/SVHG/file_contac_servlet.jsp?";
+        	 
+ 			var cantidades = [];
+ 			var importes = [];
+ 			var productos = [];
+ 		
+ 			$('input[name="importes"]').each(function() {
+ 				
+ 				importes.push($(this).val());
+ 					
+ 			});
+ 			
+ 			$('input[name="cantidades"]').each(function() {
+ 				
+ 				cantidades.push($(this).val());
+ 				
+ 			});
+ 			
+ 			$('input[name="ids"]').each(function() {
+ 				
+ 				productos.push($(this).val());
+ 				
+ 			});
+ 			
+ 			var cadena = "";
+ 			for(var i=0;i<importes.length;i++){
+ 				
+ 				
+ 				cadena = cadena + "Ids="+productos[i]+"&cantidades="+cantidades[i]+"&importes="+parseFloat(importes[i]).toFixed(2)+"&";
+ 				
+ 			}
+ 			
+ 			cadena = cadena + "tipo_entrega_pedido="+$('input:radio[name=entrega]:checked').val()+"&fecha_generar_pedido="+$("input:radio[name=fecha]:checked").val()+
+ 			"&usuario_generar_pedido="+$("#diu").val();
+ 			
+ 			if($('input:radio[name=entrega]:checked').val()=="local"){
+ 				if($("#facturacion").val()=="boleta"){
+ 					cadena = cadena + "&rs_entrega_pedido=&ruc_entrega_pedido="; 
+ 				}else{
+ 					cadena = cadena + "&rs_entrega_pedido="+$("#rs_fac").val()+"&ruc_entrega_pedido="+$("#ruc_fac").val(); 
+ 				}
+ 				
+ 				
+ 				cadena = cadena +"&facturacion_generar_pedido="+$("#facturacion").val()+"&departamento_entrega_pedido=LIMA&provincia_entrega_pedido=LIMA&distrito_entrega_pedido=BREÑA" +
+ 						"&referencia_entrega_pedido=LIMA&direccion_entrega_pedido=JR. INDEPENDENCIA&telefono_entrega_pedido=&telefono_entrega_pedido2=&cuotas_entrega_pedido=0&cargo_entrega_pedido=0";
+ 				
+ 			}else{
+ 				if($("#facturacion").val()=="boleta"){
+ 					cadena = cadena + "&rs_entrega_pedido=&ruc_entrega_pedido="; 
+ 				}else{
+ 					cadena = cadena + "&rs_entrega_pedido="+$("#rs_fac").val()+"&ruc_entrega_pedido="+$("#ruc_fac").val(); 
+ 				}
+ 				
+ 				cadena = cadena +"&facturacion_generar_pedido="+$("#facturacion").val()+"&departamento_entrega_pedido="+$("#departamento option:selected").text()+"&provincia_entrega_pedido="+$("#provincia option:selected").text()+
+ 				"&distrito_entrega_pedido="+$("#distrito option:selected").text()+
+				"&referencia_entrega_pedido="+$("#referencia").val()+"&direccion_entrega_pedido="+$("#direccion").val()+"&telefono_entrega_pedido="+$("#telefono1").val()+"&telefono_entrega_pedido2="+$("#telefono2").val()+"&cuotas_entrega_pedido=0";
+			
+ 				var subtotal = $("#subTotalV").val();
+				
+				if(parseFloat(subtotal)<200){
+					
+					cadena = cadena + "&cargo_entrega_pedido=0";
+					
+				}else{
+					
+					cadena = cadena + "&cargo_entrega_pedido=20";
+					
+				}
+ 				
+ 				
+ 			}
+ 			
+        	url = url+cadena;
+        	
+        	//alert(url);
+        	
+        	$("#return1").val(url);
+        	$("#return2").val(url);
+        	
+        	$("#"+formulario_destino).submit();
+ 			
+        	 
+         }
 			
 	
 		
