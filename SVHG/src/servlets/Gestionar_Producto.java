@@ -427,7 +427,7 @@ public class Gestionar_Producto extends HttpServlet {
 				int flagC=Integer.parseInt(request.getParameter("flagC"));;
 				producto = productodao.buscarXcriterio(dato, flag, flagC);
 				System.out.println("asdas"+producto);
-				if(producto!=null){		
+				if(producto.size()!=0 || producto!=null || !producto.isEmpty()){		
 					
 				    ResponseObject responseobj=null;
 					responseobj=new ResponseObject();

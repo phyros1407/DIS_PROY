@@ -237,10 +237,12 @@ public class ServletCliente extends HttpServlet {
 				int flagBusqueda= Integer.parseInt(request.getParameter("flag"));
 				
 				persona = iclienteDao.buscarXcriterio(dato,flagBusqueda);
-				System.out.println("asdas"+persona);
-				if(persona!=null){		
+				System.out.println("asdas  "+persona.size());
+				 ResponseObject responseobj=null;
+				 
+			if(persona.size()!=0 || persona!=null || !persona.isEmpty()){		
 					
-				    ResponseObject responseobj=null;
+				   
 					responseobj=new ResponseObject();
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
@@ -249,6 +251,8 @@ public class ServletCliente extends HttpServlet {
 					response.getWriter().write(new Gson().toJson(responseobj));
 					System.out.println("json" + new Gson().toJson(responseobj));
 			}	
+				
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
