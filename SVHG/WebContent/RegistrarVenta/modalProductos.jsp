@@ -88,12 +88,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Buscar Producto</h4>
       </div>
-       <div id ="error" style="visibility: hidden;">
-    <div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >El dni No existe</label>
-    </div>
-    </div>
-     <div id ="validardni" style="visibility: hidden;">
-    <div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >Ingrese un Nro. de Dni</label>
+     
+     <div id ="validarProducto" style="visibility: hidden;">
+    <div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >Producto Encontrado</label>
     </div>
     </div>
     
@@ -103,7 +100,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <select class="form-control" id="selectCriterioP" name="selectCriterioP" >
+                                                    <select class="form-control" id="selectCriterioP" onclick="aparecer4();"  name="selectCriterioP" >
                                                       <option value="0">SELECCIONAR</option>
                                                         <option value="1">CODIGO</option>
                                                         <option value="2">NOMBRE</option>
@@ -117,7 +114,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <select class="form-control" id="selecCategoria" name="selecCategoria" >
+                                                    <select class="form-control" id="selecCategoria" onclick="aparecer3();" name="selecCategoria" >
                                                          <option value="0">SELECCIONAR</option>
                                                         <option value="1">SUSPENSION</option>
                                                         <option value="2">FUERZA</option>
@@ -146,7 +143,7 @@
                                             <br>    <br>  
                                              <div>
                     
-                    <table class="table table-striped table-hover table-bordered" id="table-producto" >
+                    <table class="table table-striped table-hover table-bordered"   id="table-producto" >
                                         <thead>
                                             <tr>
                                                 <th> CODIGO </th>
@@ -180,6 +177,41 @@
 </div>         
   <!----------------------------------- fin del modal buscar producto---------------------------------------------------------->                  
        <script>
+       
+       function aparecer3() {
+    		
+    	   var selectBox1 = document.getElementById("selecCategoria");
+   	    var selectedValue = selectBox1.options[selectBox1.selectedIndex].value;
+    	    console.log(selectedValue);
+    	    if( selectedValue==1 || selectedValue==2 || selectedValue==3 || selectedValue==4 || selectedValue==5 || selectedValue==6){
+    	        
+    	    	txtDatoP.disabled = true;
+    	    	document.getElementById("selectCriterioP").value = 0;
+    	    	$('#txtDatoP').val("");
+    	    	
+    		}else{
+    			txtDatoP.disabled = false;
+    			}
+    	}
+       
+       function aparecer4() {
+    	   var selectBox4 = document.getElementById("selecCategoria");
+      	    var selectedValue3 = selectBox4.options[selectBox4.selectedIndex].value;
+    	   
+   		var selectBox2 = document.getElementById("selectCriterioP");
+   	    var selectedValue2 = selectBox2.options[selectBox2.selectedIndex].value;
+   	    console.log(selectedValue2);
+   	    if( selectedValue3==0 && selectedValue2!=0){
+   	        
+   	    	txtDatoP.disabled = false;
+   	    	
+   		}else{
+   			txtDatoP.disabled = true;
+   			}
+   	}
+      
+       
+       
 function buscarCriterio(){
 
 	var flagC = $('#selecCategoria').val();
@@ -200,10 +232,13 @@ $.post('<%=request.getContextPath() %>/Gestionar_Producto', {
 			flagC: flagC,
 			accion : accion
 		}, function(response) {
-			if (response!=null) {
+			if (response['object'].length!=0) {
 				var i=0;
 				 var conta="<tbody>";
-			    	for( i=0;i<response['object'].length;i++){
+				 if(document.getElementById("selecCategoria").value!=0){
+					
+					
+				 for( i=0;i<response['object'].length;i++){
 			    		contador++;
 			    		
 			    		conta=conta+("<tr><td>"+response['object'][i]['codPro']+
@@ -221,17 +256,56 @@ $.post('<%=request.getContextPath() %>/Gestionar_Producto', {
 					conta=conta+("</tbody>");
 					//$("#boton").html("<input type='submit' id='btnAsignar' name='btnAsignar'  class='btn btn-primary'  style='margin-left: 224px;'   value='Asignar' >");
 					$("#table-producto").append(conta);
+
+					var validarProducto = document.getElementById("validarProducto");
+					validarProducto.style.visibility = "visible";
+					}else{
+						
+							if($('#txtDatoP').val()==""){
+								alert("llene campo")
+							}else{
+								for( i=0;i<response['object'].length;i++){
+						    		contador++;
+						    		
+						    		conta=conta+("<tr><td>"+response['object'][i]['codPro']+
+											"</td><td>"+response['object'][i]['nombre']+
+											"</td><td>"+response['object'][i]['precio']+
+											"</td><td>"+response['object'][i]['descripcion']+
+											"</td><td style='display:none;'>"+response['object'][i]['categoria']+
+											"</td><td style='display:none;'>"+response['object'][i]['idProducto']+
+											"</td><td><input type='button'  class='btn btn-primary btn-circle' onclick='enviarDatosProducto("+response['object'][i]['idProducto']+");' value='seleccionar'>"+
+											"</td><tr>");
+									
+								
+						    	}
+						    	//$("#nombreApe").html(name);
+								conta=conta+("</tbody>");
+							$("#table-producto").append(conta);
+							
+							var validarProducto = document.getElementById("validarProducto");
+							validarProducto.style.visibility = "visible";
+							$('#txtDatoP').val("");
+							}
+							
+					
+					
+					}
+					
 					
 					console.log(contador)
 					//alert(contador)
 					console.log ("conta:"+conta)
 					
 				
-
 			}else {
-				alert("no existe");
 				
-				 error.style.visibility = "visible";		
+				 $("#table-producto td").remove();
+					$("#table-producto").append('<tr id="result_tr"> <td colspan="5"><center><font color=red>Producto no Encontrado</font></center></td></tr>').show();
+					var validarProducto2 = document.getElementById("validarProducto");
+					validarProducto2.style.visibility = "hidden";
+					
+					
+				
 			}
 	
 		});

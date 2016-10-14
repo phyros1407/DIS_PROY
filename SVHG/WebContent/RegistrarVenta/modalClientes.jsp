@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -140,12 +140,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Buscar Cliente</h4>
       </div>
-       <div id ="error" style="visibility: hidden;">
-    <div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >El dni No existe</label>
-    </div>
-    </div>
+      
      <div id ="validardni" style="visibility: hidden;">
-    <div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >Ingrese un Nro. de Dni</label>
+    <div class='alert alert-danger' style="margin-top: 15px;" role='alert'><label id='mensajepequeno' name='ms' >Cliente Encontrado</label>
     </div>
     </div>
       <div class="modal-body">
@@ -228,7 +225,7 @@ if(document.getElementById("selectCriterio").value==0){
 alert("seleccione opcion");
 
 
-$("#table-cliente").html("<thead><tr><th>DNI</th><th>NOMBRES</th><th>APELLIDO PATERNO</th><th>APELLIDO MATERNO</th><th>OPCION</th></tr></thead>");
+
 var  contador=0;
 //alert("flag: "+dato);
 
@@ -236,7 +233,7 @@ var  contador=0;
 	if( $('#txtDatoC').val()==""){
 		alert("llene el campo")
 	}else{	
-		
+	$("#table-cliente").html("<thead><tr><th>DNI</th><th>NOMBRES</th><th>APELLIDO PATERNO</th><th>APELLIDO MATERNO</th><th>OPCION</th></tr></thead>");		
 var accion='buscarCriterio'
 
 $.post('<%=request.getContextPath() %>/ServletCliente', {
@@ -245,9 +242,13 @@ $.post('<%=request.getContextPath() %>/ServletCliente', {
 			flag: flag,
 			accion : accion
 		}, function(response) {
-			if (response!=null) {
+			
+			
+			if (response['object'].length!=0) {
+				var co=0;
 				var i=0;
 				 var conta="<tbody>";
+			
 			    	for( i=0;i<response['object'].length;i++){
 			    		contador++;
 			    		//<input id='jalar' type='hidden' value='"+response['object'][i]['id']+"'>
@@ -262,26 +263,34 @@ $.post('<%=request.getContextPath() %>/ServletCliente', {
 								"</td><td style='display:none;'><input id=jalar"+i+" type='text' value='"+response['object'][i]['id']+"'>"+response['object'][i]['id']+
 								"</td><td><input type='button' class='btn btn-primary btn-circle'   onclick='enviarDatos("+response['object'][i]['id']+");' value='seleccionar'>"+
 								"</td><tr>");
-						
+					
 						
 			    	}
 			    
 			    	//$("#nombreApe").html(name);
 					conta=conta+("</tbody>");
+					
 					//$("#boton").html("<input type='submit' id='btnAsignar' name='btnAsignar'  class='btn btn-primary'  style='margin-left: 224px;'   value='Asignar' >");
 					$("#table-cliente").append(conta);
-					console.log(contador)
-					//alert(contador)
+					
+					
+					//alert(co)
 					console.log (conta)
-					
-					
+					var validardni = document.getElementById("validardni");
+  	  								validardni.style.visibility = "visible";
+  	  								
 			}else {
-				alert("no existe");
-				
-				
+				var validardni = document.getElementById("validardni");
+				validardni.style.visibility = "hidden";
+				 $("#table-cliente td").remove();
+			$("#table-cliente ").append('<tr id="result_tr"> <td colspan="5"><center><font color=red>Cliente no Encontrado</font></center></td></tr>').show();
+			 
+					//$('#table-cliente').find('.black').hide();
+			 
 			}
 	
-		});}
+		});
+		}
 }
 
 }
