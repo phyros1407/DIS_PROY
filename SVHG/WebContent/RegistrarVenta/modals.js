@@ -58,9 +58,11 @@
 				//$(this).removeData('modalCliente');
 				 //$("#table-cliente > tr").remove();
 				 $('#txtDatoC').val("");
-				 $('#selectCriterio').val("SELECCIONAR");
+				
 				$('#table-cliente td').remove();
-		
+				var validardni2 = document.getElementById("validardni");
+				validardni2.style.visibility = "hidden";
+				document.getElementById("selectCriterio").value = 0;
 			});
 		
 	}
@@ -98,7 +100,10 @@
 				 $('#txtDatoP').val("");
 				 //$('#selectCriterioP').val("SELECCIONAR");
 				$('#table-producto td').remove();
-		
+				var validarProducto3 = document.getElementById("validarProducto");
+				validarProducto3.style.visibility = "hidden";
+				document.getElementById("selectCriterioP").value = 0;
+				document.getElementById("selecCategoria").value=0;
 			});
 		
 	}
