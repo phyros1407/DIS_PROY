@@ -68,7 +68,7 @@ public class ServletPedido extends HttpServlet {
 								request.setAttribute("estado", "Pendientes");
 							}else if(estado.equalsIgnoreCase("R")){
 								request.setAttribute("estado", "Recibidos");
-							}else{
+							}else if(estado.equalsIgnoreCase("C")){
 								request.setAttribute("estado", "Cancelados");
 							}
 							
@@ -88,7 +88,7 @@ public class ServletPedido extends HttpServlet {
 					PedidoBean pedido=pedidoDao.cambiarEstadoPedido(Integer.parseInt(id));
 					
 					if(pedido!=null){//cambio estado
-						request.getServletContext().getRequestDispatcher("/ServletPedido?accion=listarPedidos&estado=PENDIENTE").forward(request, response);
+						request.getServletContext().getRequestDispatcher("/ServletPedido?accion=listarPedidos&estado=C").forward(request, response);
 					}else{//no cambio estado
 						
 					}
