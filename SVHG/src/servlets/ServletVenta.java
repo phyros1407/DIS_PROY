@@ -315,28 +315,18 @@ if (codigoAntiguo!=null) {
 		
 		    ventadao.registrarOferta(idusuario, numeroTransaccion, fecIni, productoId, cantidadPro, ImporteProducto, tipoFac);	
 			
-		    if (pedidodao.guardarComprobante(comprobante)) {
-		    
+		    if (pedidodao.guardarComprobante(comprobante) ) {
+		   
 		    	out.println("<script type=\"text/javascript\">");
 				out.println("alert('La venta se guardó satisfactoriamente. Venta Nro:'+'"+numeroTransaccion+"');");
 				out.println("location='RegistrarVenta/RegistrarVentaHerramientas.jsp'");
 				out.println("</script>");
 			System.out.println("guardooo");
-		    	
+		    
 		    }else{
 		    	System.out.println("falloooo");
 		    }
 		
-			/*	System.out.println(idusuario+numeroTransaccion+fecIni+"asdasdadsadas"+productoId+cantidadPro+ImporteProducto+tipoFac);
-				if(ventadao.registrarOferta(idusuario, numeroTransaccion, fecIni, productoId, cantidadPro, ImporteProducto, tipoFac)){
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('La venta se guardó satisfactoriamente. Venta Nro:'+'"+numeroTransaccion+"');");
-					out.println("location='RegistrarVenta/RegistrarVentaHerramientas.jsp'");
-					out.println("</script>");
-				System.out.println("guardooo");
-				}else{
-					System.out.println("fallooooo");
-				}*/
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
