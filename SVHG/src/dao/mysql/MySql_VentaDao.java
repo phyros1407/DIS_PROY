@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import beans.ComprobanteBean;
 import beans.TransaccionBean;
 import dao.interfaces.VentaDao;
 import daofactory.MySqlDAOFactory;
@@ -102,5 +103,86 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 		}
 		
 		return num;
+	}
+	
+	
+	@Override
+	public boolean guardarComprobante(ComprobanteBean comprobante) throws Exception {
+		// TODO Auto-generated method stub
+		
+		boolean flag = false;
+		int maxId=1;
+		try{
+			
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			/*Statement stmtS=con.createStatement();
+			
+				String query2="select max(id) from transaccion;";
+				ResultSet rs=stmtS.executeQuery(query2);
+				while(rs.next()){
+					maxId=Integer.parseInt(rs.getString("maxid"));
+				}*/
+				
+			String query = " INSERT INTO comprobante_pago (VEN_ID ,TIPO ,RUC ,RAZ_SOC ,NUM_COM ,IGV ,FEC_EMI ,FEC_CAN ) "
+					+ " VALUES ( (select max(id) from transaccion) , '"+comprobante.getTipo()+"','"+comprobante.getRuc()+"','"+comprobante.getRaz_soc()+"','"+comprobante.getNum_com()+"',"+comprobante.getIgv()+","+comprobante.getFec_emi()+","+comprobante.getFec_can()+" )";
+			
+			System.out.println("QUERY PARA GUARDAR COMPROBANTE ---> "+query);
+			
+			int filas = stmt.executeUpdate(query);
+			
+			if(filas == 1){
+				System.out.println("SE GUARDO CON EXITO :DDDDD");
+				flag = true;
+			}
+			
+			
+		}catch(Exception e){
+			
+			System.out.println("ERROR :"+e.getMessage());
+			
+		}
+		
+		return flag;
+	}
+	
+	
+	@Override
+	public String obtenerUltimoNumeroComprobantexTipo(String tipo) throws Exception {
+		// TODO Auto-generated method stub
+		
+		String num_com = "";
+		
+		try{
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			String query = "";
+			//String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' ORDER BY NUM_COM DESC LIMIT 1";
+			if(tipo.equalsIgnoreCase("boleta")){
+				 query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'BV' ORDER BY NUM_COM DESC LIMIT 1";
+			}else{
+				 query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'FV' ORDER BY NUM_COM DESC LIMIT 1";
+			}
+			
+			System.out.println("QUERY PARA OBTENER EL ULTIMO NUMERO DE COMPROBANTE ---->"+query);
+			ResultSet rs = stmt.executeQuery(query);
+			
+			if(rs.isBeforeFirst()){
+				
+				if(rs.next()){
+					
+					num_com = rs.getString("NUM_COM");
+					
+				}
+				
+			}
+			
+			
+		}catch(Exception e){
+			System.out.println("ERROR :"+e.getMessage());
+		}
+		
+		
+		return num_com;
 	}
 }

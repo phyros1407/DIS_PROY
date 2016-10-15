@@ -2,7 +2,7 @@ var rowCount;
 var txt_idProducto
 function registrarTabla(){
 txt_idProducto = $('#txtIdProducto').val(); 
-alert(txt_idProducto);
+//alert(txt_idProducto);
 var txt_NombresProd2 = $('#txtNombresProd').val();
 var txt_Precio2 = $('#txtPrecio').val();
 var txt_Cantidad2 = $('#txtCantidad').val();
@@ -10,7 +10,7 @@ var txt_importe = (txt_Precio2)*txt_Cantidad2;//agregado igv (18%)
 var txt_descripcion=$('#txtDescripcion').val(); 
 var txt_codproducto=$('#txtCodProducto').val();
 /**/
-alert(txt_NombresProd2+"||"+txt_Precio2+"||"+txt_Cantidad2+"||"+txt_importe);
+//alert(txt_NombresProd2+"||"+txt_Precio2+"||"+txt_Cantidad2+"||"+txt_importe);
 
 if(txt_Precio2=="" ||txt_NombresProd2==""|| txt_descripcion==""|| txt_codproducto=="" ){
 	alert("No hay Producto para agregar"); 

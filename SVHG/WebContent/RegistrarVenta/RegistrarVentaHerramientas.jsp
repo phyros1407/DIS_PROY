@@ -438,10 +438,10 @@ function buscarRuc(){
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <select class="form-control" id="selectBox" onclick="aparecer();" name="select" >
+                                                    <select class="form-control" id="selectBox" onclick="aparecer();" name="select"  form="registrar" >
                                                        
-                                                        <option value="1">Boleta</option>
-                                                        <option  value="2">Factura</option>
+                                                        <option value="boleta">Boleta</option>
+                                                        <option  value="factura">Factura</option>
                                                         
                                                     </select>
                                                 </div>
@@ -453,7 +453,7 @@ function buscarRuc(){
                                                 </label>
                                                 <div class="col-md-6"> 
                                                 
-                                                    <input type="text" name="name" id="txtCantidad" data-required="1" class="form-control" maxlength="3" onkeypress="return solonumeros(event)"/> 
+                                                    <input type="text" name="montototal4" form="registrar" id="txtCantidad" data-required="1" class="form-control" maxlength="3" onkeypress="return solonumeros(event)"/> 
                                                     </div>
                                             		
                                             </div>

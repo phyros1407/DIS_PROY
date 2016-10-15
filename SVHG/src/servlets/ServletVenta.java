@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import util.ResponseObject;
+import beans.ComprobanteBean;
 import beans.EmpresaBean;
 import beans.PersonaBean;
 
@@ -159,8 +160,17 @@ if (codigoAntiguo!=null) {
 			}
 		}	
 		
+		VentaDao pedidodao = dao.getVentaDao();
+		
+		
+		
+		
+		
+		
+		
+		
 		if(accion.equals("registrarVenta1")){
-			
+			try {	
 			
 			
 			PrintWriter out = response.getWriter();		
@@ -170,8 +180,10 @@ if (codigoAntiguo!=null) {
 			int idusuario=Integer.parseInt(request.getParameter("txtusuario"));
 			String fecIni=request.getParameter("txt_fechaactual");
 			String numeroTransaccion=request.getParameter("txt_numeroVenta");
-			String tipoFac="BOLETA";
+			
+			String tipoFac=request.getParameter("select");
 			System.out.println("agregar");
+			System.out.println("asdfasdjfansdfkljadhnflasdjf"+tipoFac);
 			
 			int size=Integer.parseInt(request.getParameter("txtsize"));
 			System.out.println("tamaññooooooo:  "+size);
@@ -195,12 +207,7 @@ if (codigoAntiguo!=null) {
 				}			
 			}
 
-		/*	if(llenos==0){
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Seleccione al menos un producto.');");
-				out.println("location='ServletVenta'");
-				out.println("</script>");
-			}*/
+		
 			String[] productoId=new String[llenos];
 			double[] ImporteProducto=new double[llenos];
 			int[] cantidadPro = new int[llenos];
@@ -212,17 +219,121 @@ if (codigoAntiguo!=null) {
 				System.out.println("llenando segundos vectores");
 			}
 			
-			try {
-				System.out.println(idusuario+numeroTransaccion+fecIni+"asdasdadsadas"+productoId+cantidadPro+ImporteProducto+tipoFac);
+			//comprobante
+			String preSerie = "";
+			ComprobanteBean comprobante = new ComprobanteBean();
+			comprobante.setTipo(tipoFac.toUpperCase());
+			if (tipoFac.equalsIgnoreCase("factura")) {
+				comprobante.setRuc(request
+						.getParameter("ruc_entrega_pedido"));
+				comprobante.setRaz_soc(request
+						.getParameter("rs_entrega_pedido"));
+				preSerie = "FV";
+			} else {
+				comprobante.setRuc("");
+				comprobante.setRaz_soc("");
+				preSerie = "BV";
+			}
+			
+			String antiguoNumeroComprobante = pedidodao
+					.obtenerUltimoNumeroComprobantexTipo(tipoFac
+							.toUpperCase());
+
+			if (antiguoNumeroComprobante.trim().equalsIgnoreCase("")) {
+
+				comprobante.setNum_com(preSerie + "00-00000001");
+
+			} else {
+				System.out
+						.println("ESTO ES LO QUE DEVUELE EN ANTIGUO COMPROBANTE ----> "
+								+ antiguoNumeroComprobante);
+				String numeroSerie = antiguoNumeroComprobante
+						.substring(0, 5);
+				System.out.println("NUMERO DE SERIE ANTIGUO -->"
+						+ numeroSerie);
+				String numeroComprobante = antiguoNumeroComprobante
+						.substring(6);
+				System.out.println("NUMERO DE COMPROBANTE ANTIGUO --->"
+						+ numeroComprobante);
+
+				if (Integer.parseInt(numeroComprobante) == 99999999) {
+
+					String primeraPartSerie = numeroSerie.substring(0,
+							2);
+					String segundaPatSerie = numeroSerie
+							.substring(3, 4);
+
+					int nuevoNumSerie = Integer
+							.parseInt(segundaPatSerie) + 1;
+
+					if (String.valueOf(nuevoNumSerie).length() < 2) {
+
+						comprobante.setNum_com(primeraPartSerie + "0"
+								+ nuevoNumSerie + "-00000001");
+
+					} else {
+
+						comprobante.setNum_com(primeraPartSerie
+								+ nuevoNumSerie + "-00000001");
+
+					}
+
+				} else {
+
+					int nuevoNumComprobante = Integer
+							.parseInt(numeroComprobante) + 1;
+
+					String cadena1 = String
+							.valueOf(nuevoNumComprobante);
+					for (int i = 0; i < 8; i++) {
+
+						if (cadena1.length() < 8) {
+							cadena1 = "0" + cadena1;
+						} else {
+							break;
+						}
+
+					}
+
+					comprobante.setNum_com(numeroSerie + cadena1);
+
+				}
+			}
+			 
+			String total= request.getParameter("montototal4");
+			System.out.println("asdasdas"+total);
+			
+			//double igvTotal = total / 1.18;
+			//System.out.println("asdasd"+total);
+			//comprobante.setIgv(Math.round(igvTotal * 100.00) / 100.00);
+			//comprobante.setIgv(Double.parseDouble(total));
+			comprobante.setFec_emi("now()");
+		    comprobante.setFec_can("now()");
+		
+		    ventadao.registrarOferta(idusuario, numeroTransaccion, fecIni, productoId, cantidadPro, ImporteProducto, tipoFac);	
+			
+		    if (pedidodao.guardarComprobante(comprobante)) {
+		    
+		    	out.println("<script type=\"text/javascript\">");
+				out.println("alert('La venta se guardó satisfactoriamente. Venta Nro:'+'"+numeroTransaccion+"');");
+				out.println("location='RegistrarVenta/RegistrarVentaHerramientas.jsp'");
+				out.println("</script>");
+			System.out.println("guardooo");
+		    	
+		    }else{
+		    	System.out.println("falloooo");
+		    }
+		
+			/*	System.out.println(idusuario+numeroTransaccion+fecIni+"asdasdadsadas"+productoId+cantidadPro+ImporteProducto+tipoFac);
 				if(ventadao.registrarOferta(idusuario, numeroTransaccion, fecIni, productoId, cantidadPro, ImporteProducto, tipoFac)){
 					out.println("<script type=\"text/javascript\">");
-					out.println("alert('La venta se guardó satisfactoriamente');");
+					out.println("alert('La venta se guardó satisfactoriamente. Venta Nro:'+'"+numeroTransaccion+"');");
 					out.println("location='RegistrarVenta/RegistrarVentaHerramientas.jsp'");
 					out.println("</script>");
 				System.out.println("guardooo");
 				}else{
 					System.out.println("fallooooo");
-				}
+				}*/
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

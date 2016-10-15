@@ -20,6 +20,7 @@ public class PersonaBean {
 	private String razonsocial;
 	private int idusuario;
 	
+	
 	public int getIdusuario() {
 		return idusuario;
 	}
