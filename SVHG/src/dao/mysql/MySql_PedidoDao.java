@@ -106,7 +106,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				producto=new PedidoBean();
 				producto.setId(rs.getInt("venta_producto"));
 				producto.setProductoId(Integer.toString(rs.getInt("producto_id")));
-			
+			  
 				producto.setProductoNombre(rs.getString("producto_nombre"));
 				producto.setCategoriaProducto(rs.getString("tipo_categoria"));
 				producto.setMedidaProducto(rs.getString("producto_medida"));
