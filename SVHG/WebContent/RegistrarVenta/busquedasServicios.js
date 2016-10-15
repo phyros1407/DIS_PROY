@@ -23,7 +23,7 @@
 						}else{
 							
 							alert("El número de DNI es incorrecto o no está registrado en la RENIEC")
-							
+							//
 						}		
 			  });
 		 
