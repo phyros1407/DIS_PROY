@@ -49,7 +49,7 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-							<%if(session.getAttribute("mostrarLogin")=="no"){ %>
+							<%if(session.getAttribute("rolEmpleado")=="1"){ %>
 							<li><a><font color=blue>Bienvenido <%=session.getAttribute("nombreApellidoPersona") %></font></a><input type="hidden" id="nombre_cliente" value="<%=session.getAttribute("nombreApellidoPersona") %>"></li>
 
 							<li><a href="ServletCliente?accion=actualizarDatos"><i class="fa fa-user"></i> Cuenta</a></li>

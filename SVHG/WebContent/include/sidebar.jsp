@@ -35,11 +35,24 @@
                                 
                             </a>
                       	</li>
+                      	<% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="heading">
                             <h3 class="uppercase">ADMINISTRADOR</h3>
                         </li>
-                        
-                       
+                        <%}  if(session.getAttribute("rolEmpleado").equals(2)){ %>
+                       <li class="heading">
+                            <h3 class="uppercase">ALMACENERO</h3>
+                        </li>
+                       	<%}  if(session.getAttribute("rolEmpleado").equals(3)){ %>
+                       	<li class="heading">
+                            <h3 class="uppercase">VENDEDOR</h3>
+                        </li>
+                       	<%}  if(session.getAttribute("rolEmpleado").equals(4)){ %>
+                       	<li class="heading">
+                            <h3 class="uppercase">PROVEEDOR</h3>
+                        </li>
+                       	<%} %>
+                       	<% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="nav-item  ">
                             <a href="Gestionar_Usuario" class="nav-link nav-toggle">
                                 <i class="icon-puzzle"></i>
@@ -47,45 +60,56 @@
                                 
                             </a>
                         </li>
+                        <%} %>
+                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/Gestionar_Producto" class="nav-link nav-toggle">
 	                                <i class="icon-diamond"></i>
 	                                <span class="title" href="" >Gestionar Producto</span>
 	                        </a>
                         </li>
+                        <%} %>
+                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/GestionarEstadoPedido.jsp" class="nav-link nav-toggle">
 	                                <i class="icon-diamond"></i>
 	                                <span class="title" href="" >Gestionar Estado Pedido</span>
 	                        </a>
                         </li>
-                       
+                        <%} %>
+                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                          <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/RegistrarVenta/RegistrarVentaHerramientas.jsp" class="nav-link nav-toggle">
 	                                <i class="icon-puzzle"></i>
 	                                <span class="title" href="" >Registrar Venta</span>
 	                        </a>
                         </li>
+                        <%} %>
+                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                          <li class="nav-item">
 	                         <a href="<%=request.getContextPath() %>/ServletReporteVentas" class="nav-link nav-toggle">
 	                                <i class="icon-puzzle"></i>
 	                                <span class="title" href="" >Reporte de Ventas</span>
 	                        </a>
                         </li>
+                       <%} %>
+                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                          <li class="nav-item">
 	                         <a href="<%=request.getContextPath() %>/ServletReporteUtilidades" class="nav-link nav-toggle">
 	                                <i class="icon-puzzle"></i>
 	                                <span class="title" href="" >Reporte de Utilidades</span>
 	                        </a>
                         </li>
+                       <%} %>
+                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/ServletOferta" class="nav-link nav-toggle">
 	                                <i class="icon-diamond"></i>
 	                                <span class="title" href="" >Registrar ofertas</span>
 	                        </a>
                         </li>
-                  
-                               
+                         <%} %>
+                             
                       
                     </ul>
                     <!-- END SIDEBAR MENU -->

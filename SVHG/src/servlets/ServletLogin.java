@@ -95,22 +95,17 @@ public class ServletLogin extends HttpServlet {
 				
 				
 				System.out.println("rolllll "+usu.getRolId());
-				if(usu.getRolId()==1 ){//rol administrador
-					System.out.println("entro 1 rol");
+
+				if(usu.getRolId()==1 || usu.getRolId()==2 || usu.getRolId()==3 || usu.getRolId()==4){//rol empleado
+					System.out.println("entro rol empleado con rol===>"+usu.getRolId());
+					misesion.setAttribute("rolEmpleado",usu.getRolId());
 					misesion.setAttribute("nombreApellidoPersonaAdmi", usu.getNombre()+" "+usu.getApellidoPaterno());
 					request.getRequestDispatcher("inicio.jsp").forward(request, response);
 					misesion.setAttribute("codigoCliente", usu.getId_usuario());
-				}else if(usu.getRolId()==2 ){//rol almacenero
-					
-				}else if(usu.getRolId()==3 ){//rol carguero
-					
-				}else if(usu.getRolId()==4 ){//rol proovedor
-					
 				}else if(usu.getRolId()==5 ){//rol cliente
+					System.out.println("entro rol cliente");
 					request.getRequestDispatcher("home.jsp").forward(request, response);
-				}else{
-					
-				}
+				} 
 			}else if( usu!=null &&  usu.getIntento().equals("1")){
 				request.setAttribute("msjError", "Le queda 3 Intentos para iniciar sessión con el usuario: "+usu.getNombreUsu());
 				request.getRequestDispatcher("home.jsp").forward(request, response);
