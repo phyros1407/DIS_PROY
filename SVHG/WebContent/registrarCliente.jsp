@@ -47,8 +47,8 @@
 			y.readOnly =true;
 			 // console.log("asdasd"+dni);
 			 var accion='buscarDni';
-			  $.get('http://env-3384797.jelasticlw.com.br/service/Gestionar_Persona', {
-				 
+			  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Persona', {
+				
 						accion : accion,
 						dni:dni
 					}, function(response) {		
@@ -88,8 +88,8 @@
 					y.readOnly =true;
 				 // console.log("asdasd"+dni);
 				 var accion='buscarRuc';
-				  $.get('http://env-3384797.jelasticlw.com.br/service/Gestionar_Empresa', {
-					  
+				  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Empresa', {
+					
 							accion : accion,
 							ruc:ruc
 						}, function(response) {		
@@ -329,7 +329,7 @@
 								</div>		
 								<div class="col-sm-4">
 									<label >Clave:</label>
-						      	<input  required type="password" id="txtClave" name="txtClave" id=txtClave1 class="form-control" required> 
+						      	<input onchange="validarClave2()" maxlength="15"  required type="password" id="txtClave" name="txtClave" id=txtClave1 class="form-control" required> 
 								</div>
 							</div>
 							
@@ -337,12 +337,12 @@
 						<br>
 							<div class="row">
 								<div class="col-sm-4">
-						       		<label >Telefono(Fijo o Celular):</label>
-						        	<input required type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
+						       		<label >Telefono:</label>
+						        	<input  onchange="longitudCampoTelefono()" required type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
 								</div>	
 								<div class="col-sm-4">
 									<label >Repetir Clave:</label>
-						        	<input required type="password" onchange="validarClave()" name="txtClave2" id="txtClave2" class="form-control" required> 
+						        	<input maxlength="15" required type="password" onchange="validarClave()" name="txtClave2" id="txtClave2" class="form-control" required> 
 								</div>
 							</div>
 							<br><br>
@@ -357,21 +357,57 @@
 					</div><!--features_items-->
 				
 					<script>
+					function longitudCampoTelefono(){
+						var x=document.getElementById("txtCelular").value;
+						var y=x.length;
+				
+					
+						
+				
+						if(y!=7 && y!=9){
+							document.getElementById("txtCelular").value = "";
+							alert("Numero de telefono incorrecto intente de nuevo");
+						
+						}
+					}	
 					function validarClave(){
-					var p1 = document.getElementById("txtClave").value;
-					var p2 = document.getElementById("txtClave2").value;
-					
-					if (p1 != p2) {
-						  document.getElementById("divError").innerHTML  ="<div class=alert alert-danger><strong>ERROR!</strong> Las claves no coinciden.</div>";
-						  document.getElementById("botonSubmit").disabled = true;
-						  return false;
-					}else{
-						 document.getElementById("divError").innerHTML  ="";
-						  document.getElementById("botonSubmit").disabled = false;
+						var p1 = document.getElementById("txtClave").value;
+						var p2 = document.getElementById("txtClave2").value;
+						
+						if(p1.length!=0){
+						if (p1 != p2) {
+							document.getElementById("txtClave").value   ="";
+							  document.getElementById("txtClave2").value   ="";
+							  document.getElementById("divError").innerHTML  ="<div class=alert alert-danger><strong>ERROR!</strong> Las claves no coinciden.</div>";
+							  
+							  document.getElementById("botonSubmit").disabled = true;
+							  return false;
+						}else{
+						
+							 document.getElementById("divError").innerHTML  ="";
+							 document.getElementById("botonSubmit").disabled = false;
+						}
+						}
 					}
-					}
 					
-		
+				function validarClave2(){
+						
+						var p1 = document.getElementById("txtClave").value;
+						var p2 = document.getElementById("txtClave2").value;
+						if(p2.length!=0){
+						if (p1 != p2) {
+							document.getElementById("txtClave").innerHTML  ="";
+							  document.getElementById("txtClave2").innerHTML  ="";
+							  document.getElementById("divError").innerHTML  ="<div class=alert alert-danger><strong>ERROR!</strong> Las claves no coinciden.</div>";
+							  
+							  document.getElementById("botonSubmit").disabled = true;
+							  return false;
+						}else{
+						
+							 document.getElementById("divError").innerHTML  ="";
+							 document.getElementById("botonSubmit").disabled = false;
+						}
+						}}
 					
 					</script>
 					
