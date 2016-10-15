@@ -33,7 +33,11 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			while(rs.next()){
 				pedido=new PedidoBean();
 				pedido.setId(rs.getInt("id"));
-				pedido.setNumPedido(rs.getString("num"));
+				
+				String[] parts = rs.getString("num").split("-");
+				String numPedido = parts[1]; 
+				
+				pedido.setNumPedido(numPedido);
 				pedido.setFechaEntrega(rs.getString("fec_ent"));
 				
 				
