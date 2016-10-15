@@ -262,6 +262,7 @@ function categoria(){
 
 function agregar(){
 	console.log("agrega");
+	
 	<%for(int i=0;i<productos.size()-1;i++){%>
 	if($('#ofertas'+<%=i%>+'').val()!=null){	
 	if(document.getElementById('ofertas'+<%=i%>+'').checked){
@@ -277,7 +278,7 @@ function agregar(){
 	descuento();
 	compStock();
 	}
-	
+
 
 function eliminar(id,valor,precio){
 	
@@ -315,8 +316,9 @@ function compStock(){
 	var stockM=10000;
 	$('#proAgre .stock').each(function()
 			{			  	
-			  var stock=($(this).html());
-			  if(stock<stockM){
+			  var stock=parseInt($(this).html());
+			  console.log('Stock a comparar'+stock);
+			  if(stockM>stock){
 				  stockM=stock;
 				  console.log(stockM)
 			  }
