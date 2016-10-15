@@ -52,7 +52,10 @@
                             <h3 class="uppercase">PROVEEDOR</h3>
                         </li>
                        	<%} %>
-                       	<% if(session.getAttribute("rolEmpleado").equals(1)){ %>
+                       	
+                       	
+                       	
+         <!-- ya esta --><% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="nav-item  ">
                             <a href="Gestionar_Usuario" class="nav-link nav-toggle">
                                 <i class="icon-puzzle"></i>
@@ -61,7 +64,7 @@
                             </a>
                         </li>
                         <%} %>
-                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
+         <!-- ya esta --><% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/Gestionar_Producto" class="nav-link nav-toggle">
 	                                <i class="icon-diamond"></i>
@@ -69,7 +72,7 @@
 	                        </a>
                         </li>
                         <%} %>
-                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
+        <!-- ya esta --><% if(session.getAttribute("rolEmpleado").equals(3)){ %>
                         <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/GestionarEstadoPedido.jsp" class="nav-link nav-toggle">
 	                                <i class="icon-diamond"></i>
@@ -77,7 +80,7 @@
 	                        </a>
                         </li>
                         <%} %>
-                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
+        <!-- ya esta --><% if(session.getAttribute("rolEmpleado").equals(3)){ %>
                          <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/RegistrarVenta/RegistrarVentaHerramientas.jsp" class="nav-link nav-toggle">
 	                                <i class="icon-puzzle"></i>
@@ -85,7 +88,7 @@
 	                        </a>
                         </li>
                         <%} %>
-                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
+       <!-- ya esta --><% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                          <li class="nav-item">
 	                         <a href="<%=request.getContextPath() %>/ServletReporteVentas" class="nav-link nav-toggle">
 	                                <i class="icon-puzzle"></i>
@@ -93,7 +96,7 @@
 	                        </a>
                         </li>
                        <%} %>
-                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
+         <!-- ya esta --><% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                          <li class="nav-item">
 	                         <a href="<%=request.getContextPath() %>/ServletReporteUtilidades" class="nav-link nav-toggle">
 	                                <i class="icon-puzzle"></i>
@@ -101,7 +104,7 @@
 	                        </a>
                         </li>
                        <%} %>
-                        <% if(session.getAttribute("rolEmpleado").equals(1)){ %>
+       <!-- ya esta --><% if(session.getAttribute("rolEmpleado").equals(1)){ %>
                         <li class="nav-item  ">
 	                         <a href="<%=request.getContextPath() %>/ServletOferta" class="nav-link nav-toggle">
 	                                <i class="icon-diamond"></i>

@@ -351,9 +351,9 @@ public class ServletGenerarPedido extends HttpServlet {
 						System.out.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 
 						
-						EnviarBoleta email = new EnviarBoleta();
+						/*EnviarBoleta email = new EnviarBoleta();
 						email.sendEmail();
-						
+						*/
 						
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('Su pedido ha sido Procesado con exito! Su numero de pedido es  : "+ codigoNuevo + "');");
