@@ -18,6 +18,7 @@ import beans.PedidoBean;
 import beans.TransaccionBean;
 import dao.interfaces.PedidoDao;
 import daofactory.DAOFactory;
+import util.EnviarBoleta;
 import util.ResponseObject;
 
 /**
@@ -268,7 +269,7 @@ public class ServletGenerarPedido extends HttpServlet {
 						comprobante.setRaz_soc("");
 						preSerie = "BV";
 					}
-
+					
 					String antiguoNumeroComprobante = pedidodao
 							.obtenerUltimoNumeroComprobantexTipo(facturacion
 									.toUpperCase());
@@ -350,11 +351,12 @@ public class ServletGenerarPedido extends HttpServlet {
 						System.out.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 
 						
+						EnviarBoleta email = new EnviarBoleta();
+						email.sendEmail();
 						
 						
 						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Su pedido ha sido Procesado con exito! Su numero de pedido es  : "
-								+ idGenerado + "');");
+						out.println("alert('Su pedido ha sido Procesado con exito! Su numero de pedido es  : "+ codigoNuevo + "');");
 						out.println("location='ServletGenerarPedido';");
 						out.println("localStorage.clear();");
 						out.println("$('#cantidadProductos').text(localStorage.length);");
