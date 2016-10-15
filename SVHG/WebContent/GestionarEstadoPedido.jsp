@@ -186,10 +186,11 @@ function buscarPedido(){
 			id:id
 			
 		},function(response){
-			
 			if(response['object'].length<1){
 				
 				$('#mensaje').html(' El Nº de Orden de pedido no existe. ');
+			}else if(response['object'][0]['estado']=='E'){
+				$('#mensaje').html(' El N° de Orden de pedido ya ha sido actualizada ');
 			}else{
 				var impTotal=0;			
 				
@@ -232,7 +233,7 @@ function buscarPedido(){
 					cadena = cadena+("<tr><td>"+response['object'][i]['ProductoId']+"</td><td>"+response['object'][i]['productoNombre']+"</td><td>"+response['object'][i]['pesoUnidad']+" Kg</td><td>"+response['object'][i]['cantidad']+"</td><td>"+response['object'][i]['precioUnidad']+"</td><td>S/"+response['object'][i]['impProd']+".00</td></tr>");
 				}
 				cadena2="<tr><td colspan='4'></td><td class='danger'>TOTAL A PAGAR </td><td class='warning'>S/"+impTotal+".00</td></tr>";
-				cadena3="<tr><td colspan='4'><label id='mensaje2' style='color:red'></label><td><input type='button' id='actualizar' class='btn btn-success' onclick='actualizarPedido("+id+")' value='Actualizar'></td><td><input type='button' class='btn btn-danger' onClick='location.reload()' value='Cancelar'></td></tr>";
+				cadena3="<tr><td colspan='4'><label id='mensaje2' style='color:red'></label><td><input type='button' id='actualizar' class='btn btn-success' onclick='actualizarPedido("+id+")' value='Actualizar'></td><td><input type='button' class='btn btn-danger' onClick='location.reload()' value='Regresar'></td></tr>";
 				$('#datos').fadeIn().removeClass('hide');
 				$('#detalleProd').html(cadena+cadena2+cadena3);
 			}

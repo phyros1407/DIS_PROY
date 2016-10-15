@@ -133,7 +133,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				
 				Statement stmt=con.createStatement();
 				//pe.EST_ENT ,pe.TIP_ENT , pe.FEC_CREA_REGI,p.DNI,p.NOM,p.DIR,pr.ID,pr.NOM ,pr.PESO,dt.CAN,pr.PRE,dt.IMP
-				String query="Select * from persona p  INNER JOIN usuario u ON p.id=u.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO  INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID  INNER JOIN producto pr ON dt.PRO_ID=pr.ID and pe.EST_ENT='P' and pe.PED_ID ='"+idPedido+"'";
+				String query="Select * from persona p  INNER JOIN usuario u ON p.id=u.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO  INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID  INNER JOIN producto pr ON dt.PRO_ID=pr.ID  and pe.PED_ID ='"+idPedido+"'";
 				System.out.println("QUERY DE VENTAS LISTADO ---->"+query);
 				ResultSet rs=stmt.executeQuery(query);
 				PedidoBean pedido=null;
