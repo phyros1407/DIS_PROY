@@ -228,7 +228,7 @@
 						<div id="para_casa" style="display:none;">
 							<div class="col-xs-6 col-sm-6">
 								<!-- PAYPAL BOTON -->
-								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="fomr2" method="get" target="_blank">
+								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="fomr2" method="get" target="_top">
 									<input type="hidden" name="cmd" value="_s-xclick">
 									<input type="hidden" name="currency_code" value="US">
 									<input type="hidden" name="business" value="nano_sport_test@hotmail.com">
@@ -252,7 +252,7 @@
 						<div id="para_local" style="display:none;">
 							<div class="col-xs-4 col-sm-4">
 								<!-- PAYPAL BOTON -->
-								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="form1" method="get" target="_blank">
+								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="form1" method="get" target="_top">
 									<input type="hidden" name="cmd" value="_s-xclick">
 									<input type="hidden" name="currency_code" value="US">
 									<input type="hidden" name="business" value="nano_sport_test@hotmail.com">

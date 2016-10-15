@@ -347,9 +347,11 @@ public class ServletGenerarPedido extends HttpServlet {
 
 					if (pedidodao.guardarComprobante(comprobante)) {
 
-						System.out
-								.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
+						System.out.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 
+						
+						
+						
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('Su pedido ha sido Procesado con exito! Su numero de pedido es  : "
 								+ idGenerado + "');");

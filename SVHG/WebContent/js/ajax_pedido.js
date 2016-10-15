@@ -312,7 +312,7 @@
 								
 								var subtotal = $("#subTotalV").val();
 								
-								if(parseFloat(subtotal)<200){
+								if(parseFloat(subtotal)>200){
 									
 									$("#cargo_entrega").text("S/. 0.00");
 									$("#total").text("S/. "+(parseFloat(subtotal)).toFixed(2));
@@ -353,7 +353,7 @@
 
 								if(total!=$("#subTotalV").val()){
 								
-									if(parseFloat(subtotal2)<200){
+									if(parseFloat(subtotal2)>200){
 										
 										$("#cargo_entrega").text("S/. 0.00");
 										$("#total").text("S/. "+(parseFloat(total)).toFixed(2));
@@ -454,7 +454,7 @@
 								var telefono2 = $("#telefono2").val();
 			
 								//SETEAR VAL
-								$("#mosNom").text("Jean Pier Barbieri");
+								$("#mosNom").text($("#nombre_cliente").val());
 								$("#mosDir").text(direccion);
 								$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
 								$("#mosTel").text("Telefono : " + telefono1 + "\n"+ " Otro Telefono : " + telefono2);
@@ -981,14 +981,14 @@
 				if(parseFloat(subtotal)<200){
 					
 					$("<input type='hidden'/>")
-				     .attr("value","0")
+				     .attr("value","20")
 				     .attr("name", "cargo_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
 				}else{
 					
 					$("<input type='hidden'/>")
-				     .attr("value","20")
+				     .attr("value","0")
 				     .attr("name", "cargo_entrega_pedido")
 				     .appendTo(formularioDestino);
 					
@@ -1071,7 +1071,7 @@
 			
 			 $('#precarga').html('<img id="image_carga" src=" imagesOut/cart/ajax-loader.gif"/>');
 
-			  $.get('http://env-3384797.jelasticlw.com.br/service/Gestionar_Empresa', {
+			  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Empresa', {
 				  
 						accion : accion,
 						ruc:ruc
@@ -1100,7 +1100,7 @@
          function generarUrl(formulario_destino){
         	 
 
-        	var url = "http://localhost:8081/SVHG/file_contac_servlet.jsp?";
+        	var url = "http://localhost:8080/SVHG/file_contac_servlet.jsp?";
         	 
  			var cantidades = [];
  			var importes = [];
@@ -1161,11 +1161,11 @@
 				
 				if(parseFloat(subtotal)<200){
 					
-					cadena = cadena + "&cargo_entrega_pedido=0";
+					cadena = cadena + "&cargo_entrega_pedido=20";
 					
 				}else{
 					
-					cadena = cadena + "&cargo_entrega_pedido=20";
+					cadena = cadena + "&cargo_entrega_pedido=0";
 					
 				}
  				
