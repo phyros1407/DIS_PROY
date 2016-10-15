@@ -33,6 +33,24 @@ S
 <%@include file="../includeOut/header.jsp" %>
 <script type="text/javascript">
 
+function longitudCampoTelefono(){
+	var x=document.getElementById("txtCelular").value;
+	var y=x.length;
+
+	if(y!=7 && y!=9){
+		
+		alert("Numero de telefono incorrecto intente de nuevo");
+	
+	}
+}
+
+function soloNumeros(e){
+
+		var key = window.Event ? e.which : e.keyCode
+		return (key >= 48 && key <= 57)
+
+}
+
 		function actualizarCliente(){	  
 		
 			  var txtClave = $('#txtClave').val();
@@ -59,7 +77,7 @@ S
 			if(txtCorreo==''){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(x==2){
-				  alert("Correo no valido. Utilize el sgt. Formato:\ncorreo@domain");
+				  alert("Correo no valido. Utilice el sgt. Formato:\ncorreo@domain");
 			  }else if(txtClave==''){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(txtClave2==''){
@@ -115,7 +133,7 @@ S
 								document.getElementById("divCorreo").innerHTML="<input type=email class=form-control onchange=buscarCorreo() autofocus name=txtCorreo id=txtCorreo>";
 								alert("El correo esta en uso. Vuelva a intentar con otro correo.")
 								if(document.getElementById("xCorreo").value!=txtCorreo){
-									alert("xxx");
+									
 								}
 								
 							}else{
@@ -212,7 +230,7 @@ S
 								</div>	
 								<div class="col-sm-4">
 									<label >Clave:</label>
-						        	<input type="password" id="txtClave" name="txtClave" id=txtClave1 class="form-control" required> 
+						        	<input onchange="validarClave2()" maxlength="15" type="password" id="txtClave" name="txtClave" id=txtClave1 class="form-control" required> 
 								</div>
 							</div>
 							
@@ -220,19 +238,19 @@ S
 						<br>
 							<div class="row">
 								<div class="col-sm-4">
-						       		<label >Celular:</label>
-						        	<input  value="<%=persona.getTelefono()%>"  type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
+						       		<label >Telefono:</label>
+						        	<input maxlength="9" onchange="longitudCampoTelefono()"  value="<%=persona.getTelefono()%>"   id="txtCelular" name="txtCelular"  class="form-control"> 
 								</div>	
 								<div class="col-sm-4">
 									<label >Repetir Clave:</label>
-						        	<input type="password"  onchange="validarClave()" id="txtClave2" class="form-control" required> 
+						        	<input maxlength="15" type="password"  onchange="validarClave()" id="txtClave2" class="form-control" required> 
 								</div>
 							</div>
 							<br><br>
 						<!-- Fila 8 -->
 							<div class="row">
 							
-							<center><button type="button" class="btn btn-warning" onclick="actualizarCliente()">Registrar</button></center>
+							<center><button id="botonSubmit" type="button" class="btn btn-warning" onclick="actualizarCliente()">Registrar</button></center>
 								<center><div id="divError"></div></center>
 							</div>
 							
@@ -245,15 +263,39 @@ S
 						var p2 = document.getElementById("txtClave2").value;
 						
 						if (p1 != p2) {
+							document.getElementById("txtClave").innerHTML  ="";
+							  document.getElementById("txtClave2").innerHTML  ="";
 							  document.getElementById("divError").innerHTML  ="<div class=alert alert-danger><strong>ERROR!</strong> Las claves no coinciden.</div>";
+							  
 							  document.getElementById("botonSubmit").disabled = true;
 							  return false;
 						}else{
+						
 							 document.getElementById("divError").innerHTML  ="";
 							 document.getElementById("botonSubmit").disabled = false;
 						}
 						}
+					function validarClave2(){
+						
+						var p1 = document.getElementById("txtClave").value;
+						var p2 = document.getElementById("txtClave2").value;
+						if(p2.length!=0){
+						if (p1 != p2) {
+							document.getElementById("txtClave").innerHTML  ="";
+							  document.getElementById("txtClave2").innerHTML  ="";
+							  document.getElementById("divError").innerHTML  ="<div class=alert alert-danger><strong>ERROR!</strong> Las claves no coinciden.</div>";
+							  
+							  document.getElementById("botonSubmit").disabled = true;
+							  return false;
+						}else{
+						
+							 document.getElementById("divError").innerHTML  ="";
+							 document.getElementById("botonSubmit").disabled = false;
+						}
+						}}
 					</script>
+					</script>
+					
 <!----------------------Final Script validacion de clave---------------- -->				
 					
 				</div>
