@@ -22,7 +22,7 @@
 							 }	
 						}else{
 							
-							alert("El número de DNI es incorrecto o no está registrado en la RENIEC")
+							alert("El numero de DNI es incorrecto o no esta registrado en la RENIEC")
 							
 						}		
 			  });
@@ -50,7 +50,7 @@
 								}
 							}else{
 								
-								alert("El número de RUC es incorrecto o no está registrado en la SUNAT");
+								alert("El numero de RUC es incorrecto o no esta registrado en la SUNAT");
 								$('#txtrazon2').val("");
 							}			
 				  });
@@ -196,7 +196,15 @@
 									
 									alert("Cliente Registrado. Su usuario es: "+usuario)
 									//document.location.href="home.jsp";
-									
+									$('#modalClienteRegistrar').modal('hide');
+									 $('#txtDni2').val("");
+									 $('#txtNombres2').val("");
+									 $('#txtApePat2').val("");
+									 $('#txtApeMat2').val("");
+									 $('#txtCorreo2').val("");
+									 $('#txtTelefono2').val("");
+									 $('#txtruc2').val("");
+									 $('#txtrazon2').val("");
 								}else{
 
 									alert("	 existe");

@@ -1100,7 +1100,9 @@
          function generarUrl(formulario_destino){
         	 
 
-        	var url = "http://localhost:8080/SVHG/file_contac_servlet.jsp?";
+        	var url = "http://localhost:" +
+        			"" +
+        			"8082/SVHG/file_contac_servlet.jsp?";
         	 
  			var cantidades = [];
  			var importes = [];

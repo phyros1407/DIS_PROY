@@ -288,6 +288,38 @@ public class ServletCliente extends HttpServlet {
 				// TODO: handle exception
 			}
 			}
+	
+	
+	
+	
+	if(accion.equals("buscardni")){		
+		try {
+			PersonaBean persona = new PersonaBean();
+			DAOFactory dao= DAOFactory.getDaoFactory(DAOFactory.MYSQL);
+			ClienteDao ipersonadao = dao.getClienteDao();
+			System.out.println("entro buscar dni");
+			persona.setDni(request.getParameter("txtDni"));
+			System.out.println("asdd"+request.getParameter("txtDni"));
+			flag = ipersonadao.buscarDni(request.getParameter("txtDni"));
+			System.out.println(request.getParameter("txtDni"));
+			System.out.println("Flag buscar dni :"+flag);
+			
+			
+			if(flag){		
+			
+				    ResponseObject responseobj=null;
+					responseobj=new ResponseObject();
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					responseobj.setSuccess(true);
+					
+					responseobj.setObject(persona);
+					response.getWriter().write(new Gson().toJson(responseobj));
+					System.out.println("json" + new Gson().toJson(responseobj));
+			}		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
-
+	}
 }

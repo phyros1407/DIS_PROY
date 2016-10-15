@@ -48,7 +48,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" maxlength="8" id="txtDni2" onkeypress="return solonumeros(event)" name="txtDni1" data-required="1" class="form-control"  /> </div>
+                                                    <input type="text"  maxlength="8"  id="txtDni5" onkeyup="buscardni()" onkeypress="return solonumeros(event)" name="txtDni1" data-required="1" class="form-control"  /> </div>
                                             	<input id="botonbuscar" type="image" src="../images/buscarP.png" onclick="buscarReniec();" width="30" height="30">
                                             </div>
                                              
@@ -57,7 +57,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input name="txtNombres2" id="txtNombres2" type="text" onkeypress="return sololetras(event)"   data-required="1" class="form-control"  disabled/> </div>
+                                                    <input name="txtNombres2" id="txtNombres2" type="text"  onkeypress="return sololetras(event)"   data-required="1" class="form-control"  disabled/> </div>
                                             </div>
                                             
                                             <div class="form-group">
@@ -294,6 +294,30 @@ $.post('<%=request.getContextPath() %>/ServletCliente', {
 }
 
 }
+
+
+
+
+function buscardni(){
+	 var txtDni = $('#txtDni5').val();
+	 
+	 var accion='buscardni';
+	  $.post('<%=request.getContextPath() %>/ServletCliente', {
+		  txtDni : txtDni,
+				accion : accion
+			}, function(response) {
+				
+				if (response.success==true) {
+						//document.getElementById("divClave").innerHTML="<input type=email class=form-control onchange=buscarCorreo() autofocus name=txtCorreo id=txtCorreo>";
+						alert("El dni esta en uso. Vuelva a intentar con otro dni.")
+						$('#txtDni5').val("");
+					}else{
+		
+				//alert("Correo valido");
+					}	
+	  });
+  }
+
 </script>
   <script src="<%=request.getContextPath() %>/RegistrarVenta/busquedasServicios.js" type="text/javascript"></script>
 </body>

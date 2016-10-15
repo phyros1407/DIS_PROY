@@ -99,4 +99,32 @@ public class MySql_ClienteDao extends MySqlDAOFactory implements ClienteDao {
 	}
 
 
+	@Override
+	public boolean buscarDni(String dni) throws Exception {
+		PersonaBean persona = null;
+		boolean flag = false;
+		try {
+			Connection con = MySqlDAOFactory.obtenerConexion();
+			Statement stmt = con.createStatement();
+			String query = "select usu.id,per.id,per.est,per.dni,per.nom,per.ape_pat,per.ape_mat, usu.car_id, per.dir, con.cor, con.tel , em.ruc , em.raz_soc "
+					+ "from persona per "
+					+ "inner join usuario usu on per.id= usu.per_id "
+					+ "inner join contacto con on per.id=con.per_id "
+					+ "left join empresa em on per.id=em.emp_id "
+					+ " where per.est='a' "
+					+ "and per.dni="+dni+"";
+			
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()){
+				if(rs.getString("per.dni").equalsIgnoreCase(dni)){
+					flag = true;
+				}
+			}
+			con.close();
+		} catch (Exception e) {
+			System.out.println("ERROR de Buscar Correo en MysqlEmpleadoDao.java");
+		}
+		
+		return flag;
+	}
 }

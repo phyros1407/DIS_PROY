@@ -156,7 +156,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" maxlength="8" id="txtDni1" onkeypress="return solonumeros(event)" name="txtDni"  class="form-control" disabled /> </div>
+                                                    <input type="text" maxlength="8" id="txtDni1" onkeypress="return solonumeros(event)" name="txtDni"  class="form-control" readonly /> </div>
                                             </div><br>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">NOMBRES
@@ -285,8 +285,9 @@ function aparecer() {
 }
 function sd(){
 	
-	txtRuc1.disabled=false;
-	txtrazonsocial1.disabled = false;
+	//txtRuc1.disabled=false;
+	//txtrazonsocial1.disabled = false;
+	document.getElementById("txtRuc1").readOnly = false;
 	document.getElementById("txtrazonsocial1").readOnly = true;
 	}
 	
@@ -350,7 +351,7 @@ function buscarRuc(){
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="name"  id="txtCodProducto" data-required="1" class="form-control" disabled/> </div>
+                                                    <input type="text" name="name2"  id="txtCodProducto" data-required="1" class="form-control" disabled/> </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Nombre Producto
@@ -551,7 +552,7 @@ function buscarRuc(){
                                                    <!--  <button type="submit" class="btn green" onclick="registrarVentas();"  style="left: 160px;"> Registrar Venta
                                                         
                                                     </button> -->
-                                                    <input type="submit" class="btn green" form="registrar" value="registrar Venta" style="left: 160px;">
+                                                    <input  id="btnVenta"  onclick="validarVenta();" class="btn green" form="registrar" value="registrar Venta" style="left: 160px;">
                                                 </div>
                                             </div>
                                           
@@ -573,7 +574,25 @@ function buscarRuc(){
                                    			 </div> 
                   </div> 
                   </div> 
+                <script type="text/javascript">
                 
+				function  validarVenta(){
+					var txt_dni4 = $('#txtDni1').val();
+					var txtSubtotal= $('#txtSubtotal').val();
+					var txtidPro= $('#txtidPro').val();
+					var tabla=$('#txtsize').val();
+					
+							if(tabla=='' || tabla==0 || txt_dni4=='' || txtSubtotal=='' || txtidPro==''){
+							alert("Llene los campos")
+						}else{
+								$('#registrar').submit();
+						}
+
+						}
+
+
+
+                </script>
                   <!-------------------------------------fin de botones----------------------------->     
                   
                    <!--fin contenido -->
@@ -591,6 +610,10 @@ function buscarRuc(){
             
         </div>
          </div>
+       
+       
+       
+       
        
    <script type="text/javascript">
    	</script>

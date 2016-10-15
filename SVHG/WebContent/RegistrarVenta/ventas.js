@@ -1,7 +1,7 @@
 var rowCount;
 var txt_idProducto
 function registrarTabla(){
-txt_idProducto = $('#txtIdProducto').val(); 
+var txt_idProducto = $('#txtIdProducto').val(); 
 //alert(txt_idProducto);
 var txt_NombresProd2 = $('#txtNombresProd').val();
 var txt_Precio2 = $('#txtPrecio').val();
@@ -9,6 +9,7 @@ var txt_Cantidad2 = $('#txtCantidad').val();
 var txt_importe = (txt_Precio2)*txt_Cantidad2;//agregado igv (18%)
 var txt_descripcion=$('#txtDescripcion').val(); 
 var txt_codproducto=$('#txtCodProducto').val();
+var id=$('#txtidPro').val();
 /**/
 //alert(txt_NombresProd2+"||"+txt_Precio2+"||"+txt_Cantidad2+"||"+txt_importe);
 
@@ -19,8 +20,17 @@ if(txt_Precio2=="" ||txt_NombresProd2==""|| txt_descripcion==""|| txt_codproduct
 		alert("Cantidad no ingresada"); 
 		}else if(txt_Cantidad2=="" ||txt_Cantidad2==0){
 			alert("Ingresar un valor mayor a cero");
+			
+			
+		/*}else if(id==txt_idProducto){
+			alert("Elegir otro producto"+id+"asdsad "+txt_idProducto);
+			$('#txtCodProducto').val("");
+			$('#txtNombresProd').val("");
+			$('#txtDescripcion').val("");
+			$('#txtPrecio').val("");
+			$('#txtCantidad').val("");
+			$('#categoria').val("");*/
 		}else{
-	
 var i=0;
 rowCount = $('#table-producto2 tr').length-1;
 $('#txtsize').val(rowCount);
@@ -40,6 +50,7 @@ console.log("cantidadddddd: "+parseFloat(cantidad));
 //importetotal.toFixed(2);
 console.log("asdadasdasdadsadadsasdas"+importetotal)
 // n= trDelResultado.find("td:eq(3)").html("");
+
 $('#txtCodProducto').val("");
 $('#txtNombresProd').val("");
 $('#txtDescripcion').val("");

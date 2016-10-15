@@ -284,7 +284,7 @@
 				<div class="col-xs-12 col-sm-12 " style="margin-top: 25px;"
 					id="infoDirEnv">
 					<h3 id="titInDir">Direccion de Envio</h3>
-					<button type="button" class="btn btn-default" id="botonCambDir" data-toggle="modal" data-target="#ModalModDir">Cambiar direccion</button>
+					<!-- <button type="button" class="btn btn-default" id="botonCambDir" data-toggle="modal" data-target="#ModalModDir">Cambiar direccion</button> -->
 					<div class="col-xs-8 col-sm-8">
 						<label id="mosNom"></label><br> <label id="mosDir"></label><br>
 						<label id="mosDis"></label><br> <label id="mosTel"></label>
