@@ -249,7 +249,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtRuc1" id="txtRuc1"  onkeyup="buscarRuc()"class="form-control"     /> </div>
+                                                    <input type="text" name="txtRuc1" id="txtRuc1" form="registrar" onkeyup="buscarRuc()"class="form-control"     /> </div>
                                             </div></div>
                                             <div class="col-md-6">
                                              <div class="form-group">
@@ -257,7 +257,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtrazonsocial1" id="txtrazonsocial1"  class="form-control"      /> 
+                                                    <input type="text" name="txtrazonsocial1" id="txtrazonsocial1"  form="registrar" class="form-control"      /> 
                                                     </div>
                                                      <div class="col-md-3">
                                                     <input id="botoneditar" type=image src="../images/editar.png" onclick="sd();" width="30" height="30">
@@ -270,12 +270,13 @@ function aparecer() {
 	var selectBox = document.getElementById("selectBox");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
     console.log(selectedValue);
-    if(selectedValue==2){
+    if(selectedValue=="factura"){
         
 	document.getElementById('empresa').style.display = 'block';
-	txtRuc1.disabled=true;
-	txtrazonsocial1.disabled = true;
-
+	//txtRuc1.disabled=true;
+	document.getElementById("txtRuc1").readOnly = true;
+	//txtrazonsocial1.disabled = true;
+	document.getElementById("txtrazonsocial1").readOnly = true;
 	
 	}else{
 		document.getElementById('empresa').style.display = 'none';
@@ -497,7 +498,7 @@ function buscarRuc(){
                                                     <span class="required"> * </span>
                                                 </label> 
                                                 <div class="col-md-6">
-                                                    <input type="text" name="name"  id="txtSubtotal" data-required="1"   class="form-control" disabled/> </div>
+                                                    <input type="text" name="name"  id="txtSubtotal" data-required="1"   form="registrar" class="form-control" readonly/> </div>
                                                                                      
                                             </div>
                                             <input type="hidden" id="txtsize" name="txtsize" form="registrar" >

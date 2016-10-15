@@ -225,9 +225,9 @@ if (codigoAntiguo!=null) {
 			comprobante.setTipo(tipoFac.toUpperCase());
 			if (tipoFac.equalsIgnoreCase("factura")) {
 				comprobante.setRuc(request
-						.getParameter("ruc_entrega_pedido"));
+						.getParameter("txtRuc1"));
 				comprobante.setRaz_soc(request
-						.getParameter("rs_entrega_pedido"));
+						.getParameter("txtrazonsocial1"));
 				preSerie = "FV";
 			} else {
 				comprobante.setRuc("");
@@ -300,13 +300,16 @@ if (codigoAntiguo!=null) {
 				}
 			}
 			 
-			String total= request.getParameter("montototal4");
+			String total= request.getParameter("name");
 			System.out.println("asdasdas"+total);
+			double total1 =Double.parseDouble(total);
+			System.out.println("asdaasdasdsdaasddaasdassdasd"+total1);
 			
-			//double igvTotal = total / 1.18;
-			//System.out.println("asdasd"+total);
-			//comprobante.setIgv(Math.round(igvTotal * 100.00) / 100.00);
-			//comprobante.setIgv(Double.parseDouble(total));
+			double igvTotal = total1 / 1.18;
+			System.out.println("igvvvvvvvvvv"+igvTotal);
+			
+			comprobante.setIgv(Math.round(igvTotal * 100.00) / 100.00);
+			
 			comprobante.setFec_emi("now()");
 		    comprobante.setFec_can("now()");
 		
