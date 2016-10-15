@@ -86,7 +86,6 @@
 		if(x=='OTROS'){ 
 			a=6
 		}
-			
 
 		if(a==1){
 		document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==1){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
@@ -109,45 +108,7 @@
 	}
 	</script>
 <!----------------------------------------- script------------------------------------------------>
-<script type="text/javascript">
 
-		function generarReporte(){
-		
-			  var anio = $('#anio').val();
-			  var producto = $('#producto').val();
-		
-			 	
-				if(producto==''){
-				
-				alert('ss');
-			  }else{ 
-				  alert('123s');
-				  var accion='reporte1';
-				  $.post('<%=request.getContextPath() %>/ServletReporteVentas', {
-					  anio : anio,
-					  producto : producto,
-
-							accion : accion
-						}, function(response) {
-							 alert('12313213');
-							if (response.success==true) {
-								location.reload();
-									alert("Cliente Registrado. Su usuario es: "+usuario)
-									document.location.href="home.jsp";
-								}else{
-
-									alert("	 existe");
-									
-								}	
-				  });
-			  }
-			
-		  }
-		
-		
-		
-
-	</script>
 <!----------------------------------------- BODY------------------------------------------------>
 <form action="<%=getServletContext().getContextPath() %>/ServletReporteVentas" method="post" role="form">
 			<div class="row">
@@ -189,6 +150,17 @@
 						</select>
 					</div>
 				</div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="sel1">Seleccione Tipo Grafico </label>
+						<select required class="form-control" id="tipoGrafico" name="tipoGrafico">
+							<option value="">Seleccione</option>
+							<option value="grafico1">G. Barras</option>
+							<option value="grafico2">G. Lineal</option>
+						</select>
+					</div>
+				</div>
 			</div>
 				<br>
 			<div class="row">
@@ -196,43 +168,20 @@
 					<div class="form-group">
 						
 <!--------------------------------------- select producto--------------------------------------- -->
-					
 						<div id="demo"></div>
 <!--------------------------------------- select producto--------------------------------------- -->
-
 					</div>
 				</div>
 				<div class="col-sm-1"></div>
-				
-			
 			</div>
 				<br>
 			<div class="row">
 				<div class="col-sm-3">
-					<button  type="submit" id="botonSubmit"  class="btn btn-warning" >Ver ReporteG</button>
-					
+					<button  type="submit" id="botonSubmit"  class="btn btn-warning" >Ver Reporte</button>
 				</div>
 			</div>
 		
 </form>
-
-
-
-<!-- ----------------------GRAFICOS 1------------------>
-
-<script>
-
-
-</script>
-
-
-
-<!-- ---------------------FIN GRAFICOS 1------------------>
-
-<!-- ---------------------INICIO GRAFICOS 2--------------->
-
-
-<!-- ---------------------FIN GRAFICOS 2------------------>
 
 
 
@@ -248,16 +197,10 @@
 			<!-- END QUICK SIDEBAR -->
 		</div>
 	</div>
-	
-   
-        
+ 
 	<!-- END CONTAINER -->
 	<%@ include file="include/footer.jsp"%>
 
-
-
 </body>
-
-
 
 </html>

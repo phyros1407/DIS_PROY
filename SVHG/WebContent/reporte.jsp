@@ -23,6 +23,7 @@
 	}					
 	</style>
 	<%	ArrayList<DetalleTransaccionBean> detalleTransaccion = (ArrayList<DetalleTransaccionBean>)request.getAttribute("listaDetalle");%>
+	
 <!--------------------------------body------------------------ -->
 <body>
 	<div class="row">
@@ -31,7 +32,10 @@
 	<div class="row">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
+		<%if(request.getAttribute("tipoGrafico").equals("grafico1")) {%>
 			<div id="chartdiv"></div>
+		<%}%>
+			
 		</div>
 		<div class="col-sm-1"></div>
 	</div><hr>
@@ -104,41 +108,41 @@ var chart = AmCharts.makeChart( "chartdiv", {
   "type": "serial",
   "theme": "light",
   "dataProvider": [ {
-    "country": "Enero",
-    "visits": <%=enero%>
+    "Mes": "Enero",
+    "Cantidad": <%=enero%>
   }, {
-    "country": "Febrero",
-    "visits": <%=febrero%>
+    "Mes": "Febrero",
+    "Cantidad": <%=febrero%>
   }, {
-    "country": "Marzo",
-    "visits": <%=marzo%>
+    "Mes": "Marzo",
+    "Cantidad": <%=marzo%>
   }, {
-    "country": "Abril",
-    "visits": <%=abril%>
+    "Mes": "Abril",
+    "Cantidad": <%=abril%>
   }, {
-    "country": "Mayo",
-    "visits": <%=mayo%>
+    "Mes": "Mayo",
+    "Cantidad": <%=mayo%>
   }, {
-    "country": "Junio",
-    "visits": <%=junio%>
+    "Mes": "Junio",
+    "Cantidad": <%=junio%>
   }, {
-    "country": "Julio",
-    "visits": <%=julio%>
+    "Mes": "Julio",
+    "Cantidad": <%=julio%>
   }, {
-    "country": "Agosto",
-    "visits": <%=agosto%>
+    "Mes": "Agosto",
+    "Cantidad": <%=agosto%>
   }, {
-    "country": "Setiembre",
-    "visits": <%=setiembre%>
+    "Mes": "Setiembre",
+    "Cantidad": <%=setiembre%>
   }, {
-    "country": "Octubre",
-    "visits": <%=octubre%>
+    "Mes": "Octubre",
+    "Cantidad": <%=octubre%>
   }, {
-    "country": "Noviembre",
-    "visits": <%=noviembre%>	
+    "Mes": "Noviembre",
+    "Cantidad": <%=noviembre%>	
   }, {
-    "country": "Diciembre",
-    "visits": <%=diciembre%>
+    "Mes": "Diciembre",
+    "Cantidad": <%=diciembre%>
   }],
   "valueAxes": [ {
     "gridColor": "#FFFFFF",
@@ -152,14 +156,14 @@ var chart = AmCharts.makeChart( "chartdiv", {
     "fillAlphas": 0.8,
     "lineAlpha": 0.2,
     "type": "column",
-    "valueField": "visits"
+    "valueField": "Cantidad"
   } ],
   "chartCursor": {
     "categoryBalloonEnabled": false,
     "cursorAlpha": 0,
     "zoomable": false
   },
-  "categoryField": "country",
+  "categoryField": "Mes",
   "categoryAxis": {
     "gridPosition": "start",
     "gridAlpha": 0,
@@ -172,7 +176,11 @@ var chart = AmCharts.makeChart( "chartdiv", {
 
 } );
 </script>
-<!--------------------------------SCRIPT REPORTE------------------------- -->
+<!--------------------------------grafico2------------------------- -->
+
+
+
+<!--------------------------------grafico2------------------------- -->
 
 
 </html>
