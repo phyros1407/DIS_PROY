@@ -1,3 +1,8 @@
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.time.ZoneId"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -45,7 +50,7 @@
 				<select onchange="listarPorEstado()" id="estadoPedido" name="estadoPedido">
 					<option value="" disabled selected>ESTADO</option>
 					<option value="PENDIENTE" >Pendientes</option>
-					<option value="RECIBIDO">Recibidos</option>
+					<option value="RECIBIDO">Entregados</option>
 					<option value="ELIMINADO">Cancelados</option>		
 				</select>
 			</div>
@@ -89,7 +94,7 @@
 									<th><center><%=pedidos.get(i).getFechaEntrega()%></center></th>
 									<th><center><%=pedidos.get(i).getDireccion() %></center></th>
 									<th><center><%=pedidos.get(i).getDistrto() %></center></th>
-									<th><a onclick="activarModal('<%=pedidos.get(i).getId() %>','<%=pedidos.get(i).getNumPedido() %>','<%=pedidos.get(i).getEstado() %>','<%=pedidos.get(i).getFechaEntrega() %>','<%=pedidos.get(i).getTipoPago()%>','<%=pedidos.get(i).getDireccion()%>','<%=pedidos.get(i).getDistrto()%>','<%=pedidos.get(i).getTipoEntrega()%>','<%=pedidos.get(i).getProvincia()%>','<%=pedidos.get(i).getDepartamento()%>')"><center>Ver Detalle</center></a></th>
+									<th><a onclick="activarModal('<%=pedidos.get(i).getId() %>','<%=pedidos.get(i).getNumPedido() %>','<%=pedidos.get(i).getEstado() %>','<%=pedidos.get(i).getFechaEntrega() %>','<%=pedidos.get(i).getTipoPago()%>','<%=pedidos.get(i).getDireccion()%>','<%=pedidos.get(i).getDistrto()%>','<%=pedidos.get(i).getTipoEntrega()%>','<%=pedidos.get(i).getProvincia()%>','<%=pedidos.get(i).getDepartamento()%>','<%=pedidos.get(i).getFechaCreacion()%>')"><center>Ver más</center></a></th>
 									</tr>
 							<% } %>
 					<%} %>
@@ -101,11 +106,22 @@
 	</section> <!--/#cart_items-->
 	<div id="divModalDetalle"></div>
 	<script >
-	function activarModal(idVenta,numPedido,estado,fechaEntrega,tipoPago,direccion,distrito,tipoEntrega,provincia,departamento){
+	function activarModal(idVenta,numPedido,estado,fechaEntrega,tipoPago,direccion,distrito,tipoEntrega,provincia,departamento,fecha){
 		document.getElementById("divBotonCancelar").innerHTML="";
 		if(tipoPago=="Contra-Entrega" || tipoPago=="Tarjeta"){
 			if(estado!="Cancelado"){
-				document.getElementById("divBotonCancelar").innerHTML="<button type=button class='btn btn-default' onclick='cancelarPedido("+idVenta+")' style='background-color: yellow' >Cancelar Pedido</button>";
+				var dNow = new Date();
+				var año = dNow.getFullYear();
+				var mes = dNow.getMonth()+1;
+				var dia = dNow.getDate();
+				var fechaServidor= año+"-"+mes+"-"+dia;
+				console.log("fechaSc=> "+fecha+" fechaServidor=> "+fechaServidor );
+				var n = fecha.localeCompare(fechaServidor);
+				console.log("n=>"+n);
+				if(n==0){
+					 document.getElementById("divBotonCancelar").innerHTML="<button type=button class='btn btn-default' onclick='cancelarPedido("+idVenta+")' style='background-color: red' >Cancelar Pedido</button>";	
+				}
+				  
 			}
 			
 			document.getElementById("divFechaPago").innerHTML="";

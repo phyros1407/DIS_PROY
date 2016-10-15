@@ -26,14 +26,14 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 			Statement stmt=con.createStatement();
 			Statement stmt1=con.createStatement();
-			String query="select *  from transaccion where id_usuario='"+idUsuario+"' and est='"+estado+"'";
+			String query="select *,cast(FEC_CREA_REGI as date)'fechaCre'  from transaccion where id_usuario='"+idUsuario+"' and est='"+estado+"'";
 			System.out.println("QUERY DE transacciones LISTADO transacciones---->"+query);
 			ResultSet rs=stmt.executeQuery(query);
 			PedidoBean pedido=null;
 			while(rs.next()){
 				pedido=new PedidoBean();
 				pedido.setId(rs.getInt("id"));
-				
+				pedido.setFechaCreacion(rs.getString("fechaCre"));
 				String[] parts = rs.getString("num").split("-");
 				String numPedido = parts[1]; 
 				
