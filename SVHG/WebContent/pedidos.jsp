@@ -104,7 +104,10 @@
 	function activarModal(idVenta,numPedido,estado,fechaEntrega,tipoPago,direccion,distrito,tipoEntrega,provincia,departamento){
 		document.getElementById("divBotonCancelar").innerHTML="";
 		if(tipoPago=="Contra-Entrega" || tipoPago=="Tarjeta"){
-			document.getElementById("divBotonCancelar").innerHTML="<button type=button class='btn btn-default' onclick='cancelarPedido("+idVenta+")' style='background-color: yellow' >Cancelar Pedido</button>";
+			if(estado!="Cancelado"){
+				document.getElementById("divBotonCancelar").innerHTML="<button type=button class='btn btn-default' onclick='cancelarPedido("+idVenta+")' style='background-color: yellow' >Cancelar Pedido</button>";
+			}
+			
 			document.getElementById("divFechaPago").innerHTML="";
 		}else{
 			document.getElementById("divFechaPago").innerHTML="<label>Fecha de Pago: </label><input disabled type=text name=fechaPagoModal id=fechaPagoModal style='border: none;background: white;' >";
