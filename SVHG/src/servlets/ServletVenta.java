@@ -106,14 +106,15 @@ if (codigoAntiguo!=null) {
 				String tipo=request.getParameter("optradio");
 				
 				PersonaBean persona = new PersonaBean();
-				
+			
 				PersonaDao ipersonadao = dao.getPersonaDAO();
 				
 				persona.setDni(request.getParameter("txt_dni"));
 				persona.setNombre( request.getParameter("txt_nombre") );
 				persona.setApellidoPaterno(request.getParameter("txt_apepat"));
 				persona.setApellidoMaterno(request.getParameter("txt_apemat"));
-				persona.setPass(request.getParameter("txtClave"));
+				String usuarioNom=persona.getNombre().charAt(0)+persona.getApellidoPaterno()+persona.getApellidoMaterno().charAt(0);
+				persona.setPass(usuarioNom);
 				persona.setCorreo(request.getParameter("txtCorreo"));
 				persona.setTelefono(request.getParameter("txtCelular"));
 				
@@ -143,9 +144,13 @@ if (codigoAntiguo!=null) {
 				System.out.println("Flag persona :"+flag);
 				System.out.println("Flag empresa :"+flagEmpresa);
 				String a= persona.getCorreo();
-				//EmailUtility.sendEmailWithAttachment(host, port, user, pass,a.getRecipient(), usuRes.getSubject(), usuRes.getContent());
+				
+				String subject="Creción de correo";
+				
+				String content="Estimado "+persona.getNombre()+" "+persona.getApellidoPaterno()+",\n\n Se creó una cuenta temporal para su ingreso al sistema SVHG \n\n Usuario: "+usuarioNom+" \n\n Contraseña: "+persona.getPass()+" ";
 				if(flag){		
 					System.out.println("7");
+					EmailUtility.sendEmailWithAttachment(host, port, user, pass,request.getParameter("txtCorreo"), subject,"Estimado "+persona.getNombre()+" "+persona.getApellidoPaterno()+",\n\n Se creó una cuenta temporal para su ingreso al sistema SVHG \n\n Usuario: "+usuarioNom+" \n\n Contraseña: "+persona.getPass()+" ");
 					    ResponseObject responseobj=null;
 						responseobj=new ResponseObject();
 						response.setContentType("application/json");

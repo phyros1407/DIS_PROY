@@ -119,7 +119,7 @@
 				var n = fecha.localeCompare(fechaServidor);
 				console.log("n=>"+n);
 				if(n==0){
-					 document.getElementById("divBotonCancelar").innerHTML="<button type=button class='btn btn-default' onclick='cancelarPedido("+idVenta+")' style='background-color: red' >Cancelar Pedido</button>";	
+					 document.getElementById("divBotonCancelar").innerHTML="<button type=button class='btn btn-default' onclick='cancelarPedido("+idVenta+")' style='background-color: red; color:white' >Cancelar Pedido</button>";	
 				}
 				  
 			}
