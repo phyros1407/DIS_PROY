@@ -93,7 +93,7 @@
                                                 <div class="col-md-6">
                                                     <input type="text" name="txtTelefono2" id="txtTelefono2" data-required="1" class="form-control" maxlength="9" onkeypress="return solonumeros(event)" /> </div>
                                             </div>
-                                             
+                                              
                             
     									</div>
     										<div class="col-md-12 portlet light portlet-fit bordered" id="empresa2" Style="visibility: hidden;">
