@@ -7,14 +7,14 @@
 <html>
 
 
-<%@ include file="include/head.jsp"%>
+<%@ include file="/include/head.jsp" %>
 
 <!-- END HEAD -->
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 	<!-- BEGIN HEADER -->
-
+ <%@ include file="/include/headSideBar.jsp" %>
 	<!-- END HEADER -->
 	<!-- BEGIN HEADER & CONTENT DIVIDER -->
 	<div class="clearfix"></div>
@@ -34,9 +34,9 @@
 				<!-- BEGIN PAGE BAR -->
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
-						<li><a href="inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
+						<li><a href="<%=request.getContextPath() %>/inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
 						</li>
-						<li><span>ADMINISTRADOR</span></li>
+						 
 					</ul>
 					<div class="page-toolbar">
 						<div id="dashboard-report-range"

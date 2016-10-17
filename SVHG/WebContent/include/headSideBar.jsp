@@ -42,7 +42,7 @@
                         <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-quick-sidebar-toggler">
-                            <a href="ServletLogin?accion=cerrarSesion" class="dropdown-toggle">
+                            <a href="<%=request.getContextPath() %>/ServletLogin?accion=cerrarSesion" class="dropdown-toggle">
                                 <i class="icon-logout"></i>
                             </a>
                         </li>

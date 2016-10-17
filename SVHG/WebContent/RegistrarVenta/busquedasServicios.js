@@ -1,7 +1,7 @@
 /*-----------------------servicios-------------------------------------------*/
 		function buscarReniec(){
 			
-			var dni = $('#txtDni2').val();
+			var dni = $('#txtDni5').val();
 		 
 			 var accion='buscarDni';
 			  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Persona', {

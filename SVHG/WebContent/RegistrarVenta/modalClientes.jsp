@@ -91,7 +91,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtTelefono2" id="txtTelefono2" data-required="1" class="form-control" maxlength="7" onkeypress="return solonumeros(event)" /> </div>
+                                                    <input type="text" name="txtTelefono2" id="txtTelefono2" data-required="1" class="form-control" maxlength="9" onkeypress="return solonumeros(event)" /> </div>
                                             </div>
                                             
                             

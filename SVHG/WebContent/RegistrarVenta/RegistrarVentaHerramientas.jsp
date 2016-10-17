@@ -70,12 +70,10 @@
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
                             <li>
-                                <a href="index.html">Inicio</a>
+                             	<li><a href="<%=request.getContextPath() %>/inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
                                 <i class="fa fa-circle"></i>
                             </li>
-                            <li>
-                                <span>Administrador</span>
-                            </li>
+                            
                         </ul>
                         <div class="page-toolbar">
                             <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">

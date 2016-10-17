@@ -1100,7 +1100,7 @@
          function generarUrl(formulario_destino){
         	 
 
-        	var url = "http://localhost:" +
+        	var url = "http://172.25.2.240:" +
         			"" +
         			"8082/SVHG/file_contac_servlet.jsp?";
         	 
