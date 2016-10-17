@@ -86,7 +86,7 @@
                                                     <input name="txtCorreo2" id="txtCorreo2" onkeyup="buscarCorreo()" type="text" class="form-control" data-required="1"  /> </div>
                                             </div>
                                             
-                                         <div class="form-group">
+                                          <div class="form-group">
                                                 <label class="control-label col-md-4">TELÉFONO <br>(Fijo o Celular)
                                                     <span class="required"> * </span>
                                                 </label>
