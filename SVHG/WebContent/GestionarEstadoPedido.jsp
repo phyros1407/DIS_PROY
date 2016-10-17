@@ -7,14 +7,14 @@
 <html>
 
 
-<%@ include file="/include/head.jsp" %>
+<%@ include file="include/head.jsp"%>
 
 <!-- END HEAD -->
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 	<!-- BEGIN HEADER -->
- <%@ include file="/include/headSideBar.jsp" %>
+
 	<!-- END HEADER -->
 	<!-- BEGIN HEADER & CONTENT DIVIDER -->
 	<div class="clearfix"></div>
@@ -34,9 +34,9 @@
 				<!-- BEGIN PAGE BAR -->
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
-						<li><a href="<%=request.getContextPath() %>/inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
+						<li><a href="inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
 						</li>
-						 
+						<li><span>ADMINISTRADOR</span></li>
 					</ul>
 					<div class="page-toolbar">
 						<div id="dashboard-report-range"
@@ -125,14 +125,14 @@
 									
 											
 							
-				
+				 
 					
 					<hr>
 					<hr>
 					<br>
 					<div><label><h3>Detalle del Pedido</h3></label></div>
 					<br>
-					<table class="table table-hover">
+					<table id="prods" class="table table-hover">
 						<thead>
 							<tr>
 								<th>CODIGO PRODUCTO</th>
@@ -161,9 +161,12 @@
 
 			<!-- END QUICK SIDEBAR -->
 		</div>
+		
+		<button onclick="demoFromHTML()">asdasdasd</button>
 	</div>
 	<!-- END CONTAINER -->
 	<%@ include file="include/footer.jsp"%>
+
 
 	        
                
@@ -205,25 +208,37 @@ function buscarPedido(){
 				var nombrePersona=response['object'][0]['nombrePersona'];
 				
 				
-				
+				// .text para el pdf
+				// .val para el html ...razon ,...pos no se xd Efra.
 				$('#formBusqueda').addClass('hide');
+				
+				$('#idpedido').text(id);
+				$('#dni').text(dni);
 				$('#idpedido').val(id);
 				$('#dni').val(dni);
 				if(estado=='P'){
+					$('#estado').text('PENDIENTE');
 					$('#estado').val('PENDIENTE');
 				}else if(estado=='C'){
+					$('#estado').text('CANCELADO');
 					$('#estado').val('CANCELADO');
 				}
 				
+				$('#fechaCreacion').text(fechaCreacion);
+				$('#direccion').text(direccion);
+				$('#nombrePersona').text(nombrePersona);
 				$('#fechaCreacion').val(fechaCreacion);
 				$('#direccion').val(direccion);
 				$('#nombrePersona').val(nombrePersona);
 				if(tipoPedido=="CE"){
 					
+					$('#tipoPago').text('CONTRA ENTREGA');
 					$('#tipoPago').val('CONTRA ENTREGA');
 				}else if(tipoPedido=='TA'){
+					$('#tipoPago').text('TARJETA DE CREDITO');
 					$('#tipoPago').val('TARJETA DE CREDITO');
 				}else if(tipoPedido=='PP'){
+					$('#tipoPago').text('PAYPAL');
 					$('#tipoPago').val('PAYPAL');
 				}
 				
@@ -241,6 +256,48 @@ function buscarPedido(){
 		});
  }
  
+function demoFromHTML() {
+    var doc = new jsPDF('p', 'pt', 'a4',true);
+    // source can be HTML-formatted string, or a reference
+    // to an actual DOM element from which the text will be scraped.
+    source = $('#datos')[0];
+
+    specialElementHandlers = {
+        // element with id of "bypass" - jQuery style selector
+        '#bypassme': function(element, renderer) {
+            // true = "handled elsewhere, bypass text extraction"
+            return true
+        }
+    };
+    margins = {
+        top: 80,
+        bottom: 60,
+        left: 40,
+        width: 522
+        
+    };
+
+    doc.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, {// y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+    function(dispose) {
+		
+		doc.setFont("helvetica");
+		doc.setFontType("bold");
+		doc.text(350, 30, 'BOLETA DE VENTA');
+		doc.text(350,60,"NUMERO DE BOLETA #23445")
+		
+		
+		        
+		        doc.save('Test.pdf');
+    }
+    , margins);
+}
+ 
 function actualizarPedido(id){
 	
 	var accion = "actualizarPedido";
@@ -254,16 +311,22 @@ function actualizarPedido(id){
 		
 			$("#actualizar").addClass("disabled");
 			alert("Estado actualizado");
+			$('#estado').text('ENTREGRADO');
+			$('#estado').val('ENTREGADO');
 			var tipPag=document.getElementById("tipoPago").value;
 			if(tipPag=='CONTRA ENTREGA'){
 			$('#mensaje2').html('Se ha enviado la boleta o factura, al correo registrado.');
 			}
 	});
 }
+
+
  
 </script>
 </body>
 
-
+<script src="<%=request.getContextPath()%>/js/jspdf.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/JSPDFhtml.js"></script>
+<script src="<%=request.getContextPath()%>/js/JSPDFsplittext.js"></script>
 
 </html>
