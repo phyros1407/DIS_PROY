@@ -112,7 +112,7 @@ public class EnviarBoleta extends Object {
         message.setSubject("Nano-Sport-Shop ()");
         message.setFrom(new InternetAddress((String)props.get("mail.smtp.mail.sender")));
         message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress("barbbbi_96@hotmail.it"));
+                new InternetAddress("jean_barbieri@usmp.pe"));
         // put everything together
         message.setContent(multiParte);
         
@@ -125,24 +125,23 @@ public class EnviarBoleta extends Object {
 	public  String armarEmail(){
 		
 		
-		String cabecera = "<!DOCTYPE html>"
-						+ "<html>"
-						+ "<head>"
-						+ "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>"
-						+ "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>"
-						+ "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>"
-						+ "</head>";
-		String cuerpo = "<body class='container'>"
-				+ "<div >"
-				+ "<div><fieldset><legend>Datos del Cliente</legend></fieldset></div>"
-				+ "<div ><fieldset><legend>Direccion de Envio</legend></fieldset></div>"
-				+ "</div>"
-				+ "</body>";
-        String pie = "</html>";
+	
+						
+						
+						
+						
+		String cuerpo ="<div class='col-xs-12'>"
+				+"<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>"
+				+ "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>"
+				+ "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>"
+				+ "<div class='col-xs-6'><fieldset><legend>Datos del Cliente</legend></fieldset></div>"
+				+ "<div class='col-xs-6'><fieldset><legend>Direccion de Envio</legend></fieldset></div>"
+				+ "</div>";
+    
        
+
         
-        
-        String formulario = cabecera+cuerpo+pie;
+        String formulario = cuerpo;
  
 		
 		
