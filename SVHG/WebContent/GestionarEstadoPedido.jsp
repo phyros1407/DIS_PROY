@@ -6,7 +6,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-
 <%@ include file="include/head.jsp"%>
 
 <!-- END HEAD -->
@@ -67,8 +66,6 @@
 				<div class="col-sm-12 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Actualizar Estado del Pedido</h2>
-						
-						
 							<br><br>
 						
 							<div class="row" id="formBusqueda">
@@ -91,11 +88,11 @@
 							
 			
 				
-				<div class="hide" id="datos">
-				
-				<div class="row">
+				<div class="hide" id="datos" style="background-color:white;">
+					<div><label><h3>Datos de la Orden</h3></div>
+				<div class="row"  style="padding:none;">
 							<hr><hr>
-								<div><label><h3>Datos de la Orden</h3></div>
+								
 								<div class="col-md-4">
 						       		<label >N° Orden  de Pedido :</label><input id="idpedido"  class="form-control" readonly="readonly">
 								</div>	
@@ -150,19 +147,46 @@
 					</table>
 
 				</div>
+				<!-- FACTURA ELECTRONICA -->
+				
+				<center>
+				<div  id="datos2" style="background-color:white;">
+					<div class="row">
+						<div class="col-md-3">
+							<img src="<%=request.getContextPath()%>/images/logo.jpg"></img>
+						</div>
+						<div class="col-md-5">
+							<h4>CENTRO INTEGRAL FITNESS  S.A.C</h4>
+							<h5>Call.Cerros de Camacho N°290 DPTO 1002</h5>
+							<h5>Santiago de Surco</h5>
+						</div>
+						<div class="col-md-4">
+							<div style="border-style: solid;border-color: red;">
+								<h4 style="color:red;">FACTURA ELECTRÓNICA</h4>
+								<h5 id="rucf">RUC</h3>
+								<h5>123434324</h5>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+				</center>
+				<!-- FIN -->
 				<br>
 				<br>
 				<hr>
 				<div class="clearfix"></div>
 				
 			</div>
+			
+			
 			<!-- END CONTENT -->
 			<!-- BEGIN QUICK SIDEBAR -->
 
 			<!-- END QUICK SIDEBAR -->
 		</div>
 		
-		<button onclick="demoFromHTML()">asdasdasd</button>
+		<button onclick="prueba()">asdasdasd</button>
 	</div>
 	<!-- END CONTAINER -->
 	<%@ include file="include/footer.jsp"%>
@@ -256,53 +280,42 @@ function buscarPedido(){
 		});
  }
  
-function demoFromHTML() {
-    var doc = new jsPDF('p', 'pt', 'a4',true);
-    // source can be HTML-formatted string, or a reference
-    // to an actual DOM element from which the text will be scraped.
-    source = $('#datos')[0];
-
-    specialElementHandlers = {
-        // element with id of "bypass" - jQuery style selector
-        '#bypassme': function(element, renderer) {
-            // true = "handled elsewhere, bypass text extraction"
-            return true
-        }
-    };
-    margins = {
-        top: 80,
-        bottom: 60,
-        left: 40,
-        width: 522
-        
-    };
-
-    doc.fromHTML(
-            source, // HTML string or DOM elem ref.
-            margins.left, // x coord
-            margins.top, {// y coord
-                'width': margins.width, // max width of content on PDF
-                'elementHandlers': specialElementHandlers
-            },
-    function(dispose) {
-		
-		doc.setFont("helvetica");
-		doc.setFontType("bold");
-		doc.text(350, 30, 'BOLETA DE VENTA');
-		doc.text(350,60,"NUMERO DE BOLETA #23445")
-		
-		
-		        
-		        doc.save('Test.pdf');
-    }
-    , margins);
-}
+function prueba(){
+	var URLactual = window.location;
+	alert(URLactual);
+	var nombre=document.getElementById("idpedido").value;
+	var dni=document.getElementById("dni").value+".png";
+	var nombreImg=nombre.concat(dni);
+	alert(nombreImg);
+	html2canvas($('#datos2'), 
+			    {
+			      onrendered: function (canvas) {
+			        var a = document.createElement('a');
+			        // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+			        a.href = canvas.toDataURL("images").replace("image/png", "image/octet-stream");
+			       
+			        a.download = nombreImg;
+			        a.click();
+			        
+			        var img=a.href;
+			          
+			        $.post('recibe',{	
+			        	nombreImg : nombreImg
+			    	},function(response){
+			    		
+			    		
+			    	});
+			        
+			        
+			      }
+			    });
+	}
  
 function actualizarPedido(id){
 	
 	var accion = "actualizarPedido";
 	
-	$.post('ServletPedido',{
+	$.post('recibe',{
 
 		accion:accion,
 		id:id
@@ -324,9 +337,10 @@ function actualizarPedido(id){
  
 </script>
 </body>
-
+<script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/jspdf.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/JSPDFhtml.js"></script>
-<script src="<%=request.getContextPath()%>/js/JSPDFsplittext.js"></script>
+<script src="<%=request.getContextPath()%>/js/fileSave.js"></script>
+<script src="<%=request.getContextPath()%>/js/html2canvas.js"></script>
 
 </html>

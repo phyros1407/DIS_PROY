@@ -37,6 +37,20 @@
         <!-- END THEME LAYOUT STYLES -->
         <!--  LOGO DEL NAVEGADOR --> 
         <link rel="shortcut icon" href="favicon.ico" />
+        <style type="text/css">
+        
+        fieldset {
+border:3px groove #ccc !important; /* Borde */
+color:#000 !important; /* Color del texto de todo el contenido */
+}
+legend {
+text-align:left !important; /* Puedes cambiarlo por center o right */
+font-weight:bold !important; /* Estilo de la fuente del título */
+color:black !important; /* Color del título */
+}
+        
+        
+        </style>
 </head>
 <body>
 
