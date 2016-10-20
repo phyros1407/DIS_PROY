@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import dao.interfaces.ClienteDao;
+import dao.interfaces.ComprobanteDao;
 import dao.interfaces.DetalleTransaccionDao;
 import dao.interfaces.EmpresaDao;
 import dao.interfaces.OfertaDao;
@@ -17,6 +18,7 @@ import dao.mysql.MySQLEmpleadoDao;
 import dao.mysql.MySQLEmpresaDao;
 import dao.mysql.MySQLOfertaDao;
 import dao.mysql.MySql_ClienteDao;
+import dao.mysql.MySql_ComprobanteDao;
 import dao.mysql.MySql_DetalleTransaccionDao;
 import dao.mysql.MySql_PedidoDao;
 import dao.mysql.MySql_ProductoDao;
@@ -39,8 +41,8 @@ public class MySqlDAOFactory extends DAOFactory {
 		*/
 		 try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost:3306/bd_gym_4.5_data";
-			conexion = DriverManager.getConnection(url,"root","");
+			String url="jdbc:mysql://localhost:3306/bd_gym_4.6.2_data";
+			conexion = DriverManager.getConnection(url,"root","root");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -105,5 +107,11 @@ public class MySqlDAOFactory extends DAOFactory {
 	public VentaDao getVentaDao() {
 		// TODO Auto-generated method stub
 		return new MySql_VentaDao();
+	}
+
+	@Override
+	public ComprobanteDao getComprobanteDao() {
+		// TODO Auto-generated method stub
+		return new MySql_ComprobanteDao();
 	}
 }

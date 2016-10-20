@@ -1,6 +1,7 @@
 package util;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.BodyPart;
@@ -19,6 +20,8 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 
 import javax.mail.internet.MimeMultipart;
+
+import beans.BoletaBean;
 
 public class EnviarBoleta extends Object {
 
@@ -47,9 +50,11 @@ public class EnviarBoleta extends Object {
         
 	}
  
-	public void sendEmail() throws Exception{
+	public void sendEmail(ArrayList<BoletaBean> boleta) throws Exception{
  
-		init();
+			init();
+			
+			
 		
             String formulario =armarEmail();
      
@@ -112,7 +117,7 @@ public class EnviarBoleta extends Object {
         message.setSubject("Nano-Sport-Shop ()");
         message.setFrom(new InternetAddress((String)props.get("mail.smtp.mail.sender")));
         message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress("jean_barbieri@usmp.pe"));
+                new InternetAddress("jean.barbieri1996@gmail.com"));
         // put everything together
         message.setContent(multiParte);
         
@@ -188,7 +193,7 @@ public class EnviarBoleta extends Object {
 						"			    	<tr>                                                                                                                                                                                                                                         "+
 						"			    		<td class='titulo'>                                                                                                                                                                                                                      "+
 						"			    			<div class='container'>                                                                                                                                                                                                              "+
-						"							  <img  style='border-radius: 8px;' class='responsive-imagen'  height='150px' src='https://scontent-mia1-2.xx.fbcdn.net/v/t34.0-12/14794081_1312073802150432_777651950_n.jpg?oh=255c1ec66a317c9b4ba63bb7e9db7b4d&oe=58085107' alt=''>"+
+						"							  <img  style='border-radius: 8px;' class='responsive-imagen'  height='150px' src='https://imagizer.imageshack.us/v2/600x150q90/923/cxMyfj.jpg' alt=''>"+
 						"							  <div class='bottomright'>                                                                                                                                                                                                          "+
 						"							  	<h2 style='text-align:right;color:white;'><span>BOLETA DE VENTA<span>&nbsp;</span><br><span>&nbsp;</span><span style='font-size:18px;'>Soy un fantasma</span></span></h2>                                                        "+
 						"							  </div>                                                                                                                                                                                                                             "+
@@ -204,7 +209,7 @@ public class EnviarBoleta extends Object {
 						"			    				<tr>                                                                                                                                                                                                                             "+
 						"			    					<td>                                                                                                                                                                                                                         "+
 						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                                                                                  "+
-						"						    				<legend>Datos del Cliente</legend>                                                                                                                                                                          "+
+						"						    				<legend >Datos del Cliente</legend>                                                                                                                                                                          "+
 						"						    				<label>CLIENTE : </label><label></label><br>                                                                                                                                                                       "+
 						"						    				<label>FECHA DE EMISION : </label><label></label><br>                                                                                                                                                              "+
 						"						    				<label>TIPO DE ENVIO : </label><label></label><br>                                                                                                                                                                 "+
@@ -232,7 +237,7 @@ public class EnviarBoleta extends Object {
 						"			    <table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table'>                                                                                                                                                        "+
 						"			    	<tr>                                                                                                                                                                                                                                         "+
 						"			    		<td style='padding-bottom:20px;text-align:left;'>                                                                                                                                                                                        "+
-						"			    			<label style='font-weight:bold;' >Detalle de Pedido : </label>                                                                                                                                                                       "+
+						"			    			<label style='font-weight:bold;'>Detalle de Pedido : </label>                                                                                                                                                                       "+
 						"			    		</td>                                                                                                                                                                                                                                    "+
 						"			    	</tr>                                                                                                                                                                                                                                        "+
 						"			    	<tr>                                                                                                                                                                                                                                         "+
@@ -259,7 +264,7 @@ public class EnviarBoleta extends Object {
 						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table'>                                                                                                                                            "+
 						"			    				<tr>                                                                                                                                                                                                                             "+
 						"			    					<td style='padding:20px 0;'>                                                                                                                                                                                                 "+
-						"			    						<img  class='responsive-imagen' width='120px' height='120px' src='https://scontent-mia1-2.xx.fbcdn.net/v/t34.0-12/14793715_1492845330730740_1341310287_n.png?oh=4634ff4d36985e7c92ab8d4c60e68dcf&oe=58083B42' alt=''>    "+
+						"			    						<img  class='responsive-imagen' width='120px' height='120px' src='https://imagizer.imageshack.us/v2/330x330q90/924/WwjtMm.jpg' alt=''>    "+
 						"			    					</td>                                                                                                                                                                                                                        "+
 						"			    					<td style='text-align:left;padding:10px;'>                                                                                                                                                                                   "+
 						"			    						NANO SPORTS PRODUCTOS EXCLUSIVOS PARA EL ENTRENAMIENTO<br>                                                                                                                                                               "+
@@ -277,7 +282,6 @@ public class EnviarBoleta extends Object {
 						"  </body>                                                                                                                                                                                                                                                       "+
 						"</html>                                                                                                                                                                                                                                                         ";
 
-				
 				                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     
        

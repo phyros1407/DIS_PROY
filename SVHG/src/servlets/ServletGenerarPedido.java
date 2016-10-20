@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import beans.BoletaBean;
 import beans.ComprobanteBean;
 import beans.DetalleTransaccionBean;
 import beans.EmpresaBean;
 import beans.PedidoBean;
 import beans.TransaccionBean;
+import dao.interfaces.ComprobanteDao;
 import dao.interfaces.PedidoDao;
 import daofactory.DAOFactory;
 import util.EnviarBoleta;
@@ -350,9 +353,11 @@ public class ServletGenerarPedido extends HttpServlet {
 
 						System.out.println("SE GUARDO CORRECTAMENTE EL COMPROBANTE");
 
+						ComprobanteDao comdao = dao.getComprobanteDao();
+						ArrayList<BoletaBean> boleta = comdao.buscarComprobanteGenerado(codigoNuevo) ;
 						
 						EnviarBoleta email = new EnviarBoleta();
-						email.sendEmail();
+						email.sendEmail(boleta);
 						
 						
 						out.println("<script type=\"text/javascript\">");
