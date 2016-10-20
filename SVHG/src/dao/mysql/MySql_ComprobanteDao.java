@@ -54,6 +54,8 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 					"	tr.NUM = '"+numeroTransaccion+"';                                                                           ";
 			
 			
+			System.out.println("QUERY EN EJECUCION PARA BOLETA ----> " + query);
+			
 			ResultSet rs = stmt.executeQuery(query);
 			
 			BoletaBean detalleB = null;

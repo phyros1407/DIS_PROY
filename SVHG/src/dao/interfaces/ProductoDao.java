@@ -1,7 +1,6 @@
 package dao.interfaces;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import beans.CategoriaBean;
 import beans.ProductoBean;
