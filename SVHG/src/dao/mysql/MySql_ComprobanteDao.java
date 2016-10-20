@@ -25,7 +25,7 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 			String query =
 					"SELECT                                                                                                         "+
 					"	tr.NUM AS NUMERO_TRANSACCION,																				"+
-					"	CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,														"+
+					"	CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,												"+
 					" DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,															"+
 					"	CASE                                                                                                        "+
 					"		WHEN p.TIP_ENT= 'EC' THEN 'DOMICILIO'                                                                   "+
@@ -34,10 +34,10 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 					"	DATE_FORMAT(tr.FEC_ENT,'%d-%m-%Y') AS FECHA_ENTREGA,                                                        "+
 					"	p.DEP_ENT AS DEPARTAMENTO,                                                                                  "+
 					"	p.PRO_ENT AS PROVINCIA,                                                                                     "+
-					"	REPLACE(p.DIS_ENT,'Ã','Ñ') AS DISTRITO,                                                                                 "+
+					"	REPLACE(p.DIS_ENT,'Ã','Ñ') AS DISTRITO,                                                                     "+
 					"	p.DIR_ENT AS DIRECCION,                                                                                     "+
 					"	pr.CODPRO AS CODIGO_PRODUCTO,                                                                               "+
-					"	pr.NOM AS NOMBRE_PRODUCTO,                                                                                           "+
+					"	pr.NOM AS NOMBRE_PRODUCTO,                                                                                  "+
 					"	pr.PRE AS PRECIO,                                                                                           "+
 					"	dt.CAN AS CANTIDAD,                                                                                         "+
 					"	ROUND((dt.IMP/1.19),2) AS IMPORTE                                                                           "+
