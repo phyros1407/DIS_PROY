@@ -88,7 +88,7 @@
 					<div class="total_area">
 						<ul>
 							<li>Sub Total <span id="subTotal"></span><input type="hidden" id="subTotalV" value="" ></li>
-							<!-- <li>IGV<span id="igv"> </span></li> -->
+							<li>IGV (19%)<span id="igv"> </span></li>
 							<li id="lista_cargo_entrega" style="display:none;">Cargo por Envio<span id="cargo_entrega"></span></li>
 							<li style="background-color: #ff8000; color: white;">Total <span id="total"> </span><input type="hidden" id="totalV" value=""></li>
 							

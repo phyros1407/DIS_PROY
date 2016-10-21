@@ -23,35 +23,40 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 			Statement stmt=con.createStatement();
 			
 			String query =
-					"SELECT                                                                                                         "+
-					"	tr.NUM AS NUMERO_TRANSACCION,																				"+
-					"	CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,												"+
-					" DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,															"+
-					"	CASE                                                                                                        "+
-					"		WHEN p.TIP_ENT= 'EC' THEN 'DOMICILIO'                                                                   "+
-					"		WHEN p.TIP_ENT= 'RL' THEN 'LOCAL'                                                                       "+
-					"	END AS TIPO_ENTREGA,                                                                                        "+
-					"	DATE_FORMAT(tr.FEC_ENT,'%d-%m-%Y') AS FECHA_ENTREGA,                                                        "+
-					"	p.DEP_ENT AS DEPARTAMENTO,                                                                                  "+
-					"	p.PRO_ENT AS PROVINCIA,                                                                                     "+
-					"	REPLACE(p.DIS_ENT,'Ã','Ñ') AS DISTRITO,                                                                     "+
-					"	p.DIR_ENT AS DIRECCION,                                                                                     "+
-					"	pr.CODPRO AS CODIGO_PRODUCTO,                                                                               "+
-					"	pr.NOM AS NOMBRE_PRODUCTO,                                                                                  "+
-					"	pr.PRE AS PRECIO,                                                                                           "+
-					"	dt.CAN AS CANTIDAD,                                                                                         "+
-					"	ROUND((dt.IMP/1.19),2) AS IMPORTE                                                                           "+
-					"FROM                                                                                                           "+
-					"	transaccion tr, comprobante_pago cp, detalle_transaccion dt, usuario us, persona pe, pedido p,producto pr   "+
-					"WHERE                                                                                                          "+
-					"	tr.ID = cp.VEN_ID AND                                                                                       "+
-					"	tr.ID = dt.VEN_ID AND                                                                                       "+
-					"	us.ID = tr.ID_USUARIO AND                                                                                   "+
-					"	pe.ID = us.PER_ID AND                                                                                       "+
-					"	p.PED_ID = tr.ID AND                                                                                        "+
-					"	dt.VEN_ID=tr.ID AND                                                                                         "+
-					"	dt.PRO_ID=pr.ID AND                                                                                         "+
-					"	tr.NUM = '"+numeroTransaccion+"';                                                                           ";
+							"SELECT                                                      "+
+							"	tr.NUM AS NUMERO_TRANSACCION,                            "+
+							"	CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,  "+
+							"    DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,    "+
+							"    DATE_FORMAT(cp.FEC_CAN,'%d-%m-%Y') AS FECHA_CANCELACION,"+
+							"	CASE                                                     "+
+							"		WHEN p.TIP_ENT= 'EC' THEN 'DOMICILIO'                "+
+							"		WHEN p.TIP_ENT= 'RL' THEN 'LOCAL'                    "+
+							"	END AS TIPO_ENTREGA,                                     "+
+							"    p.TIPO_PAG AS TIPO_PAGO,                                "+
+							"	DATE_FORMAT(tr.FEC_ENT,'%d-%m-%Y') AS FECHA_ENTREGA,     "+
+							"	p.DEP_ENT AS DEPARTAMENTO,                               "+
+							"	p.PRO_ENT AS PROVINCIA,                                  "+
+							"	REPLACE(p.DIS_ENT,'Ã','Ñ') AS DISTRITO,                  "+
+							"	p.DIR_ENT AS DIRECCION,                                  "+
+							"	pr.CODPRO AS CODIGO_PRODUCTO,                            "+
+							"	pr.NOM AS NOMBRE_PRODUCTO,                                        "+
+							"	pr.PRE AS PRECIO,                                        "+
+							"	dt.CAN AS CANTIDAD,                                      "+
+							"	ROUND((dt.IMP/1.19),2) AS IMPORTE,                       "+
+							"   of.DSC AS DESCUENTO                                      "+
+							"FROM                                                        "+
+							"	transaccion tr                                           "+
+							"    INNER JOIN comprobante_pago cp ON tr.ID = cp.VEN_ID     "+
+							"    INNER JOIN detalle_transaccion dt ON tr.ID = dt.VEN_ID  "+
+							"	INNER JOIN usuario us ON tr.ID_USUARIO = us.ID           "+
+							"	INNER JOIN persona pe ON us.PER_ID = pe.ID               "+
+							"    INNER JOIN pedido p ON tr.ID = p.PED_ID                 "+
+							"	INNER JOIN producto pr ON dt.PRO_ID = pr.ID              "+
+							"	LEFT JOIN detalle_oferta df ON pr.ID = df.PRO_ID         "+
+							"    LEFT JOIN ofertas of ON of.ID =df.OFE_ID                "+
+							"                                                            "+
+							"WHERE                                                       "+
+							"	tr.NUM = '"+numeroTransaccion+"';                            ";
 			
 			
 			System.out.println("QUERY EN EJECUCION PARA BOLETA ----> " + query);
@@ -76,6 +81,7 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 				detalleB.setPre(rs.getDouble("PRECIO"));
 				detalleB.setCan(rs.getInt("CANTIDAD"));
 				detalleB.setImporte(rs.getDouble("IMPORTE"));
+				detalleB.setDescuento(rs.getDouble("DESCUENTO"));
 				boleta.add(detalleB);
 				
 			}
@@ -88,6 +94,43 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 		}
 		
 		return boleta;
+	}
+
+	@Override
+	public String obtenerCorreo(int id) {
+		// TODO Auto-generated method stub
+		
+		String correo = "";
+		
+		try{
+			
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			
+			String query = 
+					"SELECT                                     "+
+							"	COR AS CORREO                           "+
+							"FROM                                       "+
+							"	contacto c                              "+
+							"	INNER JOIN persona p ON p.ID = c.PER_ID "+
+							"    INNER JOIN usuario u ON p.ID = u.PER_ID"+
+							"WHERE                                      "+
+							"	u.ID="+id+";                              ";
+			
+			ResultSet rs = stmt.executeQuery(query);
+			
+			if(rs.next()){
+				correo = rs.getString("CORREO");
+			}
+			
+		}catch(Exception e){
+			
+			System.out.println("ERROR ----> "+e.getMessage());
+			
+		}
+		
+		
+		return correo;
 	}
 
 }

@@ -126,14 +126,14 @@
 				
 				
 				$("#"+descImp).val((1*parseFloat(precio)).toFixed(2));
-				$("#subTotal").text("S/. "+subtotal.toFixed(2));
+				$("#subTotal").text("S/. "+((subtotal.toFixed(2)/1.19)).toFixed(2));
 				$("#subTotalV").val(subtotal.toFixed(2));
 				$("#importeM"+descImp.substring(descImp.length-1)).text((1*parseFloat(precio)).toFixed(2));
 				
 				
 				$("#total").text("S/. "+(subtotal.toFixed(2)));
 				$("#totalV").val((subtotal.toFixed(2)));
-				
+				$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
 				$("#amount1").val(subtotal.toFixed(2));
 				$("#amount2").val(subtotal.toFixed(2));
 			}
@@ -159,7 +159,7 @@
 			
 				
 				$("#"+descImp).val((canti*parseFloat(precio)).toFixed(2));
-				$("#subTotal").text("S/. "+subtotal.toFixed(2));
+				$("#subTotal").text("S/. "+((subtotal.toFixed(2)/1.19)).toFixed(2));
 				$("#subTotalV").val(subtotal.toFixed(2));
 				$("#importeM"+descImp.substring(descImp.length-1)).text((canti*parseFloat(precio)).toFixed(2));
 				
@@ -168,7 +168,7 @@
 				
 				$("#total").text("S/. "+(subtotal.toFixed(2)));
 				$("#totalV").val((subtotal.toFixed(2)));
-				
+				$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
 			}
 			
 		}
@@ -200,7 +200,7 @@
 			
 			
 			$("#"+descImp).val((canti*parseFloat(precio)).toFixed(2));
-			$("#subTotal").text("S/. "+subtotal.toFixed(2));
+			$("#subTotal").text("S/. "+((subtotal.toFixed(2)/1.19)).toFixed(2));
 			$("#subTotalV").val(subtotal.toFixed(2));
 			$("#importeM"+descImp.substring(descImp.length-1)).text((canti*parseFloat(precio)).toFixed(2));
 			
@@ -209,7 +209,7 @@
 			
 			$("#total").text("S/. "+(subtotal.toFixed(2)));
 			$("#totalV").val((subtotal.toFixed(2)));
-			
+			$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
 		}
 	
 		function disminuir(cantidad, desc,descImp,precio) {
@@ -250,7 +250,7 @@
 				
 				
 				$("#"+descImp).val((canti*parseFloat(precio)).toFixed(2));
-				$("#subTotal").text("S/. "+subtotal.toFixed(2));
+				$("#subTotal").text("S/. "+((subtotal.toFixed(2)/1.19)).toFixed(2));
 				$("#subTotalV").val(subtotal.toFixed(2));
 				$("#importeM"+descImp.substring(descImp.length-1)).text((canti*parseFloat(precio)).toFixed(2));
 				
@@ -258,8 +258,8 @@
 				$("#amount2").val((parseFloat(subtotal).toFixed(2)));
 				
 				$("#total").text("S/. "+(subtotal.toFixed(2)));
-				$("#totalV").val((subtotal.toFixed(2)));
-				
+				$("#totalV").val(igv);
+				$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
 				
 				
 			}
@@ -503,7 +503,7 @@
 			    			
 			    			$("#productosCarrito").html(conta);
 			    			$("#subTotalV").val(subtotal.toFixed(2));
-			    			$("#subTotal").text("S/. "+subtotal.toFixed(2));
+			    			$("#subTotal").text("S/. "+((subtotal.toFixed(2)/1.19)).toFixed(2));
 			    			$("#amount1").val(parseFloat(subtotal).toFixed(2));
 			    			$("#amount2").val(parseFloat(subtotal).toFixed(2));
 			    			
@@ -512,7 +512,7 @@
 							
 							
 							$("#totaldelpeso").val(subCantidad.toFixed(2));
-							
+							$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
 							//MODIFICAR FECHA
 								
 							var cadenafechas = "";
@@ -1100,9 +1100,9 @@
          function generarUrl(formulario_destino){
         	 
 
-        	var url = "http://172.25.2.240:" +
+        	var url = "http://localhost:" +
         			"" +
-        			"8082/SVHG/file_contac_servlet.jsp?";
+        			"8081/SVHG/file_contac_servlet.jsp?";
         	 
  			var cantidades = [];
  			var importes = [];

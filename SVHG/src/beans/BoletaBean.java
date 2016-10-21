@@ -16,6 +16,7 @@ public class BoletaBean {
 	private double pre;
 	private int can;
 	private double importe;
+	private double descuento;
 	
 	
 	
@@ -102,6 +103,12 @@ public class BoletaBean {
 	}
 	public void setImporte(double importe) {
 		this.importe = importe;
+	}
+	public double getDescuento() {
+		return descuento;
+	}
+	public void setDescuento(double descuento) {
+		this.descuento = descuento;
 	}
 	
 	

@@ -356,8 +356,9 @@ public class ServletGenerarPedido extends HttpServlet {
 						ComprobanteDao comdao = dao.getComprobanteDao();
 						ArrayList<BoletaBean> boleta = comdao.buscarComprobanteGenerado(codigoNuevo) ;
 						
+						String correo = comdao.obtenerCorreo(id_usuario);
 						EnviarBoleta email = new EnviarBoleta();
-						email.sendEmail(boleta);
+						email.sendEmail(boleta,correo);
 						
 						
 						out.println("<script type=\"text/javascript\">");

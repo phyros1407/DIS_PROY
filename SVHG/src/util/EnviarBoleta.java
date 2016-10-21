@@ -50,7 +50,7 @@ public class EnviarBoleta extends Object {
         
 	}
  
-	public void sendEmail(ArrayList<BoletaBean> boleta) throws Exception{
+	public void sendEmail(ArrayList<BoletaBean> boleta,String correo) throws Exception{
  
 			init();
 			
@@ -67,7 +67,7 @@ public class EnviarBoleta extends Object {
             */
             
             // enviar el correo MULTIPART
-            sendMultipart();
+            sendMultipart(correo);
         
 		
 	}
@@ -101,7 +101,7 @@ public class EnviarBoleta extends Object {
         this.multiParte.addBodyPart(messageBodyPart);
     }
 	
-	public void sendMultipart() throws Exception
+	public void sendMultipart(String correo) throws Exception
     {
         Session mailSession = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
@@ -115,7 +115,7 @@ public class EnviarBoleta extends Object {
         message.setSubject("Nano-Sport-Shop : ¡Gracias por su compra!");
         message.setFrom(new InternetAddress((String)props.get("mail.smtp.mail.sender")));
         message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress("jean.barbieri1996@gmail.com"));
+                new InternetAddress(correo.toLowerCase()));
         // put everything together
         message.setContent(multiParte);
         
@@ -133,16 +133,16 @@ public class EnviarBoleta extends Object {
 		
 		for(int i = 0;i<boleta.size();i++){
 			
-			tabla = tabla + ( "<tr>"
-							+ "<td>"+boleta.get(i).getCod_pro()+"</td>"
-							+ "<td>"+boleta.get(i).getNom_pro()+"</td>"
-							+ "<td>"+boleta.get(i).getPre()+"</td>"
-							+ "<td>S/. 0.00</td>"
-							+ "<td>"+boleta.get(i).getCan()+"</td>"
-							+ "<td>"+boleta.get(i).getImporte()+"</td>"
-							+ "</tr>");
-			
-			subtotal = subtotal + boleta.get(i).getImporte();
+				tabla = tabla + ( "<tr>"
+						+ "<td>"+boleta.get(i).getCod_pro()+"</td>"
+						+ "<td>"+boleta.get(i).getNom_pro()+"</td>"
+						+ "<td>S/. "+boleta.get(i).getPre()+"</td>"
+						+ "<td>S/. "+Math.round((boleta.get(i).getPre()*boleta.get(i).getDescuento()) * 100.000) / 100.000+"</td>"
+						+ "<td>"+boleta.get(i).getCan()+"</td>"
+						+ "<td>S/. "+boleta.get(i).getImporte()+"</td>"
+						+ "</tr>");
+		
+				subtotal = subtotal + boleta.get(i).getImporte();
 		}
 						
 		String cuerpo =
@@ -278,7 +278,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
 						"			    					<td width='100PX' style='text-align:left;'>SUBTOTAL: </td>                                                                                                           "+
-						"			    					<td width='100PX'>S/. "+Math.round(subtotal * 100.00) / 100.00+"</td>                                                                                                                                          "+
+						"			    					<td width='100PX'>S/. "+Math.round(subtotal * 100.000) / 100.000+"</td>                                                                                                                                          "+
 						"			    				</tr>                                                                                                                                                                    "+
 						"			    				<tr>                                                                                                                                                                     "+
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
@@ -286,7 +286,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
 						"			    					<td width='100PX' style='text-align:left;'>IGV (18%) : </td>                                                                                                         "+
-						"			    					<td width='100PX'>S/."+Math.round((subtotal*0.19) * 100.00) / 100.00+" </td>                                                                                                                                          "+
+						"			    					<td width='100PX'>S/."+Math.round((subtotal*0.19) * 100.000) / 100.000+" </td>                                                                                                                                          "+
 						"			    				</tr>                                                                                                                                                                    "+
 						"			    				<tr>                                                                                                                                                                     "+
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
@@ -294,7 +294,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
 						"			    					<td width='100PX'></td>                                                                                                                                              "+
 						"			    					<td width='100PX' style='text-align:left;'>TOTAL: </td>                                                                                                           "+
-						"			    					<td width='100PX'>S/. "+Math.round((subtotal*1.19)* 100.00) / 100.00+"</td>                                                                                                                                          "+
+						"			    					<td width='100PX'>S/. "+Math.round((subtotal*1.19)* 100.000) / 100.000+"</td>                                                                                                                                          "+
 						"			    				</tr>                                                                                                                                                                    "+
 						"			    			</table>                                                                                                                                                                     "+
 						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table' style='padding-top:15px;'>                                                       "+
