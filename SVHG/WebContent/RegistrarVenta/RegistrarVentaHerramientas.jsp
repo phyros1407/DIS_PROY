@@ -491,6 +491,13 @@ function buscarRuc(){
                       </table> 
                 <div action="#" id="form_sample_1" class="form-horizontal" >
                                        <div class="col-md-7" style="left:600px">
+                                           <div class="form-group">
+                                                <label class="control-label col-md-4">IGV
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="name" id="txtIGV" data-required="1" class="form-control" disabled/> </div>
+                                            </div>
                                            
                                             <div class="form-group">
                                                 <label class="control-label col-md-4">Monto Total<small>(Incl.IGV)</small>

@@ -1102,7 +1102,7 @@
 
         	var url = "http://localhost:" +
         			"" +
-        			"8081/SVHG/file_contac_servlet.jsp?";
+        			"8080/SVHG/file_contac_servlet.jsp?";
         	 
  			var cantidades = [];
  			var importes = [];

@@ -61,9 +61,9 @@ $('#categoria').val("");
 
 });
 
-var txt_IGV =importetotal*0.18 ;
+var txt_IGV =importetotal/1.18 ;
 //var txt_Total = txt_IGV + importetotal;
-
+$('#txtIGV').val(txt_IGV.toFixed(2));
 $('#txtSubtotal').val(importetotal.toFixed(2));	
 
 
@@ -72,7 +72,7 @@ $('#txtsize').val(rowCount);
 console.log("dsffgslgsldkfjghsldkjghsd: "+rowCount)
 ;
 //$('#temporalsubtotal').val(temp)
-//$('#txtIGV').val(txt_IGV);
+
 //$('#txtTotal').val(txt_Total);
 }
 	
@@ -93,7 +93,11 @@ console.log("importw1"+importetotal2);
 importetotal2=importetotal2-parseFloat(cantidad);
 console.log("importw2: "+importetotal2);
 
-$('#txtSubtotal').val(importetotal2.toFixed(2));	
+$('#txtSubtotal').val(importetotal2.toFixed(2));
+
+
+
+
 document.getElementById("table-producto2").deleteRow(i);
 
 var rowCount = $('#table-producto2 tr').length-1;
