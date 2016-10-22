@@ -49,7 +49,7 @@
 		
 	<div class="row">
 		<div class="col-sm-10"></div>
-		<div class="col-sm-1"><a href="<%=request.getContextPath() %>/ServletReporteVentas" class="btn btn-warning" role="button">Regresar</a></div>
+		<div class="col-sm-1"><a href="<%=request.getContextPath() %>/ServletReporteUtilidades" class="btn btn-warning" role="button">Regresar</a></div>
 		<div class="col-sm-1"></div>
 		
 	</div>
@@ -94,7 +94,7 @@ for(int i=0;i<detalleTransaccion.size();i++){
 		julio=detalleTransaccion.get(i).getImporte();
 	}
 	if(x.equals("08")){
-		agosto=detalleTransaccion.get(i).getImporte();
+		agosto=detalleTransaccion.get(i).getImporte(); 
 	}
 	if(x.equals("09")){
 		setiembre=detalleTransaccion.get(i).getImporte();
@@ -188,44 +188,44 @@ var chart = AmCharts.makeChart("chartdiv2", {
     "type": "serial",
     "theme": "light",
     "marginRight": 80,
-    "dataProvider": [{
-        "lineColor": "#b7e021",
-        "date": "<%=request.getAttribute("anio")%>-01-01",
+    "dataProvider": [{  
+        "lineColor": "#2498d2", 
+        "date": "<%=request.getAttribute("anio")%>-01",
         "duration": <%=enero%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-02",
+        "date": "<%=request.getAttribute("anio")%>-02",
         "duration": <%=febrero%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-03",
+        "date": "<%=request.getAttribute("anio")%>-03",
         "duration": <%=marzo%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-04",
+        "date": "<%=request.getAttribute("anio")%>-04",
         "duration": <%=abril%>
     }, {
-        "lineColor": "#fbd51a",
-        "date": "<%=request.getAttribute("anio")%>-01-05",
+    	"lineColor": "#2498d2",
+        "date": "<%=request.getAttribute("anio")%>-05",
         "duration": <%=mayo%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-06",
+        "date": "<%=request.getAttribute("anio")%>-06",
         "duration": <%=junio%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-07",
+        "date": "<%=request.getAttribute("anio")%>-07",
         "duration": <%=julio%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-08",
+        "date": "<%=request.getAttribute("anio")%>-08",
         "duration": <%=agosto%>,
         "lineColor": "#2498d2"
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-09",
+        "date": "<%=request.getAttribute("anio")%>-09",
         "duration": <%=setiembre%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-10",
+        "date": "<%=request.getAttribute("anio")%>-10",
         "duration": <%=octubre%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-11",
+        "date": "<%=request.getAttribute("anio")%>-11",
         "duration": <%=noviembre%>
     }, {
-        "date": "<%=request.getAttribute("anio")%>-01-12",
+        "date": "<%=request.getAttribute("anio")%>-12",
         "duration": <%=diciembre%>
     }],
     "balloon": {
@@ -289,7 +289,7 @@ var chart = AmCharts.makeChart("chartdiv2", {
 chart.addListener("dataUpdated", zoomChart);
 
 function zoomChart() {
-    chart.zoomToDates(new Date(<%=request.getAttribute("anio")%>, 0, 3), new Date(<%=request.getAttribute("anio")%>, 0, 11));
+    chart.zoomToDates(new Date(<%=request.getAttribute("anio")%>, 0, 0), new Date(<%=request.getAttribute("anio")%>, 12, 0));
 }
 </script>
 <!--------------------------------SCRIPT REPORTE------------------------- -->
