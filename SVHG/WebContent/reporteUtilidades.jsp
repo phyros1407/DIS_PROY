@@ -190,42 +190,42 @@ var chart = AmCharts.makeChart("chartdiv2", {
     "marginRight": 80,
     "dataProvider": [{
         "lineColor": "#b7e021",
-        "date": "2012-01-01",
+        "date": "<%=request.getAttribute("anio")%>-01-01",
         "duration": <%=enero%>
     }, {
-        "date": "2012-01-02",
+        "date": "<%=request.getAttribute("anio")%>-01-02",
         "duration": <%=febrero%>
     }, {
-        "date": "2012-01-03",
+        "date": "<%=request.getAttribute("anio")%>-01-03",
         "duration": <%=marzo%>
     }, {
-        "date": "2012-01-04",
+        "date": "<%=request.getAttribute("anio")%>-01-04",
         "duration": <%=abril%>
     }, {
         "lineColor": "#fbd51a",
-        "date": "2012-01-05",
+        "date": "<%=request.getAttribute("anio")%>-01-05",
         "duration": <%=mayo%>
     }, {
-        "date": "2012-01-06",
+        "date": "<%=request.getAttribute("anio")%>-01-06",
         "duration": <%=junio%>
     }, {
-        "date": "2012-01-07",
+        "date": "<%=request.getAttribute("anio")%>-01-07",
         "duration": <%=julio%>
     }, {
-        "date": "2012-01-08",
+        "date": "<%=request.getAttribute("anio")%>-01-08",
         "duration": <%=agosto%>,
         "lineColor": "#2498d2"
     }, {
-        "date": "2012-01-09",
+        "date": "<%=request.getAttribute("anio")%>-01-09",
         "duration": <%=setiembre%>
     }, {
-        "date": "2012-01-10",
+        "date": "<%=request.getAttribute("anio")%>-01-10",
         "duration": <%=octubre%>
     }, {
-        "date": "2012-01-11",
+        "date": "<%=request.getAttribute("anio")%>-01-11",
         "duration": <%=noviembre%>
     }, {
-        "date": "2012-01-12",
+        "date": "<%=request.getAttribute("anio")%>-01-12",
         "duration": <%=diciembre%>
     }],
     "balloon": {
@@ -289,7 +289,7 @@ var chart = AmCharts.makeChart("chartdiv2", {
 chart.addListener("dataUpdated", zoomChart);
 
 function zoomChart() {
-    chart.zoomToDates(new Date(2012, 0, 3), new Date(2012, 0, 11));
+    chart.zoomToDates(new Date(<%=request.getAttribute("anio")%>, 0, 3), new Date(<%=request.getAttribute("anio")%>, 0, 11));
 }
 </script>
 <!--------------------------------SCRIPT REPORTE------------------------- -->

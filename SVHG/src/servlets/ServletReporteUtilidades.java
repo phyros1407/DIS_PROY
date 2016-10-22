@@ -58,8 +58,9 @@ public class ServletReporteUtilidades extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ServletReporteUtilidades");
 		String accion=request.getParameter("accion");
-		String tipoGrafico=request.getParameter("tipoGrafico");
+		String tipoGrafico=request.getParameter("tipoGrafico"); 
 		System.out.println("Tipo Grafico Utilidades: "+tipoGrafico);
+ 
 		System.out.println("accion: "+accion);
 		if(accion.equals("reporte1")){		
 			try {
@@ -74,7 +75,7 @@ public class ServletReporteUtilidades extends HttpServlet {
 				ArrayList<DetalleTransaccionBean> listaDetalleTransaccion = idetalleTransacciondao.listarReporte2(anio, idProducto) ;
 				request.setAttribute("listaDetalle", listaDetalleTransaccion);
 				request.setAttribute("tipoGrafico", tipoGrafico);
-		 
+				request.setAttribute("anio", anio);
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
