@@ -163,7 +163,7 @@
 						<label for="sel1">Seleccione Categoria:</label>
 						<select required onchange="cambiarProducto()"  name="categoria" class="form-control" id="categoria">
 							<option value="">Seleccione</option>
-							<option value="SUSPENSI">SUSPENSI</option>
+							<option value="SUSPENSI">SUSPENSIÓN</option>
 							<option value="FUERZA">FUERZA</option>
 							<option value="AGILIDAD">AGILIDAD</option>
 							<option value="COORDINACION">COORDINACION</option>
