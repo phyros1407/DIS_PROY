@@ -189,6 +189,17 @@
 						</select>
 					</div>
 				</div>
+					<div class="col-sm-1"></div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="sel1">Seleccione Tipo Grafico </label>
+						<select required class="form-control" id="tipoGrafico" name="tipoGrafico">
+							<option value="">Seleccione</option>
+							<option value="grafico1">G. Barras</option>
+							<option value="grafico2">G. Lineal</option>
+						</select>
+					</div>
+				</div>
 			</div>
 				<br>
 			<div class="row">

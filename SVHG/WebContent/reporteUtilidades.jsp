@@ -31,7 +31,9 @@
 	<div class="row">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
+			<%if(request.getAttribute("tipoGrafico").equals("grafico1")) {%>
 			<div id="chartdiv"></div>
+		<%}%>
 		</div>
 		<div class="col-sm-1"></div>
 	</div><hr>

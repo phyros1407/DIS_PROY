@@ -58,6 +58,8 @@ public class ServletReporteUtilidades extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ServletReporteUtilidades");
 		String accion=request.getParameter("accion");
+		String tipoGrafico=request.getParameter("tipoGrafico");
+		System.out.println("Tipo Grafico Utilidades: "+tipoGrafico);
 		System.out.println("accion: "+accion);
 		if(accion.equals("reporte1")){		
 			try {
@@ -71,20 +73,8 @@ public class ServletReporteUtilidades extends HttpServlet {
 			
 				ArrayList<DetalleTransaccionBean> listaDetalleTransaccion = idetalleTransacciondao.listarReporte2(anio, idProducto) ;
 				request.setAttribute("listaDetalle", listaDetalleTransaccion);
-				  
-		
-				
-				
-				/*	ResponseObject responseobj=null;
-				if(listaDetalleTransaccion!=null){
-					responseobj=new ResponseObject();
-					response.setContentType("application/json");
-					response.setCharacterEncoding("UTF-8");
-					responseobj.setSuccess(true);
-					responseobj.setObject(listaDetalleTransaccion);
-				}
-				response.getWriter().write(new Gson().toJson(responseobj));
-				System.out.println("json" + new Gson().toJson(responseobj));*/
+				request.setAttribute("tipoGrafico", tipoGrafico);
+		 
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
