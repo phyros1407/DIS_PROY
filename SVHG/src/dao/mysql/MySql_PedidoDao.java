@@ -133,12 +133,22 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				
 				Statement stmt=con.createStatement();
 				//pe.EST_ENT ,pe.TIP_ENT , pe.FEC_CREA_REGI,p.DNI,p.NOM,p.DIR,pr.ID,pr.NOM ,pr.PESO,dt.CAN,pr.PRE,dt.IMP
-				String query="Select * from persona p  INNER JOIN usuario u ON p.id=u.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO  INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID  INNER JOIN producto pr ON dt.PRO_ID=pr.ID  and pe.PED_ID ='"+idPedido+"'";
+				String query="Select * from persona p INNER JOIN usuario u ON p.id=u.id INNER JOIN contacto con ON con.per_id=p.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO INNER JOIN comprobante_pago comp ON t.id=comp.id INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID INNER JOIN producto pr ON dt.PRO_ID=pr.ID and  pe.PED_ID="+idPedido+" ";
 				System.out.println("QUERY DE VENTAS LISTADO ---->"+query);
 				ResultSet rs=stmt.executeQuery(query);
 				PedidoBean pedido=null;
+				ComprobanteBean comprobante=null;
 				while(rs.next()){
+					comprobante= new ComprobanteBean();
+					comprobante.setRaz_soc(rs.getString("comp.RAZ_SOC"));
+					comprobante.setNum_com(rs.getString("comp.NUM_COM"));
+					comprobante.setTipo(rs.getString("comp.TIPO"));
+					comprobante.setIgv(rs.getDouble("comp.IGV"));
+					comprobante.setRuc(rs.getString("comp.RUC"));
 					pedido=new PedidoBean();
+					
+					
+					
 					pedido.setEstado(rs.getString("pe.EST_ENT"));
 					pedido.setTipoPedido(rs.getString("pe.TIPO_PAG"));
 					pedido.setFechaCreacion(rs.getString("pe.FEC_CREA_REGI"));
@@ -151,7 +161,11 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 					pedido.setCantidad(rs.getInt("dt.CAN"));
 					pedido.setPrecioUnidad(rs.getDouble("pr.PRE"));
 					pedido.setImpProd(rs.getDouble("dt.IMP")); 
+					pedido.setCorreo(rs.getString("con.COR"));
+					pedido.setComprobanteBean(comprobante);
 
+					
+					
 					pedidos.add(pedido);
 
 				}

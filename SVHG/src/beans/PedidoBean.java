@@ -27,6 +27,7 @@ public class PedidoBean {
 	private String telefono1,telefono2;
 	private int cuota;
 	private double cargo_entrega;
+	private String correo;
 	
 	//AUDITORIA 
 	private String usu_crea_regi;
@@ -34,10 +35,19 @@ public class PedidoBean {
 	private String ult_usu_mod_regi;
 	private String fec_ult_mod_regi;
 	
+	//Factura
+	ComprobanteBean comprobanteBean;
 	
 	
 	
 	
+	
+	public ComprobanteBean getComprobanteBean() {
+		return comprobanteBean;
+	}
+	public void setComprobanteBean(ComprobanteBean comprobanteBean) {
+		this.comprobanteBean = comprobanteBean;
+	}
 	public String getProvincia() {
 		return provincia;
 	}
@@ -232,6 +242,12 @@ public class PedidoBean {
 	}
 	public void setFec_ult_mod_regi(String fec_ult_mod_regi) {
 		this.fec_ult_mod_regi = fec_ult_mod_regi;
+	}
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 	
 	

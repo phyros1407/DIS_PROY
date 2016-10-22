@@ -150,23 +150,56 @@
 				<!-- FACTURA ELECTRONICA -->
 				
 				<center>
-				<div  id="datos2" style="background-color:white;">
+				<div  id="datos2"    style="background-color:white;position: absolute;opacity:0;">
 					<div class="row">
 						<div class="col-md-3">
 							<img src="<%=request.getContextPath()%>/images/logo.jpg"></img>
 						</div>
-						<div class="col-md-5">
+						<div class="col-sm-5">
 							<h4>CENTRO INTEGRAL FITNESS  S.A.C</h4>
 							<h5>Call.Cerros de Camacho N°290 DPTO 1002</h5>
 							<h5>Santiago de Surco</h5>
 						</div>
-						<div class="col-md-4">
+						<div class="col-sm-4">
 							<div style="border-style: solid;border-color: red;">
-								<h4 style="color:red;">FACTURA ELECTRÓNICA</h4>
-								<h5 id="rucf">RUC</h3>
-								<h5>123434324</h5>
+								<h4  style="color:red;">FACTURA ELECTRÓNICA</h4>
+								<h5>56472884738</h5>
+								<h5 id="factura"></h5>
 							</div>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6" style="padding-left:160px;text-align:left;" >
+							<p><b>Empresa:</b> <p id="razonSocial"></p> </p>
+							<p><b>Cliente :</b> <label id="nombrePersona2"></label></p>
+							<p><b>Direccion :</b> <label id="direccion2"></label></p>
+							<p><b>Departamento :</b> <label>LIMA</label></p>
+							<p><b>Fecha de Emision </b>: <label>26/06/2016</label></p>
+							<p><b>Tipo de Envio:</b> <label>DOMICILIO</label></p>
+						</div>
+						
+						<div class="col-md-6" style="padding-right:130px;text-align:left;">
+							<p><b>RUC  :</b> <label id="ruc"></label></p><br><br>
+							<p><b>DISTRITO :</b> <label>BREÑA</label></p>
+						</div>
+					</div>
+					<div class="row">
+						<table id="prodss" class="table table-hover">
+						<thead>
+							<tr>
+								<th>Nº de Producto</th>
+								<th>Producto</th>
+								<th>Precio Und.</th>
+								<th>Descuento</th>
+								<th>Cantidad</th>
+								<th>Precio Total</th>
+							</tr>
+						</thead>
+						<tbody id="detalleProd2">
+									
+									
+						</tbody>
+					</table>
 					</div>
 				
 				</div>
@@ -230,39 +263,45 @@ function buscarPedido(){
 				var fechaCreacion=response['object'][0]['fechaCreacion'];
 				var direccion=response['object'][0]['direccion'];
 				var nombrePersona=response['object'][0]['nombrePersona'];
-				
-				
+			
+				var ruc=response['object'][0]['comprobanteBean']['ruc'];
+				var factura=response['object'][0]['comprobanteBean']['num_com'];
+				var igv=response['object'][0]['comprobanteBean']['igv'];
+				var correo=response['object'][0]['correo'];
+				var tipoComprobante=response['object'][0]['comprobanteBean']['tipo'];
+				var razonSocial=response['object'][0]['comprobanteBean']['raz_soc'];
+								
 				// .text para el pdf
-				// .val para el html ...razon ,...pos no se xd Efra.
 				$('#formBusqueda').addClass('hide');
 				
-				$('#idpedido').text(id);
-				$('#dni').text(dni);
+				//PARA LA FACTURA
+				$('#igv').text(igv);	
+				$('#factura').text(factura);
+				$('#ruc').text(ruc);
+				$('#razonSocial').text(razonSocial);
+				//FIN FACTURA
+				
+				
+			
 				$('#idpedido').val(id);
 				$('#dni').val(dni);
 				if(estado=='P'){
-					$('#estado').text('PENDIENTE');
 					$('#estado').val('PENDIENTE');
-				}else if(estado=='C'){
-					$('#estado').text('CANCELADO');
+					}else if(estado=='C'){
 					$('#estado').val('CANCELADO');
 				}
 				
-				$('#fechaCreacion').text(fechaCreacion);
-				$('#direccion').text(direccion);
-				$('#nombrePersona').text(nombrePersona);
 				$('#fechaCreacion').val(fechaCreacion);
 				$('#direccion').val(direccion);
 				$('#nombrePersona').val(nombrePersona);
+				$('#nombrePersona2').text(nombrePersona);
+				$('#direccion2').text(direccion);
 				if(tipoPedido=="CE"){
 					
-					$('#tipoPago').text('CONTRA ENTREGA');
 					$('#tipoPago').val('CONTRA ENTREGA');
 				}else if(tipoPedido=='TA'){
-					$('#tipoPago').text('TARJETA DE CREDITO');
 					$('#tipoPago').val('TARJETA DE CREDITO');
 				}else if(tipoPedido=='PP'){
-					$('#tipoPago').text('PAYPAL');
 					$('#tipoPago').val('PAYPAL');
 				}
 				
@@ -275,6 +314,7 @@ function buscarPedido(){
 				cadena3="<tr><td colspan='4'><label id='mensaje2' style='color:red'></label><td><input type='button' id='actualizar' class='btn btn-success' onclick='actualizarPedido("+id+")' value='Actualizar'></td><td><input type='button' class='btn btn-danger' onClick='location.reload()' value='Regresar'></td></tr>";
 				$('#datos').fadeIn().removeClass('hide');
 				$('#detalleProd').html(cadena+cadena2+cadena3);
+				$('#detalleProd2').html(cadena);
 			}
 			
 		});
@@ -306,7 +346,6 @@ function prueba(){
 			    		
 			    	});
 			        
-			        
 			      }
 			    });
 	}
@@ -324,8 +363,7 @@ function actualizarPedido(id){
 		
 			$("#actualizar").addClass("disabled");
 			alert("Estado actualizado");
-			$('#estado').text('ENTREGRADO');
-			$('#estado').val('ENTREGADO');
+			$('#estado').val('ENTREGRADO');
 			var tipPag=document.getElementById("tipoPago").value;
 			if(tipPag=='CONTRA ENTREGA'){
 			$('#mensaje2').html('Se ha enviado la boleta o factura, al correo registrado.');
@@ -335,7 +373,7 @@ function actualizarPedido(id){
 
 
  
-</script>
+</script>	
 </body>
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/jspdf.min.js"></script>
