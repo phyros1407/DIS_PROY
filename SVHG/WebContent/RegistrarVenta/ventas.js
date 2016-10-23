@@ -9,7 +9,10 @@ var txt_Cantidad2 = $('#txtCantidad').val();
 var txt_importe = (txt_Precio2)*txt_Cantidad2;//agregado igv (18%)
 var txt_descripcion=$('#txtDescripcion').val(); 
 var txt_codproducto=$('#txtCodProducto').val();
+var txt_igv=txt_importe/1.18;
+alert(txt_igv)
 var id=$('#txtidPro').val();
+
 /**/
 //alert(txt_NombresProd2+"||"+txt_Precio2+"||"+txt_Cantidad2+"||"+txt_importe);
 
@@ -36,7 +39,7 @@ rowCount = $('#table-producto2 tr').length-1;
 $('#txtsize').val(rowCount);
 console.log("dsffgslgsldkfjghsldkjghsd: "+rowCount)
 ;
-$('#table-producto2').append("<tr><td style='display:none;'><input type='hidden' name='txtidPro"+rowCount+"' id='txtidPro' form='registrar' value='"+txt_idProducto+"' >"+txt_idProducto+"</td><td>"+txt_NombresProd2+"</td><td>"+txt_Precio2+"</td><td id='cantidadPro' name='cantidadPro'>"+txt_Cantidad2+"</td><td id='importePro' name='importePro'>"+txt_importe.toFixed(2)+"</td><td><input type='button'  onclick='deleteRow(this,"+txt_importe.toFixed(2)+");' value='eliminar' ></td><input type='hidden' name='cantidadPro"+rowCount+"' id='cantidadPro' form='registrar' value='"+txt_Cantidad2+"' ><input type='hidden' name='importePro"+rowCount+"' id='importePro' form='registrar' value='"+txt_importe.toFixed(2)+"' ></tr>");
+$('#table-producto2').append("<tr><td style='display:none;'><input type='hidden' name='txtidPro"+rowCount+"' id='txtidPro' form='registrar' value='"+txt_idProducto+"' >"+txt_idProducto+"</td><td>"+txt_NombresProd2+"</td><td>"+txt_Precio2+"</td><td id='cantidadPro' name='cantidadPro'>"+txt_Cantidad2+"</td><td id='importePro' name='importePro'>"+txt_importe.toFixed(2)+"</td><td><input type='button'  onclick='deleteRow(this,"+txt_importe.toFixed(2)+","+txt_igv.toFixed(2)+");' value='eliminar' ></td><input type='hidden' name='cantidadPro"+rowCount+"' id='cantidadPro' form='registrar' value='"+txt_Cantidad2+"' ><input type='hidden' name='importePro"+rowCount+"' id='importePro' form='registrar' value='"+txt_importe.toFixed(2)+"' ></tr>");
 
 var importetotal=0.0;
 
@@ -82,7 +85,7 @@ console.log("dsffgslgsldkfjghsldkjghsd: "+rowCount)
 
 
 }
-function deleteRow(r,cantidad) {
+function deleteRow(r,cantidad,igv4) {
 var i = r.parentNode.parentNode.rowIndex;
 
 var importetotal2= $('#txtSubtotal').val();
@@ -93,6 +96,9 @@ console.log("importw1"+importetotal2);
 importetotal2=importetotal2-parseFloat(cantidad);
 console.log("importw2: "+importetotal2);
 
+var igv2=$('#txtIGV').val();
+igv2=igv2-parseFloat(igv4);
+$('#txtIGV').val(igv2.toFixed(2));
 $('#txtSubtotal').val(importetotal2.toFixed(2));
 
 
