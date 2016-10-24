@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,13 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.EnviarBoleta;
 import util.ResponseObject;
+import beans.BoletaBean;
 import beans.ComprobanteBean;
 import beans.EmpresaBean;
 import beans.PersonaBean;
 
 import com.google.gson.Gson;
 
+import dao.interfaces.ComprobanteDao;
 import dao.interfaces.EmpresaDao;
 import dao.interfaces.OfertaDao;
 import dao.interfaces.PedidoDao;
@@ -224,6 +228,8 @@ if (codigoAntiguo!=null) {
 				System.out.println("llenando segundos vectores");
 			}
 			
+			
+			
 			//comprobante
 			String preSerie = "";
 			ComprobanteBean comprobante = new ComprobanteBean();
@@ -318,9 +324,17 @@ if (codigoAntiguo!=null) {
 			comprobante.setFec_emi("now()");
 		    comprobante.setFec_can("now()");
 		
-		    ventadao.registrarOferta(idusuario, numeroTransaccion, fecIni, productoId, cantidadPro, ImporteProducto, tipoFac);	
+		    ventadao.registrarVenta(idusuario, numeroTransaccion, fecIni, productoId, cantidadPro, ImporteProducto, tipoFac);	
 			
 		    if (pedidodao.guardarComprobante(comprobante) ) {
+		    	
+		    	ComprobanteDao comdao = dao.getComprobanteDao();
+				ArrayList<BoletaBean> boleta = ventadao.buscarComprobanteGenerado(numeroTransaccion) ;
+				System.out.println("entro a boleta");
+				String correo = comdao.obtenerCorreo(idusuario);
+				System.out.println("correo boleta: "+correo);
+				EnviarBoleta email = new EnviarBoleta();
+				email.sendEmail(boleta,correo);
 		   
 		    	out.println("<script type=\"text/javascript\">");
 				out.println("alert('La venta se guardó satisfactoriamente. Venta Nro:'+'"+numeroTransaccion+"');");

@@ -3,7 +3,9 @@ package dao.mysql;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import beans.BoletaBean;
 import beans.ComprobanteBean;
 import beans.TransaccionBean;
 import dao.interfaces.VentaDao;
@@ -12,7 +14,7 @@ import daofactory.MySqlDAOFactory;
 public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 
 	@Override
-	public boolean registrarOferta(int idUsuario, String numeroTran,
+	public boolean registrarVenta(int idUsuario, String numeroTran,
 			String fechaEntrega, String[] productoId, int[] productoCantidad,
 			double[] productoImporte, String tipoFac) throws Exception {
 		
@@ -185,4 +187,78 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 		
 		return num_com;
 	}
+	
+	
+	@Override
+	public ArrayList<BoletaBean> buscarComprobanteGenerado(String numeroTransaccion) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<BoletaBean> boleta = new ArrayList<BoletaBean>();
+		
+		try{
+			
+			Connection con=MySqlDAOFactory.obtenerConexion();
+			Statement stmt=con.createStatement();
+			
+			String query="SELECT  tr.NUM AS NUMERO_TRANSACCION,                            	"
+					+ "CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,      "
+					+ "DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,       "
+					+ "DATE_FORMAT(cp.FEC_CAN,'%d-%m-%Y') AS FECHA_CANCELACION,"
+					+ "DATE_FORMAT(tr.FEC_ENT,'%d-%m-%Y') AS FECHA_ENTREGA,"
+					+ "pr.CODPRO AS CODIGO_PRODUCTO,     "
+					+ "pr.NOM AS NOMBRE_PRODUCTO,                                   "
+					+ "pr.PRE AS PRECIO,                                        	"
+					+ "dt.CAN AS CANTIDAD, "
+					+ "concat(p.DIR_ENT,'LOCAL') AS DIRECCION,                                     	"
+					+ "ROUND((dt.IMP/1.19),2) AS IMPORTE,                         "
+					+ "of.DSC AS DESCUENTO                                    "
+					+ "FROM                                                   "
+					+ "transaccion tr                                         "
+					+ "INNER JOIN comprobante_pago cp ON tr.ID = cp.VEN_ID    "
+					+ "INNER JOIN detalle_transaccion dt ON tr.ID = dt.VEN_ID "
+					+ "INNER JOIN usuario us ON tr.ID_USUARIO = us.ID           "
+					+ "INNER JOIN persona pe ON us.PER_ID = pe.ID                "
+					+ "INNER JOIN producto pr ON dt.PRO_ID = pr.ID             "
+					+ "LEFT JOIN detalle_oferta df ON pr.ID = df.PRO_ID        "
+					+ "LEFT JOIN ofertas of ON of.ID =df.OFE_ID                "
+					+ "WHERE                                                   "
+					+ "tr.NUM = '"+numeroTransaccion+"';";
+							
+			
+			System.out.println("QUERY EN EJECUCION PARA BOLETA ----> " + query);
+			
+			ResultSet rs = stmt.executeQuery(query);
+			
+			BoletaBean detalleB = null;
+			
+			while(rs.next()){
+				detalleB = new BoletaBean();
+				detalleB.setNum_com(rs.getString("NUMERO_TRANSACCION"));
+				detalleB.setNom_cli(rs.getString("NOMBRE_CLIENTE"));
+				detalleB.setFec_emi(rs.getString("FECHA_EMISION"));
+				
+				detalleB.setFec_ent(rs.getString("FECHA_ENTREGA"));
+				detalleB.setDir(rs.getString("DIRECCION"));
+				detalleB.setCod_pro(rs.getString("CODIGO_PRODUCTO"));
+				detalleB.setNom_pro(rs.getString("NOMBRE_PRODUCTO"));
+				detalleB.setPre(rs.getDouble("PRECIO"));
+				detalleB.setCan(rs.getInt("CANTIDAD"));
+				detalleB.setImporte(rs.getDouble("IMPORTE"));
+				detalleB.setDescuento(rs.getDouble("DESCUENTO"));
+				boleta.add(detalleB);
+				
+			}
+			
+			
+		}catch(Exception e){
+			
+			System.out.println("ERROR -----> "+e.getMessage());
+			
+		}
+		
+		return boleta;
+	}
+	
+	
+	
 }
