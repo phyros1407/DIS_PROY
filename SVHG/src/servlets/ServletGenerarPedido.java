@@ -358,7 +358,9 @@ public class ServletGenerarPedido extends HttpServlet {
 						
 						String correo = comdao.obtenerCorreo(id_usuario);
 						EnviarBoleta email = new EnviarBoleta();
-						email.sendEmail(boleta,correo);
+						
+						String mensaje = email.armarEmail(boleta);
+						email.sendEmail(mensaje,correo);
 						
 						
 						out.println("<script type=\"text/javascript\">");

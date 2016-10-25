@@ -50,13 +50,13 @@ public class EnviarBoleta extends Object {
         
 	}
  
-	public void sendEmail(ArrayList<BoletaBean> boleta,String correo) throws Exception{
+	public void sendEmail(String mensaje,String correo) throws Exception{
  
 			init();
 			
-            String formulario =armarEmail(boleta);
+            
      
-            addContent(formulario);
+            addContent(mensaje);
      
             /**
             //añadir imagenes
@@ -115,7 +115,7 @@ public class EnviarBoleta extends Object {
         message.setSubject("Nano-Sport-Shop : ¡Gracias por su compra!");
         message.setFrom(new InternetAddress((String)props.get("mail.smtp.mail.sender")));
         message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress(correo.toLowerCase()));
+                new InternetAddress("jean.barbieri1996@gmail.com"));
         // put everything together
         message.setContent(multiParte);
         
