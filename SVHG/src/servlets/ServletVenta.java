@@ -334,7 +334,9 @@ if (codigoAntiguo!=null) {
 				String correo = comdao.obtenerCorreo(idusuario);
 				System.out.println("correo boleta: "+correo);
 				EnviarBoleta email = new EnviarBoleta();
-				email.sendEmail(boleta,correo);
+				
+				String mensaje =email.armarEmail(boleta);
+				email.sendEmail(mensaje,correo);
 		   
 		    	out.println("<script type=\"text/javascript\">");
 				out.println("alert('La venta se guardó satisfactoriamente. Venta Nro:'+'"+numeroTransaccion+"');");
