@@ -255,8 +255,6 @@ public class Gestionar_Producto extends HttpServlet {
 				String rutaGuardarFoto=rutaPathCortada+ nombreProyecto+"/WebContent/images/";
 				String rutaBaseDatos=rutaPathCortada+ nombreProyecto+"/images/";
 				
-				
-				
 				String rutaProyecto = "images/"+nombreFoto;
 				
 				System.out.println("RUTA PROYECTO PARA DIS --->"+rutaProyecto);
@@ -290,8 +288,7 @@ public class Gestionar_Producto extends HttpServlet {
 					
 					
 					if(productodao.agregarProducto(producto)){
-						
-						
+
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('Producto agregado correctamente');");
 						out.println("location='Gestionar_Producto'");

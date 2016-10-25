@@ -137,186 +137,299 @@ public class EnviarBoleta extends Object {
 						+ "<td>"+boleta.get(i).getCod_pro()+"</td>"
 						+ "<td>"+boleta.get(i).getNom_pro()+"</td>"
 						+ "<td>S/. "+boleta.get(i).getPre()+"</td>"
-						+ "<td>S/. "+Math.round((boleta.get(i).getPre()*boleta.get(i).getDescuento()) * 100.000) / 100.000+"</td>"
+						+ "<td>S/. "+Math.round((boleta.get(i).getPre()*boleta.get(i).getDescuento()) * 100.00) / 100.00+"</td>"
 						+ "<td>"+boleta.get(i).getCan()+"</td>"
 						+ "<td>S/. "+boleta.get(i).getImporte()+"</td>"
 						+ "</tr>");
 		
 				subtotal = subtotal + boleta.get(i).getImporte();
 		}
+				
+		String datosCliente = "";
+		
+		if(boleta.get(0).getIde()=="P"){
+			
+			if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
+		
+				 datosCliente = 
 						
+						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td>                                                                                                                                                                  "+
+						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+						"						    				<br>                                                                                                                                                          "+
+						"						    			</fieldset>                                                                                                                                                       "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      "+
+						"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td>                                                                                                                                                                  "+
+						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+						"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
+						"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
+						"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
+						"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
+						"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
+						"						    				<br>                                                                                                                                                          "+
+						"						    			</fieldset>                                                                                                                                                       "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      ";
+			}else{
+				
+
+				 datosCliente = 
+						
+						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td>                                                                                                                                                                  "+
+						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+						"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
+						"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
+						"						    				<br>                                                                                                                                                          "+
+						"						    			</fieldset>                                                                                                                                                       "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      "+
+						"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td>                                                                                                                                                                  "+
+						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+						"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
+						"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
+						"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
+						"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
+						"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
+						"						    				<br>                                                                                                                                                          "+
+						"						    			</fieldset>                                                                                                                                                       "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      ";
+				
+			}
+			
+			
+			
+		}else{
+			
+			if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
+				
+				 datosCliente = 
+						
+						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td>                                                                                                                                                                  "+
+						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+						"						    				<br>                                                                                                                                                          "+
+						"						    			</fieldset>                                                                                                                                                       "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      ";
+						                                                                                                                                                        
+			}else{
+				
+
+				 datosCliente = 
+						
+						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td>                                                                                                                                                                  "+
+						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+						"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
+						"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
+						"						    				<br>                                                                                                                                                          "+
+						"						    			</fieldset>                                                                                                                                                       "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      ";
+
+				
+			}
+			
+			
+		}
+		
 		String cuerpo =
-				"<!DOCTYPE html>                                                                                                                                                                                         "+
-						"<html>                                                                                                                                                                                                  "+
-						"  <head>                                                                                                                                                                                                "+
-						"    <meta charset='utf-8'>                                                                                                                                                                              "+
-						"    <meta name='viewport' content='width=device-width;initial-scale-1'>                                                                                                                                 "+
-						"    <meta http-equiv='X-UA-Compatible' content='IE-edge'>                                                                                                                                               "+
-						"    <title></title>                                                                                                                                                                                     "+
-						"    <style>                                                                                                                                                                                             "+
-						"    	body{                                                                                                                                                                                            "+
-						"    		font-family: Arial, Helvetica, sans-serif;                                                                                                                                                   "+
-						"    	}                                                                                                                                                                                                "+
-						"                                                                                                                                                                                                        "+
-						"		.container {                                                                                                                                                                                     "+
-						"		    position: relative;                                                                                                                                                                          "+
-						"		}                                                                                                                                                                                                "+
-						"                                                                                                                                                                                                        "+
-						"		.bottomright {                                                                                                                                                                                   "+
-						"		    position: absolute;                                                                                                                                                                          "+
-						"		    bottom: 8px;                                                                                                                                                                                 "+
-						"		    right: 16px;                                                                                                                                                                                 "+
-						"		    font-size: 18px;                                                                                                                                                                             "+
-						"		}                                                                                                                                                                                                "+
-						"                                                                                                                                                                                                        "+
-						"		img {                                                                                                                                                                                            "+
-						"		    width: 100%;                                                                                                                                                                                 "+
-						"		    height: auto;                                                                                                                                                                                "+
-						"		}                                                                                                                                                                                                "+
-						"                                                                                                                                                                                                        "+
-						"	    @media screen and (max-width:600px){                                                                                                                                                             "+
-						"		    table [class='responsive-table'] {                                                                                                                                                           "+
-						"		    	width: 100% !important;                                                                                                                                                                  "+
-						"		    }                                                                                                                                                                                            "+
-						"                                                                                                                                                                                                        "+
-						"		    table [class='responsive-imagen'] {                                                                                                                                                          "+
-						"            	width: 100% !important;                                                                                                                                                                  "+
-						"                                                                                                                                                                                                        "+
-						"            }                                                                                                                                                                                           "+
-						"                                                                                                                                                                                                        "+
-						"            table [class='responsive-table-2']{                                                                                                                                                         "+
-						"            	width: 100% !important;                                                                                                                                                                  "+
-						"            	padding: 20px;                                                                                                                                                                           "+
-						"            }                                                                                                                                                                                           "+
-						"                                                                                                                                                                                                        "+
-						"            td[class='titulo']{                                                                                                                                                                         "+
-						"            	font-size: 10px !important;                                                                                                                                                              "+
-						"            	text-align: center !important;                                                                                                                                                           "+
-						"            }                                                                                                                                                                                           "+
-						"                                                                                                                                                                                                        "+
-						"    	}                                                                                                                                                                                                "+
-						"    </style>                                                                                                                                                                                            "+
-						"  </head>                                                                                                                                                                                               "+
-						"  <body >                                                                                                                                                                                               "+
-						"  	<!-- TABLA CONTENEDORA-->                                                                                                                                                                            "+
-						"    <table width='100%' cellpadding='0' cellspacing='0' border='0' align='center'>                                                                                                                      "+
-						"    	<tr>                                                                                                                                                                                             "+
-						"    		<td style='vertical-align: middle; text-align: center;' >                                                                                                                                    "+
-						"    			<!--TABLA DEL EMAIL-->                                                                                                                                                                   "+
-						"    			<table width='600px' cellpadding='0' cellspacing='0' border='0' style='text-align:left' class='responsive-table'>                                                                        "+
-						"			    	<tr>                                                                                                                                                                                 "+
-						"			    		<td class='titulo'>                                                                                                                                                              "+
-						"			    			<div class='container'>                                                                                                                                                      "+
-						"							  <img  style='border-radius: 8px;' class='responsive-imagen'  height='150px' src='https://imagizer.imageshack.us/v2/600x150q90/923/cxMyfj.jpg' alt=''>                      "+
-						"							  <div class='bottomright'>                                                                                                                                                  "+
-						"							  	<h2 style='text-align:right;color:white;text-shadow: -2px -2px 1px #000, 2px 2px 1px #000, -2px 2px 1px #000, 2px -2px 1px #000;'><span>BOLETA DE VENTA<span>&nbsp;</span><br><span>&nbsp;</span><span style='font-size:18px;'>"+boleta.get(0).getNum_com().toUpperCase()+"</span></span></h2>"+
-						"							  </div>                                                                                                                                                                     "+
-						"							</div>                                                                                                                                                                       "+
-						"			    		</td>                                                                                                                                                                            "+
-						"			    		<td>                                                                                                                                                                             "+
-						"			    			                                                                                                                                                                             "+
-						"			    		</td>                                                                                                                                                                            "+
-						"			    	</tr>                                                                                                                                                                                "+
-						"			    	<tr>                                                                                                                                                                                 "+
-						"			    		<td>                                                                                                                                                                             "+
-						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                      "+
-						"			    				<tr>                                                                                                                                                                     "+
-						"			    					<td>                                                                                                                                                                 "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                          "+
-						"						    				<legend>Datos Generales</legend>                                                                                                                             "+
-						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli().toUpperCase()+"</label><br>                                                                                                               "+
-						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                                                      "+
-						"						    				<br>                                                                                                                                                         "+
-						"						    			</fieldset>                                                                                                                                                      "+
-						"			    					</td>                                                                                                                                                                "+
-						"			    				</tr>                                                                                                                                                                    "+
-						"			    			</table>                                                                                                                                                                     "+
-						"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                     "+
-						"			    				<tr>                                                                                                                                                                     "+
-						"			    					<td>                                                                                                                                                                 "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                          "+
-						"						    				<legend>Datos de Envio</legend>                                                                                                                              "+
-						"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir().toUpperCase()+"</label><br>                                                                                                               "+
-						"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                                                                      "+
-						"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                                                         "+
-						"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label><br>                                                                                            "+
-						"						    			</fieldset>                                                                                                                                                      "+
-						"			    					</td>                                                                                                                                                                "+
-						"			    				</tr>                                                                                                                                                                    "+
-						"			    			</table>                                                                                                                                                                     "+
-						"			    		</td>                                                                                                                                                                            "+
-						"			    	</tr>                                                                                                                                                                                "+
-						"			    </table>                                                                                                                                                                                 "+
-						"			    <table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table'>                                                                                                "+
-						"			    	<tr>                                                                                                                                                                                 "+
-						"			    		<td style='padding-bottom:20px;text-align:left;'>                                                                                                                                "+
-						"			    			<label style='font-weight:bold;'>Detalle de Pedido : </label>                                                                                                                "+
-						"			    		</td>                                                                                                                                                                            "+
-						"			    	</tr>                                                                                                                                                                                "+
-						"			    	<tr>                                                                                                                                                                                 "+
-						"			    		<td>                                                                                                                                                                             "+
-						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table' style='padding-bottom:20px;'>                                                       "+
-						"			    				<thead style='font-weight:bold;background-color:#D8D8D8;'>                                                                                                               "+
-						"			    					<tr>                                                                                                                                                                 "+
-						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>N° de Producto</td>                                     "+
-						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Producto</td>                                           "+
-						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Precio Und.</td>                                        "+
-						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Descuento</td>                                          "+
-						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Cantidad</td>                                           "+
-						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Importe</td>                                            "+
-						"			    					</tr>                                                                                                                                                                "+
-						"			    				</thead>                                                                                                                                                                 "+
-						"			    				<tbody>                                                                                                                                                                  "+
-						"			    					"+tabla+"                                                                                                                                                                     "+
-						"			    				</tbody>                                                                                                                                                                 "+
-						"			    			</table>                                                                                                                                                                     "+
-						"                                                                                                                                                                                                        "+
-						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table'>                                                                                    "+
-						"			    				<tr>                                                                                                                                                                     "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX' style='text-align:left;'>SUBTOTAL: </td>                                                                                                           "+
-						"			    					<td width='100PX'>S/. "+Math.round(subtotal * 100.000) / 100.000+"</td>                                                                                                                                          "+
-						"			    				</tr>                                                                                                                                                                    "+
-						"			    				<tr>                                                                                                                                                                     "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX' style='text-align:left;'>IGV (18%) : </td>                                                                                                         "+
-						"			    					<td width='100PX'>S/."+Math.round((subtotal*0.19) * 100.000) / 100.000+" </td>                                                                                                                                          "+
-						"			    				</tr>                                                                                                                                                                    "+
-						"			    				<tr>                                                                                                                                                                     "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX'></td>                                                                                                                                              "+
-						"			    					<td width='100PX' style='text-align:left;'>TOTAL: </td>                                                                                                           "+
-						"			    					<td width='100PX'>S/. "+Math.round((subtotal*1.19)* 100.000) / 100.000+"</td>                                                                                                                                          "+
-						"			    				</tr>                                                                                                                                                                    "+
-						"			    			</table>                                                                                                                                                                     "+
-						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table' style='padding-top:15px;'>                                                       "+
-						"			    				<tr>                                                                                                                                                                     "+
-						"			    					<td style='padding.right:15px;'>                                                                                                                                     "+
-						"			    						<img  class='responsive-imagen' width='80px' height='80px' src='https://imagizer.imageshack.us/v2/330x330q90/924/WwjtMm.jpg' alt=''>                             "+
-						"			    					</td>                                                                                                                                                                "+
-						"			    					<td style='text-align:left;'>                                                                                                                                        "+
-						"			    						NANO SPORTS PRODUCTOS EXCLUSIVOS PARA EL ENTRENAMIENTO<br>                                                                                                       "+
-						"			    						TELEFONO : (511) 997274277 <br>                                                                                                                                      "+
-						"			    						www.nanosports.com.pe - info@nanosports.com.pe                                                                                                                   "+
-						"			    					</td>                                                                                                                                                                "+
-						"			    				</tr>                                                                                                                                                                    "+
-						"			    			</table>                                                                                                                                                                     "+
-						"			    		</td>                                                                                                                                                                            "+
-						"			    	</tr>                                                                                                                                                                                "+
-						"			    </table>                                                                                                                                                                                 "+
-						"    		</td>                                                                                                                                                                                        "+
-						"    	</tr>                                                                                                                                                                                            "+
-						"    </table>                                                                                                                                                                                            "+
-						"  </body>                                                                                                                                                                                               "+
-						"</html>                                                                                                                                                                                                 ";
+				"<!DOCTYPE html>                                                                                                                                                                                          		  "+
+						"                                                                                                                                                                                                         "+
+						"<html>                                                                                                                                                                                                   "+
+						"  <head>                                                                                                                                                                                                 "+
+						"    <meta charset='utf-8'>                                                                                                                                                                               "+
+						"    <meta name='viewport' content='width=device-width;initial-scale-1'>                                                                                                                                  "+
+						"    <meta http-equiv='X-UA-Compatible' content='IE-edge'>                                                                                                                                                "+
+						"    <title></title>                                                                                                                                                                                      "+
+						"    <style>                                                                                                                                                                                              "+
+						"    	body{                                                                                                                                                                                             "+
+						"    		font-family: Arial, Helvetica, sans-serif;                                                                                                                                                    "+
+						"    	}                                                                                                                                                                                                 "+
+						"                                                                                                                                                                                                         "+
+						"		.container {                                                                                                                                                                                      "+
+						"		    position: relative;                                                                                                                                                                           "+
+						"		}                                                                                                                                                                                                 "+
+						"                                                                                                                                                                                                         "+
+						"		.bottomright {                                                                                                                                                                                    "+
+						"		    position: absolute;                                                                                                                                                                           "+
+						"		    bottom: 8px;                                                                                                                                                                                  "+
+						"		    right: 16px;                                                                                                                                                                                  "+
+						"		    font-size: 18px;                                                                                                                                                                              "+
+						"		}                                                                                                                                                                                                 "+
+						"                                                                                                                                                                                                         "+
+						"		img {                                                                                                                                                                                             "+
+						"		    width: 100%;                                                                                                                                                                                  "+
+						"		    height: auto;                                                                                                                                                                                 "+
+						"		}                                                                                                                                                                                                 "+
+						"                                                                                                                                                                                                         "+
+						"	    @media screen and (max-width:600px){                                                                                                                                                              "+
+						"		    table [class='responsive-table'] {                                                                                                                                                            "+
+						"		    	width: 100% !important;                                                                                                                                                                   "+
+						"		    }                                                                                                                                                                                             "+
+						"                                                                                                                                                                                                         "+
+						"		    table [class='responsive-imagen'] {                                                                                                                                                           "+
+						"            	width: 100% !important;                                                                                                                                                                   "+
+						"                                                                                                                                                                                                         "+
+						"            }                                                                                                                                                                                            "+
+						"                                                                                                                                                                                                         "+
+						"            table [class='responsive-table-2']{                                                                                                                                                          "+
+						"            	width: 100% !important;                                                                                                                                                                   "+
+						"            	padding: 20px;                                                                                                                                                                            "+
+						"            }                                                                                                                                                                                            "+
+						"                                                                                                                                                                                                         "+
+						"            td[class='titulo']{                                                                                                                                                                          "+
+						"            	font-size: 10px !important;                                                                                                                                                               "+
+						"            	text-align: center !important;                                                                                                                                                            "+
+						"            }                                                                                                                                                                                            "+
+						"                                                                                                                                                                                                         "+
+						"    	}                                                                                                                                                                                                 "+
+						"    </style>                                                                                                                                                                                             "+
+						"  </head>                                                                                                                                                                                                "+
+						"  <body >                                                                                                                                                                                                "+
+						"  	<!-- TABLA CONTENEDORA-->                                                                                                                                                                             "+
+						"    <table width='100%' cellpadding='0' cellspacing='0' border='0' align='center'>                                                                                                                       "+
+						"    	<tr>                                                                                                                                                                                              "+
+						"    		<td style='vertical-align: middle; text-align: center;' >                                                                                                                                     "+
+						"    			<!--TABLA DEL EMAIL-->                                                                                                                                                                    "+
+						"    			<table width='600px' cellpadding='0' cellspacing='0' border='0' style='text-align:left' class='responsive-table'>                                                                         "+
+						"			    	<tr>                                                                                                                                                                                  "+
+						"			    		<td class='titulo'>                                                                                                                                                               "+
+						"			    			<div class='container'>                                                                                                                                                       "+
+						"							  <img  style='border-radius: 4px;' class='responsive-imagen'  height='150px' src='https://imagizer.imageshack.us/v2/600x150q90/923/cxMyfj.jpg'>                              "+
+						"							  	<div class='bottomright'>                                                                                                                                                 "+
+						"							  		<h2 style='text-align:right;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;'>"+
+						"							  			<span>BOLETA DE VENTA                                                                                                                                             "+
+						"							  				<span>&nbsp;</span><br>                                                                                                                                       "+
+						"							  				<span>&nbsp;</span>                                                                                                                                           "+
+						"							  				<span style='font-size:18px;'>"+boleta.get(0).getNum_com()+"</span>                                                                                                          "+
+						"							  			</span>                                                                                                                                                           "+
+						"							  		</h2>                                                                                                                                                                 "+
+						"							  	</div>                                                                                                                                                                    "+
+						"							  </div>                                                                                                                                                                      "+
+						"							</div>                                                                                                                                                                        "+
+						"			    		</td>                                                                                                                                                                             "+
+						"			    		<td>                                                                                                                                                                              "+
+						"			    			                                                                                                                                                                              "+
+						"			    		</td>                                                                                                                                                                             "+
+						"			    	</tr>                                                                                                                                                                                 "+
+						"			    	<tr>                                                                                                                                                                                  "+
+						"			    		<td>                                                                                                                                                                              "+
+													datosCliente+
+						"			    		</td>                                                                                                                                                                             "+
+						"			    	</tr>                                                                                                                                                                                 "+
+						"			    </table>                                                                                                                                                                                  "+
+						"			    <table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table'>                                                                                                 "+
+						"			    	<tr>                                                                                                                                                                                  "+
+						"			    		<td style='padding-bottom:20px;text-align:left;'>                                                                                                                                 "+
+						"			    			<label style='font-weight:bold;'>Detalle de Pedido : </label>                                                                                                                 "+
+						"			    		</td>                                                                                                                                                                             "+
+						"			    	</tr>                                                                                                                                                                                 "+
+						"			    	<tr>                                                                                                                                                                                  "+
+						"			    		<td>                                                                                                                                                                              "+
+						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table' style='padding-bottom:20px;'>                                                        "+
+						"			    				<thead style='font-weight:bold;background-color:#D8D8D8;'>                                                                                                                "+
+						"			    					<tr>                                                                                                                                                                  "+
+						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>N° de Producto</td>                                      "+
+						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Producto</td>                                            "+
+						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Precio Und.</td>                                         "+
+						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Descuento</td>                                           "+
+						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Cantidad</td>                                            "+
+						"			    						<td style='border-width:2.5px;border-top-style: none;border-right-style: solid;border-left-style: none;'>Importe</td>                                             "+
+						"			    					</tr>                                                                                                                                                                 "+
+						"			    				</thead>                                                                                                                                                                  "+
+						"			    				<tbody>                                                                                                                                                                   "+
+						"			    					  "+tabla+"                                                                                                                                                                    "+
+						"			    				</tbody>                                                                                                                                                                  "+
+						"			    			</table>                                                                                                                                                                      "+
+						"                                                                                                                                                                                                         "+
+						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table'>                                                                                     "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX' style='text-align:left;'>SUBTOTAL: </td>                                                                                                            "+
+						"			    					<td width='100PX'>S/. "+Math.round(subtotal * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX' style='text-align:left;'>IGV (18%) : </td>                                                                                                          "+
+						"			    					<td width='100PX'>S/. "+Math.round((subtotal*0.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX' style='text-align:left;'>CAR. ENVIO : </td>                                                                                                         "+
+						"			    					<td width='100PX'>S/. "+Math.round(boleta.get(0).getCar_ent() * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX'></td>                                                                                                                                               "+
+						"			    					<td width='100PX' style='text-align:left;'>SUBTOTAL: </td>                                                                                                            "+
+						"			    					<td width='100PX'>S/. "+Math.round((subtotal*1.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      "+
+						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table' style='padding-bottom:20px;'>                                                        "+
+						"			    				<tr>                                                                                                                                                                      "+
+						"			    					<td style='padding.right:15px;'>                                                                                                                                      "+
+						"			    						<img  class='responsive-imagen' width='80px' height='80px' src='https://imagizer.imageshack.us/v2/330x330q90/924/WwjtMm.jpg' alt=''>                              "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    					<td style='text-align:left;'>                                                                                                                                         "+
+						"			    						NANO SPORTS PRODUCTOS EXCLUSIVOS PARA EL ENTRENAMIENTO<br>                                                                                                        "+
+						"			    						TELEFONO : (511) 997274277                                                                                                                                        "+
+						"			    						www.nanosports.com.pe - info@nanosports.com.pe                                                                                                                    "+
+						"			    					</td>                                                                                                                                                                 "+
+						"			    				</tr>                                                                                                                                                                     "+
+						"			    			</table>                                                                                                                                                                      "+
+						"			    		</td>                                                                                                                                                                             "+
+						"			    	</tr>                                                                                                                                                                                 "+
+						"			    </table>                                                                                                                                                                                  "+
+						"    		</td>                                                                                                                                                                                         "+
+						"    	</tr>                                                                                                                                                                                             "+
+						"    </table>                                                                                                                                                                                             "+
+						"  </body>                                                                                                                                                                                                "+
+						"</html>                                                                                                                                                                                                  ";
 
 		
         String formulario = cuerpo;
@@ -325,7 +438,6 @@ public class EnviarBoleta extends Object {
 		
 		return formulario;
 		
-
 	}
 	
 }
