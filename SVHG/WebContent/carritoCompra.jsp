@@ -15,7 +15,7 @@
 	<link href="css/animate.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
-	<link rel="shortcut icon" href="imagesOut/ico/favicon.ico">
+	<link rel="shortcut icon" href="imagesOut/ico/logo_gym.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="imagesOut/ico/apple-touch-icon-144-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="imagesOut/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="imagesOut/ico/apple-touch-icon-72-precomposed.png">
@@ -34,7 +34,13 @@
 	<script src="js/ajax_pedido.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.3.0/js/client.min.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.3.0/js/paypal.min.js"></script>
+	<style>
 	
+		#link_pri:hover {
+		    text-decoration: none;
+		}
+	
+	</style>
 </head>
 <body >
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
@@ -48,6 +54,12 @@
 				</ol>
 			</div>
 			<div id="mensaje" style="color:red;"></div>
+			<div style="margin-bottom:20px;text-align:right;">
+				<a href="#" data-toggle="modal" data-target="#modalAgregar" id="link_pri">
+	          		<span style="color:#FE9A2E;font-size:15px;" class="glyphicon glyphicon-plus"></span>
+	          		<span style="color:#FE9A2E;font-size:15px;text-decoration: none;"> AGREGAR PRODUCTO</span>
+	        	</a>
+	        </div>
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
