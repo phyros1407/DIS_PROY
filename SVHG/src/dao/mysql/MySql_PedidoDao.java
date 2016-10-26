@@ -43,9 +43,9 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				
 				if(rs.getString("est").equalsIgnoreCase("P")){
 					pedido.setEstado("Pendiente");
-				}else if(rs.getString("est").equalsIgnoreCase("R")){
-					pedido.setEstado("Recibido");
-				}else{
+				}else if(rs.getString("est").equalsIgnoreCase("E")){
+					pedido.setEstado("Entregado");
+				}else if(rs.getString("est").equalsIgnoreCase("C")){
 					pedido.setEstado("Cancelado");
 				}
 				
