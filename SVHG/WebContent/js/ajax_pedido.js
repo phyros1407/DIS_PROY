@@ -1120,6 +1120,8 @@
      					
      					alert("¡ Su transaccion ha sido aprobada por su banco !");
      					
+     					$("body").css("display","block");
+     					
      					ejecutarForm("#generar_pedido_tarjeta");
      					
      				}else{
