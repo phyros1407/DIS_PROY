@@ -61,7 +61,7 @@
 				}
 				
 				if(document.getElementById("estadoPedido").value=="RECIBIDO"){
-					location.href="ServletPedido?accion=listarPedidos&estado=R";
+					location.href="ServletPedido?accion=listarPedidos&estado=E";
 				}
 				if(document.getElementById("estadoPedido").value=="ELIMINADO"){
 					location.href="ServletPedido?accion=listarPedidos&estado=C";

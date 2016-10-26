@@ -66,7 +66,7 @@ public class ServletPedido extends HttpServlet {
 							request.setAttribute("productos", productos);
 							if(estado.equalsIgnoreCase("P")){
 								request.setAttribute("estado", "Pendientes");
-							}else if(estado.equalsIgnoreCase("R")){
+							}else if(estado.equalsIgnoreCase("E")){
 								request.setAttribute("estado", "Entregados");
 							}else if(estado.equalsIgnoreCase("C")){
 								request.setAttribute("estado", "Cancelados");
