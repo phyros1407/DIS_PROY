@@ -1078,11 +1078,26 @@
 		//EJECUTAR
 		function ejecutarForm(formularioDestino){
 			
+			$(".modal-body").animate({
+  				'height': '200px'
+  			});
+			 $(".close").css("display","none");
+		     $(".cuerpo").css("display","none");
+		     $(".modal-footer").css("display","none");
+			 $(".modal-content").css("background-image","url('imagesOut/cart/cargando.gif')");
+			 $(".modal-content").css("background-repeat","no-repeat");
+			 		 
 			$(formularioDestino).submit();
-			
+
 		}
 		
+		
+		
+		
          function pagar(){
+        	 
+        	 
+        	
         	 
         	 var tipo_tarjeta = $("#tipo_tarjeta").val();
         	 var marca_tarjeta = $("#marca_tarjeta").val();
@@ -1098,9 +1113,15 @@
         	 
         	 if(tipo_tarjeta==""||marca_tarjeta==""||num_tar==""||mesCad==""||anioCad==""||cvc.trim()==""||cuota_tarjeta==""){
         		 
-        		 alert("Llene todo los campos requeridos");
+        		 $('#precargatar').html('<span style="color:red;font-weight:bold;">Llene todo los campos requeridos</span>');
         		 
         	 }else{
+        		 
+        		 $("#pagar_tarjeta").prop("disabled","true");
+        		 $("#closer").prop("disabled","true");
+        		 
+        		 $('#precargatar').html('<img id="image_carga_tar" src=" imagesOut/cart/ajax-loader.gif" style="height:20px;" />');
+        		 
         		 $.get('http://servicios2.j.facilcloud.com/SERVICIOS_PAGO_TARJETA/servicios',{
      				
      				action : action,
@@ -1115,18 +1136,20 @@
      			},function(response){
      				
      				var respuesta = response['object'];
+     				$('#image_carga_tar').hide(1000);
      			
      				if(respuesta == "APROBADO"){
      					
-     					alert("¡ Su transaccion ha sido aprobada por su banco !");
-     					
-     					$("body").css("display","block");
-     					
-     					ejecutarForm("#generar_pedido_tarjeta");
+     					$('#precargatar').html('Su banco ha aprobado la transacción <span id="confirmacion" class="glyphicon glyphicon-ok" style="margin-top:10px;color:green;"></span>');
+     						
+     					setTimeout ("ejecutarForm('#generar_pedido_tarjeta');", 2000); 
+
      					
      				}else{
      					
-     					alert("¡ Su transaccion NO ha sido aprobada por su banco !");
+     					$("#pagar_tarjeta").removeProp("disabled","true");
+     					$("#closer").removeProp("disabled","true");
+     					$('#precargatar').html('No se completo la transacción  <span id="confirmacion" class="glyphicon glyphicon-remove" style="margin-top:10px;color:red;"></span>');
      					
      				}
 
@@ -1263,6 +1286,7 @@
  			
         	 
          }
-			
-	
+		
+         
+    
 		

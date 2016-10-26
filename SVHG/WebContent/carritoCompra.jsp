@@ -42,7 +42,7 @@
 	
 	</style>
 </head>
-<body onload="cargarDep();">
+<body id="test">
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
 	
 	<section id="cart_items">
@@ -260,7 +260,7 @@
 								<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 							</div>
 							<div class="col-xs-6 col-sm-6">
-								<img onclick="anios();validarFacturacion('#generar_pedido_tarjeta','#modalTarjeta');" id="btnTarjeta"  style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
+								<img   onclick="anios();validarFacturacion('#generar_pedido_tarjeta','#modalTarjeta');" id="btnTarjeta"  style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 							</div>
 							
 						</div>
@@ -278,16 +278,16 @@
 									<input type="hidden" name="hosted_button_id" value="NDTB7REJQZUHN">
 									<input type="hidden" name="return" id="return1" value="http://localhost:8080/SVHG/carritoCompra.jsp?action=prueba">
 									<input type="hidden" name="rm" value="2">
-									<input type="image" onclick="validarFacturacion2('form1');" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
+									<input  type="image" onclick="validarFacturacion2('form1');" style="border-radius:4px;vertical-align: middle; text-align: center;" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-44px.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
 									
 								</form>	
 								<script src="http://www.paypalobjects.com/api/checkout.js" async></script>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<img id="btnTarjeta" onclick="anios();validarFacturacion('#generar_pedido_tarjeta','#modalTarjeta');" style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
+								<img  id="btnTarjeta" onclick="anios();validarFacturacion('#generar_pedido_tarjeta','#modalTarjeta');" style="height:44px;cursor: pointer;border-radius:4px;vertical-align: middle; text-align: center;"alt="Visa y Mastercard" src="imagesOut/cart/visa_mastercard.png">
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<img onclick = "validarFacturacion('#form_generar_pedido','#contra_entrega');"  style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid ;vertical-align: middle; text-align: center;" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
+								<img  onclick = "validarFacturacion('#form_generar_pedido','#contra_entrega');"  style="height:44px;cursor: pointer;border-radius:4px;border: 2px solid ;vertical-align: middle; text-align: center;" alt="Visa y Mastercard" src="imagesOut/cart/contra_entrega.png">
 							</div>
 						</div>
 					</div>

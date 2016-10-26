@@ -36,9 +36,9 @@
 <style>
 
 	body {
-    background-image: url("imagesOut/cart/ajax-loader-page.gif");
+    background-image: url("imagesOut/cart/cargando.gif");
     background-repeat: no-repeat;
-    background-position: right top;
+    background-position:  top;
 }
 </style>
 

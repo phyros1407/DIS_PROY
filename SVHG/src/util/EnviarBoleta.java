@@ -136,10 +136,10 @@ public class EnviarBoleta extends Object {
 				tabla = tabla + ( "<tr>"
 						+ "<td>"+boleta.get(i).getCod_pro()+"</td>"
 						+ "<td>"+boleta.get(i).getNom_pro()+"</td>"
-						+ "<td>S/. "+boleta.get(i).getPre()+"</td>"
-						+ "<td>S/. "+Math.round((boleta.get(i).getPre()*boleta.get(i).getDescuento()) * 100.00) / 100.00+"</td>"
+						+ "<td>S/. "+Math.round((boleta.get(i).getPre()*1.19) * 100.00) / 100.00+"</td>"
+						+ "<td>S/. "+Math.round(((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()) * 100.00) / 100.00+"</td>"
 						+ "<td>"+boleta.get(i).getCan()+"</td>"
-						+ "<td>S/. "+boleta.get(i).getImporte()+"</td>"
+						+ "<td>S/. "+Math.round((boleta.get(i).getImporte()*1.19) * 100.00) / 100.00+"</td>"
 						+ "</tr>");
 		
 				subtotal = subtotal + boleta.get(i).getImporte();
@@ -532,7 +532,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
-						"			    					<td width='100PX' style='text-align:left;'>SUBTOTAL: </td>                                                                                                            "+
+						"			    					<td width='100PX' style='text-align:left;'>TOTAL (con IGV) : </td>                                                                                                            "+
 						"			    					<td width='100PX'>S/. "+Math.round((subtotal*1.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
 						"			    				</tr>                                                                                                                                                                     "+
 						"			    			</table>                                                                                                                                                                      "+
