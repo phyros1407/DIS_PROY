@@ -42,7 +42,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-								<a href="index.jsp"><img src="imagesOut/inicio/logo.png" alt="" /></a>
+								<a href="home.jsp"><img src="imagesOut/inicio/logo.png" alt="" /></a>
 						</div>
 						
 					</div>
@@ -104,7 +104,7 @@
 							<ul role="menu" class="sub-menu">
 								<li><a href="home.jsp">Productos</a></li>
 							</ul></li>
-						<li><a href="contact-us.html">Contacto</a></li>
+						<!-- <li><a href="contact-us.html">Contacto</a></li> -->
 					</ul>
 				</div>
 					</div>
