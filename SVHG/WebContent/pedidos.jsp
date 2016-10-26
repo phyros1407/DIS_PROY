@@ -4,8 +4,8 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html"%> 
+<%@page pageEncoding="UTF-8"%> 
  <%@page import="beans.PedidoBean"%>
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -74,12 +74,12 @@
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="description"><center>Nº de Pedido</center></td>
+							<td class="description"><center>NÂº de Pedido</center></td>
 							<td class="description"><center>Tipo de Pago</center></td>
 							<td class="description"><center>Fecha de Entrega</center></td>
-							<td class="description"><center>Dirección</center></td>
+							<td class="description"><center>DirecciÃ³n</center></td>
 							<td class="description"><center>Distrito</center></td>
-							<td class="description"><center><a>Opción</a></center></td>
+							<td class="description"><center><a>OpciÃ³n</a></center></td>
 						</tr>
 					</thead>
 				
@@ -94,7 +94,7 @@
 									<th><center><%=pedidos.get(i).getFechaEntrega()%></center></th>
 									<th><center><%=pedidos.get(i).getDireccion() %></center></th>
 									<th><center><%=pedidos.get(i).getDistrto() %></center></th>
-									<th><a onclick="activarModal('<%=pedidos.get(i).getId() %>','<%=pedidos.get(i).getNumPedido() %>','<%=pedidos.get(i).getEstado() %>','<%=pedidos.get(i).getFechaEntrega() %>','<%=pedidos.get(i).getTipoPago()%>','<%=pedidos.get(i).getDireccion()%>','<%=pedidos.get(i).getDistrto()%>','<%=pedidos.get(i).getTipoEntrega()%>','<%=pedidos.get(i).getProvincia()%>','<%=pedidos.get(i).getDepartamento()%>','<%=pedidos.get(i).getFechaCreacion()%>')"><center>Ver más</center></a></th>
+									<th><a onclick="activarModal('<%=pedidos.get(i).getId() %>','<%=pedidos.get(i).getNumPedido() %>','<%=pedidos.get(i).getEstado() %>','<%=pedidos.get(i).getFechaEntrega() %>','<%=pedidos.get(i).getTipoPago()%>','<%=pedidos.get(i).getDireccion()%>','<%=pedidos.get(i).getDistrto()%>','<%=pedidos.get(i).getTipoEntrega()%>','<%=pedidos.get(i).getProvincia()%>','<%=pedidos.get(i).getDepartamento()%>','<%=pedidos.get(i).getFechaCreacion()%>')"><center>Ver mÃ¡s</center></a></th>
 									</tr>
 							<% } %>
 					<%} %>
@@ -111,10 +111,10 @@
 		if(tipoPago=="Contra-Entrega" || tipoPago=="Tarjeta"){
 			if(estado!="Cancelado"){
 				var dNow = new Date();
-				var año = dNow.getFullYear();
+				var aÃ±o = dNow.getFullYear();
 				var mes = dNow.getMonth()+1;
 				var dia = dNow.getDate();
-				var fechaServidor= año+"-"+mes+"-"+dia;
+				var fechaServidor= aÃ±o+"-"+mes+"-"+dia;
 				console.log("fechaSc=> "+fecha+" fechaServidor=> "+fechaServidor );
 				var n = fecha.localeCompare(fechaServidor);
 				console.log("n=>"+n);
@@ -138,9 +138,9 @@
 			document.getElementById("divDistrito").innerHTML="";
 		}else{
 
-			document.getElementById("divUrbanizacion").innerHTML="<label>Urbanización: </label><input disabled  type=text name=urbanizacionModal id=urbanizacionModal style='border: none;background: white;' >";
+			document.getElementById("divUrbanizacion").innerHTML="<label>UrbanizaciÃ³n: </label><input disabled  type=text name=urbanizacionModal id=urbanizacionModal style='border: none;background: white;' >";
 			document.getElementById("divProvincia").innerHTML="<label>Provincia: </label><input disabled  type=text name=provinciaModal id=provinciaModal style='border: none;background: white;' >";
-			document.getElementById("divDireccion").innerHTML="<label>Dirección: </label><input  disabled type=text name=direccionModal id=direccionModal style='border: none;background: white;' >";
+			document.getElementById("divDireccion").innerHTML="<label>DirecciÃ³n: </label><input  disabled type=text name=direccionModal id=direccionModal style='border: none;background: white;' >";
 			document.getElementById("divDepartamento").innerHTML="	<label>Departamento: </label><input disabled  type=text name=departamentoModal id=departamentoModal style='border: none; width: 50%;background: white;' >";
 			document.getElementById("divDistrito").innerHTML="<label>Distrito: </label><input disabled  type=text name=distritoModal id=distritoModal style='border: none;background: white;' >";
 			
@@ -175,7 +175,7 @@
 	}
 	function cancelarPedido(idVenta) {
 		
-		 if (confirm("¿Esta seguro que desea cancelar el pedido?") == true) {
+		 if (confirm("Â¿Esta seguro que desea cancelar el pedido?") == true) {
 			 location.href="ServletPedido?accion=cancelarPedido&id="+idVenta;
 		 }
 		
@@ -189,7 +189,7 @@
 			<div class=modal-content style="width: 130%">
 				<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Pedido Nº<input disabled type="text" name="numPedidoModal" id="numPedidoModal" style="border: none;background: white;" ></h4>
+				<h4 class="modal-title">Pedido NÂº<input disabled type="text" name="numPedidoModal" id="numPedidoModal" style="border: none;background: white;" ></h4>
 			  	<input type="hidden" name="idVenta" id="idVenta">
 			    </div>
 				<div class=modal-body >
@@ -208,7 +208,7 @@
 							<label>Tipo de Pago: </label><input  disabled type="text" name="tipoPagoModal" id="tipoPagoModal" style="border: none; width: 50%;background: white;" >
 						</div>
 						<div class="col-sm-6" id="divUrbanizacion">
-							<label>Urbanización: </label><input disabled  type="text" name="urbanizacionModal" id="urbanizacionModal" style="border: none;background: white;" >
+							<label>UrbanizaciÃ³n: </label><input disabled  type="text" name="urbanizacionModal" id="urbanizacionModal" style="border: none;background: white;" >
 						</div>
 					</div>
 					
@@ -225,12 +225,12 @@
 						<label>Fecha de Entrega: </label><input disabled  type="text" name="fechaEntregaModal" id="fechaEntregaModal" style="border: none; width: 50%;background: white;" >
 						</div>
 					<div class="col-sm-6">
-							<label>Teléfono: </label><input  disabled type="text" name="telefonoModal" id="telefonoModal" style="border: none;background: white;" >					
+							<label>TelÃ©fono: </label><input  disabled type="text" name="telefonoModal" id="telefonoModal" style="border: none;background: white;" >					
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-6" id="divDireccion" style="padding-left: 40px">
-							<label>Dirección: </label><input  disabled type="text" name="direccionModal" id="direccionModal" style="border: none;background: white;" >
+							<label>DirecciÃ³n: </label><input  disabled type="text" name="direccionModal" id="direccionModal" style="border: none;background: white;" >
 						</div>
 						<div class="col-sm-6" id="divDepartamento">
 								<label>Departamento: </label><input disabled  type="text" name="departamentoModal" id="departamentoModal" style="border: none; width: 50%;background: white;" >
