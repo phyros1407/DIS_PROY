@@ -26,7 +26,8 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 			Statement stmt=con.createStatement();
 			Statement stmt1=con.createStatement();
-			String query="select *,cast(FEC_CREA_REGI as date)'fechaCre'  from transaccion where id_usuario='"+idUsuario+"' and est='"+estado+"'";
+			String query="select t.*,cast(t.FEC_CREA_REGI as date)'fechaCre',p.est_ent  from transaccion t, pedido p where t.id_usuario='"+idUsuario+"' "
+					+ "and t.id=p.ped_id  and p.est_ent='"+estado+"'";
 			System.out.println("QUERY DE transacciones LISTADO transacciones---->"+query);
 			ResultSet rs=stmt.executeQuery(query);
 			PedidoBean pedido=null;
@@ -41,16 +42,16 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				pedido.setFechaEntrega(rs.getString("fec_ent"));
 				
 				
-				if(rs.getString("est").equalsIgnoreCase("P")){
+				if(rs.getString("est_ent").equalsIgnoreCase("P")){
 					pedido.setEstado("Pendiente");
-				}else if(rs.getString("est").equalsIgnoreCase("E")){
+				}else if(rs.getString("est_ent").equalsIgnoreCase("E")){
 					pedido.setEstado("Entregado");
-				}else if(rs.getString("est").equalsIgnoreCase("C")){
+				}else if(rs.getString("est_ent").equalsIgnoreCase("C")){
 					pedido.setEstado("Cancelado");
 				}
 				
 				
-				String query1="select tip_ent, tipo_pag, dep_ent,pro_ent,dis_ent, dir_ent "
+				String query1="select tip_ent, tipo_pag, dep_ent,pro_ent,dis_ent, dir_ent, est_ent "
 						+ " from pedido"
 						+ " where ped_id='"+rs.getInt("id")+"' ";
 				System.out.println("QUERY DE transacciones LISTADO1 transacciones---->"+query1);
