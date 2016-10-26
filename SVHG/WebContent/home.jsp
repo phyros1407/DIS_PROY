@@ -134,7 +134,7 @@
 		<div class="container">
 			<div class="row">
 				<%@include file="../includeOut/sidebar.jsp" %>
-				<input type="button" onclick="limpiar()" value="Vaciar Carritoooo">
+				<button type="button" onclick="limpiar()" class="btn btn-primary" style="width: 150px;">Vaciar Carrito</button>
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Productos</h2>

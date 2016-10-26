@@ -35,7 +35,7 @@
 <style>
 
 	body {
-    background-image: url("imagesOut/cart/ajax-loader-page.gif"");
+    background-image: url("imagesOut/cart/ajax-loader-page.gif");
     background-repeat: no-repeat;
     background-position: right top;
 }
@@ -47,7 +47,7 @@
 <body >
 
 
-<form action="ServletGenerarPedido" method="post" id="formularioPaypal">
+<form action="ServletGenerarPedido" method="post" id="formularioPaypal" style="display:none;">
 
 	<%for(int i=0;i<importes.length;i++){%>
 	
