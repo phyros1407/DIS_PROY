@@ -1126,7 +1126,7 @@
      					
      				}else{
      					
-     					alert("no se aprobo");
+     					alert("¡ Su transaccion NO ha sido aprobada por su banco !");
      					
      				}
 

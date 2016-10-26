@@ -4,9 +4,9 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Contra_Entrega</h4>
+      <div class="modal-header" style="background-color: #FE9A2E;">
+        <button type="button" class="close" data-dismiss="modal" style="font-weight: bold; color:white;">&times;</button>
+        <h4 class="modal-title" style="font-weight: bold; color:white;">Contra Entrega</h4>
       </div>
       <div class="modal-body">
         <h3><b>Facturacion elegida</b></h3>

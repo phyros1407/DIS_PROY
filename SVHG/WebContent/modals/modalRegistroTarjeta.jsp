@@ -24,7 +24,6 @@
   
   	function tip_tar(tarjeta){
   		
-  		alert("Aca toy");
   		
   		if(tarjeta=="credito"){
   			$("#cuota_form").val("0");
@@ -53,9 +52,9 @@
     <div class="modal-dialog modal-md">
     
       <div class="modal-content" >
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Detalles de la Tarjeta</h4>
+        <div class="modal-header" style="background-color: #FE9A2E;">
+          <button type="button" class="close" data-dismiss="modal" style="font-weight: bold; color:white;">&times;</button>
+          <h4 class="modal-title" style="font-weight: bold; color:white;">Detalles de la Tarjeta</h4>
         </div>
         <div class="modal-body" style="height:150px;" id="mybody" >
             <form>

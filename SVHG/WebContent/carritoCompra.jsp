@@ -42,7 +42,7 @@
 	
 	</style>
 </head>
-<body >
+<body onload="cargarDep();">
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
 	
 	<section id="cart_items">
