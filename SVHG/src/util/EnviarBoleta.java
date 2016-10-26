@@ -458,7 +458,7 @@ public class EnviarBoleta extends Object {
 						"							  <img  style='border-radius: 4px;' class='responsive-imagen'  height='150px' src='https://imagizer.imageshack.us/v2/600x150q90/923/cxMyfj.jpg'>                              "+
 						"							  	<div class='bottomright'>                                                                                                                                                 "+
 						"							  		<h2 style='text-align:right;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;'>"+
-						"							  			<span>BOLETA DE VENTA                                                                                                                                             "+
+						"							  			<span>"+boleta.get(0).getTip_com()+" DE VENTA                                                                                                                                             "+
 						"							  				<span>&nbsp;</span><br>                                                                                                                                       "+
 						"							  				<span>&nbsp;</span>                                                                                                                                           "+
 						"							  				<span style='font-size:18px;'>"+boleta.get(0).getNum_com()+"</span>                                                                                                          "+

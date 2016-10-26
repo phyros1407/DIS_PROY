@@ -316,7 +316,7 @@
 	<jsp:include page="modals/modalGenerarPedido.jsp"></jsp:include>
 	<jsp:include page="modals/modalRegistroTarjeta.jsp"></jsp:include>
 	<jsp:include page="modals/modalContra_Entrega.jsp"></jsp:include>
-	
+	<jsp:include page="modals/modalAgregarProducto.jsp"></jsp:include>
 </body>
 
 <script src="js/jquery.js"></script>
