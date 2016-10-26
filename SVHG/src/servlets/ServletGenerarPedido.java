@@ -364,18 +364,18 @@ public class ServletGenerarPedido extends HttpServlet {
 						
 						
 						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Su pedido ha sido Procesado con exito! Su numero de pedido es  : "+ codigoNuevo + "');");
 						out.println("location='ServletGenerarPedido';");
 						out.println("localStorage.clear();");
 						out.println("$('#cantidadProductos').text(localStorage.length);");
-						out.println("alert('Su pedido ha sido Procesado con exito! Su numero de pedido es  : "+ codigoNuevo + "');");
 						out.println("</script>");
 
 					} else {
 
 						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Su pedido no ha sido Procesado con exito! ');");
 						out.println("location='ServletGenerarPedido';");
 						out.println("$('#cantidadProductos').text(localStorage.length);");
-						out.println("alert('Su pedido no ha sido Procesado con exito! ');");
 						out.println("</script>");
 
 					}
@@ -383,9 +383,9 @@ public class ServletGenerarPedido extends HttpServlet {
 				} else {
 
 					out.println("<script type=\"text/javascript\">");
+					out.println("alert('Su pedido no ha sido Procesado con exito! ');");
 					out.println("location='ServletGenerarPedido';");
 					out.println("$('#cantidadProductos').text(localStorage.length);");
-					out.println("alert('Su pedido no ha sido Procesado con exito! ');");
 					out.println("</script>");
 
 				}
@@ -393,9 +393,9 @@ public class ServletGenerarPedido extends HttpServlet {
 			} else {
 
 				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Su pedido no ha sido Procesado con exito! ');");
 				out.println("location='ServletGenerarPedido';");
 				out.println("$('#cantidadProductos').text(localStorage.length);");
-				out.println("alert('Su pedido no ha sido Procesado con exito! ');");
 				out.println("</script>");
 
 			}
