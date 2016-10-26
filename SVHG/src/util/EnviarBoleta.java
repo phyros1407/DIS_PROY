@@ -146,120 +146,246 @@ public class EnviarBoleta extends Object {
 		}
 				
 		String datosCliente = "";
-		
-		if(boleta.get(0).getIde()=="P"){
+		if(boleta.get(0).getFec_can()==null){
 			
-			if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
-		
-				 datosCliente = 
-						
-						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
-						"			    				<tr>                                                                                                                                                                      "+
-						"			    					<td>                                                                                                                                                                  "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
-						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
-						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
-						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
-						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
-						"						    				<br>                                                                                                                                                          "+
-						"						    			</fieldset>                                                                                                                                                       "+
-						"			    					</td>                                                                                                                                                                 "+
-						"			    				</tr>                                                                                                                                                                     "+
-						"			    			</table>                                                                                                                                                                      "+
-						"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
-						"			    				<tr>                                                                                                                                                                      "+
-						"			    					<td>                                                                                                                                                                  "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
-						"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
-						"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
-						"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
-						"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
-						"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
-						"						    				<br>                                                                                                                                                          "+
-						"						    			</fieldset>                                                                                                                                                       "+
-						"			    					</td>                                                                                                                                                                 "+
-						"			    				</tr>                                                                                                                                                                     "+
-						"			    			</table>                                                                                                                                                                      ";
+			if(boleta.get(0).getIde().equalsIgnoreCase("P")){
+				
+				if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
+			
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label> POR CANCELAR </label><br>                                                                         "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      "+
+							"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
+							"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
+							"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
+							"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
+							"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
+				}else{
+					
+
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label> POR CANCELAR </label><br>                                                                           "+
+							"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
+							"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      "+
+							"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
+							"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
+							"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
+							"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
+							"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
+					
+				}
+				
+				
+				
 			}else{
 				
+				if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
+					
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
+							                                                                                                                                                        
+				}else{
+					
 
-				 datosCliente = 
-						
-						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
-						"			    				<tr>                                                                                                                                                                      "+
-						"			    					<td>                                                                                                                                                                  "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
-						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
-						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
-						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
-						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
-						"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
-						"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
-						"						    				<br>                                                                                                                                                          "+
-						"						    			</fieldset>                                                                                                                                                       "+
-						"			    					</td>                                                                                                                                                                 "+
-						"			    				</tr>                                                                                                                                                                     "+
-						"			    			</table>                                                                                                                                                                      "+
-						"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
-						"			    				<tr>                                                                                                                                                                      "+
-						"			    					<td>                                                                                                                                                                  "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
-						"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
-						"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
-						"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
-						"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
-						"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
-						"						    				<br>                                                                                                                                                          "+
-						"						    			</fieldset>                                                                                                                                                       "+
-						"			    					</td>                                                                                                                                                                 "+
-						"			    				</tr>                                                                                                                                                                     "+
-						"			    			</table>                                                                                                                                                                      ";
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+							"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
+							"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
+
+					
+				}
+				
 				
 			}
 			
 			
-			
 		}else{
 			
-			if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
+			if(boleta.get(0).getIde().equalsIgnoreCase("P")){
 				
-				 datosCliente = 
-						
-						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
-						"			    				<tr>                                                                                                                                                                      "+
-						"			    					<td>                                                                                                                                                                  "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
-						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
-						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
-						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
-						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
-						"						    				<br>                                                                                                                                                          "+
-						"						    			</fieldset>                                                                                                                                                       "+
-						"			    					</td>                                                                                                                                                                 "+
-						"			    				</tr>                                                                                                                                                                     "+
-						"			    			</table>                                                                                                                                                                      ";
-						                                                                                                                                                        
+				if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
+			
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                         "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      "+
+							"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
+							"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
+							"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
+							"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
+							"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
+				}else{
+					
+
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+							"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
+							"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      "+
+							"			    			<table align='right' width='300px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2' style='text-align: left;padding-bottom: 15px;'>                      "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos de Envio</legend>                                                                                                                               "+
+							"						    				<label>DIRECCION : </label><label>"+boleta.get(0).getDir()+"</label><br>                                                                                      "+
+							"						    				<label>"+boleta.get(0).getDis()+" - "+boleta.get(0).getPro()+" - "+boleta.get(0).getDep()+"</label><br>                                                       "+
+							"						    				<label>TIPO DE ENTREGA : </label><label>"+boleta.get(0).getTip_ent()+"</label><br>                                                                            "+
+							"						    				<label>FECHA DE ENTREGA DE PEDIDO : </label><label>"+boleta.get(0).getFec_ent()+"</label>                                                                     "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
+					
+				}
+				
+				
+				
 			}else{
 				
+				if(boleta.get(0).getTip_com().equalsIgnoreCase("BOLETA")){
+					
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
+							                                                                                                                                                        
+				}else{
+					
 
-				 datosCliente = 
-						
-						"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
-						"			    				<tr>                                                                                                                                                                      "+
-						"			    					<td>                                                                                                                                                                  "+
-						"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
-						"						    				<legend>Datos Generales</legend>                                                                                                                              "+
-						"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
-						"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
-						"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
-						"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
-						"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
-						"						    				<br>                                                                                                                                                          "+
-						"						    			</fieldset>                                                                                                                                                       "+
-						"			    					</td>                                                                                                                                                                 "+
-						"			    				</tr>                                                                                                                                                                     "+
-						"			    			</table>                                                                                                                                                                      ";
+					 datosCliente = 
+							
+							"			    			<table align='left' style='text-align: left;padding-bottom: 15px;' width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table-2'>                       "+
+							"			    				<tr>                                                                                                                                                                      "+
+							"			    					<td>                                                                                                                                                                  "+
+							"			    						<fieldset style='border:3px solid;border-radius: 8px;'>                                                                                                           "+
+							"						    				<legend>Datos Generales</legend>                                                                                                                              "+
+							"						    				<label>CLIENTE : </label><label>"+boleta.get(0).getNom_cli()+"</label><br>                                                                                    "+
+							"						    				<label>FECHA DE EMISION : </label><label>"+boleta.get(0).getFec_emi()+"</label><br>                                                                           "+
+							"						    				<label>FECHA DE CANCELACION : </label><label>"+boleta.get(0).getFec_can()+"</label><br>                                                                           "+
+							"						    				<label>RUC : </label><label>"+boleta.get(0).getRuc_cli()+"</label><br>                                                                           "+
+							"						    				<label>RAZON SOCIAL : </label><label>"+boleta.get(0).getRaz_soc()+"</label><br>                                                                           "+
+							"						    				<br>                                                                                                                                                          "+
+							"						    			</fieldset>                                                                                                                                                       "+
+							"			    					</td>                                                                                                                                                                 "+
+							"			    				</tr>                                                                                                                                                                     "+
+							"			    			</table>                                                                                                                                                                      ";
 
+					
+				}
+				
 				
 			}
 			

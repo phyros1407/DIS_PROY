@@ -9,7 +9,7 @@
 			
 			var action = "deps";
 			
-			$.get('http://servicios.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+			$.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
 				
 				action:action
 				
@@ -47,7 +47,7 @@
 			
 			var action = "pros";
 			
-			$.get('http://servicios.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+			$.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
 				
 				
 				action : action,
@@ -74,7 +74,7 @@
 			
 			var action = "dist";
 			
-			$.get('http://servicios.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+			$.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
 				
 				
 				action : action,
@@ -169,6 +169,32 @@
 				$("#total").text("S/. "+(subtotal.toFixed(2)));
 				$("#totalV").val((subtotal.toFixed(2)));
 				$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
+				
+				
+				var subtotal = $("#subTotalV").val();
+				
+				if(parseFloat(subtotal)>200){
+					
+					$("#cargo_entrega").text("S/. 0.00");
+					$("#total").text("S/. "+(parseFloat(subtotal)).toFixed(2));
+					$("#totalV").val((parseFloat(subtotal)).toFixed(2));
+					
+
+					$("#amount1").val((parseFloat(subtotal).toFixed(2)));
+					$("#amount2").val((parseFloat(subtotal).toFixed(2)));
+					
+				}else{
+					
+					$("#cargo_entrega").text("S/. 20.00");
+					$("#total").text("S/. "+(parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					$("#totalV").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					
+
+					$("#amount1").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					$("#amount2").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					
+				}
+				
 			}
 			
 		}
@@ -210,6 +236,31 @@
 			$("#total").text("S/. "+(subtotal.toFixed(2)));
 			$("#totalV").val((subtotal.toFixed(2)));
 			$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
+			
+			var subtotal = $("#subTotalV").val();
+			
+			if(parseFloat(subtotal)>200){
+				
+				$("#cargo_entrega").text("S/. 0.00");
+				$("#total").text("S/. "+(parseFloat(subtotal)).toFixed(2));
+				$("#totalV").val((parseFloat(subtotal)).toFixed(2));
+				
+
+				$("#amount1").val((parseFloat(subtotal).toFixed(2)));
+				$("#amount2").val((parseFloat(subtotal).toFixed(2)));
+				
+			}else{
+				
+				$("#cargo_entrega").text("S/. 20.00");
+				$("#total").text("S/. "+(parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+				$("#totalV").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+				
+
+				$("#amount1").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+				$("#amount2").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+				
+			}
+			
 		}
 	
 		function disminuir(cantidad, desc,descImp,precio) {
@@ -259,7 +310,32 @@
 				
 				$("#total").text("S/. "+(subtotal.toFixed(2)));
 				$("#totalV").val(igv);
-				$("#igv").text("S/. "+(($("#totalV").val()/1.19)*0.19).toFixed(2));
+				$("#igv").text("S/. "+(($("#subTotalV").val()/1.19)*0.19).toFixed(2));
+				
+				
+				var subtotal = $("#subTotalV").val();
+				
+				if(parseFloat(subtotal)>200){
+					
+					$("#cargo_entrega").text("S/. 0.00");
+					$("#total").text("S/. "+(parseFloat(subtotal)).toFixed(2));
+					$("#totalV").val((parseFloat(subtotal)).toFixed(2));
+					
+
+					$("#amount1").val((parseFloat(subtotal).toFixed(2)));
+					$("#amount2").val((parseFloat(subtotal).toFixed(2)));
+					
+				}else{
+					
+					$("#cargo_entrega").text("S/. 20.00");
+					$("#total").text("S/. "+(parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					$("#totalV").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					
+
+					$("#amount1").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					$("#amount2").val((parseFloat(subtotal)+parseFloat(20.00)).toFixed(2));
+					
+				}
 				
 				
 			}
@@ -1025,7 +1101,7 @@
         		 alert("Llene todo los campos requeridos");
         		 
         	 }else{
-        		 $.get('http://servicios.j.facilcloud.com/SERVICIOS_PAGO_TARJETA/servicios',{
+        		 $.get('http://servicios2.j.facilcloud.com/SERVICIOS_PAGO_TARJETA/servicios',{
      				
      				action : action,
      				tip_tar : tipo_tarjeta,
@@ -1042,7 +1118,7 @@
      			
      				if(respuesta == "APROBADO"){
      					
-     					alert("¡ Su transaccion ha sido aprobada por su bando !");
+     					alert("¡ Su transaccion ha sido aprobada por su banco !");
      					
      					ejecutarForm("#generar_pedido_tarjeta");
      					

@@ -27,7 +27,7 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 							"	substring(tr.NUM,6) AS NUMERO_TRANSACCION,                     "+
 							"   tr.IDE AS IDENTIFICADOR,                                       "+
 							"	CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,"+
-							"	cp.TIPO AS TIPO_COMPROBANTE,									   "+
+							"	cp.TIPO AS TIPO_COMPROBANTE,								   "+
 							"   cp.RUC AS RUC,                                                 "+
 							"   cp.RAZ_SOC AS RAZON_SOCIAL,                                    "+
 							"   DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,           "+
@@ -61,7 +61,7 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 							"   LEFT JOIN ofertas of ON of.ID =df.OFE_ID                	   "+
 							"                                                            	   "+
 							"WHERE                                                       	   "+
-							"	tr.NUM = '"+numeroTransaccion+"';                            	   ";
+							"	tr.NUM = '"+numeroTransaccion+"';                            	";
 			
 			
 			System.out.println("QUERY EN EJECUCION PARA BOLETA ----> " + query);

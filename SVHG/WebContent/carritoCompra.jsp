@@ -1,9 +1,12 @@
-<!DOCTYPE html >
+<%@page contentType="text/html"%> 
+<%@page pageEncoding="UTF-8"%> 
+<!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Carrito</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta charset="ISO-8859-1" />
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
@@ -104,19 +107,19 @@
 	<section id="do_action">
 		<div class="container">
 			<!-- FORMULARIO 1-->
-			<div id="formuCasa" style="display: none;">|
+			<div id="formuCasa" style="display: none;">
 				<div class="col-sm-12 col-xs-12">
-					<h3>Direccion de Envio:</h3>
+					<h3>Dirección de Envio:</h3>
 					<br>
 					<form class="form-horizontal"  id="form1">
 						<div class="form-group">
 							<div class="col-xs-2 col-sm-2">
-								<label id="titulitos">Tipo de Direccion</label>
+								<label id="titulitos">Tipo de Dirección</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" id="tipo_direccion">
 									<option>Avenida</option>
-									<option>Jiron</option>
+									<option>Jirón</option>
 									<option>Calle</option>
 								</select>
 							</div>
@@ -131,7 +134,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-xs-2 col-sm-2">
-								<label id="titulitos">Direccion </label>
+								<label id="titulitos">Dirección </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<input type="text"  id="direccion" maxlength="95" class="form-control" onkeypress=" return validarn(event)">
@@ -165,14 +168,14 @@
 						</div>
 						<div class="form-group">
 							<div class="col-xs-2 col-sm-2">
-								<label id="titulitos">Telefono Celular</label>
+								<label id="titulitos">Teléfono Celular</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<input type="text" id="telefono1" maxlength="9" class="form-control"  onkeyup="validarTelefono(this.value,deserror1.value);" onkeypress="return solonumeros(event);">
 								<b id="error1" style="color:red;"></b><input type="hidden" id="deserror1" value="error1">
 							</div>
 							<div class="col-xs-2 col-sm-2">
-								<label id="titulitos"  >Otro Telefono </label>
+								<label id="titulitos"  >Otro Teléfono </label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<input class="form-control" maxlength="9" id="telefono2"  onkeyup="validarTelefono(this.value,deserror2.value);" onkeypress="return solonumeros(event);">
