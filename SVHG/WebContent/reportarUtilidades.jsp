@@ -220,7 +220,7 @@
 				<br>
 			<div class="row">
 				<div class="col-sm-3">
-					<button  type="submit" id="botonSubmit"  class="btn btn-warning" >Ver ReporteG</button>
+					<button  type="submit" id="botonSubmit"  class="btn btn-warning" >Ver Reporte</button>
 					
 				</div>
 			</div>
