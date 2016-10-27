@@ -147,7 +147,7 @@ stock{
 <br>
 <div class="form-group"  >						
 <label class="control-label col-md-3">Del :	</label>
-<div class="col-md-5"><input id="dateD" name="dateD" type="date" class="form-control" onchange="hasta()" required></div>
+<div class="col-md-5"><input id="dateD" name="dateD" type="date" class="form-control" onchange="hasta()" max="2016-12-31" required></div>
 <br>
 <br>
 </div>
@@ -308,7 +308,13 @@ function descuento(){
 function hasta(){
 	var desde=$('#dateD').val();
 	console.log(desde);
+	var anio = parseInt(desde.substring(0, 4));
+	anio=anio+1;
+	console.log(anio);
+	var max=anio+desde.substring(4,10);
 	document.getElementById("dateH").min=desde;
+	document.getElementById("dateH").max=max;
+	
 	$('#dateH').val(desde);
 }
 
