@@ -134,7 +134,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				
 				Statement stmt=con.createStatement();
 				//pe.EST_ENT ,pe.TIP_ENT , pe.FEC_CREA_REGI,p.DNI,p.NOM,p.DIR,pr.ID,pr.NOM ,pr.PESO,dt.CAN,pr.PRE,dt.IMP
-				String query="Select * from persona p INNER JOIN usuario u ON p.id=u.id INNER JOIN contacto con ON con.per_id=p.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO INNER JOIN comprobante_pago comp ON t.id=comp.id INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID INNER JOIN producto pr ON dt.PRO_ID=pr.ID and  pe.PED_ID="+idPedido+" ";
+				String query="Select * from persona p INNER JOIN usuario u ON p.id=u.id INNER JOIN contacto con ON con.per_id=p.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO INNER JOIN comprobante_pago comp ON t.id=comp.ven_id INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID INNER JOIN producto pr ON dt.PRO_ID=pr.ID and  pe.PED_ID="+idPedido+" ";
 				System.out.println("QUERY DE VENTAS LISTADO ---->"+query);
 				ResultSet rs=stmt.executeQuery(query);
 				PedidoBean pedido=null;
@@ -146,10 +146,11 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 					comprobante.setTipo(rs.getString("comp.TIPO"));
 					comprobante.setIgv(rs.getDouble("comp.IGV"));
 					comprobante.setRuc(rs.getString("comp.RUC"));
+				
 					pedido=new PedidoBean();
 					
 					
-					
+					pedido.setTrans(rs.getString("t.NUM"));
 					pedido.setEstado(rs.getString("pe.EST_ENT"));
 					pedido.setTipoPedido(rs.getString("pe.TIPO_PAG"));
 					pedido.setFechaCreacion(rs.getString("pe.FEC_CREA_REGI"));
@@ -164,6 +165,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 					pedido.setImpProd(rs.getDouble("dt.IMP")); 
 					pedido.setCorreo(rs.getString("con.COR"));
 					pedido.setComprobanteBean(comprobante);
+					pedido.setId(rs.getInt("con.id"));
 
 					
 					
@@ -193,7 +195,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 		return ped;
 	}
 	@Override
-	public boolean actualizarEstadoPedido(String idTransaccion) throws Exception {
+	public boolean actualizarEstadoPedido(String idpedido) throws Exception {
 		// TODO Auto-generated method stub
 				boolean flag=false;
 				try {
@@ -201,11 +203,22 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 					
 					Statement stmt=con.createStatement();
 					
-					String query="UPDATE pedido set EST_ENT='E' where PED_ID='"+idTransaccion+"'";
+					String query="UPDATE pedido set EST_ENT='E' where PED_ID='"+idpedido+"'";
 					
 					int filas=stmt.executeUpdate(query);
 					if(filas==1){
-						flag=true;
+						System.out.println("actualizo estado pedido");
+						String query2="UPDATE transaccion set EST='C' where ID='"+idpedido+"'";
+						int filas2=stmt.executeUpdate(query2);
+						if(filas2==1){
+							System.out.println("actualizo estado transaccion");
+							String query3="UPDATE comprobante_pago set FEC_CAN=CURDATE() where VEN_ID='"+idpedido+"'";
+							int filas3=stmt.executeUpdate(query3);
+								if(filas3==1){
+									System.out.println("actualizo fecha comprobante");
+									flag=true;
+								}
+						  }
 					}
 					
 					con.close();

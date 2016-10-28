@@ -28,6 +28,7 @@ public class PedidoBean {
 	private int cuota;
 	private double cargo_entrega;
 	private String correo;
+	private String trans;
 	
 	//AUDITORIA 
 	private String usu_crea_regi;
@@ -248,6 +249,12 @@ public class PedidoBean {
 	}
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+	public String getTrans() {
+		return trans;
+	}
+	public void setTrans(String trans) {
+		this.trans = trans;
 	}
 	
 	

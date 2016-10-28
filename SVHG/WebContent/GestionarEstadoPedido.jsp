@@ -147,69 +147,9 @@
 					</table>
 
 				</div>
-				<!-- FACTURA ELECTRONICA -->
 				
-				<center>
-				<div  id="datos2"    style="background-color:white;position: absolute;opacity:0;">
-					<div class="row">
-						<div class="col-md-3">
-							<img src="<%=request.getContextPath()%>/images/logo.jpg"></img>
-						</div>
-						<div class="col-sm-5">
-							<h4>CENTRO INTEGRAL FITNESS  S.A.C</h4>
-							<h5>Call.Cerros de Camacho N°290 DPTO 1002</h5>
-							<h5>Santiago de Surco</h5>
-						</div>
-						<div class="col-sm-4">
-							<div style="border-style: solid;border-color: red;">
-								<h4  style="color:red;">FACTURA ELECTRÓNICA</h4>
-								<h5>56472884738</h5>
-								<h5 id="factura"></h5>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6" style="padding-left:160px;text-align:left;" >
-							<p><b>Empresa:</b> <p id="razonSocial"></p> </p>
-							<p><b>Cliente :</b> <label id="nombrePersona2"></label></p>
-							<p><b>Direccion :</b> <label id="direccion2"></label></p>
-							<p><b>Departamento :</b> <label>LIMA</label></p>
-							<p><b>Fecha de Emision </b>: <label>26/06/2016</label></p>
-							<p><b>Tipo de Envio:</b> <label>DOMICILIO</label></p>
-						</div>
-						
-						<div class="col-md-6" style="padding-right:130px;text-align:left;">
-							<p><b>RUC  :</b> <label id="ruc"></label></p><br><br>
-							<p><b>DISTRITO :</b> <label>BREÑA</label></p>
-						</div>
-					</div>
-					<div class="row">
-						<table id="prodss" class="table table-hover">
-						<thead>
-							<tr>
-								<th>Nº de Producto</th>
-								<th>Producto</th>
-								<th>Precio Und.</th>
-								<th>Descuento</th>
-								<th>Cantidad</th>
-								<th>Precio Total</th>
-							</tr>
-						</thead>
-						<tbody id="detalleProd2">
-									
-									
-						</tbody>
-					</table>
-					</div>
-				
-				</div>
-				</center>
-				<!-- FIN -->
-				<br>
-				<br>
-				<hr>
 				<div class="clearfix"></div>
-				
+				<input id="transaccion"  class="hide" readonly="readonly">
 			</div>
 			
 			
@@ -219,7 +159,6 @@
 			<!-- END QUICK SIDEBAR -->
 		</div>
 		
-		<button onclick="prueba()">asdasdasd</button>
 	</div>
 	<!-- END CONTAINER -->
 	<%@ include file="include/footer.jsp"%>
@@ -251,12 +190,16 @@ function buscarPedido(){
 				$('#mensaje').html(' El Nº de Orden de pedido no existe. ');
 			}else if(response['object'][0]['estado']=='E'){
 				$('#mensaje').html(' El N° de Orden de pedido ya ha sido actualizada ');
+			}else if(response['object'][0]['estado']=='C'){
+				$('#mensaje').html(' El N° de Orden de pedido ha sido cancelado, busque otro por favor.');
 			}else{
 				var impTotal=0;			
 				
 				var cadena = "";
 				var cadena2="";
 				var cadena3="";
+				var usuario=response['object'][0]['id'];
+				var transaccion=response['object'][0]['trans'];
 				var dni=response['object'][0]['dni'];
 				var estado=response['object'][0]['estado'];
 				var tipoPedido=response['object'][0]['tipoPedido'];
@@ -271,9 +214,9 @@ function buscarPedido(){
 				var tipoComprobante=response['object'][0]['comprobanteBean']['tipo'];
 				var razonSocial=response['object'][0]['comprobanteBean']['raz_soc'];
 								
+				$('#transaccion').val(transaccion);
 				// .text para el pdf
 				$('#formBusqueda').addClass('hide');
-				
 				//PARA LA FACTURA
 				$('#igv').text(igv);	
 				$('#factura').text(factura);
@@ -287,9 +230,7 @@ function buscarPedido(){
 				$('#dni').val(dni);
 				if(estado=='P'){
 					$('#estado').val('PENDIENTE');
-					}else if(estado=='C'){
-					$('#estado').val('CANCELADO');
-				}
+					}
 				
 				$('#fechaCreacion').val(fechaCreacion);
 				$('#direccion').val(direccion);
@@ -311,7 +252,7 @@ function buscarPedido(){
 					cadena = cadena+("<tr><td>"+response['object'][i]['ProductoId']+"</td><td>"+response['object'][i]['productoNombre']+"</td><td>"+response['object'][i]['pesoUnidad']+" Kg</td><td>"+response['object'][i]['cantidad']+"</td><td>"+response['object'][i]['precioUnidad']+"</td><td>S/"+response['object'][i]['impProd']+".00</td></tr>");
 				}
 				cadena2="<tr><td colspan='4'></td><td class='danger'>TOTAL A PAGAR </td><td class='warning'>S/"+impTotal+".00</td></tr>";
-				cadena3="<tr><td colspan='4'><label id='mensaje2' style='color:red'></label><td><input type='button' id='actualizar' class='btn btn-success' onclick='actualizarPedido("+id+")' value='Actualizar'></td><td><input type='button' class='btn btn-danger' onClick='location.reload()' value='Regresar'></td></tr>";
+				cadena3="<tr><td colspan='4'><label id='mensaje2' style='color:red'></label><td><input type='button' id='actualizar' class='btn btn-success' onclick='actualizarPedido("+id+","+usuario+")' value='Actualizar'></td><td><input type='button' class='btn btn-danger' onClick='location.reload()' value='Regresar'></td></tr>";
 				$('#datos').fadeIn().removeClass('hide');
 				$('#detalleProd').html(cadena+cadena2+cadena3);
 				$('#detalleProd2').html(cadena);
@@ -350,15 +291,16 @@ function prueba(){
 			    });
 	}
  
-function actualizarPedido(id){
+function actualizarPedido(id,usuario){
 	
 	var accion = "actualizarPedido";
-	
-	$.post('recibe',{
+	var transaccion=document.getElementById("transaccion").value;
+	$.post('ServletPedido',{
 
 		accion:accion,
-		id:id
-		
+		id:id,
+		usuario:usuario,
+		transaccion:transaccion
 	},function(response){
 		
 			$("#actualizar").addClass("disabled");

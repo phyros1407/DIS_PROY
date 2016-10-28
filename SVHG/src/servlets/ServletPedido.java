@@ -12,14 +12,17 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import beans.BoletaBean;
 import beans.PedidoBean;
 import beans.UsuarioBean;
+import dao.interfaces.ComprobanteDao;
 import dao.interfaces.PedidoDao;
 import dao.interfaces.ProductoDao;
 import dao.interfaces.UsuarioDao;
 import dao.mysql.MySql_PedidoDao;
 import dao.mysql.MySql_UsuarioDao;
 import daofactory.DAOFactory;
+import util.EnviarBoleta;
 import util.ResponseObject;
 
 /**
@@ -145,9 +148,25 @@ public class ServletPedido extends HttpServlet {
 									System.out.println("fallo listar pedidos: "+e.getMessage());
 								}
 							}else if(accion.equals("actualizarPedido")){
+								
 								String id=request.getParameter("id");
+								int id_usuario=Integer.parseInt(request.getParameter("usuario"));
+								String codigoNuevo=request.getParameter("transaccion");
+								
+								System.out.println("me llegas  "+codigoNuevo+"<-  usuario id :  "+id_usuario);
+								
 								try {
 									boolean flag=pedidoDao.actualizarEstadoPedido(id);
+									
+									ComprobanteDao comdao = dao.getComprobanteDao();
+									ArrayList<BoletaBean> boleta = comdao.buscarComprobanteGenerado(codigoNuevo) ;
+									
+									String correo = comdao.obtenerCorreo(id_usuario);
+									EnviarBoleta email = new EnviarBoleta();
+									
+									String mensaje = email.armarEmail(boleta);
+									email.sendEmail(mensaje,correo);
+									
 									
 									
 										 ResponseObject responseobj=null;
