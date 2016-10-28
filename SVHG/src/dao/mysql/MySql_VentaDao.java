@@ -202,6 +202,8 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 			
 			String query="SELECT  tr.NUM AS NUMERO_TRANSACCION,                            	"
 					+ "CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,      "
+					+ "	cp.TIPO AS TIPO_COMPROBANTE,								   "
+					+ "   tr.IDE AS IDENTIFICADOR,                                       "
 					+ "DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,       "
 					+ "DATE_FORMAT(cp.FEC_CAN,'%d-%m-%Y') AS FECHA_CANCELACION,"
 					+ "DATE_FORMAT(tr.FEC_ENT,'%d-%m-%Y') AS FECHA_ENTREGA,"
@@ -209,7 +211,6 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 					+ "pr.NOM AS NOMBRE_PRODUCTO,                                   "
 					+ "pr.PRE AS PRECIO,                                        	"
 					+ "dt.CAN AS CANTIDAD, "
-					+ "concat(p.DIR_ENT,'LOCAL') AS DIRECCION,                                     	"
 					+ "ROUND((dt.IMP/1.19),2) AS IMPORTE,                         "
 					+ "of.DSC AS DESCUENTO                                    "
 					+ "FROM                                                   "
@@ -234,11 +235,13 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 			while(rs.next()){
 				detalleB = new BoletaBean();
 				detalleB.setNum_com(rs.getString("NUMERO_TRANSACCION"));
+				detalleB.setIde(rs.getString("IDENTIFICADOR"));
 				detalleB.setNom_cli(rs.getString("NOMBRE_CLIENTE"));
+				detalleB.setTip_com(rs.getString("TIPO_COMPROBANTE"));
 				detalleB.setFec_emi(rs.getString("FECHA_EMISION"));
-				
+				detalleB.setFec_can(rs.getString("FECHA_CANCELACION"));
 				detalleB.setFec_ent(rs.getString("FECHA_ENTREGA"));
-				detalleB.setDir(rs.getString("DIRECCION"));
+				//detalleB.setDir(rs.getString("DIRECCION"));
 				detalleB.setCod_pro(rs.getString("CODIGO_PRODUCTO"));
 				detalleB.setNom_pro(rs.getString("NOMBRE_PRODUCTO"));
 				detalleB.setPre(rs.getDouble("PRECIO"));

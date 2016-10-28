@@ -114,6 +114,7 @@ if (codigoAntiguo!=null) {
 				PersonaDao ipersonadao = dao.getPersonaDAO();
 				
 				persona.setDni(request.getParameter("txt_dni"));
+				System.out.println("asdasdasddniiiiii "+request.getParameter("txt_dni"));
 				persona.setNombre( request.getParameter("txt_nombre") );
 				persona.setApellidoPaterno(request.getParameter("txt_apepat"));
 				persona.setApellidoMaterno(request.getParameter("txt_apemat"));
@@ -329,8 +330,9 @@ if (codigoAntiguo!=null) {
 		    if (pedidodao.guardarComprobante(comprobante) ) {
 		    	
 		    	ComprobanteDao comdao = dao.getComprobanteDao();
-				ArrayList<BoletaBean> boleta = ventadao.buscarComprobanteGenerado(numeroTransaccion) ;
+				//ArrayList<BoletaBean> boleta = ventadao.buscarComprobanteGenerado(numeroTransaccion) ;
 				System.out.println("entro a boleta");
+				ArrayList<BoletaBean> boleta = ventadao.buscarComprobanteGenerado(numeroTransaccion);
 				String correo = comdao.obtenerCorreo(idusuario);
 				System.out.println("correo boleta: "+correo);
 				EnviarBoleta email = new EnviarBoleta();
@@ -339,7 +341,7 @@ if (codigoAntiguo!=null) {
 				email.sendEmail(mensaje,correo);
 		   
 		    	out.println("<script type=\"text/javascript\">");
-				out.println("alert('La venta se guardó satisfactoriamente. Venta Nro:'+'"+numeroTransaccion+"');");
+				out.println("alert('Venta registrada Satisfactoriamente.  Código venta:'+'"+numeroTransaccion+"');");
 				out.println("location='RegistrarVenta/RegistrarVentaHerramientas.jsp'");
 				out.println("</script>");
 			System.out.println("guardooo");

@@ -9,8 +9,8 @@ var txt_Cantidad2 = $('#txtCantidad').val();
 var txt_importe = (txt_Precio2)*txt_Cantidad2;//agregado igv (18%)
 var txt_descripcion=$('#txtDescripcion').val(); 
 var txt_codproducto=$('#txtCodProducto').val();
-var txt_igv=txt_importe/1.18;
-alert(txt_igv)
+var txt_igv=txt_importe/1.19;
+//alert(txt_igv)
 var id=$('#txtidPro').val();
 
 /**/
@@ -64,7 +64,7 @@ $('#categoria').val("");
 
 });
 
-var txt_IGV =importetotal/1.18 ;
+var txt_IGV =importetotal/1.19 ;
 //var txt_Total = txt_IGV + importetotal;
 $('#txtIGV').val(txt_IGV.toFixed(2));
 $('#txtSubtotal').val(importetotal.toFixed(2));	

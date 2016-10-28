@@ -24,7 +24,7 @@
                                                    
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="radio" id="rdnpersona"  name="rdn" onclick="aparecer3();" value="1" data-required="1" class="form-control"  /> </div>
+                                                    <input type="radio" id="rdnpersona"  name="rdn" onclick="aparecer32();" class="form-control"  /> </div>
                                             	
                                      </div>
                                      <div class="col-md-6">
@@ -91,12 +91,16 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="txtTelefono2" id="txtTelefono2" data-required="1" class="form-control" maxlength="9" onkeypress="return solonumeros(event)" /> </div>
+                                                    <input type="text" name="txtTelefono2" id="txtTelefono2" data-required="1" class="form-control" maxlength="9" onchange="longitudCampoTelefono2();" onkeypress="return solonumeros(event)" /> </div>
                                             </div>
                                               
                             
     									</div>
-    										<div class="col-md-12 portlet light portlet-fit bordered" id="empresa2" Style="visibility: hidden;">
+    									
+    										 
+    										 
+    										 
+    										 <div class="col-md-12 portlet light portlet-fit bordered" id="empresa2" Style="visibility: hidden;">
     										<br>
     										 <div class="col-md-6">
     										  <div class="form-group">
@@ -118,6 +122,8 @@
                                             </div>
     										 </div>
     										 </div>
+    										 
+    										 
     									 </div>
                                          <div class="modal-footer">
       			  						
@@ -295,7 +301,19 @@ $.post('<%=request.getContextPath() %>/ServletCliente', {
 
 }
 
+function longitudCampoTelefono2(){
+	var x=document.getElementById("txtTelefono2").value;
+	var y=x.length;
 
+
+	
+
+	if(y!=7 && y!=9){
+		document.getElementById("txtTelefono2").value = "";
+		alert("Numero de telefono incorrecto intente de nuevo");
+	
+	}
+}	
 
 
 function buscardni(){

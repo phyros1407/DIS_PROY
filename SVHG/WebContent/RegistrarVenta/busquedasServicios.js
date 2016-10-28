@@ -75,9 +75,10 @@
 		  
 		  }
 		  
-		  function aparecer3(){
+		  function aparecer32(){
 			  xx="persona";
 			   if(document.getElementById("rdnpersona").checked==true){
+				   console.log(document.getElementById("rdnempresa").checked)
 				   document.getElementById('empresa2').style.visibility="hidden";
 				   document.getElementById("rdnempresa").checked = false;
 				
@@ -88,6 +89,7 @@
 			  }
 		     
 		  /*---------------fin div empresa---------------*/
+		  
 		  
 		  
 		  
@@ -115,7 +117,7 @@
 		  /*------------------------------------------------------------------*/
 		 
 		  function registrarCliente(){
-			  var txt_dni = $('#txtDni2').val();
+			  var txt_dni = $('#txtDni5').val();
 			  var txt_nombre = $('#txtNombres2').val();
 			  var txt_apepat = $('#txtApePat2').val();
 			  var txt_apemat = $('#txtApeMat2').val();
@@ -160,12 +162,13 @@
 			  }else if(y=='1'){
 				  if(longNum=='9'){
 					    alert("Numero de celular incorrecto. Debe iniciar con 9");
+					   
 				  }
 				  if(longNum=='7'){
 					  alert("Numero fijo incorrecto")
 				  }
 					  alert("Ingrese numero de celular o fijo.");
-				  
+					  $('#txtTelefono2').val("");
 				  
 			  }else if(optradio==''){
 				  alert("Debe llenar los campos obligatorios.");
@@ -197,7 +200,7 @@
 									alert("Cliente Registrado. Su usuario es: "+usuario)
 									//document.location.href="home.jsp";
 									$('#modalClienteRegistrar').modal('hide');
-									 $('#txtDni2').val("");
+									 $('#txtDni5').val("");
 									 $('#txtNombres2').val("");
 									 $('#txtApePat2').val("");
 									 $('#txtApeMat2').val("");
@@ -207,7 +210,7 @@
 									 $('#txtrazon2').val("");
 								}else{
 
-									alert("	 existe");
+									alert("Error en Registrar Cliente");
 									
 								}	
 				  });

@@ -389,7 +389,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 		try {
 			Connection con = MySqlDAOFactory.obtenerConexion();
 			Statement stmt = con.createStatement();
-			String query="select prod.id,prod.codpro,prod.nom,prod.des,prod.pre*(1.18) as pre,prod.cat_id,prod.can,ca.tipo "
+			String query="select prod.id,prod.codpro,prod.nom,prod.des,prod.pre*(1.19) as pre,prod.cat_id,prod.can,ca.tipo "
 					+ "from producto prod inner join  categoria ca on prod.cat_id=ca.id where ";
 			
 			if(flag==1){
@@ -431,7 +431,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 		try {
 			Connection con = MySqlDAOFactory.obtenerConexion();
 			Statement stmt = con.createStatement();
-			String query = "select prod.id,prod.codpro,prod.nom,prod.des,prod.pre*(1.18) as pre,prod.cat_id,prod.can,ca.tipo "
+			String query = "select prod.id,prod.codpro,prod.nom,prod.des,prod.pre*(1.19) as pre,prod.cat_id,prod.can,ca.tipo "
 					+ "from producto prod inner join  categoria ca on prod.cat_id=ca.id where prod.id="+id+"";
 			
 			
