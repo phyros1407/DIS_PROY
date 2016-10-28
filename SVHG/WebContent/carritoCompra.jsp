@@ -230,14 +230,17 @@
 					</div>
 					<div class="col-xs-12 col-sm-12" style="margin-top:15px;">
 						<div class="col-xs-5 col-sm-5">
-							<input  style="display:none;" type="text"class="form-control" placeholder="RUC" name="ruc_fac" onkeypress="return solonumeros(event);"   onkeyup="buscarRuc3();" id="ruc_fac" maxlength="11">
+							<label id="ruc_fac_lab" style="display:none;"> R.U.C.</label>
+							<input id="ruc_fac" style="display:none;" type="text"class="form-control" placeholder="RUC" name="ruc_fac" onkeypress="return solonumeros(event);"   onkeyup="buscarRuc3();"  maxlength="11">
 						</div>
 						<div class="col-xs-6 col-sm-6">
-							<input disabled style="display:none;" type="text"class="form-control" name="rs_fac"  id="rs_fac" placeholder="Razon Social">
+							<label id="rs_fac_lab" style="display:none;"> RAZÓN SOCIAL</label>
+							<input id="rs_fac" disabled style="display:none;" type="text"class="form-control" name="rs_fac"   placeholder="Razon Social">
 						</div>
 						<div class="col-xs-1 col-sm-1" id="precarga" >
 							<!-- <a  href="#"  style="display:none;" id="icono"></a> -->
 						</div>
+						<br>
 					</div>
 					<div class="col-xs-12 col-sm-12" style="margin-top:15px;">
 						<div id="para_casa" style="display:none;">

@@ -677,9 +677,12 @@
 			
 			if(comprobante=="factura"){
 				
-
+				
 				$("#ruc_fac").slideDown();
 				$("#rs_fac").slideDown();
+				$("#ruc_fac_lab").show(500);
+				$("#rs_fac_lab").show(500);
+				
 				
 				var id = $("#diu").val();
 				var accion = "buscar";
@@ -722,8 +725,12 @@
 					
 					$("#ruc_fac").slideUp();
 					$("#rs_fac").slideUp();
+					$("#ruc_fac_lab").hide(500);
+					$("#rs_fac_lab").hide(500);
+					
 					$("#confirmacion").hide();
 					$("#image_carga").slideUp();
+					
 					
 			}
 			

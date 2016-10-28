@@ -124,9 +124,11 @@ public class MySql_ComprobanteDao extends MySqlDAOFactory implements Comprobante
 							"FROM                                       "+
 							"	contacto c                              "+
 							"	INNER JOIN persona p ON p.ID = c.PER_ID "+
-							"    INNER JOIN usuario u ON p.ID = u.PER_ID"+
+							"    INNER JOIN usuario u ON p.ID = u.PER_ID "+
 							"WHERE                                      "+
 							"	u.ID="+id+";                             ";
+			
+			System.out.println("QUERY QUE SE EJECUTEE ----> "+query);
 			
 			ResultSet rs = stmt.executeQuery(query);
 			
