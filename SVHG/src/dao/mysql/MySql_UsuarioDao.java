@@ -279,6 +279,7 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			String insertIntento="";
 			String validacion="";
 			if(rs.next()){
+				System.out.println("exite usuario en bd");
 				idUsu=rs.getInt("idUsu");
 				intento=rs.getInt("INTENTO");
 				
@@ -323,6 +324,8 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 				}
 				stmt.executeUpdate(insertIntento);
 				
+			}else{
+				System.out.println("no se encontro usuario en la bd");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
