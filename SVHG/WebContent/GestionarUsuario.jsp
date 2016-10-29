@@ -50,7 +50,7 @@
 					<ul class="page-breadcrumb">
 						<li><a href="inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
 						</li>
-						<li><span>ADMINISTRADOR</span></li>
+						<li><span> </span></li>
 					</ul>
 					<div class="page-toolbar">
 						<div id="dashboard-report-range"
