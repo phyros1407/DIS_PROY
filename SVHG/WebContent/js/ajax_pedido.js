@@ -1179,7 +1179,7 @@
 			
 			 $('#precarga').html('<img id="image_carga" src=" imagesOut/cart/ajax-loader.gif"/>');
 
-			  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Empresa', {
+			  $.get('http://servicios.jelasticlw.com.br/service/Gestionar_Empresa', {
 				  
 						accion : accion,
 						ruc:ruc
