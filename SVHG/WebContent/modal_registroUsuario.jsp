@@ -204,7 +204,7 @@
 	function buscarReniec(){
 		  var dni = $('#txtDNI').val();
 		 var accion='buscarDni';
-		  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Persona', {
+		  $.get('http://servicios.jelasticlw.com.br/service/Gestionar_Persona', {
 			  
 					accion : accion,
 					dni:dni
@@ -235,7 +235,7 @@
 			  var ruc = $('#txtRUC').val();
 			 // console.log("asdasd"+dni);
 			 var accion='buscarRuc';
-			  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Empresa', {
+			  $.get('http://servicios.jelasticlw.com.br/service/Gestionar_Empresa', {
 				  
 						accion : accion,
 						ruc:ruc
