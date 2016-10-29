@@ -19,6 +19,11 @@
 		width		: 100%;
 		height		: 500px;
 		font-size	: 11px;
+	}	
+		#chartdiv2 {
+		width		: 100%;
+		height		: 500px;
+		font-size	: 11px;
 	}					
 	</style>
 	<%	ArrayList<DetalleTransaccionBean> detalleTransaccion = (ArrayList<DetalleTransaccionBean>)request.getAttribute("listaDetalle");%>
@@ -26,13 +31,16 @@
 <!--------------------------------body------------------------ -->
 <body>
 	<div class="row">
-		<center><h1>Reporte de Ventas</h1></center>
+		<center><h1>Reporte de Productos</h1></center>
 	</div>
 	<div class="row">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
 		<%if(request.getAttribute("tipoGrafico").equals("grafico1")) {%>
-			<div id="chartdiv"></div>
+			<div id="chartdiv1"></div>
+		<%}%>
+		<%if(request.getAttribute("tipoGrafico").equals("grafico2")) {%>
+			<div id="chartdiv2"></div>
 		<%}%>
 			
 		</div>
@@ -103,7 +111,7 @@ for(int i=0;i<detalleTransaccion.size();i++){
 }%>
 
 <script>
-var chart = AmCharts.makeChart( "chartdiv", {
+var chart = AmCharts.makeChart( "chartdiv1", {
   "type": "serial",
   "theme": "light",
   "dataProvider": [ {
@@ -174,12 +182,115 @@ var chart = AmCharts.makeChart( "chartdiv", {
   }
 
 } );
+//reporte lineal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+var chart = AmCharts.makeChart("chartdiv2", {
+    "type": "serial",
+    "theme": "light",
+    "marginRight": 80,
+    "dataProvider": [{  
+        "lineColor": "#2498d2", 
+        "date": "<%=request.getAttribute("anio")%>-01",
+        "duration": <%=enero%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-02",
+        "duration": <%=febrero%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-03",
+        "duration": <%=marzo%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-04",
+        "duration": <%=abril%>
+    }, {
+    	"lineColor": "#2498d2",
+        "date": "<%=request.getAttribute("anio")%>-05",
+        "duration": <%=mayo%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-06",
+        "duration": <%=junio%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-07",
+        "duration": <%=julio%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-08",
+        "duration": <%=agosto%>,
+        "lineColor": "#2498d2"
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-09",
+        "duration": <%=setiembre%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-10",
+        "duration": <%=octubre%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-11",
+        "duration": <%=noviembre%>
+    }, {
+        "date": "<%=request.getAttribute("anio")%>-12",
+        "duration": <%=diciembre%>
+    }],
+    "balloon": {
+        "cornerRadius": 6,
+        "horizontalPadding": 15,
+        "verticalPadding": 10
+    },
+    "valueAxes": [ {
+        "gridColor": "#FFFFFF",
+        "gridAlpha": 0.2,
+        "dashLength": 0
+      } ],
+    "graphs": [{
+        "bullet": "square",
+        "bulletBorderAlpha": 1,
+        "bulletBorderThickness": 1,
+        "fillAlphas": 0.3,
+        "fillColorsField": "lineColor",
+        "legendValueText": "[[value]]",
+        "lineColorField": "lineColor",
+        "title": "duration",
+        "valueField": "duration"
+    }],
+    "chartScrollbar": {
+
+    },
+    "chartCursor": {
+        "categoryBalloonDateFormat": "YYYY MMM DD",
+        "cursorAlpha": 0,
+        "fullWidth": true
+    },
+    "dataDateFormat": "YYYY-MM-DD",
+    "categoryField": "date",
+    "categoryAxis": {
+        "dateFormats": [{
+            "period": "DD",
+            "format": "DD"
+        }, {
+            "period": "WW",
+            "format": "MMM DD"
+        }, {
+            "period": "MM",
+            "format": "MMM"
+        }, {
+            "period": "YYYY",
+            "format": "YYYY"
+        }],
+        "parseDates": true,
+        "autoGridCount": false,
+        "axisColor": "#555555",
+        "gridAlpha": 0,
+        "gridCount": 50
+    },
+    "export": {
+        "enabled": true
+    }
+});
+
+
+
+chart.addListener("dataUpdated", zoomChart);
+
+function zoomChart() {
+    chart.zoomToDates(new Date(<%=request.getAttribute("anio")%>, 0, 0), new Date(<%=request.getAttribute("anio")%>, 12, 0));
+}
 </script>
-<!--------------------------------grafico2------------------------- -->
-
-
-
-<!--------------------------------grafico2------------------------- -->
-
+ 
 
 </html>

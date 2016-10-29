@@ -81,6 +81,7 @@ public class ServletReporteVentas extends HttpServlet {
 				ArrayList<DetalleTransaccionBean> listaDetalleTransaccion = idetalleTransacciondao.listarReporte1(anio, idProducto) ;
 				request.setAttribute("listaDetalle", listaDetalleTransaccion);
 				request.setAttribute("tipoGrafico", tipoGrafico);
+				request.setAttribute("tipoGrafico", tipoGrafico);
 
 
 			} catch (Exception e) {
