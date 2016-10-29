@@ -89,22 +89,22 @@
 			
 
 		if(a==1){
-		document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==1){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+		document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select required name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==1){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 		}
 		if(a==2){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==2){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select required name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==2){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==3){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==3){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select required name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==3){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==4){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==4){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select required name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==4){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==5){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==5){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select required name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==5){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 		if(a==6){
-			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==6){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
+			document.getElementById("demo").innerHTML = "<label for=sel1>Seleccione Producto:</label><br><select required name=producto id=producto class=form-control><%for (int i = 0; i < productos.size(); i++) {%><%if(productos.get(i).getIdCategoria()==6){%><option value=<%=productos.get(i).getIdProducto()%>><%=productos.get(i).getNombre()%></option><%} %><%}%></select>";
 			}
 	}
 	</script>
@@ -149,7 +149,7 @@
 
 	</script>
 <!----------------------------------------- BODY------------------------------------------------>
-<form action="<%=getServletContext().getContextPath() %>/ServletReporteUtilidades" method="post" role="form">
+<form name="myform" action="<%=getServletContext().getContextPath() %>/ServletReporteUtilidades" method="post" role="form">
 			<div class="row">
 				<div class="col-sm-11">
 					<h1>Reporte de Ventas</h1>
@@ -161,7 +161,7 @@
 					<div class="form-group">
 					<!-- onchange="cambiarProducto()" -->
 						<label for="sel1">Seleccione Categoría:</label>
-						<select required onchange="cambiarProducto()"  name="categoria" class="form-control" id="categoria">
+						<select required   onchange="cambiarProducto()"  name="categoria" class="form-control" id="categoria">
 							<option value="">Seleccione</option>
 							<option value="SUSPENSI">SUSPENSIÓN</option>
 							<option value="FUERZA">FUERZA</option>
@@ -220,13 +220,28 @@
 				<br>
 			<div class="row">
 				<div class="col-sm-3">
-					<button  type="submit" id="botonSubmit"  class="btn btn-warning" >Ver Reporte</button>
+					<button  onclick="validarPanel()" id="botonSubmit"  class="btn btn-warning" >Ver Reporte</button>
 					
 				</div>
 			</div>
 		
 </form>
 
+<script>
+function validarPanel(){
+	if(document.getElementById("categoria").value==''){
+		alert("Seleccione una Categoría y después el Producto");
+	}else if(document.getElementById("anio").value==''){
+		alert("Seleccione el año");
+	}else if(document.getElementById("tipoGrafico").value==''){
+		alert("Seleccione el Tipo de Gráfico");
+	}else if(document.getElementById("producto").value==''){
+		alert("Seleccione un Producto");
+	}else{
+		myform.submit();
+	}
+}
+</script>
 
 
 <!-- ----------------------GRAFICOS 1------------------>

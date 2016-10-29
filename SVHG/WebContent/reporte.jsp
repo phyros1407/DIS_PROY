@@ -15,7 +15,7 @@
 <script src="<%=request.getContextPath() %>/js/themes/light.js"></script>
 </head>
 	<style>
-	#chartdiv {
+	#chartdiv1 {
 		width		: 100%;
 		height		: 500px;
 		font-size	: 11px;

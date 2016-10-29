@@ -110,7 +110,7 @@
 <!----------------------------------------- script------------------------------------------------>
 
 <!----------------------------------------- BODY------------------------------------------------>
-<form action="<%=getServletContext().getContextPath() %>/ServletReporteVentas" method="post" role="form">
+<form name="myform" action="<%=getServletContext().getContextPath() %>/ServletReporteVentas" method="post" role="form">
 			<div class="row">
 				<div class="col-sm-11">
 					<h1>Reporte de Productos</h1>
@@ -177,14 +177,28 @@
 				<br>
 			<div class="row">
 				<div class="col-sm-3">
-					<button  type="submit" id="botonSubmit"  class="btn btn-warning" >Ver Reporte</button>
+					<button  onclick="validarPanel()" id="botonSubmit"  class="btn btn-warning" >Ver Reporte</button>
 				</div>
 			</div>
 		
 </form>
 
 
-
+<script>
+function validarPanel(){
+	if(document.getElementById("categoria").value==''){
+		alert("Seleccione una Categoría y después el Producto");
+	}else if(document.getElementById("anio").value==''){
+		alert("Seleccione el año");
+	}else if(document.getElementById("tipoGrafico").value==''){
+		alert("Seleccione el Tipo de Gráfico");
+	}else if(document.getElementById("producto").value==''){
+		alert("Seleccione un Producto");
+	}else{
+		myform.submit();
+	}
+}
+</script>
 <!-----------------------------------------FIN BODY---------------------------------------------->
 				
 
