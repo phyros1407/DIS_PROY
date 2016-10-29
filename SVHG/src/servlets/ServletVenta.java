@@ -102,7 +102,7 @@ if (codigoAntiguo!=null) {
 
 
 
-		boolean flag=false;
+		String flag="";
 		boolean flagEmpresa=false;
 		if(accion.equals("registrarClientes")){		
 			try {
@@ -153,7 +153,7 @@ if (codigoAntiguo!=null) {
 				String subject="Creción de correo";
 				
 				String content="Estimado "+persona.getNombre()+" "+persona.getApellidoPaterno()+",\n\n Se creó una cuenta temporal para su ingreso al sistema SVHG \n\n Usuario: "+usuarioNom+" \n\n Contraseña: "+persona.getPass()+" ";
-				if(flag){		
+				if(flag!=null){		
 					System.out.println("7");
 					EmailUtility.sendEmailWithAttachment(host, port, user, pass,request.getParameter("txtCorreo"), subject,"Estimado "+persona.getNombre()+" "+persona.getApellidoPaterno()+",\n\n Se creó una cuenta temporal para su ingreso al sistema SVHG \n\n Usuario: "+usuarioNom+" \n\n Contraseña: "+persona.getPass()+" ");
 					    ResponseObject responseobj=null;

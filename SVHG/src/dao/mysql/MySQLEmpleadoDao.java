@@ -12,13 +12,14 @@ public class MySQLEmpleadoDao implements PersonaDao {
 
 
 	@Override
-	public boolean registrarCliente(PersonaBean persona) throws Exception {
-		boolean flag = false;
+	public String registrarCliente(PersonaBean persona) throws Exception {
+		String flag = "";
 		
 		try {
 		Connection con = MySqlDAOFactory.obtenerConexion();
 		Statement stmt= con.createStatement();
-
+		Statement stmt2_1= con.createStatement();
+		
 	
 		String queryPersona="INSERT INTO persona (DNI,NOM, APE_PAT, APE_MAT, FEC_NAC, DIR, USU_CREA_REGI, FEC_CREA_REGI, ULT_USU_MOD_REGI, FEC_ULT_MOD_REGI,EST) "
 		+ " VALUES ('"+persona.getDni()+"','"+persona.getNombre()+"','"+persona.getApellidoPaterno()+"','"+persona.getApellidoMaterno()+"',"
@@ -27,7 +28,7 @@ public class MySQLEmpleadoDao implements PersonaDao {
 		int filas = stmt.executeUpdate(queryPersona);
 		System.out.println("444");
 		if(filas==1){
-			String queryIdPersona="select max(p.id) as idPersonaMax from persona p";
+			String queryIdPersona="select max(p.id) as idPersonaMax , nom,APE_PAT,APE_MAT from persona p";
 			System.out.println("id : "+queryIdPersona);
 		 
 			ResultSet rs = stmt.executeQuery(queryIdPersona);	
@@ -38,15 +39,32 @@ public class MySQLEmpleadoDao implements PersonaDao {
 				int idPer=rs.getInt("idPersonaMax");
 				//idPer=28;
 				System.out.println("idepersona: "+idPer);
-				String queryUsuario="insert into usuario (CAR_ID,PER_ID,USU,PAS,EST_ACT,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"
-						+ "  values ('5','"+idPer+"','"+persona.getNombre().charAt(0)+persona.getApellidoPaterno()+persona.getApellidoMaterno().charAt(0)+"','"+persona.getPass()+"','A', 'USER',now(), 'USER',now())";
+				
+				String nomUsu=persona.getNombre().charAt(0)+""+persona.getApellidoPaterno()+""+persona.getApellidoMaterno().charAt(0);
+				
+				String queryUsu="select * from usuario where usu='"+nomUsu+"' ";
+				ResultSet rs1=stmt2_1.executeQuery(queryUsu);
+				String queryUsuario="";
+				String nuevoNombre="";
+				if(rs1.next()){
+					 nuevoNombre=nomUsu+"1";
+					queryUsuario="insert into usuario (CAR_ID,PER_ID,USU,PAS,EST_ACT,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"
+							+ "  values ('5','"+idPer+"','"+nuevoNombre+"','"+persona.getPass()+"','A', 'USER',now(), 'USER',now())";
+					System.out.println("existia usuario con el mismo nombre de usuario por crear");
+				}else{
+					 nuevoNombre=nomUsu;
+					queryUsuario="insert into usuario (CAR_ID,PER_ID,USU,PAS,EST_ACT,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"
+							+ "  values ('5','"+idPer+"','"+nuevoNombre+"','"+persona.getPass()+"','A', 'USER',now(), 'USER',now())";
+					 System.out.println("NOOOO existia usuario con el mismo nombre de usuario por crear");
+				}
+			
 				int filas1 = stmt.executeUpdate(queryUsuario);
 				if(filas1==1){
 					String queryContacto="insert into contacto (PER_ID,COR,TEL) values ('"+idPer+"','"+persona.getCorreo()+"','"+persona.getTelefono()+"')";
 					int filas2 = stmt.executeUpdate(queryContacto);
 					if(filas2==1){
 
-						flag=true;
+						flag=nuevoNombre;
 					}
 					
 				}

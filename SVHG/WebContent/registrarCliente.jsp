@@ -190,7 +190,7 @@
 							if (response.success==true) {
 								location.reload();
 							
-									alert("Cliente Registrado. Su usuario es: "+usuario)
+									alert("Cliente Registrado. Su usuario es: "+response['object']['fechaNacimiento'])
 									document.location.href="home.jsp";
 								}else{
 

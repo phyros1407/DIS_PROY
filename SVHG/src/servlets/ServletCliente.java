@@ -100,6 +100,7 @@ public class ServletCliente extends HttpServlet {
 		String accion=request.getParameter("accion");
 		
 		boolean flag=false;
+		String consulta="";
 		boolean flagEmpresa=false;
 		if(accion.equals("registrarCliente")){		
 			try {
@@ -116,8 +117,8 @@ public class ServletCliente extends HttpServlet {
 				persona.setPass(request.getParameter("txtClave"));
 				persona.setCorreo(request.getParameter("txtCorreo"));
 				persona.setTelefono(request.getParameter("txtCelular"));
-				
-				flag = ipersonadao.registrarCliente(persona);
+
+				consulta = ipersonadao.registrarCliente(persona);
 				System.out.print("xxxxxxxxxxxTIPO: "+tipo);
 				if(tipo.equalsIgnoreCase("empresa")){
 					//---------------BUSCAR POR CORREO Y DNI---------------------------------
@@ -143,14 +144,16 @@ public class ServletCliente extends HttpServlet {
 				System.out.println("Flag persona :"+flag);
 				System.out.println("Flag empresa :"+flagEmpresa);
 				
-				if(flag){		
+				if(consulta!=null){		
 					System.out.println("7");
+					persona.setFechaNacimiento(consulta);
 					    ResponseObject responseobj=null;
 						responseobj=new ResponseObject();
 						response.setContentType("application/json");
 						response.setCharacterEncoding("UTF-8");
 						responseobj.setSuccess(true);
 						responseobj.setObject(persona);
+						
 						response.getWriter().write(new Gson().toJson(responseobj));
 						System.out.println("json" + new Gson().toJson(responseobj));
 				}		
