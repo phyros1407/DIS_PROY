@@ -44,7 +44,7 @@
 					<ul class="page-breadcrumb">
 						<li><a href="inicio.jsp">Inicio</a> <i class="fa fa-circle"></i>
 						</li>
-						<li><span>Reporte de Ventas</span></li>
+						<li><span>ADMINISTRADOR</span></li>
 					</ul>
 					<div class="page-toolbar">
 						<div id="dashboard-report-range"
@@ -113,7 +113,7 @@
 <form action="<%=getServletContext().getContextPath() %>/ServletReporteVentas" method="post" role="form">
 			<div class="row">
 				<div class="col-sm-11">
-					<h1>Reporte de Ventas</h1>
+					<h1>Reporte de Productos</h1>
 				</div>
 			</div>
 				<br>
@@ -121,13 +121,13 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 					<!-- onchange="cambiarProducto()" -->
-						<label for="sel1">Seleccione Categoria:</label>
+						<label for="sel1">Seleccione Categoría:</label>
 						<select required onchange="cambiarProducto()"  name="categoria" class="form-control" id="categoria">
 							<option value="">Seleccione</option>
 							<option value="SUSPENSI">SUSPENSIÓN</option>
 							<option value="FUERZA">FUERZA</option>
 							<option value="AGILIDAD">AGILIDAD</option>
-							<option value="COORDINACION">COORDINACION</option>
+							<option value="COORDINACION">COORDINACIÓN</option>
 							<option value="POTENCIA">POTENCIA</option>
 							<option value="OTROS">OTROS</option>
 						</select>
@@ -153,7 +153,7 @@
 				<div class="col-sm-1"></div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="sel1">Seleccione Tipo Grafico </label>
+						<label for="sel1">Seleccione Tipo Gráfico </label>
 						<select required class="form-control" id="tipoGrafico" name="tipoGrafico">
 							<option value="">Seleccione</option>
 							<option value="grafico1">G. Barras</option>
