@@ -16,6 +16,7 @@
 
 	<!-- END HEADER -->
 	<!-- BEGIN HEADER & CONTENT DIVIDER -->
+	<%@ include file="include/headSideBar.jsp"%>
 	<div class="clearfix"></div>
 	<!-- END HEADER & CONTENT DIVIDER -->
 	<!-- BEGIN CONTAINER -->
