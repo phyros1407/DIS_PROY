@@ -34,7 +34,7 @@
 							<option value="1">Administrador</option>
 							<option value="2">Almacenero</option>
 							<option value="3">Vendedor</option>
-							<option value="4">Proveedor</option>
+							<!-- <option value="4">Proveedor</option> -->
 							</select>
 						</div>
 					</div>
@@ -107,9 +107,9 @@
 							class="required"> * </span>
 						</label>
 						<div class="col-md-2">
-							<input maxlength="9" pattern=".{11}" required title="Debe tener 11 dígitos" id="txtRUC"
+							<input maxlength="9" pattern=".{11}"  title="Debe tener 11 dígitos" id="txtRUC"
 								onkeypress="return solonumeros(event)" name="txtRUC"
-								data-required="1" class="form-control">
+								 class="form-control">
 						</div>
 						<div class="col-md-1">
 							<input name="btnRaz" id="btnRaz" type="button" value="Buscar" onclick="buscarRuc();" class="btn btn-default"/>

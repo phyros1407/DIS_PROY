@@ -115,7 +115,7 @@ public class EnviarBoleta extends Object {
         message.setSubject("Nano-Sport-Shop : ¡Gracias por su compra!");
         message.setFrom(new InternetAddress((String)props.get("mail.smtp.mail.sender")));
         message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress("barbbbi_96@hotmail.it"));
+                new InternetAddress(correo));
         // put everything together
         message.setContent(multiParte);
         

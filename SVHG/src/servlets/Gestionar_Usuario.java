@@ -150,7 +150,7 @@ public class Gestionar_Usuario extends HttpServlet {
 			int telefono=Integer.parseInt(request.getParameter("txtTel"));
 			int ruc;String razsoc;
 			if(cargo==4){
-			ruc=Integer.parseInt(request.getParameter("txtTel"));
+			ruc=Integer.parseInt(request.getParameter("txtRUC"));
 			razsoc=request.getParameter("txtRazSoc");
 			}else{
 			ruc=0;
