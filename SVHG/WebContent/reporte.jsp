@@ -22,7 +22,7 @@
 	}	
 		#chartdiv2 {
 		width		: 100%;
-		height		: 500px;
+		height		: 500px; 
 		font-size	: 11px;
 	}					
 	</style>
