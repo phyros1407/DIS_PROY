@@ -20,7 +20,7 @@
 		height		: 500px;
 		font-size	: 11px;
 	}	 
-		#chartdiv2 {
+		#chartdiv2 { 
 		width		: 100%; 
 		height		: 500px; 
 		font-size	: 11px;
