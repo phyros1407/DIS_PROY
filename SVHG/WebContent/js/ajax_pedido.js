@@ -502,7 +502,7 @@
 							}
 						}else{
 						
-							if($("#direccion").val()==""||$("#departamento").val()==0||$("#provincia").val()==0||$("#distrito").val()==0||$("#referencia").val()==""||$("#telefono1").val()==""||$("#telefono2").val()==""){
+							if($("#direccion").val()==""||$("#departamento").val()==0||$("#provincia").val()==0||$("#distrito").val()==0||$("#referencia").val().trim()==""||$("#telefono1").val().trim()==""||$("#telefono2").val().trim()==""){
 							
 								alert("Por favor complete todos los campos");
 								
