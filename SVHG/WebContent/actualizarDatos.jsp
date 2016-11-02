@@ -39,7 +39,7 @@ function longitudCampoTelefono(){
 
 	if(y!=7 && y!=9){
 		
-		alert("Numero de telefono incorrecto intente de nuevo");
+		alert("Número de telefono incorrecto, intente de nuevo");
 	
 	}
 }
@@ -77,7 +77,7 @@ function soloNumeros(e){
 			if(txtCorreo==''){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(x==2){
-				  alert("Correo no valido. Utilice el sgt. Formato:\ncorreo@domain");
+				  alert("Correo no válido. Utilice el sgt. Formato:\ncorreo@domain");
 			  }else if(txtClave==''){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(txtClave2==''){
@@ -86,12 +86,12 @@ function soloNumeros(e){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(y=='1'){
 				  if(longNum=='9'){
-					    alert("Numero de celular incorrecto. Debe iniciar con 9");
+					    alert("Número de celular incorrecto. Debe iniciar con 9");
 				  }
 				  if(longNum=='7'){
-					  alert("Numero fijo incorrecto. Formato: 5555555")
+					  alert("Número fijo incorrecto. Formato: 5555555")
 				  }
-					  alert("Ingrese numero de celular o fijo.");
+					  alert("Ingrese número de celular o fijo.");
 				  
 				  
 			  }else { 
@@ -109,7 +109,7 @@ function soloNumeros(e){
 							if (response.success==true) {
 								location.reload();
 							
-									alert("Actualizacion de datos correcta")
+									alert("Actualización de datos correcta")
 									document.location.href="home.jsp";
 								}else{
 
@@ -131,7 +131,7 @@ function soloNumeros(e){
 						
 						if (response.success==true) {
 								document.getElementById("divCorreo").innerHTML="<input type=email class=form-control onchange=buscarCorreo() autofocus name=txtCorreo id=txtCorreo>";
-								alert("El correo esta en uso. Vuelva a intentar con otro correo.")
+								alert("El correo está en uso. Vuelva a intentar con otro correo.")
 								if(document.getElementById("xCorreo").value!=txtCorreo){
 									
 								}
@@ -189,11 +189,11 @@ function soloNumeros(e){
 						<%if(empresa!=null){ %>
 						<br>
 							<div class="row">
-								<center><h2>Datos Juridicos</h2></center>
+								<center><h2>Datos Jurídicos</h2></center>
 							</div>
 							<div class="row">
 								<div class="col-sm-4">
-							       		<label >Razon Social:</label>
+							       		<label >Razón Social:</label>
 							        	<input value="<%=empresa.getRazonSocial()%>" type="text" name="razonSocial"  id="razonSocial" class="form-control" readonly> 
 								</div>	
 								<div class="col-sm-4">
@@ -238,7 +238,7 @@ function soloNumeros(e){
 						<br>
 							<div class="row">
 								<div class="col-sm-4">
-						       		<label >Telefono:</label>
+						       		<label >Teléfono:</label>
 						        	<input maxlength="9" onchange="longitudCampoTelefono()"  value="<%=persona.getTelefono()%>"   id="txtCelular" name="txtCelular"  class="form-control"> 
 								</div>	
 								<div class="col-sm-4">

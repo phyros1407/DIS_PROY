@@ -151,7 +151,7 @@
 			  }else if(txtCorreo==''){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(x==2){
-				  alert("Correo no valido. Utilize el sgt. Formato:\ncorreo@domain");
+				  alert("Correo no válido. Utilize el sgt. Formato:\ncorreo@domain");
 			  }else if(txtClave==''){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(txtClave2==''){
@@ -160,12 +160,12 @@
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(y=='1'){
 				  if(longNum=='9'){
-					    alert("Numero de celular incorrecto. Debe iniciar con 9");
+					    alert("Número de celular incorrecto. Debe iniciar con 9");
 				  }
 				  if(longNum=='7'){
-					  alert("Numero fijo incorrecto")
+					  alert("Número fijo incorrecto")
 				  }
-					  alert("Ingrese numero de celular o fijo.");
+					  alert("Ingrese número de celular o fijo.");
 				  
 				  
 			  }else if(optradio==''){
@@ -194,7 +194,7 @@
 									document.location.href="home.jsp";
 								}else{
 
-									alert("	 existe");
+									alert("Error al registrar.Intente de nuevo.");
 									
 								}	
 				  });
@@ -212,7 +212,7 @@
 						
 						if (response.success==true) {
 								document.getElementById("divClave").innerHTML="<input type=email class=form-control onchange=buscarCorreo() autofocus name=txtCorreo id=txtCorreo>";
-								alert("El correo esta en uso. Vuelva a intentar con otro correo.")
+								alert("El correo está en uso. Vuelva a intentar con otro correo.")
 								
 							}else{
 				
@@ -337,7 +337,7 @@
 						<br>
 							<div class="row">
 								<div class="col-sm-4">
-						       		<label >Telefono:</label>
+						       		<label >Teléfono:</label>
 						        	<input  onchange="longitudCampoTelefono()" required type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
 								</div>	
 								<div class="col-sm-4">
@@ -366,7 +366,7 @@
 				
 						if(y!=7 && y!=9){
 							document.getElementById("txtCelular").value = "";
-							alert("Numero de telefono incorrecto intente de nuevo");
+							alert("Número de telefono incorrecto intente de nuevo");
 						
 						}
 					}	

@@ -61,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                     <!-- END PAGE BAR -->
                     <!-- BEGIN PAGE TITLE-->
-                    <h3 class="page-title"> Estadisticas
+                    <h3 class="page-title"> Estadísticas
                         
                     </h3>
                     <!-- END PAGE TITLE-->

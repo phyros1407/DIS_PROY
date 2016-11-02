@@ -74,11 +74,11 @@
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1>Nano Sports</h1>
-									<h2>Peru</h2>
+									<h2>Perú</h2>
 									<p>Estamos especializados en brindar servicios y proyectos de 
-									asesoría y consultoria en la rama del fitness y del entrenamiento
+									asesoría y consultoría en la rama del fitness y del entrenamiento
 									 deportivo integral. </p>
-									<button type="button" class="btn btn-default get">Consiguelo Ahora</button>
+									<button type="button" class="btn btn-default get">Consíguelo Ahora</button>
 								</div>
 								<div class="col-sm-6">
 									<img src="imagesOut/inicio/speed.png" class="girl img-responsive" alt="" />
@@ -87,9 +87,9 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1>Nano Sports</h1>
-									<h2>Peru</h2>
+									<h2>Perú</h2>
 									<p>Hemos investigado y trabajado para brindar un servicio que realmente llegue a los atletas y entrenadores,</p>
-									<button type="button" class="btn btn-default get">Consiguelo Ahora</button>
+									<button type="button" class="btn btn-default get">Consíguelo Ahora</button>
 								</div>
 								<div class="col-sm-6">
 									<img src="imagesOut/inicio/weightlifting.png" class="girl img-responsive" alt="" />
@@ -101,12 +101,12 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1>Nano Sports</h1>
-									<h2>Peru</h2>
+									<h2>Perú</h2>
 									<p>Realizamos diversos tipos de evaluaciones para diagnosticar el
 									estado actual del atleta y recomendamos los pasos a seguir de acuerdo
 									 a los objetivos que se estén 
 									buscando</p>
-									<button type="button" class="btn btn-default get">Consiguelo Ahora</button>
+									<button type="button" class="btn btn-default get">Consíguelo Ahora</button>
 								</div>
 								<div class="col-sm-6">
 									<img src="imagesOut/inicio/dumbbell.png" class="girl img-responsive" alt="" />
