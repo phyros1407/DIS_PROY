@@ -293,7 +293,7 @@ function buscarRuc(){
 	  var ruc = $('#txtRuc1').val();
 	 // console.log("asdasd"+dni);
 	 var accion='buscarRuc';
-	  $.get('http://env-9625104.jelasticlw.com.br/service/Gestionar_Empresa', {
+	  $.get('http://servicios.jelasticlw.com.br/service/Gestionar_Empresa', {
 		  
 				accion : accion,
 				ruc:ruc

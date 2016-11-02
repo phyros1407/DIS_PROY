@@ -64,7 +64,8 @@ $('#categoria').val("");
 
 });
 
-var txt_IGV =importetotal/1.19 ;
+var txt_IGV =importetotal-importetotal/1.19 ;
+
 //var txt_Total = txt_IGV + importetotal;
 $('#txtIGV').val(txt_IGV.toFixed(2));
 $('#txtSubtotal').val(importetotal.toFixed(2));	

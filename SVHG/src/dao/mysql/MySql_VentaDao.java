@@ -201,7 +201,7 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 			Statement stmt=con.createStatement();
 			
 			String query="SELECT  tr.NUM AS NUMERO_TRANSACCION,                            	"
-					+ "CONCAT(pe.APE_PAT,' ',pe.APE_PAT,' ',pe.NOM) AS NOMBRE_CLIENTE,      "
+					+ "CONCAT(pe.APE_PAT,' ',pe.APE_MAT,' ',pe.NOM) AS NOMBRE_CLIENTE,      "
 					+ "	cp.TIPO AS TIPO_COMPROBANTE,								   "
 					+ "   tr.IDE AS IDENTIFICADOR,                                       "
 					+ "DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,       "
