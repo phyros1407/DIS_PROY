@@ -28,9 +28,6 @@ public class EnviarBoleta extends Object {
 
 	final String username ="nano_sport_test@hotmail.com";
 	final String password ="nanosport1234";
-	
-	
- 
     MimeMultipart multiParte = new MimeMultipart("related");
 	Properties props = new Properties();
 	
@@ -115,7 +112,7 @@ public class EnviarBoleta extends Object {
         message.setSubject("Nano-Sport-Shop : ¡Gracias por su compra!");
         message.setFrom(new InternetAddress((String)props.get("mail.smtp.mail.sender")));
         message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress(correo));
+                new InternetAddress("jean_barbieri@usmp.pe"));
         // put everything together
         message.setContent(multiParte);
         
@@ -461,7 +458,7 @@ public class EnviarBoleta extends Object {
 						"							  			<span>"+boleta.get(0).getTip_com()+" DE VENTA                                                                                                                                             "+
 						"							  				<span>&nbsp;</span><br>                                                                                                                                       "+
 						"							  				<span>&nbsp;</span>                                                                                                                                           "+
-						"							  				<span style='font-size:18px;'>"+boleta.get(0).getNum_com()+"</span>                                                                                                          "+
+						"							  				<span style='font-size:18px;'>"+boleta.get(0).getNum_com().substring(5)+"</span>                                                                                                          "+
 						"							  			</span>                                                                                                                                                           "+
 						"							  		</h2>                                                                                                                                                                 "+
 						"							  	</div>                                                                                                                                                                    "+
@@ -516,7 +513,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
-						"			    					<td width='100PX' style='text-align:left;'>IGV (18%) : </td>                                                                                                          "+
+						"			    					<td width='100PX' style='text-align:left;'>IGV (19%) : </td>                                                                                                          "+
 						"			    					<td width='100PX'>S/. "+Math.round((subtotal*0.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
 						"			    				</tr>                                                                                                                                                                     "+
 						"			    				<tr>                                                                                                                                                                      "+
