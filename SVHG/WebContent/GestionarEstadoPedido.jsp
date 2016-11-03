@@ -254,7 +254,7 @@ function buscarPedido(){
 				}
 				
 				var igvv=impTotal*0.19;
-				var subtotal=impTotal-igvv;
+				var subtotal=impTotal-igvv; 
 				cadena0="<tr><td colspan='4'></td><td class='danger'>SUB TOTAL</td><td class='warning'>S/"+subtotal+"</td></tr>";
 				cadena1="<tr><td colspan='4'></td><td class='danger'>IGV</td><td class='warning'>S/"+igvv+"</td></tr>";
 				cadena2="<tr><td colspan='4'></td><td class='danger'>TOTAL A PAGAR </td><td class='warning'>S/"+impTotal+".00</td></tr>";
