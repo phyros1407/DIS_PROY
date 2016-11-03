@@ -21,7 +21,7 @@ public class MySQLEmpleadoDao implements PersonaDao {
 		Statement stmt2_1= con.createStatement();
 		
 	
-		String queryPersona="insert into persona (dni,nom, ape_pat, ape_mat, fec_nac, dir, usu_crea,regi, fec_crea_regi, ult_usu_mod_regi, fec_ult_mod_regi,est) "
+		String queryPersona="insert into persona (dni,nom, ape_pat, ape_mat, fec_nac, dir, usu_crea_regi, fec_crea_regi, ult_usu_mod_regi, fec_ult_mod_regi,est) "
 		+ " VALUES ('"+persona.getDni()+"','"+persona.getNombre()+"','"+persona.getApellidoPaterno()+"','"+persona.getApellidoMaterno()+"',"
 				+ "  '1994-05-23', 'aerawerwre', 'USER',now(), 'USER',now(),'A')";
 		
