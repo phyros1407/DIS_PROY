@@ -24,18 +24,18 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 		try {
 			Connection con=MySqlDAOFactory.obtenerConexion();
 			Statement stmt=con.createStatement();
-			String query="select u.id as u_id,p.id as p_id,u.est_act,p.DNI, p.nom, p.ape_Pat, p.ape_Mat,r.car from Rol r,Persona p"+
-					" inner join Usuario u on u.per_id=p.id where u.car_id=r.ID;";
+			String query="select u.id as u_id,p.id as p_id,u.est_act,p.dni, p.nom, p.ape_pat, p.ape_mat,r.car from rol r,persona p"+
+					" inner join usuario u on u.per_id=p.id where u.car_id=r.ID;";
 			ResultSet rs=stmt.executeQuery(query);
 			UsuarioBean usuario=null;
 			while(rs.next()){
 				usuario=new UsuarioBean();
 				usuario.setId_usuario(Integer.parseInt(rs.getString("u_id")));
 				usuario.setId_persona(Integer.parseInt(rs.getString("p_id")));
-				usuario.setDni(rs.getString("p.DNI"));
+				usuario.setDni(rs.getString("p.dni"));
 				usuario.setNombre(rs.getString("p.nom"));
-				usuario.setApePat(rs.getString("p.ape_Pat"));
-				usuario.setApeMat(rs.getString("p.ape_Mat"));
+				usuario.setApePat(rs.getString("p.ape_pat"));
+				usuario.setApeMat(rs.getString("p.ape_mat"));
 				usuario.setRol(rs.getString("r.car"));
 				usuario.setEstado(rs.getString("u.est_act"));
 				usuarios.add(usuario);
@@ -88,15 +88,15 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			case 4: carL="pro"; break;
 			}
 			
-			String query="insert into persona(dni,nom,ape_pat,ape_mat,fec_nac,est,dir,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"+ 
+			String query="insert into persona(dni,nom,ape_pat,ape_mat,fec_nac,est,dir,usu_crea_regi,fec_crea_regi,ult_usu_mod_regi,fec_ult_mod_regi)"+ 
                     "values('"+dni+"','"+nombres+"','"+apePat+"','"+apeMat+"','"+fechaNac+"','A','"+direccion+"','Cristhian','2016-08-31','Cristhian','2016-08-31');";
 			String query1="insert into contacto(per_id,cor,tel)"+
 					"values((select id from persona where dni='"+dni+"'),'"+correo+"',"+telefono+");";
 			
-			String query2="insert into empresa(emp_id,ide,ruc,raz_soc,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI)"+
+			String query2="insert into empresa(emp_id,ide,ruc,raz_soc,usu_crea_regi,fec_crea_regi,ult_usu_mod_regi,fec_ult_mod_regi)"+
 					"values ((select id from persona where dni='"+dni+"'),'P',"+ruc+",'"+razsoc+"','Cristhian','2016-08-31','Cristhian','2016-08-31');";
 			
-			String query3="insert into usuario(car_id,per_id,usu,pas,est_act,USU_CREA_REGI,FEC_CREA_REGI,ULT_USU_MOD_REGI,FEC_ULT_MOD_REGI) "+
+			String query3="insert into usuario(car_id,per_id,usu,pas,est_act,usu_crea_regi,fec_crea_regi,ult_usu_mod_regi,fec_ult_mod_regi) "+
 					"values("+cargo+",(select id from persona where dni='"+dni+"'),'"+carL+""+nombres.charAt(0)+""+apePat+""+apeMat.charAt(0)+"','"+contraseña1+"','A','Cristhian','2016-08-26','Cristhian','2016-08-26');";
 			
 			int filas = stmt.executeUpdate(query);
@@ -185,12 +185,12 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			String query;
 			
 			if(cargo==4){
-			query="select p.DNI,u.USU,r.car,e.raz_soc,e.ruc,c.COR,c.TEL,p.FEC_NAC, p.id as 'P_ID',u.id as 'U_ID',u.PAS "+
-						"from Rol r,Persona p,contacto c,usuario u,empresa e where u.car_id=r.ID and c.per_id=p.ID and p.id="+id+" and e.emp_id=p.id and p.id=u.per_id;";
+			query="select p.dni,u.usu,r.car,e.raz_soc,e.ruc,c.cor,c.tel,p.fec_nac, p.id as 'p_id',u.id as 'u_id',u.pas "+
+						"from rol r,persona p,contacto c,usuario u,empresa e where u.car_id=r.id and c.per_id=p.id and p.id="+id+" and e.emp_id=p.id and p.id=u.per_id;";
 						
 			}else{
-				query="select p.DNI,u.USU,r.car,c.COR,c.TEL,p.FEC_NAC, p.id as 'P_ID',u.id as 'U_ID',u.PAS " 
-						+"from Rol r,Persona p,contacto c,usuario u where u.car_id=r.ID and c.per_id=p.ID and p.id="+id+" and p.id=u.per_id;";
+				query="select p.dni,u.usu,r.car,c.cor,c.tel,p.fec_nac, p.id as 'p_id',u.id as 'u_id',u.pas " 
+						+"from rol r,persona p,contacto c,usuario u where u.car_id=r.id and c.per_id=p.id and p.id="+id+" and p.id=u.per_id;";
 				}
 			
 			
@@ -200,15 +200,15 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 				usuario.setRuc(Long.parseLong(rs.getString("e.ruc")));
 				usuario.setRazSoc(rs.getString("e.raz_soc"));
 				}
-				usuario.setDni(rs.getString("p.DNI"));
-				usuario.setUsuario(rs.getString("u.USU"));				
+				usuario.setDni(rs.getString("p.dni"));
+				usuario.setUsuario(rs.getString("u.usu"));				
 				usuario.setRol(rs.getString("r.car"));
-				usuario.setCorreo(rs.getString("c.COR"));
-				usuario.setTelefono(Integer.parseInt(rs.getString("c.TEL")));
-				usuario.setFecNac(rs.getString("p.FEC_NAC"));
-				usuario.setId_persona(Integer.parseInt(rs.getString("P_ID")));
-				usuario.setId_usuario(Integer.parseInt(rs.getString("U_ID")));
-				usuario.setContraseña(rs.getString("u.PAS"));
+				usuario.setCorreo(rs.getString("c.cor"));
+				usuario.setTelefono(Integer.parseInt(rs.getString("c.tel")));
+				usuario.setFecNac(rs.getString("p.fec_nac"));
+				usuario.setId_persona(Integer.parseInt(rs.getString("p_id")));
+				usuario.setId_usuario(Integer.parseInt(rs.getString("u_id")));
+				usuario.setContraseña(rs.getString("u.pas"));
 			}
 			System.out.println(query);
 			con.close();
@@ -251,8 +251,8 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			//int codigoPersona=generarCodigoPersona()+1;
 			Connection con = MySqlDAOFactory.obtenerConexion();
 			Statement stmt= con.createStatement();
-			String  consulta ="INSERT INTO persona (codper,nombres,apellido_paterno,apellido_materno,sexo) "
-					+ " VALUES ('"+dni+"','"+nombre+"','"+apellidoPaterno+"', '"+apellidoMaterno+"', '"+sexo+"');";
+			String  consulta ="insert into persona (codper,nombres,apellido_paterno,apellido_materno,sexo) "
+					+ " values ('"+dni+"','"+nombre+"','"+apellidoPaterno+"', '"+apellidoMaterno+"', '"+sexo+"');";
 			int filas = stmt.executeUpdate(consulta);
 			if(filas==1){
 				usuario=new UsuarioBean();
@@ -271,8 +271,8 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 		try {
 			Connection con = MySqlDAOFactory.obtenerConexion();
 			Statement stmt= con.createStatement();
-			String  consulta ="select usu.id as idUsu,usu.CAR_ID as ROL_ID ,usu.*,pe.NOM,pe.APE_PAT,co.COR  from usuario usu, persona pe, contacto co "
-					+ " where usu='"+usuario+"'  and pe.id=usu.PER_ID and usu.PER_ID=co.PER_ID";
+			String  consulta ="select usu.id as idusu,usu.car_id as rol_id ,usu.*,pe.nom,pe.ape_pat,co.cor  from usuario usu, persona pe, contacto co "
+					+ " where usu='"+usuario+"'  and pe.id=usu.per_id and usu.per_id=co.per_id";
 			ResultSet rs = stmt.executeQuery(consulta);
 			int idUsu;
 			int intento;
@@ -288,35 +288,35 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 				usu.setEstado("");
 				usu.setCorreo(rs.getString("COR"));
 				if(rs.getString("PAS").equalsIgnoreCase(contraseña)){
-						insertIntento="UPDATE usuario SET INTENTO='0' , EST_ACT='A' WHERE ID='"+idUsu+"'";
+						insertIntento="update usuario set intento='0' , est_act='A' where id='"+idUsu+"'";
 						
 						
-						usu.setPersonaId(rs.getInt("PER_ID"));
-						usu.setUsuId(rs.getInt("idUsu"));
-						usu.setRolId(rs.getInt("ROL_ID"));
-						usu.setEstado(rs.getString("EST_ACT"));
+						usu.setPersonaId(rs.getInt("per_id"));
+						usu.setUsuId(rs.getInt("idusu"));
+						usu.setRolId(rs.getInt("rol_id"));
+						usu.setEstado(rs.getString("est_act"));
 						usu.setNombreUsu(rs.getString("usu"));
 						usu.setIntento("validado");
-						usu.setNombre(rs.getString("NOM"));
-						usu.setApellidoPaterno(rs.getString("APE_PAT"));
+						usu.setNombre(rs.getString("nom"));
+						usu.setApellidoPaterno(rs.getString("ape_pat"));
 						
 				}else{
 					System.out.println("no es contrasena");
 					
 					if(intento==1){
-						 insertIntento="UPDATE usuario SET INTENTO='2' WHERE ID='"+idUsu+"'";
+						 insertIntento="update usuario set intento='2' where id='"+idUsu+"'";
 						 validacion="2";
 						 usu.setIntento(validacion);
 					}else if(intento==2){
-						 insertIntento="UPDATE usuario SET INTENTO='3' WHERE ID='"+idUsu+"'";
+						 insertIntento="update usuario set intento='3' where id='"+idUsu+"'";
 						 validacion="3";
 						 usu.setIntento(validacion);
 					}else if(intento==3){
-						 insertIntento="UPDATE usuario SET INTENTO='0' WHERE ID='"+idUsu+"'";
+						 insertIntento="update usuario set intento='0' where id='"+idUsu+"'";
 						validacion="resetearPass";
 						usu.setIntento(validacion);
 					}else{
-						 insertIntento="UPDATE usuario SET INTENTO='1' WHERE ID='"+idUsu+"'";
+						 insertIntento="update usuario set intento='1' where id='"+idUsu+"'";
 						 validacion="1";
 						 usu.setIntento(validacion);
 					}
@@ -344,10 +344,10 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			Statement stmt= con.createStatement();
 			int numAleatorio=(int)Math.floor(Math.random()*(999999-100000)+100000);
 			
-			String consulta = "select * from contacto where COR='"+correo+"'" ;
+			String consulta = "select * from contacto where cor='"+correo+"'" ;
 			ResultSet rs = stmt.executeQuery(consulta);
 			if(rs.next()){
-				String contra="update usuario set PAS='"+numAleatorio+"' where id='"+rs.getString("PER_ID")+"'   ";
+				String contra="update usuario set pas='"+numAleatorio+"' where id='"+rs.getString("per_id")+"'   ";
 				int filasP=stmt.executeUpdate(contra);
 				if(filasP==1){
 					usu=new emailBean();
