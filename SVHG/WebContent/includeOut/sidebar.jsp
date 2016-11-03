@@ -7,7 +7,7 @@
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Categorias
+											Categorías
 										</a>
 									</h4>
 								</div>
@@ -16,8 +16,8 @@
 										<ul class="listado">
 											<li><a href="javascript:void(0)">TODOS</a></li>
 											<li><a href="javascript:void(0)">FUERZA</a></li>
-											<li><a href="javascript:void(0)">SUSPENSION</a></li>
-											<li><a href="javascript:void(0)">COORDINACION</a></li>
+											<li><a href="javascript:void(0)">SUSPENSIóN</a></li>
+											<li><a href="javascript:void(0)">COORDINACIóN</a></li>
 											<li><a href="javascript:void(0)">AGILIDAD</a></li>
 											<li><a href="javascript:void(0)">POTENCIA</a></li>
 											<li><a href="javascript:void(0)">OTROS</a></li>
@@ -33,8 +33,8 @@
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
 									<li><a href="#"> <span class="pull-right"></span>Evaluaciones</a></li>
-									<li><a href="#"> <span class="pull-right"></span>Evaluaciones Psicologicas</a></li>
-									<li><a href="#"> <span class="pull-right"></span>Entrenamiento Especifico</a></li>
+									<li><a href="#"> <span class="pull-right"></span>Evaluaciones Psicológicas</a></li>
+									<li><a href="#"> <span class="pull-right"></span>Entrenamiento Específico</a></li>
 								</ul>
 							</div>
 						</div><!--/brands_products-->
