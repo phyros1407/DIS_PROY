@@ -48,12 +48,12 @@ public class MySQLEmpleadoDao implements PersonaDao {
 				String nuevoNombre="";
 				if(rs1.next()){
 					 nuevoNombre=nomUsu+"1";
-					queryUsuario="insert into usuario (car_id,per_id,usu,pas,est_act,usu_crea,regi, fec_crea_regi, ult_usu_mod_regi, fec_ult_mod_regi)"
+					queryUsuario="insert into usuario (car_id,per_id,usu,pas,est_act,usu_crea_regi, fec_crea_regi, ult_usu_mod_regi, fec_ult_mod_regi)"
 							+ "  values ('5','"+idPer+"','"+nuevoNombre+"','"+persona.getPass()+"','A', 'USER',now(), 'USER',now())";
 					System.out.println("existia usuario con el mismo nombre de usuario por crear");
 				}else{
 					 nuevoNombre=nomUsu;
-					queryUsuario="insert into usuario (car_id,per_id,usu,pas,est_act,usu_crea,regi, fec_crea_regi, ult_usu_mod_regi, fec_ult_mod_regi)"
+					queryUsuario="insert into usuario (car_id,per_id,usu,pas,est_act,usu_crea_regi, fec_crea_regi, ult_usu_mod_regi, fec_ult_mod_regi)"
 							+ "  values ('5','"+idPer+"','"+nuevoNombre+"','"+persona.getPass()+"','A', 'USER',now(), 'USER',now())";
 					 System.out.println("NOOOO existia usuario con el mismo nombre de usuario por crear");
 				}

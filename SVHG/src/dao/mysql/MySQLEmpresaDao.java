@@ -21,7 +21,7 @@ public class MySQLEmpresaDao extends MySqlDAOFactory implements EmpresaDao {
 			Statement stmt= con.createStatement();
 
 			System.out.println("metodo registrarEmpresa en msqlEmpresadao 1");
-			String queryEmpresa="INSERT INTO empresa (EMP_ID,IDE, RUC, RAZ_SOC, USU_CREA_REGI, FEC_CREA_REGI, ULT_USU_MOD_REGI, FEC_ULT_MOD_REGI) "
+			String queryEmpresa="insert into empresa (emp_id,ide, ruc, raz_soc, usu_crea_regi, fec_crea_regi, ult_usu_mod_regi, fec_ult_mod_regi) "
 			+ " VALUES ('"+empresa.getEmp_ide()+"','"+empresa.getIde()+"','"+empresa.getRuc()+"','"+empresa.getRazonSocial()+"','USER',now(), 'USER',now())";
 			System.out.println("metodo registrarEmpresa en msqlEmpresadao 2");
 			System.out.println("queryEmpresa: "+queryEmpresa);
