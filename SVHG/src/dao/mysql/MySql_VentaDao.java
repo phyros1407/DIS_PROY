@@ -87,13 +87,13 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 			
 			Statement stmt=con.createStatement();
 			
-			String query = "SELECT NUM FROM transaccion ORDER BY NUM DESC LIMIT 1";
+			String query = "select num from transaccion order by num desc limit 1";
 			
 			ResultSet rs = stmt.executeQuery(query);
 			TransaccionBean trans=null;
 			while(rs.next()){
 				trans= new TransaccionBean();
-				num = rs.getString("NUM");
+				num = rs.getString("num");
 				
 				trans.setNum(num);
 				
@@ -126,8 +126,8 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 					maxId=Integer.parseInt(rs.getString("maxid"));
 				}*/
 				
-			String query = " INSERT INTO comprobante_pago (VEN_ID ,TIPO ,RUC ,RAZ_SOC ,NUM_COM ,IGV ,FEC_EMI ,FEC_CAN ) "
-					+ " VALUES ( (select max(id) from transaccion) , '"+comprobante.getTipo()+"','"+comprobante.getRuc()+"','"+comprobante.getRaz_soc()+"','"+comprobante.getNum_com()+"',"+comprobante.getIgv()+","+comprobante.getFec_emi()+","+comprobante.getFec_can()+" )";
+			String query = " insert into comprobante_pago (ven_id ,tipo ,ruc ,raz_soc ,num_com ,igv ,fec_emi ,fec_can ) "
+					+ " values ( (select max(id) from transaccion) , '"+comprobante.getTipo()+"','"+comprobante.getRuc()+"','"+comprobante.getRaz_soc()+"','"+comprobante.getNum_com()+"',"+comprobante.getIgv()+","+comprobante.getFec_emi()+","+comprobante.getFec_can()+" )";
 			
 			System.out.println("QUERY PARA GUARDAR COMPROBANTE ---> "+query);
 			
@@ -161,9 +161,9 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 			String query = "";
 			//String query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' ORDER BY NUM_COM DESC LIMIT 1";
 			if(tipo.equalsIgnoreCase("boleta")){
-				 query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'BV' ORDER BY NUM_COM DESC LIMIT 1";
+				 query = "select num_com from comprobante_pago where tipo = '"+tipo+"' and substr(num_com,1,2) = 'BV' order by num_com desc limit 1";
 			}else{
-				 query = "SELECT NUM_COM FROM comprobante_pago WHERE TIPO = '"+tipo+"' AND substr(NUM_COM,1,2) = 'FV' ORDER BY NUM_COM DESC LIMIT 1";
+				 query = "select num_com from comprobante_pago where tipo = '"+tipo+"' and substr(num_com,1,2) = 'FV' order by num_com desc limit 1";
 			}
 			
 			System.out.println("QUERY PARA OBTENER EL ULTIMO NUMERO DE COMPROBANTE ---->"+query);
@@ -173,7 +173,7 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 				
 				if(rs.next()){
 					
-					num_com = rs.getString("NUM_COM");
+					num_com = rs.getString("num_com");
 					
 				}
 				
