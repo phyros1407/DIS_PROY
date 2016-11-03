@@ -248,14 +248,20 @@ function buscarPedido(){
 				}
 				
 				for(var i=0;i<response['object'].length;i++){
-					impTotal+=response['object'][i]['impProd'];
+					impTotal+=(response['object'][i]['impProd'])/1.19;
 					
-					cadena = cadena+("<tr><td>"+response['object'][i]['ProductoId']+"</td><td>"+response['object'][i]['productoNombre']+"</td><td>"+response['object'][i]['pesoUnidad']+" Kg</td><td>"+response['object'][i]['cantidad']+"</td><td>"+response['object'][i]['precioUnidad']+"</td><td>S/"+response['object'][i]['impProd']+".00</td></tr>");
+					cadena = cadena+("<tr><td>"+response['object'][i]['ProductoId']+"</td><td>"+response['object'][i]['productoNombre']+"</td><td>"+response['object'][i]['pesoUnidad']+" Kg</td><td>"+response['object'][i]['cantidad']+"</td><td>"+response['object'][i]['precioUnidad']+"</td><td>S/"+(response['object'][i]['impProd'])/1.19+".00</td></tr>");
 				}
+				
+				var igvv=impTotal*0.19;
+				var subtotal=impTotal-igvv;
+				cadena0="<tr><td colspan='4'></td><td class='danger'>SUB TOTAL</td><td class='warning'>S/"+subtotal+"</td></tr>";
+				cadena1="<tr><td colspan='4'></td><td class='danger'>IGV</td><td class='warning'>S/"+igvv+"</td></tr>";
 				cadena2="<tr><td colspan='4'></td><td class='danger'>TOTAL A PAGAR </td><td class='warning'>S/"+impTotal+".00</td></tr>";
 				cadena3="<tr><td colspan='4'><label id='mensaje2' style='color:red'></label><td><input type='button' id='actualizar' class='btn btn-success' onclick='actualizarPedido("+id+","+usuario+")' value='Actualizar'></td><td><input type='button' class='btn btn-danger' onClick='location.reload()' value='Regresar'></td></tr>";
+				
 				$('#datos').fadeIn().removeClass('hide');
-				$('#detalleProd').html(cadena+cadena2+cadena3);
+				$('#detalleProd').html(cadena+cadena0+cadena1+cadena2+cadena3);
 				$('#detalleProd2').html(cadena);
 			}
 			

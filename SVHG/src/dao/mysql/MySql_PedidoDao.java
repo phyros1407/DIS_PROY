@@ -134,7 +134,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 				
 				Statement stmt=con.createStatement();
 				//pe.EST_ENT ,pe.TIP_ENT , pe.FEC_CREA_REGI,p.DNI,p.NOM,p.DIR,pr.ID,pr.NOM ,pr.PESO,dt.CAN,pr.PRE,dt.IMP
-				String query="Select * from persona p INNER JOIN usuario u ON p.id=u.id INNER JOIN contacto con ON con.per_id=p.id INNER JOIN transaccion t ON u.id=t.ID_USUARIO INNER JOIN comprobante_pago comp ON t.id=comp.ven_id INNER JOIN pedido pe ON pe.PED_ID=t.ID INNER JOIN detalle_transaccion dt ON t.ID =dt.VEN_ID INNER JOIN producto pr ON dt.PRO_ID=pr.ID and  pe.PED_ID="+idPedido+" ";
+				String query="Select * from persona p INNER JOIN usuario u ON p.id=u.id INNER JOIN contacto con ON con.per_id=p.id INNER JOIN transaccion t ON u.id=t.id_usuario INNER JOIN comprobante_pago comp ON t.id=comp.ven_id INNER JOIN pedido pe ON pe.ped_id=t.ID INNER JOIN detalle_transaccion dt ON t.id =dt.ven_id INNER JOIN producto pr ON dt.pro_id=pr.id and  pe.ped_id="+idPedido+" ";
 				System.out.println("QUERY DE VENTAS LISTADO ---->"+query);
 				ResultSet rs=stmt.executeQuery(query);
 				PedidoBean pedido=null;
@@ -203,16 +203,16 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 					
 					Statement stmt=con.createStatement();
 					
-					String query="UPDATE pedido set EST_ENT='E' where PED_ID='"+idpedido+"'";
+					String query="update pedido set est_ent='E' where ped_id='"+idpedido+"'";
 					
 					int filas=stmt.executeUpdate(query);
 					if(filas==1){
 						System.out.println("actualizo estado pedido");
-						String query2="UPDATE transaccion set EST='C' where ID='"+idpedido+"'";
+						String query2="update transaccion set est='C' where ID='"+idpedido+"'";
 						int filas2=stmt.executeUpdate(query2);
 						if(filas2==1){
 							System.out.println("actualizo estado transaccion");
-							String query3="UPDATE comprobante_pago set FEC_CAN=CURDATE() where VEN_ID='"+idpedido+"'";
+							String query3="update comprobante_pago set fec_can=CURDATE() where ven_id='"+idpedido+"'";
 							int filas3=stmt.executeUpdate(query3);
 								if(filas3==1){
 									System.out.println("actualizo fecha comprobante");
