@@ -200,30 +200,32 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 			Connection con=MySqlDAOFactory.obtenerConexion();
 			Statement stmt=con.createStatement();
 			
-			String query="SELECT  tr.NUM AS NUMERO_TRANSACCION,                            	"
-					+ "CONCAT(pe.APE_PAT,' ',pe.APE_MAT,' ',pe.NOM) AS NOMBRE_CLIENTE,      "
-					+ "	cp.TIPO AS TIPO_COMPROBANTE,								   "
-					+ "   tr.IDE AS IDENTIFICADOR,                                       "
-					+ "DATE_FORMAT(cp.FEC_EMI,'%d-%m-%Y') AS FECHA_EMISION,       "
-					+ "DATE_FORMAT(cp.FEC_CAN,'%d-%m-%Y') AS FECHA_CANCELACION,"
-					+ "DATE_FORMAT(tr.FEC_ENT,'%d-%m-%Y') AS FECHA_ENTREGA,"
-					+ "pr.CODPRO AS CODIGO_PRODUCTO,     "
-					+ "pr.NOM AS NOMBRE_PRODUCTO,                                   "
-					+ "pr.PRE AS PRECIO,                                        	"
-					+ "dt.CAN AS CANTIDAD, "
-					+ "ROUND((dt.IMP/1.19),2) AS IMPORTE,                         "
-					+ "of.DSC AS DESCUENTO                                    "
-					+ "FROM                                                   "
+			String query="select  tr.num as numero_transaccion,                            	"
+					+ " concat(pe.ape_pat,' ',pe.ape_mat,' ',pe.nom) as nombre_cliente,      "
+					+ "	cp.tipo as tipo_comprobante,								   "
+					+ "   cp.ruc as ruc,                                                 "
+					+ "   cp.raz_soc as razon_social,                                    "
+					+ "   tr.ide as identificador,                                       "
+					+ "date_format(cp.fec_emi,'%d-%m-%Y') as fecha_emision,       "
+					+ "date_format(cp.fec_can,'%d-%m-%Y') as fecha_cancelacion,"
+					+ "date_format(tr.fec_ent,'%d-%m-%Y') as fecha_entrega,"
+					+ "pr.codpro as codigo_producto,     "
+					+ "pr.nom as nombre_producto,                                   "
+					+ "pr.pre as precio,                                        	"
+					+ "dt.can as cantidad, "
+					+ "round((dt.imp/1.19),2) as importe,                         "
+					+ "of.dsc as descuento                                    "
+					+ "from                                                   "
 					+ "transaccion tr                                         "
-					+ "INNER JOIN comprobante_pago cp ON tr.ID = cp.VEN_ID    "
-					+ "INNER JOIN detalle_transaccion dt ON tr.ID = dt.VEN_ID "
-					+ "INNER JOIN usuario us ON tr.ID_USUARIO = us.ID           "
-					+ "INNER JOIN persona pe ON us.PER_ID = pe.ID                "
-					+ "INNER JOIN producto pr ON dt.PRO_ID = pr.ID             "
-					+ "LEFT JOIN detalle_oferta df ON pr.ID = df.PRO_ID        "
-					+ "LEFT JOIN ofertas of ON of.ID =df.OFE_ID                "
-					+ "WHERE                                                   "
-					+ "tr.NUM = '"+numeroTransaccion+"';";
+					+ "inner join comprobante_pago cp on tr.id = cp.ven_id    "
+					+ "inner join detalle_transaccion dt on tr.id = dt.ven_id "
+					+ "inner join usuario us on tr.id_usuario = us.id           "
+					+ "inner join persona pe on us.per_id = pe.id                "
+					+ "inner join producto pr on dt.pro_id = pr.id             "
+					+ "left join detalle_oferta df on pr.id = df.pro_id        "
+					+ "left join ofertas of on of.id =df.ofe_id                "
+					+ "where                                                   "
+					+ "tr.num = '"+numeroTransaccion+"';";
 							
 			
 			System.out.println("QUERY EN EJECUCION PARA BOLETA ----> " + query);
@@ -234,20 +236,22 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 			
 			while(rs.next()){
 				detalleB = new BoletaBean();
-				detalleB.setNum_com(rs.getString("NUMERO_TRANSACCION"));
-				detalleB.setIde(rs.getString("IDENTIFICADOR"));
-				detalleB.setNom_cli(rs.getString("NOMBRE_CLIENTE"));
-				detalleB.setTip_com(rs.getString("TIPO_COMPROBANTE"));
-				detalleB.setFec_emi(rs.getString("FECHA_EMISION"));
-				detalleB.setFec_can(rs.getString("FECHA_CANCELACION"));
-				detalleB.setFec_ent(rs.getString("FECHA_ENTREGA"));
+				detalleB.setNum_com(rs.getString("numero_transaccion"));
+				detalleB.setIde(rs.getString("identificador"));
+				detalleB.setNom_cli(rs.getString("nombre_cliente"));
+				detalleB.setTip_com(rs.getString("tipo_comprobante"));
+				detalleB.setFec_emi(rs.getString("fecha_emision"));
+				detalleB.setFec_can(rs.getString("fecha_cancelacion"));
+				detalleB.setFec_ent(rs.getString("fecha_entrega"));
+				detalleB.setRuc_cli(rs.getString("ruc"));
+				detalleB.setRaz_soc(rs.getString("razon_social"));
 				//detalleB.setDir(rs.getString("DIRECCION"));
-				detalleB.setCod_pro(rs.getString("CODIGO_PRODUCTO"));
-				detalleB.setNom_pro(rs.getString("NOMBRE_PRODUCTO"));
-				detalleB.setPre(rs.getDouble("PRECIO"));
-				detalleB.setCan(rs.getInt("CANTIDAD"));
-				detalleB.setImporte(rs.getDouble("IMPORTE"));
-				detalleB.setDescuento(rs.getDouble("DESCUENTO"));
+				detalleB.setCod_pro(rs.getString("codigo_producto"));
+				detalleB.setNom_pro(rs.getString("nombre_producto"));
+				detalleB.setPre(rs.getDouble("precio"));
+				detalleB.setCan(rs.getInt("cantidad"));
+				detalleB.setImporte(rs.getDouble("importe"));
+				detalleB.setDescuento(rs.getDouble("descuento"));
 				boleta.add(detalleB);
 				
 			}
