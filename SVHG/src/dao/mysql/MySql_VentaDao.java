@@ -17,7 +17,7 @@ public class MySql_VentaDao extends MySqlDAOFactory implements VentaDao {
 	public boolean registrarVenta(int idUsuario, String numeroTran,
 			String fechaEntrega, String[] productoId, int[] productoCantidad,
 			double[] productoImporte, String tipoFac) throws Exception {
-		
+		/**/
 		try {
 			Connection con = MySqlDAOFactory.obtenerConexion();
 			Statement stmt= con.createStatement();
