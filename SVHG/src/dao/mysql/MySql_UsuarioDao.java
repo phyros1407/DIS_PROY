@@ -365,7 +365,7 @@ public class MySql_UsuarioDao extends MySqlDAOFactory implements UsuarioDao {
 			System.out.println(e.getMessage());
 		}
 		return usu;
-	}
+	}//
 
 	@Override
 	public String obtenerUsuarioC(int dni) {
