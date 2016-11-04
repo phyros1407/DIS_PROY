@@ -23,7 +23,7 @@ public class MySql_ProductoDao  extends MySqlDAOFactory implements ProductoDao {
 			
 			Statement stmt=con.createStatement();
 			
-			String query="select *  from producto a INNER JOIN categoria b ON a.cat_id=b.id ORDER BY a.pre";
+			String query="select *  from producto a INNER JOIN categoria b ON a.cat_id=b.id ORDER BY a.nom";
 			System.out.println("QUERY DE PRODUCTOS LISTADO ---->"+query);
 			ResultSet rs=stmt.executeQuery(query);
 			ProductoBean producto=null;
