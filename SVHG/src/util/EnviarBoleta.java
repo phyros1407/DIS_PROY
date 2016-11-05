@@ -133,13 +133,13 @@ public class EnviarBoleta extends Object {
 				tabla = tabla + ( "<tr>"
 						+ "<td>"+boleta.get(i).getCod_pro()+"</td>"
 						+ "<td>"+boleta.get(i).getNom_pro()+"</td>"
-						+ "<td>S/. "+Math.round((boleta.get(i).getPre()*1.19) * 100.00) / 100.00+"</td>"
+						+ "<td>S/. "+Math.round(((boleta.get(i).getPre()*1.19)) * 100.00) / 100.00+"</td>"
 						+ "<td>S/. "+Math.round(((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()) * 100.00) / 100.00+"</td>"
 						+ "<td>"+boleta.get(i).getCan()+"</td>"
-						+ "<td>S/. "+Math.round((boleta.get(i).getImporte()*1.19) * 100.00) / 100.00+"</td>"
+						+ "<td>S/. "+Math.round((((boleta.get(i).getPre()*1.19)-((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()))*boleta.get(i).getCan()) * 100.00) / 100.00+"</td>"
 						+ "</tr>");
 		
-				subtotal = subtotal + boleta.get(i).getImporte();
+				subtotal = subtotal + Math.round((((boleta.get(i).getPre()*1.19)-((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()))*boleta.get(i).getCan()) * 100.00) / 100.00;
 		}
 				
 		String datosCliente = "";
@@ -458,7 +458,7 @@ public class EnviarBoleta extends Object {
 						"							  			<span>"+boleta.get(0).getTip_com()+" DE VENTA                                                                                                                                             "+
 						"							  				<span>&nbsp;</span><br>                                                                                                                                       "+
 						"							  				<span>&nbsp;</span>                                                                                                                                           "+
-						"							  				<span style='font-size:18px;'>"+boleta.get(0).getNum_com().substring(5)+"</span>                                                                                                          "+
+						"							  				<span style='font-size:18px;'>"+boleta.get(0).getNum_com()+"</span>                                                                                                          "+
 						"							  			</span>                                                                                                                                                           "+
 						"							  		</h2>                                                                                                                                                                 "+
 						"							  	</div>                                                                                                                                                                    "+
