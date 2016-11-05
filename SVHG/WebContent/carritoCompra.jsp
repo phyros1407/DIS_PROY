@@ -21,7 +21,6 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="imagesOut/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="imagesOut/ico/apple-touch-icon-57-precomposed.png">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="js/validaciones.js"></script>
@@ -42,8 +41,15 @@
 		
 	
 	</style>
+	<script type="text/javascript">
+	
+	 $( document ).ready(function() {
+		cargarDep("#departamento");
+		});
+	
+	</script>
 </head>
-<body id="test">
+<body  id="test" >
 	<jsp:include page="includeOut/header.jsp"></jsp:include>
 	
 	<section id="cart_items">
@@ -122,7 +128,7 @@
 			<!-- FORMULARIO 1-->
 			<div id="formuCasa" style="display: none;">
 				<div class="col-sm-12 col-xs-12">
-					<h3>Dirección de Envio:</h3>
+					<h3><b>Dirección de Envio:</b></h3>
 					<br>
 					<form class="form-horizontal"  id="form1">
 						<div class="form-group">
@@ -140,7 +146,7 @@
 								<label id="titulitos">Departamento</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control" id="departamento" onchange="cargarPros(this.value);">
+								<select class="form-control" id="departamento" onchange="cargarPros(this.value,'#provincia');">
 									
 								</select>
 							</div>
@@ -158,7 +164,7 @@
 								<label id="titulitos">Provincia</label>
 							</div>
 							<div class="col-xs-4 col-sm-4">
-								<select class="form-control"  id="provincia" onchange="cargarDist(this.value);">
+								<select class="form-control"  id="provincia" onchange="cargarDist(this.value,'#distrito');">
 									<option value="0"> -- SELECCIONAR -- </option>
 								</select>
 							</div>
@@ -303,10 +309,10 @@
 				<div class="col-xs-12 col-sm-12 " style="margin-top: 25px;"
 					id="infoDirEnv">
 					<h3 id="titInDir">Direccion de Envio</h3>
-					<!-- <button type="button" class="btn btn-default" id="botonCambDir" data-toggle="modal" data-target="#ModalModDir">Cambiar direccion</button> -->
 					<div class="col-xs-8 col-sm-8">
 						<label id="mosNom"></label><br> <label id="mosDir"></label><br>
-						<label id="mosDis"></label><br> <label id="mosTel"></label>
+						<label id="mosDis"></label><br> <label id="mosTel"></label><br>
+						<button type="button" class="btn btn-default" id="botonCambDir" onclick="cargandoModalModDir();">Cambiar direccion</button>
 					</div>
 				</div>
 			</div>

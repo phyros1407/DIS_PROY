@@ -5,7 +5,7 @@
 		
 		var  igvS = 1.19; //THE REAL IGV NO FAKE 100%
 		
-		function cargarDep(){
+		function cargarDep(campid){
 			
 			var action = "deps";
 			
@@ -26,7 +26,7 @@
 				console.log(depas.length);
 				var pre = "<option value='0'> -- SELECCIONAR -- </option>";
 					
-				$("#departamento").html(pre+cadena);
+				$(campid).html(pre+cadena);
 				
 
 				
@@ -34,7 +34,7 @@
 			
 		}
 	
-		function cargarPros(id){
+		function cargarPros(id,campid){
 			
 			//LIMPIAR SELECTS
 			if(id==0){
@@ -65,12 +65,12 @@
 				
 				console.log(depas[i]);
 				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
-				$('#provincia').html(pre+cadena);
+				$(campid).html(pre+cadena);
 				
 			});
 		}
 	
-		function cargarDist(id){
+		function cargarDist(id,campid){
 			
 			var action = "dist";
 			
@@ -92,7 +92,7 @@
 				
 				console.log(depas[i]);
 				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
-				$('#distrito').html(pre+cadena);
+				$(campid).html(pre+cadena);
 				
 			});
 			
@@ -410,7 +410,7 @@
 									
 								}
 								
-								cargarDep();
+								
 								$(".step1").hide();
 								$(".step2").hide(1000);
 								$(".step3").hide(1000);
@@ -1294,6 +1294,258 @@
         	 
          }
 		
+       
+         //FALTA OPTIMIZAR
+         function cargandoModalModDir(){
+        	 
+        	 $('#ModalModDir').modal();
+        	 
+        	 var action1 = "deps";
+        	 
+        	 $.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+ 				
+ 				action:action1
+ 				
+ 			},function(response){
+ 				
+ 				depas = new Array(response['object'].length);
+ 				console.log(response['object'].length);	
+ 				var cadena = "";
+ 				for(var i=0;i<response['object'].length;i++){
+ 					depas[i] = response['object'][i]['departamento'];
+ 					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['departamento']+"</option>");
+ 				}
+ 				
+ 				console.log(depas.length);
+ 				var pre = "<option value='0'> -- SELECCIONAR -- </option>";
+ 					
+ 				$("#departamento_mod").html(pre+cadena);
+ 				
+ 				$("#departamento_mod option[value="+ $("#departamento").val() +"]").attr("selected",true);
+
+ 				
+ 			});
+        	 
+        	 
+        	
+        	 
+        	 if($("#departamento").val()==0){
+ 				
+ 				$('#provincia_mod').html("<option> -- SELECCIONAR -- </option>");
+ 				$('#distrito_mod').html("<option> -- SELECCIONAR -- </option>");
+ 				
+ 			}
+ 			
+ 			
+ 			var action2 = "pros";
+ 			
+ 			$.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+ 				
+ 				
+ 				action : action2,
+ 				id : $("#departamento").val()
+ 				
+ 			},function(response){
+ 				
+ 				pros = new Array(response['object'].length);
+ 				
+ 				var cadena = "";
+ 				for(var i=0;i<response['object'].length;i++){
+ 					pros[i] = response['object'][i]['provincia'];
+ 					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['provincia']+"</option>");
+ 				}
+ 				
+ 				console.log(depas[i]);
+ 				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+ 				$('#provincia_mod').html(pre+cadena);
+ 				
+ 				 $("#provincia_mod option[value="+ $("#provincia").val() +"]").attr("selected",true);
+ 				
+ 			});
+        	 
+ 			
+ 			
+ 			var action3 = "dist";
+			
+			$.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+				
+				
+				action : action3,
+				id : $("#provincia").val()
+				
+			},function(response){
+				
+				dist = new Array(response['object'].length);
+				
+				var cadena = "";
+				for(var i=0;i<response['object'].length;i++){
+					dist[i] = response['object'][i]['distrito'];
+					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['distrito']+"</option>");
+				}
+				
+				console.log(depas[i]);
+				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+				$('#distrito_mod').html(pre+cadena);
+				
+				
+				 $("#distrito_mod option[value="+ $("#distrito").val() +"]").attr("selected",true);
+				
+			});
+ 			
+        	 
+        	 $("#direccion_mod").val($("#direccion").val());
+        	 $("#referencia_mod").val($("#referencia").val());
+        	 $("#telefono1_mod").val($("#telefono1").val());
+        	 $("#telefono2_mod").val($("#telefono2").val());
+        	 $("#tipo_direccion_mod").val($("#tipo_direccion").val());
+        	 
+        	
+ 
+         }
+         
+         
+         
+         function changeDir(){
+        	 
+        	 
+        	 if($("#direccion_mod").val()==""||$("#departamento_mod").val()==0||$("#provincia_mod").val()==0||$("#distrito_mod").val()==0||$("#referencia_mod").val().trim()==""||$("#telefono1_mod").val().trim()==""||$("#telefono2_mod").val().trim()==""){
+					
+					alert("Por favor complete todos los campos");
+					
+        	 }else{
+        		 
+        		//var nombre = $("#").val();
+ 				var direccion = $("#direccion_mod").val();
+ 				var distrito = $("#distrito_mod  option:selected").text();
+ 				var provincia = $("#provincia_mod  option:selected").text();
+ 				var departamento = $("#departamento_mod option:selected").text();
+ 				var telefono1 = $("#telefono1_mod").val();
+ 				var telefono2 = $("#telefono2_mod").val();
+
+ 				//SETEAR VAL
+ 				$("#mosNom").text($("#nombre_cliente").val());
+ 				$("#mosDir").text(direccion);
+ 				$("#mosDis").text(distrito + " - " + provincia + " - "+ departamento);
+ 				$("#mosTel").text("Telefono : " + telefono1 + "\n"+ " Otro Telefono : " + telefono2);
+ 				
+ 				
+ 				 var action1 = "deps";
+ 	        	 
+ 	        	 $.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+ 	 				
+ 	 				action:action1
+ 	 				
+ 	 			},function(response){
+ 	 				
+ 	 				depas = new Array(response['object'].length);
+ 	 				console.log(response['object'].length);	
+ 	 				var cadena = "";
+ 	 				for(var i=0;i<response['object'].length;i++){
+ 	 					depas[i] = response['object'][i]['departamento'];
+ 	 					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['departamento']+"</option>");
+ 	 				}
+ 	 				
+ 	 				console.log(depas.length);
+ 	 				var pre = "<option value='0'> -- SELECCIONAR -- </option>";
+ 	 					
+ 	 				$("#departamento").html(pre+cadena);
+ 	 				
+ 	 				$("#departamento option[value="+ $("#departamento_mod").val() +"]").attr("selected",true);
+
+ 	 				
+ 	 			});
+ 	        	 
+ 	        	 
+ 	        	
+ 	        	 
+ 	        	 if($("#departamento").val()==0){
+ 	 				
+ 	 				$('#provincia').html("<option> -- SELECCIONAR -- </option>");
+ 	 				$('#distrito').html("<option> -- SELECCIONAR -- </option>");
+ 	 				
+ 	 			}
+ 	 			
+ 	 			
+ 	 			var action2 = "pros";
+ 	 			
+ 	 			$.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+ 	 				
+ 	 				
+ 	 				action : action2,
+ 	 				id : $("#departamento_mod").val()
+ 	 				
+ 	 			},function(response){
+ 	 				
+ 	 				pros = new Array(response['object'].length);
+ 	 				
+ 	 				var cadena = "";
+ 	 				for(var i=0;i<response['object'].length;i++){
+ 	 					pros[i] = response['object'][i]['provincia'];
+ 	 					cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['provincia']+"</option>");
+ 	 				}
+ 	 				
+ 	 				console.log(depas[i]);
+ 	 				var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+ 	 				$('#provincia').html(pre+cadena);
+ 	 				
+ 	 				 $("#provincia option[value="+ $("#provincia_mod").val() +"]").attr("selected",true);
+ 	 				
+ 	 			});
+ 	        	 
+ 	 			
+ 	 			
+ 	 			var action3 = "dist";
+ 				
+ 				$.get('http://servicios2.j.facilcloud.com/SERVICIOS_SVHG/servicios',{
+ 					
+ 					
+ 					action : action3,
+ 					id : $("#provincia_mod").val()
+ 					
+ 				},function(response){
+ 					
+ 					dist = new Array(response['object'].length);
+ 					
+ 					var cadena = "";
+ 					for(var i=0;i<response['object'].length;i++){
+ 						dist[i] = response['object'][i]['distrito'];
+ 						cadena = cadena+("<option value="+response['object'][i]['id']+">"+response['object'][i]['distrito']+"</option>");
+ 					}
+ 					
+ 					console.log(depas[i]);
+ 					var pre = "<option value='0'> -- SELECCIONAR -- </option>"
+ 					$('#distrito').html(pre+cadena);
+ 					
+ 					
+ 					 $("#distrito option[value="+ $("#distrito_mod").val() +"]").attr("selected",true);
+ 					
+ 				});
+ 	 			
+ 				
+ 				
+ 				$("#direccion").val($("#direccion_mod").val());
+ 	        	 $("#referencia").val($("#referencia_mod").val());
+ 	        	 $("#telefono1").val($("#telefono1_mod").val());
+ 	        	 $("#telefono2").val($("#telefono2_mod").val());
+ 	        	 $("#tipo_direccion").val($("#tipo_direccion_mod").val());
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				 $('#ModalModDir').modal("hide");
+        		 
+        	 }
+        	 
+        	 
+        	 
+       
+        	
+				
+        	 
+         }
          
     
 		
