@@ -157,7 +157,7 @@
 			  }else if(txtClave2==''){
 				  alert("Debe llenar los campos obligatorios.");
 			  }else if(txtCelular==''){
-				  alert("Debe llenar los campos obligatorios.");
+				  alert("Ingrese numero de celular o fijo.");
 			  }else if(y=='1'){
 				  if(longNum=='9'){
 					    alert("Número de celular incorrecto. Debe iniciar con 9");
@@ -338,12 +338,13 @@
 							<div class="row">
 								<div class="col-sm-4">
 						       		<label >Teléfono:</label>
-						        	<input  onchange="longitudCampoTelefono()" required type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
+						        	<input max="999999999" onchange="longitudCampoTelefono()" required type="number" id="txtCelular" name="txtCelular"  class="form-control"> 
 								</div>	
 								<div class="col-sm-4">
 									<label >Repetir Clave:</label>
 						        	<input maxlength="15" required type="password" onchange="validarClave()" name="txtClave2" id="txtClave2" class="form-control" required> 
 								</div>
+							
 							</div>
 							<br><br>
 						<!-- Fila 8 -->
