@@ -4,14 +4,14 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html"%> 
-<%@page pageEncoding="UTF-8"%> 
+ <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <%@page import="beans.PedidoBean"%>
  
-<!DOCTYPE html >
+<!DOCTYPE HTML >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<meta charset="UTF-8">
 <title>Mis pedidos</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -112,7 +112,11 @@
 									<th><center><%=pedidos.get(i).getTipoPago()%></center></th>
 									<th><center><%=pedidos.get(i).getFechaEntrega()%></center></th>
 									<th><center><%=pedidos.get(i).getDireccion() %></center></th>
-									<th><center><%=pedidos.get(i).getDistrto() %></center></th>
+									<%if(pedidos.get(i).getDistrto().equalsIgnoreCase("BREÃ?A")){ %>
+										<th><center>BREÑA</center></th>
+									<% }else{%>
+										<th><center><%=pedidos.get(i).getDistrto()%></center></th>
+									<%} %>
 									<th><a onclick="activarModal('<%=pedidos.get(i).getId() %>','<%=pedidos.get(i).getNumPedido() %>','<%=pedidos.get(i).getEstado() %>','<%=pedidos.get(i).getFechaEntrega() %>','<%=pedidos.get(i).getTipoPago()%>','<%=pedidos.get(i).getDireccion()%>','<%=pedidos.get(i).getDistrto()%>','<%=pedidos.get(i).getTipoEntrega()%>','<%=pedidos.get(i).getProvincia()%>','<%=pedidos.get(i).getDepartamento()%>','<%=pedidos.get(i).getFechaCreacion()%>')"><center>Ver más</center></a></th>
 									</tr>
 							<% } %>
@@ -289,7 +293,8 @@
 				</div>
 				
 				<div class=modal-footer>
-					<button type=button class=btn btn-default data-dismiss=modal>Cerrar</button>
+					<button type=button class="btn btn-default" data-dismiss=modal>Cerrar</button>
+					
 				</div>
 			</div>
 		
