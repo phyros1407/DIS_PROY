@@ -30,6 +30,7 @@ public class MySqlDAOFactory extends DAOFactory {
 	
 	public static Connection obtenerConexion(){
 		Connection conexion=null;
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://mysql110519-dis-pruebas.jelasticlw.com.br/bd_dis";
@@ -46,6 +47,7 @@ public class MySqlDAOFactory extends DAOFactory {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		 
 		 */
 		
 		return conexion;

@@ -191,18 +191,19 @@ public class ServletGenerarPedido extends HttpServlet {
 				if (tipo_entrega.equalsIgnoreCase("local")) {
 
 					pedido.setTipoEntrega("RL");
+					pedido.setDireccion(direccion.trim());
 
 				}
 				if (tipo_entrega.equalsIgnoreCase("casa")) {
 
 					pedido.setTipoEntrega("EC");
+					pedido.setDireccion(request.getParameter("tipo_direccion_pedido")+" "+direccion.trim());
 
 				}
 				pedido.setTipoPago(tipo_pago);
 				pedido.setDepartamento(departamento);
 				pedido.setProvincia(provincia);
 				pedido.setDistrto(distrito);
-				pedido.setDireccion(direccion);
 				pedido.setReferencia(referencia);
 
 				if (!(request.getParameter("telefono_entrega_pedido"))

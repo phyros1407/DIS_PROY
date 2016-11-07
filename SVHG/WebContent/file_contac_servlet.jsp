@@ -30,6 +30,8 @@
 	  int cuotas = Integer.parseInt(request.getParameter("cuotas_entrega_pedido"));
 	  double rec_ent = Double.parseDouble(request.getParameter("cargo_entrega_pedido"));
 	  
+	  String tipo_direccion = request.getParameter("tipo_direccion_pedido");
+	  
 %>
 
 
@@ -74,6 +76,7 @@
 		<input type="hidden" name="telefono_entrega_pedido2" value="<%=tele2%>">
 		<input type="hidden" name="cuotas_entrega_pedido" value="<%=cuotas%>">	
 		<input type="hidden" name="cargo_entrega_pedido" value="<%=rec_ent%>">
+		<input type="hidden" name="tipo_direccion_pedido" value="<%=tipo_direccion%>">
 		
 		<input type="hidden" name="tipo_pago" value="PP">	
 

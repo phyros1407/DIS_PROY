@@ -137,9 +137,9 @@
 							</div>
 							<div class="col-xs-4 col-sm-4">
 								<select class="form-control" id="tipo_direccion">
-									<option>Avenida</option>
-									<option>Jirón</option>
-									<option>Calle</option>
+									<option value="Av.">Avenida</option>
+									<option value="Jr.">Jirón</option>
+									<option value="Cl.">Calle</option>
 								</select>
 							</div>
 							<div class="col-xs-2 col-sm-2">

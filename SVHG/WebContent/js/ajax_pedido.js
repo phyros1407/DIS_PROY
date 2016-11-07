@@ -1019,6 +1019,11 @@
 			     .appendTo(formularioDestino);
 				
 				$("<input type='hidden'/>")
+			     .attr("value",$("#tipo_direccion").val())
+			     .attr("name", "tipo_direccion_pedido")
+			     .appendTo(formularioDestino);
+				
+				$("<input type='hidden'/>")
 			     .attr("value",$("#departamento option:selected").text())
 			     .attr("name", "departamento_entrega_pedido")
 			     .appendTo(formularioDestino);
@@ -1253,7 +1258,7 @@
  				}
  				
  				
- 				cadena = cadena +"&facturacion_generar_pedido="+$("#facturacion").val()+"&departamento_entrega_pedido=LIMA&provincia_entrega_pedido=LIMA&distrito_entrega_pedido=BREÑA" +
+ 				cadena = cadena +"&tipo_direccion_pedido=&facturacion_generar_pedido="+$("#facturacion").val()+"&departamento_entrega_pedido=LIMA&provincia_entrega_pedido=LIMA&distrito_entrega_pedido=BREÑA" +
  						"&referencia_entrega_pedido=LIMA&direccion_entrega_pedido=JR. INDEPENDENCIA&telefono_entrega_pedido=&telefono_entrega_pedido2=&cuotas_entrega_pedido=0&cargo_entrega_pedido=0";
  				
  			}else{
@@ -1263,7 +1268,7 @@
  					cadena = cadena + "&rs_entrega_pedido="+$("#rs_fac").val()+"&ruc_entrega_pedido="+$("#ruc_fac").val(); 
  				}
  				
- 				cadena = cadena +"&facturacion_generar_pedido="+$("#facturacion").val()+"&departamento_entrega_pedido="+$("#departamento option:selected").text()+"&provincia_entrega_pedido="+$("#provincia option:selected").text()+
+ 				cadena = cadena +"&tipo_direccion_pedido="+$("#tipo_direccion").val()+"&facturacion_generar_pedido="+$("#facturacion").val()+"&departamento_entrega_pedido="+$("#departamento option:selected").text()+"&provincia_entrega_pedido="+$("#provincia option:selected").text()+
  				"&distrito_entrega_pedido="+$("#distrito option:selected").text()+
 				"&referencia_entrega_pedido="+$("#referencia").val()+"&direccion_entrega_pedido="+$("#direccion").val()+"&telefono_entrega_pedido="+$("#telefono1").val()+"&telefono_entrega_pedido2="+$("#telefono2").val()+"&cuotas_entrega_pedido=0";
 			

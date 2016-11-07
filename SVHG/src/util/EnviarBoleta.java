@@ -133,13 +133,15 @@ public class EnviarBoleta extends Object {
 				tabla = tabla + ( "<tr>"
 						+ "<td>"+boleta.get(i).getCod_pro()+"</td>"
 						+ "<td>"+boleta.get(i).getNom_pro()+"</td>"
-						+ "<td>S/. "+Math.round(((boleta.get(i).getPre()*1.19)) * 100.00) / 100.00+"</td>"
-						+ "<td>S/. "+Math.round(((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()) * 100.00) / 100.00+"</td>"
+						+ "<td>S/. "+Math.rint(((boleta.get(i).getPre()*1.19)) * 100.00) / 100.00+"</td>"
+						+ "<td>S/. "+Math.rint(((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()) * 100.00) / 100.00+"</td>"
 						+ "<td>"+boleta.get(i).getCan()+"</td>"
-						+ "<td>S/. "+Math.round((((boleta.get(i).getPre()*1.19)-((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()))*boleta.get(i).getCan()) * 100.00) / 100.00+"</td>"
+						+ "<td>S/. "+Math.rint((((boleta.get(i).getPre()*1.19)*boleta.get(i).getCan())-((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento())*boleta.get(i).getCan()) * 100.00) / 100.00+"</td>"
 						+ "</tr>");
 		
-				subtotal = subtotal + Math.round((((boleta.get(i).getPre()*1.19)-((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento()))*boleta.get(i).getCan()) * 100.00) / 100.00;
+						subtotal = subtotal + Math.round((((boleta.get(i).getPre()*1.19)*boleta.get(i).getCan())-((boleta.get(i).getPre()*1.19)*boleta.get(i).getDescuento())*boleta.get(i).getCan()) * 100.00) / 100.00;
+						
+						
 		}
 				
 		String datosCliente = "";
@@ -506,7 +508,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX' style='text-align:left;'>SUBTOTAL: </td>                                                                                                            "+
-						"			    					<td width='100PX'>S/. "+Math.round(subtotal * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    					<td width='auto;'>S/. "+Math.round((subtotal/1.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
 						"			    				</tr>                                                                                                                                                                     "+
 						"			    				<tr>                                                                                                                                                                      "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
@@ -514,7 +516,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX' style='text-align:left;'>IGV (19%) : </td>                                                                                                          "+
-						"			    					<td width='100PX'>S/. "+Math.round((subtotal*0.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    					<td width='auto;'>S/. "+Math.round(((subtotal/1.19)*0.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
 						"			    				</tr>                                                                                                                                                                     "+
 						"			    				<tr>                                                                                                                                                                      "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
@@ -522,7 +524,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX' style='text-align:left;'>CAR. ENVIO : </td>                                                                                                         "+
-						"			    					<td width='100PX'>S/. "+Math.round(boleta.get(0).getCar_ent() * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    					<td width='auto;'>S/. "+Math.round(boleta.get(0).getCar_ent() * 100.00) / 100.00+"</td>                                                                                                                                           "+
 						"			    				</tr>                                                                                                                                                                     "+
 						"			    				<tr>                                                                                                                                                                      "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
@@ -530,7 +532,7 @@ public class EnviarBoleta extends Object {
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX'></td>                                                                                                                                               "+
 						"			    					<td width='100PX' style='text-align:left;'>TOTAL (con IGV) : </td>                                                                                                            "+
-						"			    					<td width='100PX'>S/. "+Math.round((subtotal*1.19) * 100.00) / 100.00+"</td>                                                                                                                                           "+
+						"			    					<td width='auto;'>S/. "+Math.round(subtotal * 100.00) / 100.00+"</td>                                                                                                                                           "+
 						"			    				</tr>                                                                                                                                                                     "+
 						"			    			</table>                                                                                                                                                                      "+
 						"			    			<table width='600px' cellpadding='0' cellspacing='0' border='0' class='responsive-table' style='padding-bottom:20px;'>                                                        "+

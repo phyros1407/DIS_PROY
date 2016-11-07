@@ -8,11 +8,11 @@
 <%@page pageEncoding="UTF-8"%> 
  <%@page import="beans.PedidoBean"%>
  
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Mis pedidos</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -29,11 +29,29 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="imagesOut/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="imagesOut/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="imagesOut/ico/apple-touch-icon-57-precomposed.png">
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
     <%
     ArrayList<PedidoBean> pedidos=(ArrayList) request.getAttribute("pedidos");
     ArrayList<PedidoBean> productos=(ArrayList) request.getAttribute("productos");
     %>
+    
+   <script>
+   
+   $(document).ready(function () {
+	    (function ($) {
+	        $('#filter').keyup(function () {
+	            var rex = new RegExp($(this).val(), 'i');
+	            $('.searchable tr').hide();
+	            $('.searchable tr').filter(function () {
+	                return rex.test($(this).text());
+	            }).show();
+	        })
+	    }(jQuery));
+	});
+
+   </script>
+	
 </head>
 <body>
 	<%@include file="../includeOut/header.jsp" %>
@@ -70,6 +88,7 @@
 			</script>
 			<br>
 			<center><h3><%=request.getAttribute("estado") %></h3></center>
+			<div align="right"><input id="filter" type="text" class="form-control" style="width: 190px;" placeholder="Buscar..." /></div>
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -83,7 +102,7 @@
 						</tr>
 					</thead>
 				
-					<tbody>
+					<tbody class="searchable">
 					<%if(pedidos.size()==0){ %>
 						<tr> <td colspan="6"><center><font color=blue >Usted no tiene Pedidos <%=request.getAttribute("estado") %></font></center></td></tr>
 					<%}else{ %>
@@ -168,7 +187,7 @@
 				
 				$('#productosVenta')
 				.append(
-				'<tr ><td><center><%=productos.get(i).getProductoId() %></center></td><td><center><%=productos.get(i).getProductoNombre()%></center></td><td><center><%=productos.get(i).getCategoriaProducto()%></center></td><td><center><%=productos.get(i).getMedidaProducto() %></center></td><td><center><%=productos.get(i).getCantidad() %></center></td><td><center><%=productos.get(i).getPesoUnidad() %></center></td><td><center><%=Math.rint(productos.get(i).getCantidad()*productos.get(i).getPesoUnidad()*100)/100 %></center></td><td><center><%=productos.get(i).getPrecioUnidad() %></center></td><td><center><%=productos.get(i).getPrecioUnidad()*productos.get(i).getCantidad()%></center></td></tr>');
+				'<tr ><td><center><%=productos.get(i).getProductoId() %></center></td><td><center><%=productos.get(i).getProductoNombre()%></center></td><td><center><%=productos.get(i).getCategoriaProducto()%></center></td><td><center><%=productos.get(i).getMedidaProducto() %></center></td><td><center><%=productos.get(i).getCantidad() %></center></td><td><center><%=productos.get(i).getPesoUnidad() %></center></td><td><center><%=Math.rint(productos.get(i).getCantidad()*productos.get(i).getPesoUnidad()*100)/100 %></center></td><td><center><%=Math.rint((productos.get(i).getPrecioUnidad()*1.19)*100.00)/100.00 %></center></td><td><center><%=Math.rint(((productos.get(i).getPrecioUnidad()*1.19)*productos.get(i).getCantidad())*100.00)/100.00%></center></td></tr>');
 			}
 			<% } %>
 		  $('#modalDetalle').modal('show'); 

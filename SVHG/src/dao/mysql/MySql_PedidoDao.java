@@ -312,7 +312,7 @@ public class MySql_PedidoDao extends MySqlDAOFactory implements PedidoDao {
 			
 			
 			String query = " INSERT INTO pedido (PED_ID,TIP_ENT,TIPO_PAG,DEP_ENT,PRO_ENT,DIS_ENT,DIR_ENT,REF,TEL_REF_1,TEL_REF_2,EST_ENT,CUO,CAR_ENT) "
-					+ " VALUES("+pedido.getId()+",'"+pedido.getTipoEntrega()+"','"+pedido.getTipoPago()+"','"+pedido.getDepartamento()+"','"+pedido.getProvincia()+"','"+pedido.getDistrto().replace("Ã", "Ñ")+"','"+pedido.getDireccion()+"','"+pedido.getReferencia()+"','"+pedido.getTelefono1()+"','"+pedido.getTelefono2()+"','P',"+pedido.getCuota()+","+pedido.getCargo_entrega()+");";
+					+ " VALUES("+pedido.getId()+",'"+pedido.getTipoEntrega()+"','"+pedido.getTipoPago()+"','"+pedido.getDepartamento()+"','"+pedido.getProvincia()+"','"+pedido.getDistrto().replace("Ã?", "Ñ")+"','"+pedido.getDireccion().toUpperCase()+"','"+pedido.getReferencia()+"','"+pedido.getTelefono1()+"','"+pedido.getTelefono2()+"','P',"+pedido.getCuota()+","+pedido.getCargo_entrega()+");";
 			
 			System.out.println("QUERY PARA GUARDAR PEDIDO ----> "+query);
 			
