@@ -1182,7 +1182,7 @@
 			
 			 var accion='buscarRuc';
 			
-			 $('#precarga').html('<img id="image_carga" src=" imagesOut/cart/ajax-loader.gif"/>');
+			 $('#precarga').html('<img id="image_carga" style="margin-top:25px;" src=" imagesOut/cart/ajax-loader.gif"/>');
 
 			  $.get('http://servicios.jelasticlw.com.br/service/Gestionar_Empresa', {
 				  

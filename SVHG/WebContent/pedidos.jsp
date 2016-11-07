@@ -112,7 +112,7 @@
 									<th><center><%=pedidos.get(i).getTipoPago()%></center></th>
 									<th><center><%=pedidos.get(i).getFechaEntrega()%></center></th>
 									<th><center><%=pedidos.get(i).getDireccion() %></center></th>
-									<%if(pedidos.get(i).getDistrto().equalsIgnoreCase("BREÃ?A")){ %>
+									<%if(pedidos.get(i).getDistrto().equalsIgnoreCase("BREÃA")||pedidos.get(i).getDistrto().equalsIgnoreCase("BREÃ?A")){ %>
 										<th><center>BREÑA</center></th>
 									<% }else{%>
 										<th><center><%=pedidos.get(i).getDistrto()%></center></th>
