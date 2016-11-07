@@ -1195,7 +1195,7 @@
 						
 						if (response!=null) { 
 						
-							 	$('#precarga').html('<span id="confirmacion" class="glyphicon glyphicon-ok" style="margin-top:10px;color:green;"></span>');
+							 	$('#precarga').html('<span id="confirmacion" class="glyphicon glyphicon-ok" style="margin-top:25px;color:green;"></span>');
 								$('#rs_fac').val(response['object']['razonSocial']);  
 								
 						
