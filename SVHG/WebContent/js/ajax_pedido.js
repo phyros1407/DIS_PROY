@@ -1208,9 +1208,9 @@
          function generarUrl(formulario_destino){
         	 
 
-        	var url = "http://localhost:" +
+        	var url = "http://dis-pruebas.jelasticlw.com.br/" +
         			"" +
-        			"8080/SVHG/file_contac_servlet.jsp?";
+        			"SVHG_FINAL/file_contac_servlet.jsp?";
         	 
  			var cantidades = [];
  			var importes = [];
