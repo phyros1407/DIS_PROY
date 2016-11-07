@@ -49,7 +49,6 @@ public class MySqlDAOFactory extends DAOFactory {
 		}
 		 
 		 */
-		
 		return conexion;
 	}
 
